@@ -28,19 +28,13 @@ public class GameService {
     }
 
     private int calcPoint(int bettingPoint, GameResult gameResult) {
-        switch (gameResult) {
-            case WIN:
-                return bettingPoint * 2; // 원금의 2배
+        return switch (gameResult) {
+            case WIN -> bettingPoint * 2; // 원금의 2배
 
-            case LOSE:
-                return 0; // 차감한 금액에서 안돌려줌
-                break;
+            case LOSE -> 0; // 차감한 금액에서 안돌려줌
 
-            case DRAW:
-                return bettingPoint; // 원금 반환
-                break;
-        }
-        return 0;
+            case DRAW -> bettingPoint; // 원금 반환
+        };
     }
 
 

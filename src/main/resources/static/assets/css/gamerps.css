@@ -32,3 +32,15 @@ section.rps input#bet-btn {
 section.rps .rps-game {
   display: none;
 }
+
+section.rps .result { /* 결과창 */
+  display: none;
+}
+
+section.rps .result h2 {
+  font-size: 18px;
+}
+
+section.rps .result .btn-primary {
+  margin: auto;
+}

@@ -65,6 +65,7 @@ public class HomeController {
 
         // 가위바위보 결과
         String result = gameService.rpsPointCalc(dto);
+        System.out.println(result);
 
 
         return ResponseEntity.ok().body(result);

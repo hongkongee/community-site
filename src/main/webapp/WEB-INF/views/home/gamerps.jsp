@@ -55,6 +55,16 @@
         <button id="scissors" class="rps-btn" ><img src="/assets/img/scissors_image.jpg" alt="Scissors"></button>  
 
       </div>
+
+      <!-- 가위바위보 결과 -->
+
+      <div class="result">
+        <div id="win">이겼습니다! 원금의 2배 획득</div>
+        <div id="draw">무승부입니다.</div>
+        <div id="lose">패배입니다...</div>
+        <a class="btn btn-primary" href="/home/rps" role="button">다시 하기</a>
+      </div>
+
       
     </section>
     
@@ -110,7 +120,35 @@
 
     };
 
-    
+    $resultScreen = document.querySelector('section.rps .result');
+
+    // 결과 화면
+    function whatResultOnScreen(rr) { // rr : 가위바위보 결과 (WIN, DRAW, LOSE 중 하나)
+      console.log("스크린 화면 결정 스크립트 실행!");
+      console.log('rr: ', rr);
+
+      $resultScreen.style.display = 'block';
+
+      if (rr === 'WIN') {
+        console.log("승리");
+        document.getElementById('win').style.display = 'block';
+        document.getElementById('draw').style.display = 'none';
+        document.getElementById('lose').style.display = 'none';
+
+      } else if (rr === 'DRAW') {
+        document.getElementById('draw').style.display = 'block';
+        document.getElementById('win').style.display = 'none';
+        document.getElementById('lose').style.display = 'none';
+
+      } else { // LOSE
+        document.getElementById('lose').style.display = 'block';
+        document.getElementById('win').style.display = 'none';
+        document.getElementById('draw').style.display = 'none';
+
+      }
+
+
+    }
 
 
 
@@ -127,12 +165,7 @@
             'choice': choice 
           })
       })
-      .then(response => {
-          if (!response.ok) {
-              throw new Error('Network response was not ok');
-          }
-          return response.json();
-      })
+      .then(response => response.text())
       .then(data => {
           console.log('Server response:', data);
           // Handle server response as needed
@@ -144,6 +177,8 @@
 
       $rpsArea.style.display = 'none';
 
+      console.log('rpsResult: ', rpsResult);
+      whatResultOnScreen(rpsResult);
       
     }
 

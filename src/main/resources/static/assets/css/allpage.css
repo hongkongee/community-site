@@ -1,0 +1,111 @@
+ /* ============================================ 전체게시글 페이지 디자인 =============================================== */
+
+ .wrapper {
+    margin: auto;
+    padding: 5%;
+    width: 60vw;
+    height: 100vh;
+    background: #F8F6E3;
+    margin: auto;
+  }
+
+  .all {
+    font-size: 20px;
+    margin: 0 auto;
+    border: #000 solid 1px;
+  }
+
+.all>h2 {
+    margin: 20px;
+    font-weight: bold;
+}
+
+section.all .list-container { /* 게시판 테이블 */
+    width: 90%;
+    border: #000 solid 1px;
+    margin: auto;
+    margin-bottom: 200px;
+}
+
+table {
+    width: 100%;   
+    border-collapse: separate; /* Ensure that borders are collapsed separately */
+    border-spacing: 10px; /* Adjust the spacing between columns */
+}
+
+table thead.head-wrapper tr {
+    line-height: 150%;
+    font-weight: 700;
+}
+
+table tr.post td#bno {
+    width: 10%;
+}
+
+table tr.post td#title {
+    width: 35%;
+}
+
+table tr.post td#writer {
+    width: 17%;
+}
+
+table tr.post td#date {
+    width: 28%;
+}
+
+table tr.post td#view {
+    width: 10%;
+}
+
+
+
+tr.post {
+    border-bottom: 1px solid #000;
+}
+
+tr.post td {
+    line-height: 150%;
+}
+
+section.all .list-container .head-wrapper {
+    border-bottom: #000 solid 2px;
+    
+}
+
+.bottom-section {
+    margin: 30px auto;
+}
+
+
+.bottom-section nav {
+    border: yellow solid 1px;
+    width: 50%;
+    height: 100px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+}
+
+
+
+.bottom-section nav ul.pagination li.page-item a.page-link {
+    width: 40px;
+    height: 20px;
+    margin: 2%;
+    font-size: 14px;
+
+   
+
+}
+
+
+
+
+
+
+
+
+

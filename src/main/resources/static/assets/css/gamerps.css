@@ -1,0 +1,30 @@
+.wrapper {
+  margin: auto;
+  padding: 5%;
+  width: 60vw;
+  height: 100vh;
+  background: #F8F6E3;
+  margin: auto;
+}
+
+section.rps {
+  border: yellowgreen solid 1px;
+}
+
+section.rps h2 {
+  margin: 20px;
+}
+
+section.rps form#rps-betting {
+  margin: auto;
+}
+
+section.rps input#bet-money {
+  color: #adadad;
+  font-size: 18px;
+  margin: 20px;
+}
+
+section.rps input#bet-btn {
+  margin: 20px;
+}

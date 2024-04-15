@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="diary.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+
+<body>
+
+    <div class="MydiaryJsp">
+        <div class="Frame45">
+            <div class="Frame46">
+                <div class="Diary">Diary</div>
+            </div>
+
+            <div class="month">
+                <div class="this">4</div>
+                <div class="next">5</div>
+                <div class="before">3</div>
+            </div>
+
+            <table class="tbl">
+
+                <thead class="week">
+                    <th class="Sun">SUN</th>
+                    <th>MON</th>
+                    <th>TUE</th>
+                    <th>WED</th>
+                    <th>THU</th>
+                    <th>FRI</th>
+                    <th class="Sat">SAT</th>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td class="Sat">6</td>
+                    </tr>
+
+                    <tr>
+                        <td class="Sun">7</td>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>12</td>
+                        <td class="Sat">13</td>
+                    </tr>
+
+                    <tr>
+                        <td class="Sun">14</td>
+                        <td>15</td>
+                        <td>16</td>
+                        <td>17</td>
+                        <td>18</td>
+                        <td>19</td>
+                        <td class="Sat">20</td>
+                    </tr>
+
+                    <tr>
+                        <td class="Sun">21</td>
+                        <td>22</td>
+                        <td>23</td>
+                        <td>24</td>
+                        <td>25</td>
+                        <td>26</td>
+                        <td class="Sat">27</td>
+                    </tr>
+
+                    <tr>
+                        <td class="Sun">28</td>
+                        <td>29</td>
+                        <td>30</td>
+                    </tr>
+
+                </tbody>
+
+                <tr>
+
+                </tr>
+            </table>
+
+            <div class="Frame58">
+                <div class="year4">2024 <br></div>
+                <div class="year3">2023 <br></div>
+                <div class="year2">2022 <br></div>
+                <div class="year1">2021 <br></div>
+            </div>
+
+            <div class="Frame57">
+                <div class="date">2024년 4월 11일 일정
+                    <div class="list"></div>
+                </div>
+
+                <div class="story"> 일기쓰기
+                    <input type="text" class="story-write">
+                    <button>저장</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="Frame40">
+        <span class="material-symbols-outlined">menu</span>
+
+        <div class="Menu">
+            <a href="">HOME</a><br>
+            <a href="">Posting</a><br>
+            <a href="">Diary</a><br>
+            <a href="">Gallery</a><br>
+            <a href="">Chat</a><br>
+            <a href="">Market</a>
+        </div>
+
+    </div>
+    </div>
+</body>
+
+<script>
+    // Add a hover event listener to the Frame40 element
+    document.querySelector('.Frame40').addEventListener('mouseover', function () {
+        // When the user hovers over the element, change its transform property to translateX(0)
+        this.style.transform = 'translateX(0)';
+    });
+
+    document.querySelector('.Frame40').addEventListener('mouseout', function () {
+        // When the user is not hovering over the element, change its transform property to translateX(-100%)
+        this.style.transform = 'translateX(-100%)';
+    });
+</script>
+
+</html>

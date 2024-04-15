@@ -15,9 +15,10 @@ section.rps h2 {
   margin: 20px;
 }
 
-section.rps form#rps-betting {
-  margin: auto;
+section.rps .rps-bet {
+  margin: 20px;
 }
+
 
 section.rps input#bet-money {
   color: #adadad;
@@ -35,12 +36,10 @@ section.rps .rps-game {
 
 section.rps .result { /* 결과창 */
   display: none;
-}
-
-section.rps .result h2 {
   font-size: 18px;
+  margin: 20px;
 }
 
 section.rps .result .btn-primary {
-  margin: auto;
+  margin: 20px;
 }

@@ -177,8 +177,13 @@
 
       $rpsArea.style.display = 'none';
 
-      console.log('rpsResult: ', rpsResult);
-      whatResultOnScreen(rpsResult);
+      // 2초 뒤 실행
+      setTimeout(function() {
+        console.log('rpsResult: ', rpsResult);
+        whatResultOnScreen(rpsResult);
+      }, 2000);
+
+      
       
     }
 

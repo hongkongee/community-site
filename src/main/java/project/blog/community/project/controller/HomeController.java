@@ -54,7 +54,7 @@ public class HomeController {
 
     }*/
 
-    // 가위바위보 게임
+    // 가위바위보 게임 (비동기)
     @PostMapping("/rps/game")
     @ResponseBody
     public ResponseEntity<String> rpsGame(@RequestBody RpsRequestDTO dto) {

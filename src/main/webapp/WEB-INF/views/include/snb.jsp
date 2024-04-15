@@ -8,11 +8,11 @@
     <nav class="left-snb">
     <!-- 왼쪽 메뉴 사이드바 -->
     <ul>
-        <li id="home"><a href="#">Home</a></li>
-        <li id="game"><a href="#">게임</a></li>
+        <li id="home"><a href="/home/main">Home</a></li>
+        <li id="game"><a href="/home/rps">게임</a></li>
         <li id="second-hand"><a href="#">중고 장터</a></li>
         <li id="sports"><a href="#">스포츠 예측</a></li>
-        <li id="all"><a href="#">
+        <li id="all"><a href="/home/all">
         전체 게시판
         <ul>
             <li id="game-board"><a href="#">게임 게시판</a></li>

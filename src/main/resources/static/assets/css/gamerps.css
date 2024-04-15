@@ -28,3 +28,7 @@ section.rps input#bet-money {
 section.rps input#bet-btn {
   margin: 20px;
 }
+
+section.rps .rps-game {
+  display: none;
+}

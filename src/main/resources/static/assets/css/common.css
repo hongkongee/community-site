@@ -1,6 +1,8 @@
 /* reset css */
 @import url('https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css');
 
+
+=======
 /* 폰트 */
 @import url('https://fonts.googleapis.com/css2?family=Orbit&display=swap');
 a {
@@ -10,13 +12,16 @@ a {
 }
 
 
-
 /* padding 적용해도 box 사이즈 고정 */
 * {
   box-sizing: border-box;
 }
 
+
+/* a태그 기능 죽이기 */
+
 /* a태그 디자인 죽이기 */
+
 a {
   color: inherit;
   text-decoration: none;

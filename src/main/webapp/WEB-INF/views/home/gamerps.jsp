@@ -76,10 +76,11 @@
 
     const myPoint = 30000; // 내 포인트
     const minPoint = 5000; // 최소 베팅 포인트
+    let betPoint = -1; // 입력 베팅 포인트
 
     $betButton.onclick = e => {
       console.log("베팅 버튼 클릭");
-      const betPoint = $betPoint.value.trim();
+      betPoint = $betPoint.value.trim();
       console.log(betPoint);
 
       if (isNaN(betPoint)) { // 문자열로 입력한 경우
@@ -115,12 +116,15 @@
     // 가위바위보
 
     function sendChoice(choice) {
-      fetch('/your-endpoint', {
+      fetch('/home/rps/game', {
           method: 'POST',
           headers: {
-              'Content-Type': 'application/json'
+              'content-type': 'application/json'
           },
-          body: JSON.stringify({ choice: choice })
+          body: JSON.stringify({ 
+            'betPoint': betPoint,
+            'choice': choice 
+          })
       })
       .then(response => {
           if (!response.ok) {

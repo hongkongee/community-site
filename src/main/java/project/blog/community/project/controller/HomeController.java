@@ -39,22 +39,31 @@ public class HomeController {
     }
 
     // 가위바위보 베팅 금액 입력
-    @GetMapping("/rps/bet")
+/*    @GetMapping("/rps/bet")
     public String betting(@RequestParam("bp") int bp) {
         // bp: 유저가 입력한 가위바위보를 위한 베팅 금액
         log.info("/home/rps/bet: POST, {}", bp);
 
         return "redirect:/home/rps";
 
-    }
+    }*/
 
     // 가위바위보 게임
     @PostMapping("/rps/game")
     @ResponseBody
     public String rpsGame(@RequestBody RpsRequestDTO dto) {
         // bp: 유저가 입력한 가위바위보를 위한 베팅 금액
-        log.info("/home/rps/game: POST, {}, {}", bp, rps);
+        log.info("/home/rps/game: POST, {}", dto.toString());
         // scissors: 가위, rock: 바위, paper: 보
+
+
+        // 1. 내 포인트에서 베팅 금액 차감
+        
+        // 2. 가위바위보 진행 (컴퓨터 랜덤 가위바위보 생성 후 비교)
+        
+        // 3. 가위바위보 결과에 따라 포인트 지급 or 차감
+        
+        // 4. 결과를 화면단에 전달, 결과에 따라 화면을 다르게 구성
 
         return "redirect:/home/rps";
 

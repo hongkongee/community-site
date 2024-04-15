@@ -159,8 +159,7 @@ margin: 30px;
   width: 128px; height: 119px; left: 159px; top: 189px; position: absolute; color: black; font-size: 36px; font-family: Inter; font-weight: 100; word-wrap: break-word
 }
 .Frame40{
-  width: 166px; height: 345px; padding-bottom: 11px; padding-left: 12px; padding-right: 12px; left: -2px; top: 61px; position: absolute; background: white; border: 3px #7AA2E3 solid; flex-direction: column; justify-content: center; align-items: center; gap: 10px; display: inline-flex
+  width: 359px; height: 1024px; padding-bottom: 11px; padding-left: 12px; padding-right: 12px; left: 0px; top: 0px; position: absolute; background: white; border: 3px #7AA2E3 solid; flex-direction: column; justify-content: center; align-items: center; gap: 10px; display: inline-flex
 }
 .HomePostingDiaryGalleryChatMarket{
-  width: 93px; height: 248px; color: black; font-size: 24px; font-family: Inter; font-weight: 500; word-wrap: break-word
-}
+  width: 93px; height: 248px; color: black; font-size: 24px; font-family: Inter; font-weight: 500; word-wrap: break-word}

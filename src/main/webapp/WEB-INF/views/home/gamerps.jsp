@@ -78,6 +78,9 @@
     const minPoint = 5000; // 최소 베팅 포인트
     let betPoint = -1; // 입력 베팅 포인트
 
+    const $rpsBtn = document.querySelectorAll('.rps-btn'); // 가위바위보 최종 버튼
+    let rpsResult; // 가위바위보 결과 from 서버
+
     $betButton.onclick = e => {
       console.log("베팅 버튼 클릭");
       betPoint = $betPoint.value.trim();
@@ -107,14 +110,12 @@
 
     };
 
-    const $rpsBtn = document.querySelectorAll('.rps-btn');
     
 
 
 
 
-    // 가위바위보
-
+    // 가위바위보 입력값을 서버에 전송
     function sendChoice(choice) {
       fetch('/home/rps/game', {
           method: 'POST',
@@ -135,13 +136,19 @@
       .then(data => {
           console.log('Server response:', data);
           // Handle server response as needed
+          rpsResult = data;
       })
       .catch(error => {
           console.error('There was a problem with the fetch operation:', error);
       });
+
+      $rpsArea.style.display = 'none';
+
+      
     }
 
 
+    // 가위 or 바위 or 보 버튼 중 하나를 클릭 시
     document.getElementById("scissors").addEventListener("click", function() {
         sendChoice("scissors");
     });
@@ -153,6 +160,8 @@
     document.getElementById("paper").addEventListener("click", function() {
         sendChoice("paper");
     });
+
+
 
 
 

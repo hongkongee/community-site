@@ -1,15 +1,21 @@
 package project.blog.community.project.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import project.blog.community.project.dto.request.RpsRequestDTO;
+import project.blog.community.project.service.GameService;
 
 
 @Controller
 @RequestMapping("/home")
+@RequiredArgsConstructor
 @Slf4j
 public class HomeController {
+
+    private final GameService gameService;
 
     // 홈페이지 - 메인페이지
     @GetMapping("/main")
@@ -51,21 +57,17 @@ public class HomeController {
     // 가위바위보 게임
     @PostMapping("/rps/game")
     @ResponseBody
-    public String rpsGame(@RequestBody RpsRequestDTO dto) {
+    public ResponseEntity<String> rpsGame(@RequestBody RpsRequestDTO dto) {
         // bp: 유저가 입력한 가위바위보를 위한 베팅 금액
         log.info("/home/rps/game: POST, {}", dto.toString());
         // scissors: 가위, rock: 바위, paper: 보
 
 
-        // 1. 내 포인트에서 베팅 금액 차감
-        
-        // 2. 가위바위보 진행 (컴퓨터 랜덤 가위바위보 생성 후 비교)
-        
-        // 3. 가위바위보 결과에 따라 포인트 지급 or 차감
-        
-        // 4. 결과를 화면단에 전달, 결과에 따라 화면을 다르게 구성
+        // 가위바위보 결과
+        String result = gameService.rpsPointCalc(dto);
 
-        return "redirect:/home/rps";
+
+        return ResponseEntity.ok().body(result);
 
     }
 

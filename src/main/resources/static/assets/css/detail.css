@@ -46,6 +46,7 @@ section.board .left-region {
 /* 작성자를 누르면 창이 뜬다 */
 section.board .writer-info {
   display: none;
+  font-size: 18px;
   width: 150px;
   height: 130px;
   background: #97E7E1;
@@ -89,6 +90,7 @@ section.board .form-container hr {
 section.board .form-container .buttons {
   margin: 20px;
   float: right;
+  font-size: 16px;
 }
 
 section.board .form-container .buttons #modify,
@@ -106,6 +108,7 @@ section.board #content {
 section.reply {
   margin-top: 100px;
   border: blue 1px dashed;
+  font-size: 20px;
 }
 
 

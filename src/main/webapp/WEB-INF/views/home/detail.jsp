@@ -159,7 +159,6 @@
                   <textarea rows="3" id="claimText" name="claimText" class="form-control"
                                             placeholder="신고 사유를 입력해주세요"></textarea>
 
-                
 
               </div>
               <div class="modal-footer">
@@ -264,8 +263,7 @@
   const $writerInformation = document.querySelector('.writer-info');
 
   // 작성자 누르면 관련 기능 
-  document.querySelector('body').onclick = (e) => {
-    console.log(e.target);
+  document.querySelector('.wrapper').onclick = e => {
 
     if(e.target.matches('#writer-a')) { // 작성자를 누르면
 
@@ -307,7 +305,7 @@
 
     document.body.removeChild(tempInput);
 
-    alert("Page URL copied to clipboard: " + currentPageUrl);
+    alert("페이지 URL이 복사되었습니다.: " + currentPageUrl);
 
   };
 
@@ -318,72 +316,57 @@
     document.getElementById('clame-btn').click();
   };
 
+
+
   // 신고 form 제출
-  // document.getElementById('claim-form').addEventListener("submit", function(e) {
+  document.getElementById('claim-form').addEventListener("submit", function(e) {
 
-  //   console.log('신고 제출!');
-  //   e.preventDefault();
+    console.log('신고 제출!');
+    e.preventDefault(); // form 기능 없애기
 
-  //   // true or false
-  //   const advertisement = document.getElementById("advertisement").checked;
-  //   const bad = document.getElementById("bad").checked;
-  //   const dispute = document.getElementById("dispute").checked;
-  //   const plaster = document.getElementById("plaster").checked;
+    // true or false checkbox 배열
+    var interests = [];
+    var checkboxes = document.querySelectorAll('input[name="clame-reason"]:checked');
+    console.log(checkboxes); // nodelist
 
-  //   // String
-  //   const message = document.getElementById("claimText").value; // 기타 신고 사유 textArea
-  //   console.log(advertisement);
-  //   console.log(bad);
-  //   console.log(message);
+    checkboxes.forEach(function(checkbox) { // 배열 고차 함수
+        interests.push(checkbox.value); // 체크한 항목만 모아둔 배열 (정제된 형태의 배열)
+    });
+    console.log(interests);
 
-  // });
+    var message = document.getElementById("claimText").value;
 
+    // *********************** AJAX : 서버에 요청 보내기 ***********************
 
-
-
-
-
-
-
-
-
-    /* 친구 정보 */
-    const $friends = document.querySelector('.friends');
-    const $userInformation = document.getElementById('user-information');
-    const $xBtn = document.getElementById('x-btn');
-
-    $friends.onclick = e => {
-      if(!e.target.matches('.friend')) return;
-      e.preventDefault();
-      
-      // #user-information 의 p태그가 누른 대상의 닉네임이 되어야 한다.
-      $userInformation.style.display = 'block';
-      $userInformation.classList.add("animate");
-
-      // 애니메이션이 끝나면 animate 클래스 제거하기
-      setTimeout(function() {
-          image.classList.remove("animate");
-      }, 500); // Adjust the duration to match the transition duration
-      
+    var formData = {
+        message: message, // text area 기타 사유 메세지
+        interests: interests // 체크된 박스만 모아둔 배열
     };
 
-    $xBtn.onclick = e => {
-      console.log('x버튼 클릭');
-      $userInformation.style.display = 'none';
-    }
+    // Send the form data to the server
+    fetch("/home/detail/claim", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log("Form submission successful:", data);
+        // Handle server response as needed
+    })
+    .catch(error => {
+        console.error("Error submitting form:", error);
+    });
 
+    alert('정상적으로 신고되었습니다.');
+    document.querySelector('.modal-content .modal-footer .btn-secondary').click(); 
+    document.getElementById("claimText").value='';
 
+    
 
-
-    /* 채팅 모달창 */
-    // const $modal = document.getElementById();
-
-    // addEventListener('click', () => {
-    //   $modal.style.display = 'block';
-    // });
-
-
-    // appendPageActive();
+  });
 
 
 

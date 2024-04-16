@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import project.blog.community.project.dto.request.ClaimRequestDTO;
 import project.blog.community.project.dto.request.RpsRequestDTO;
 import project.blog.community.project.service.GameService;
 
@@ -17,7 +18,7 @@ public class HomeController {
 
     private final GameService gameService;
 
-    // 홈페이지 - 메인페이지
+    // 홈페이지 - 메인페이지 view
     @GetMapping("/main")
     public String main() {
         log.info("/home/main: GET");
@@ -26,7 +27,7 @@ public class HomeController {
         return "home/main";
     }
 
-    // 홈페이지 - 전체게시글
+    // 홈페이지 - 전체게시글 view
     @GetMapping("/all")
     public String allBoardList() {
         log.info("/home/all: GET");
@@ -35,7 +36,7 @@ public class HomeController {
         return "home/all";
     }
 
-    // 홈페이지 - 게시글 조회
+    // 홈페이지 - 게시글 조회 view
     @GetMapping("/detail")
     public String detail() {
         log.info("/home/detail: GET");
@@ -44,12 +45,21 @@ public class HomeController {
         return "home/detail";
     }
 
+    // 게시글 작성자 신고 (비동기)
     @PostMapping("/detail/claim")
-    public String claim(ClaimRequestDTO dto) {
+    @ResponseBody
+    public ResponseEntity<String> claim(@RequestBody ClaimRequestDTO dto) {
+        log.info("/home/detail/claim: POST: {}", dto);
+
+        // 신고 체크박스, 신고 내용에 관련한 DB에 저장 (mapper)
+        // 만약 신고 횟수가 특정 횟수 이상일 경우 해당 user 계정 정지 or 추방
+
+
+        return ResponseEntity.ok().body("신고 완료");
 
     }
 
-    // 홈페이지 - 가위바위보
+    // 홈페이지 - 가위바위보 view
     @GetMapping("/rps")
     public String list() {
         log.info("/home/rps: GET");
@@ -58,15 +68,6 @@ public class HomeController {
         return "home/gamerps";
     }
 
-    // 가위바위보 베팅 금액 입력
-/*    @GetMapping("/rps/bet")
-    public String betting(@RequestParam("bp") int bp) {
-        // bp: 유저가 입력한 가위바위보를 위한 베팅 금액
-        log.info("/home/rps/bet: POST, {}", bp);
-
-        return "redirect:/home/rps";
-
-    }*/
 
     // 가위바위보 게임 (비동기)
     @PostMapping("/rps/game")

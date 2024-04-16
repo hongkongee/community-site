@@ -15,13 +15,14 @@ private final String regDate;
     public GalleryListResponseDTO(Gallery gallery) {
         this.PhotoNumber = gallery.getPhotoNumber();
         this.shortTitle = makeShortTitle(gallery.getTitle());
+
         this.regDate = makePrettierDateString(gallery.getRegDate());
         this.writer = gallery.getUser();
     }
 
     private String makePrettierDateString(LocalDateTime regDate) {
-        DateTimeFormatter dto = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return null;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return dtf.format(regDate);
     }
 
     private String makeShortTitle(String title) {

@@ -1,0 +1,190 @@
+body {
+  background: #F8F6E3;
+}
+
+.wrapper {
+  margin: auto;
+  padding: 5%;
+  width: 60vw;
+  height: 300vh;
+  background: #F8F6E3;
+}
+
+
+/* ========================== 게시글 영역 ================================= */
+
+section.board {
+  width: 95%;
+  margin: 25px auto;
+}
+
+section.board .board-info {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+section.board .form-container #bno {
+  font-size: 16px;
+}
+
+section.board .form-container #title {
+  font-size: 28px;
+  margin: 20px 0;
+}
+
+section.board .form-container #writer {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+section.board .left-region {
+  position: relative;
+}
+
+/* 작성자를 누르면 창이 뜬다 */
+section.board .writer-info {
+  display: none;
+  font-size: 18px;
+  width: 150px;
+  height: 130px;
+  background: #97E7E1;
+  padding: 10px;
+  position: absolute;
+  top: 75%;
+  left: 85%;
+  transform: translateX(-50%);
+  z-index: 1;
+
+}
+
+section.board .writer-info li {
+  line-height: 150%;
+}
+
+section.board .form-container #date {
+  font-size: 14px;
+}
+
+section.board .form-container .right-region {
+  font-weight: 700;
+  /* border: #000000 solid 1px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-size: 18px;
+
+}
+
+section.board .form-container #date #see-reply {
+  margin-top: 10px;
+}
+
+section.board .form-container hr {
+  margin-top: 10px;
+}
+
+
+
+section.board .form-container .buttons {
+  margin: 20px;
+  float: right;
+  font-size: 16px;
+}
+
+section.board .form-container .buttons #modify,
+section.board .form-container .buttons #delete {
+  /* 작성자만 삭제, 수정권한이 있음 */
+  display: none;
+}
+
+section.board #content {
+  font-size: 20px;
+}
+
+
+/* ========================== 댓글 영역 ================================= */
+section.reply {
+  margin-top: 100px;
+  border: blue 1px dashed;
+  font-size: 20px;
+}
+
+
+/* ========================== 신고 영역 (모달) ================================= */
+
+#clame-btn {
+  display: none;
+}
+
+section.claim {
+  font-size: 19px;
+}
+
+section.claim .modal-body label {
+  margin: 14px;
+
+}
+
+section.claim .modal-body label {
+  margin: 4px;
+}
+
+.form-check {
+  margin: 10px;
+}
+
+section.claim label[for="claim-reason"] {
+  margin-top: 15px;
+}
+
+section.claim .modal-footer button {
+  width: 52px;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+
+
+
+/* ========================== 기본 디자인 ================================= */
+
+/* 체크박스 디자인 */
+
+/* input[type="checkbox"] {
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px dotted #999999;
+  border-radius: 50%;
+  background-color: #ffffff;
+  transition: background 300ms;
+}
+
+input[type="checkbox"]:not(checked) {
+  background-color: #ffffff;
+  border: 2px dotted #000000;
+  border-radius: 50%;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #ffffff;
+  border: 2px dotted #000000;
+  border-radius: 50%;
+}
+
+input[type="checkbox"]:checked::after {
+  content: '';
+  color: #ffffff;
+  font-size: 20pt;
+  line-height: 1em; 
+}*/
+
+/* 버튼 디자인 */
+button {
+  width: 48px;
+  height: 26px;
+  border: none;
+  background-color: #f7cac9;
+}

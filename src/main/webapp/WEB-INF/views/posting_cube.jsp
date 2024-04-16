@@ -1,11 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>posting_cube</title>
 
-    <link rel="stylesheet" href="posting_cube.css">
+    <link rel="stylesheet" href="/assets/css/posting_cube.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,18 +51,19 @@
                                 </div>
                                 <input type="text" class="reply-rec"></input>
                                 <button class="reply">댓글 쓰기</button>
-                                
-                                
+
+
                             </div>
                         </div>
                     </section>
                 </div>
             </div>
+        </div>
 
-            <div class="Frame40">
-            <span class="material-symbols-outlined">menu</span>
+        <div class="Frame40">
 
             <div class="Menu">
+                <button class="close-btn">X</button> <br>
                 <a href="">HOME</a><br>
                 <a href="">Posting</a><br>
                 <a href="">Diary</a><br>
@@ -69,19 +73,28 @@
             </div>
 
         </div>
-        </div>
+
+
 </body>
 
 <script>
+
+    const sidebar = document.querySelector('.Frame40');
+
+    document.querySelector('.Frame40').addEventListener('mouseover', function () {
+    // When the user hovers over the element, change its transform property to translateX(0)
+    this.style.transform = 'translateX(-100%)';
+    });
+
     // Add a hover event listener to the Frame40 element
     document.querySelector('.Frame40').addEventListener('mouseover', function () {
         // When the user hovers over the element, change its transform property to translateX(0)
         this.style.transform = 'translateX(0)';
     });
 
-    document.querySelector('.Frame40').addEventListener('mouseout', function () {
+    document.querySelector('.close-btn').addEventListener('click', function () {
         // When the user is not hovering over the element, change its transform property to translateX(-100%)
-        this.style.transform = 'translateX(-100%)';
+        sidebar.setAttribute("style", "transform: translateX(-100%);");
     });
 </script>
 

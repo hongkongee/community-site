@@ -42,7 +42,6 @@ body {
     color: black;
     font-size: 48px;
     font-weight: bold;
-    word-wrap: break-word;
 }
 
 .Frame39 .Cube {
@@ -218,33 +217,24 @@ body {
     left: 0px;
     top: 0px;
     border: 1px solid #7AA2E3;
+    index: 100;
 }
 
-/* .Frame40:hover {
-    width: 30%;
-    height: 100%;
-    padding-bottom: 11px;
-    padding-left: 12px;
-    padding-right: 12px;
-
-    position: absolute;
-    background: white;
-    border: 3px #7AA2E3 solid;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    display: inline-flex;
-/* } */
+.Frame40 .Menu {
+    margin: 150px 50px;
+    text-align: center;
+}
 
 .Frame40 .Menu a {
+    
     width: 93px;
     height: 248px;
     color: #7AA2E3;
     font-size: 30px;
     font-weight: 500;
     text-decoration: none;
-    margin: 100px 50px;
+    
+    
 }
 
 .Frame40 .Menu a:hover {
@@ -252,8 +242,17 @@ body {
     color: black;
 }
 
-.Frame40 .material-symbols-outlined {
-    font-size: 50px;
+.Frame40 .Menu>button {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    width: 50px;
+    height: 50px;
+    background: none;
+    font-weight: bold;
+    border: none;
+    font-size: 30px;
+
 }
 
 

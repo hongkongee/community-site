@@ -4,71 +4,38 @@ body {
     font-style: normal;
     width: 100%;
     height: 100%;
+    background: #7AA2E3;
+    position: relative;
+    display: flex;
+    
 }
 
 .MydiaryJsp {
-    width: 1440px;
-    height: 1024px;
-    position: absolute;
+    width: 100%;
     background: #7AA2E3;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
 }
 
 .MydiaryJsp .Frame45 {
     width: 1277px;
     height: 903px;
-    left: 76px;
     top: 60px;
     position: relative;
     background: #F8F6E3;
     border-radius: 60px;
     overflow: hidden;
+    
 }
 
-.Frame45 .month {
-    width: 60%;
-    height: 100px;
-    /* border: 1px solid #7AA2E3; */
-    background: #F8F6E3;
-    margin-left: 240px;
-    margin-top: 100px;
-    margin-bottom: 0;
-    position: relative;
-
-}
-
-.Frame45 .month .this {
-    font-size: 50px;
-    text-align: center;
-    font-weight: bold;
-    position: absolute;
-    left: 50%;
-
-}
-
-.Frame45 .month .next {
-    font-size: 30px;
-    position: absolute;
-    right: 0px;
-    top: 50%;
-}
-
-.Frame45 .month .before {
-    font-size: 30px;
-
-    position: absolute;
-    left: 0px;
-    top: 50%;
-
-}
 
 .Frame45 .Frame46 {
-    width: 1200px;
-    height: 92px;
+    width: 100%;
     left: 192px;
     top: 13px;
     position: absolute;
-    display: flex;
-
+    flex: 1;
 }
 
 .Frame45 .Frame46 .Diary {
@@ -82,45 +49,41 @@ body {
     font-weight: bold;
 }
 
+
 /* ---------------------캘린더 시작--------------------- */
 
 table {
-    width: 65%;
+    width: 60%;
     height: 45%;
     border-radius: 60px;
     border: 1px solid #7aa2e3;
     padding: 30px;
     background: #F8F6E3;
-    margin-left: 220px;
-    margin-top: 10px;
-
+    margin-left: 20%;
+    margin-top: 10%;
 }
 
-.tbl .Sun {
+table th {
+    width: 14%;
+    box-sizing: border-box;
+}
+
+table tbody {
+    background-color: white;
+}
+
+.Sun {
     color: red;
 }
 
-.tbl .Sat {
+.Sat {
     color: blue;
 }
-
-.tbl tr {
-    width: 100px;
-}
-
-
-.tbl td {
-    /* border: 1px solid #7AA2E3; */
-    background: white;
-    padding: 0 10px;
-
-}
-
 
 /* ---------------------캘린더 끝--------------------- */
 
 /* ----------------------년도 시작----------------------- */
-
+/* 
 .Frame58 {
     padding: 20px;
     background: white;
@@ -152,35 +115,32 @@ table {
 .Frame58 .year1:hover {
     color: #7AA2E3;
     text-decoration: underline;
-}
+} */
 
 /* ----------------------년도 끝----------------------- */
 
 .Frame57 {
-    width: 65%;
+    width: 60%;
     height: 20%;
     background: #F8F6E3;
     border-radius: 60px;
     overflow: hidden;
     border: 1px #7AA2E3 solid;
-    margin-top: 40px;
-    margin-left: 75px;
+    margin-left: 20%;
+    margin-top: 10%;
 
     display: inline-flex;
 }
 
 .Frame57 .date {
     width: 300px;
-
     color: black;
     font-size: 20px;
     font-weight: bold;
-    margin-left: 30px;
+    margin-left: 5%;
     margin-top: 10px;
-    display: inline-flex;
-    position: relative;
-    text-align: center;
     
+    position: relative;
 }
 .Frame57 .date .list {
     width: 90%;
@@ -189,6 +149,13 @@ table {
     border-radius: 60px;
     position: absolute;
     top: 35px;
+}
+
+.Frame57 .event-date {
+    font-family: inherit;
+    font-size: 20px;
+    width: 50%;
+    
 }
 .Frame57 .story {
     width: 60%;
@@ -228,27 +195,34 @@ table {
 }
 
 
-/* --------------------------------------------------------------- */
+/* ----------------------사이드바 메뉴 시작---------------------- */
 
 .Frame40 {
     width: 20%;
     height: 100%;
     background: white;
-    position: absolute;
+    /* position: absolute; */
     left: 0px;
     top: 0px;
     border: 1px solid #7AA2E3;
+    index: 100;
 }
 
+.Frame40 .Menu {
+    margin: 150px 50px;
+    text-align: center;
+}
 
 .Frame40 .Menu a {
+    
     width: 93px;
     height: 248px;
     color: #7AA2E3;
     font-size: 30px;
     font-weight: 500;
     text-decoration: none;
-    margin: 100px 50px;
+    
+    
 }
 
 .Frame40 .Menu a:hover {
@@ -256,6 +230,18 @@ table {
     color: black;
 }
 
-.Frame40 .material-symbols-outlined {
-    font-size: 50px;
+.Frame40 .Menu>button {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    width: 50px;
+    height: 50px;
+    background: none;
+    font-weight: bold;
+    border: none;
+    font-size: 30px;
+
 }
+
+
+/* ----------------------사이드바 메뉴 끝---------------------- */

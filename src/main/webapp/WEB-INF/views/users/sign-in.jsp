@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="/assets/css/common.css">
 
     <style>
-
         body {
             background-color: #7AA2E3;
         }
@@ -110,12 +109,18 @@
                 background-position: 0;
             }
         }
-
     </style>
 
 </head>
 
 <body>
+
+    <c:if test="${login != null}">
+        <script>
+            alert("이미 로그인 하셨네요!");
+            location.href = "/home/main";
+        </script>
+    </c:if>
 
     <div class="container">
         <div class="wrap">
@@ -131,7 +136,7 @@
                     </div>
                     <div class="login-pw">
                         <p>비밀번호를 입력해주세요 &nbsp;&nbsp;&nbsp;<span id="pwCheck"></span>
-                        <input type="password" name="password" id="userPw" required="required" placeholder="비밀번호">
+                            <input type="password" name="password" id="userPw" required="required" placeholder="비밀번호">
                     </div>
                     <label for="auto-login">
                         <span>

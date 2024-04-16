@@ -10,7 +10,15 @@
 
 <body>
 
-    <h1> 안녕하세요! </h1>
+    <% String userName = "방문자!";
+        Cookie[] cookies = request.getCookies();
+        for(Cookie C: cookies) {
+            if (c.getName().equals("login")) {
+                username = c.getValue();
+            }
+        }
+    %>
+    <h1><%= userName %> 님 안녕하세요! </h1>
 
 
 </body>

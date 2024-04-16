@@ -1,4 +1,4 @@
-# Spring Boot3 Web MVC 학습!
+# 중간 프로젝트 Community 사이트
 
 ## 프로젝트 초기 설정시 추가할 문법
 - build.gradle 파일에 jsp 설정 추가

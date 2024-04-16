@@ -1,0 +1,31 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.blog.community.project.mapper.UserMapper">
+
+    <insert id="save">
+        INSERT INTO tbl_user
+            (account_number, password, name, email, birthday, gender)
+        VALUES
+            (#{accountNumber}, #{password}, #{name}, #{email}, #{birthday}, #{gender})
+    </insert>
+
+    <select id="findUser" resultType="user">
+        SELECT * FROM tbl_user
+        WHERE account_number = #{accountNumber}
+    </select>
+
+    <select id="isDuplicate" resultType="boolean">
+        SELECT COUNT(*)
+        FROM tbl_user
+        <if test="type == 'account'">
+            WHERE account = #{keyword}
+        </if>
+        <if test="type == 'email'">
+            WHERE email = #{keyword}
+        </if>
+    </select>
+
+
+</mapper>

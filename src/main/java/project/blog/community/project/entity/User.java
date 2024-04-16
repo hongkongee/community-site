@@ -1,5 +1,25 @@
 package project.blog.community.project.entity;
 
+/*
+User 테이블 MYSQL 복사 붙기!
+
+CREATE TABLE tbl_user (
+   account_number VARCHAR(50),
+   password VARCHAR(150) NOT NULL,
+   name VARCHAR(50) NOT NULL,
+   email VARCHAR(100) NOT NULL UNIQUE,
+   auth VARCHAR(20) DEFAULT 'COMMON',
+   reg_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+   birthday int NOT NULL,
+   gender VARCHAR(20) NOT NULL,
+   nickname VARCHAR(45) NOT NULL,
+
+   CONSTRAINT pk_member PRIMARY KEY (account_number)
+);
+
+*/
+
+
 import lombok.*;
 import org.springframework.cglib.core.Local;
 
@@ -26,6 +46,8 @@ public class User {
    private LocalDateTime regDate;
 
    private Gender gender;
+
+   private String nickname;
 
    // 회원 생일(year)
    private int birthday;

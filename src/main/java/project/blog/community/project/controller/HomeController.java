@@ -35,6 +35,20 @@ public class HomeController {
         return "home/all";
     }
 
+    // 홈페이지 - 게시글 조회
+    @GetMapping("/detail")
+    public String detail() {
+        log.info("/home/detail: GET");
+
+        // /WEB-INF/views/~~~~~.jsp
+        return "home/detail";
+    }
+
+    @PostMapping("/detail/claim")
+    public String claim(ClaimRequestDTO dto) {
+
+    }
+
     // 홈페이지 - 가위바위보
     @GetMapping("/rps")
     public String list() {

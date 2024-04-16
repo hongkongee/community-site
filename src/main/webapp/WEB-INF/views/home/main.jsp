@@ -31,7 +31,7 @@
   
         <div class="btn-container">
   
-          <a href="#">
+          <a href="/home/main">
             <i class="fa-solid fa-rotate-right"></i> <!-- 새로고침 아이콘 -->
           </a>
           

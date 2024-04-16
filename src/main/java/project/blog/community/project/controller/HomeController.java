@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import project.blog.community.project.dto.request.ClaimRequestDTO;
 import project.blog.community.project.dto.request.RpsRequestDTO;
 import project.blog.community.project.service.GameService;
+import project.blog.community.project.service.ManagementService;
 
 
 @Controller
@@ -17,6 +18,7 @@ import project.blog.community.project.service.GameService;
 public class HomeController {
 
     private final GameService gameService;
+    private final ManagementService managementService;
 
     // 홈페이지 - 메인페이지 view
     @GetMapping("/main")
@@ -46,12 +48,14 @@ public class HomeController {
     }
 
     // 게시글 작성자 신고 (비동기)
-    @PostMapping("/detail/claim")
+    @PostMapping("/detail/report")
     @ResponseBody
     public ResponseEntity<String> claim(@RequestBody ClaimRequestDTO dto) {
-        log.info("/home/detail/claim: POST: {}", dto);
+        log.info("/home/detail/report: POST: {}", dto);
 
         // 신고 체크박스, 신고 내용에 관련한 DB에 저장 (mapper)
+        managementService.report(dto);
+
         // 만약 신고 횟수가 특정 횟수 이상일 경우 해당 user 계정 정지 or 추방
 
 

@@ -52,6 +52,9 @@ public class User {
    // 회원 생일(year)
    private int birthday;
 
+   // 신고 횟수
+   private int report;
+
    // 쿠키
    private String sessionId;
    // 쿠키 수명

@@ -50,7 +50,7 @@
               <ul>
                 <li><a href="#">게시글 보기</a></li>
                 <li><a href="#">1:1 채팅</a></li>
-                <li><a id="claim-writer" href="#">신고하기</a></li>
+                <li><a id="report-writer" href="#">신고하기</a></li>
                 <li><a href="#">차단하기</a></li>
               </ul>
             </div>
@@ -97,7 +97,7 @@
     </section>
 
     <!-- ==================== 신고 모달 영역 ==================== -->
-    <section class="claim">
+    <section class="report">
       <!-- Button trigger modal -->
       <button id="clame-btn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         신고하기
@@ -108,7 +108,7 @@
         <div class="modal-dialog">
 
 
-          <form id="claim-form" action="/home/detail/claim" method="post">
+          <form id="report-form" action="/home/detail/report" method="post">
             <div class="modal-content">
               <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">작성자 님을 신고</h1>
@@ -119,13 +119,13 @@
                 <!-- 모달 신고 내용 영역 -->
 
 
-                <label for="claim-object">신고 대상</label>
+                <label for="report-object">신고 대상</label>
                 <span> 작성자 </span>
                 <br>
 
                 
 
-                  <label for="claim-question">신고 사유</label>
+                  <label for="report-question">신고 사유</label>
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="clame-reason" value="advertisement" id="advertisement">
                     <label class="form-check-label" for="flexCheckDefault">
@@ -155,8 +155,8 @@
                   </div>
 
 
-                  <label for="claim-reason">기타 사유가 있으면 말씀해주세요</label>
-                  <textarea rows="3" id="claimText" name="claimText" class="form-control"
+                  <label for="report-reason">기타 사유가 있으면 말씀해주세요</label>
+                  <textarea rows="3" id="reportText" name="reportText" class="form-control"
                                             placeholder="신고 사유를 입력해주세요"></textarea>
 
 
@@ -310,7 +310,7 @@
   };
 
   // 신고버튼 누르기
-  const $clameWriter = document.getElementById('claim-writer');
+  const $clameWriter = document.getElementById('report-writer');
   $clameWriter.onclick = () => {
     console.log('신고!!');
     document.getElementById('clame-btn').click();
@@ -319,7 +319,7 @@
 
 
   // 신고 form 제출
-  document.getElementById('claim-form').addEventListener("submit", function(e) {
+  document.getElementById('report-form').addEventListener("submit", function(e) {
 
     console.log('신고 제출!');
     e.preventDefault(); // form 기능 없애기
@@ -334,7 +334,7 @@
     });
     console.log(interests);
 
-    var message = document.getElementById("claimText").value;
+    var message = document.getElementById("reportText").value;
 
     // *********************** AJAX : 서버에 요청 보내기 ***********************
 
@@ -344,7 +344,7 @@
     };
 
     // Send the form data to the server
-    fetch("/home/detail/claim", {
+    fetch("/home/detail/report", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -362,7 +362,7 @@
 
     alert('정상적으로 신고되었습니다.');
     document.querySelector('.modal-content .modal-footer .btn-secondary').click(); 
-    document.getElementById("claimText").value='';
+    document.getElementById("reportText").value='';
 
     
 

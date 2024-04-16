@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
 
   <!-- common css -->
-  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="/assets/css/market.css">
 
   <!-- 부트스트랩 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -27,7 +27,7 @@
 
   <style>
     /* common css 가져오기 */
-    @import url('../common/common.css');
+    @import url('/assets/css/market.css');
 
 
 
@@ -184,31 +184,6 @@ ight-snb>.weather-->
 
 
 
-
-        <div class="ad">
-          <!-- 광고 테스트 -->
-          <div class="ad-box">
-            <div class="adtitle">광고</div>
-            <ul class="add-group">
-              <li class="Ad1">
-                <img src="https://via.placeholder.com/150x138" />
-                <div class="Ad1content">#포켓몬 빵 팝니다<br />#6,000원</div>
-              </li>
-              <li class="Ad2">
-                <img src="https://via.placeholder.com/150x142" />
-                <div class="Ad2content">조니워커 블루 빈병팝니다<br />#30,000원</div>
-              </li>
-              <li class="Ad3">
-                <img src="https://via.placeholder.com/150x138" />
-                <div class="Ad3content">#포켓몬 빵 팝니다<br />#6,000원</div>
-              </li>
-              <li class="Ad4">
-                <img src="https://via.placeholder.com/150x138" />
-                <div class="Ad4content">#포켓몬 빵 팝니다<br />#6,000원</div>
-              </li>
-            </ul>
-          </div>
-        </div>
       </div>
 
 

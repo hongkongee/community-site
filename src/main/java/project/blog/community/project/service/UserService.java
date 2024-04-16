@@ -51,6 +51,9 @@ public class UserService {
    }
 
 
+   public boolean checkDuplicateValue(String type, String keyword) {
+      return userMapper.isDuplicate(type, keyword);
+   }
 }
 
 

@@ -117,6 +117,7 @@
             &:hover {
                 background-position: 0;
             }
+        }
 
 
     </style>
@@ -129,11 +130,11 @@
     <div class="container">
         <h2>회원 가입</h2>
         <div class="wrap">
-            <form action="/members/sign-up" name="signUp" id="signUpForm" method="post">
+            <form action="/users/sign-up" name="signUp" id="signUpForm" method="post">
                 <div class="info">
                     <div id="info_id">
                         <p>아이디를 입력해주세요</p>
-                        <input type="text" name="account" id="user_id" class="input-btn"
+                        <input type="text" name="accountNumber" id="user_id" class="input-btn"
                         required="required" placeholder="사용하실 아이디를 입력해주세요">
                         <button>중복 확인</button>
                     </div>
@@ -158,9 +159,9 @@
                     </div>
                     <div>
                         <p>성별을 선택해주세요</p>
-                        <input type="radio" name="gender" value="male">
+                        <input type="radio" name="gender" value="Male">
                         <label for="gender_male">남자</label>
-                        <input type="radio" name="gender" value="female">
+                        <input type="radio" name="gender" value="Female">
                         <label for="gender_female">여자</label>
                     </div>
                     <div>
@@ -172,13 +173,13 @@
                     <div>
                         <p>출생년도를 입력해주세요</p>
                         <p>
-                            <input type="number" name="birth_year" id="birth-btn" required="required">
+                            <input type="number" name="birthday" id="birth-btn" required="required">
                         </p>
                     </div>
                 </div>
                 <div class="main-btn">
-                    <div class="back-btn"><button>돌아가기</button></div>
-                    <div class="submit-btn"><button>회원가입</button></div>
+                    <div class="back-btn"><button type="button">돌아가기</button></div>
+                    <div class="submit-btn"><button type="submit">회원가입</button></div>
                 </div>
             </form>
         </div>

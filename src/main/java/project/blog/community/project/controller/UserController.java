@@ -5,7 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import project.blog.community.project.dto.request.LoginRequestDTO;
 import project.blog.community.project.dto.request.SignUpRequestDto;
+import project.blog.community.project.service.LoginResult;
 import project.blog.community.project.service.UserService;
 
 @Controller
@@ -14,7 +17,7 @@ import project.blog.community.project.service.UserService;
 @Slf4j
 public class UserController {
 
-   private UserService userService;
+   private final UserService userService;
 
    @GetMapping("/sign-up")
    public void signUp() {
@@ -40,7 +43,33 @@ public class UserController {
       log.info("dto = {}", dto);
 
       userService.join(dto);
-      return "redirect:/";
+      return "redirect:/home/main";
+
+   }
+
+   // 로그인 양식 화면 요청 처리
+   @GetMapping("/sign-in")
+   public void signIn() {
+      log.info("/users/sign-in: GET!!");
+   }
+
+   //로그인 검증 요청
+   @PostMapping("/sign-in")
+   public String signIn(LoginRequestDTO dto,
+                        RedirectAttributes ra) {
+      log.info("/users/sign-in: POST!!");
+      log.info("dto = {}", dto);
+
+      LoginResult result = userService.authenticate(dto);
+      log.info("result = {}", result);
+
+      ra.addFlashAttribute("result", result);
+
+      if (result == LoginResult.SUCCESS) {
+         return "redirect:/home/main";
+      }
+
+      return "redirect:/users/sign-in";
 
    }
 

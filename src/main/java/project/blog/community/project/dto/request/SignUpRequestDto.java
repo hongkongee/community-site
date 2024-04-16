@@ -35,7 +35,11 @@ public class SignUpRequestDto {
    private int birthday;
 
    @NotBlank
-   private Gender gender;
+   private String gender;
+
+   @NotBlank
+   @Size(min = 2, max = 8)
+   private String nickname;
 
    public User toEntity(PasswordEncoder encoder) {
       return User.builder()
@@ -44,7 +48,8 @@ public class SignUpRequestDto {
             .name(name)
             .email(email)
             .birthday(birthday)
-            .gender(gender)
+            .gender(gender.equals("Male") ? Gender.MALE : Gender.FEMALE)
+            .nickname(nickname)
             .build();
    }
 

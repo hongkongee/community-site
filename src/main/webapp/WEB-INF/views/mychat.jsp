@@ -49,9 +49,44 @@
       <div class="Rectangle57" ></div>
       <div class="Api" >대화창 api</div>
     </div>
-    <div class="Frame40" style="">
-      <div class="HomePostingDiaryGalleryChatMarket" style="width: 93px; height: 248px; color: black; font-size: 24px; font-family: Inter; font-weight: 500; word-wrap: break-word">HOME<br/>Posting<br/>Diary<br/>Gallery<br/>Chat<br/>Market</div>
-    </div>
+    <div class="Frame40">
+
+                <div class="Menu">
+                    <button class="close-btn">X</button> <br>
+                    <a href="">HOME</a><br>
+                    <a href="">Posting</a><br>
+                    <a href="">Diary</a><br>
+                    <a href="">Gallery</a><br>
+                    <a href="">Chat</a><br>
+                    <a href="">Market</a>
+                </div>
+
+            </div>
+
+
+    </body>
+
+    <script>
+
+        const sidebar = document.querySelector('.Frame40');
+
+        // document.querySelector('.Frame40').addEventListener('mouseover', function () {
+        //     // When the user hovers over the element, change its transform property to translateX(0)
+        //     this.style.transform = 'translateX(-100%)';
+        // });
+
+        // Add a hover event listener to the Frame40 element
+        document.querySelector('.Frame40').addEventListener('mouseover', function () {
+            // When the user hovers over the element, change its transform property to translateX(0)
+            this.style.transform = 'translateX(0)';
+        });
+
+
+        document.querySelector('.close-btn').addEventListener('click', function () {
+            // When the user is not hovering over the element, change its transform property to translateX(-100%)
+            sidebar.setAttribute("style", "transform: translateX(-100%);");
+        });
+    </script>
   </div>
 
 </body>

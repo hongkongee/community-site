@@ -117,6 +117,7 @@
             &:hover {
                 background-position: 0;
             }
+        }
 
 
     </style>
@@ -132,18 +133,18 @@
             <form action="/members/sign-up" name="signUp" id="signUpForm" method="post">
                 <div class="info">
                     <div id="info_id">
-                        <p>아이디를 입력해주세요</p>
+                        <p>아이디를 입력해주세요&nbsp; <span id="idChk"></span></p>
                         <input type="text" name="account" id="user_id" class="input-btn"
-                        required="required" placeholder="사용하실 아이디를 입력해주세요">
-                        <button>중복 확인</button>
+                        required="required" maxlength="14" placeholder="사용하실 아이디를 입력해주세요">
+                        <button id="id_check">중복 확인</button>
                     </div>
                     <div>
-                        <p>비밀번호를 입력해주세요 (영문과 특수문자를 포함해서 8자 이상)</p>
+                        <p>비밀번호를 입력해주세요&nbsp;<span id="pwChk">(영문과 특수문자를 포함해서 8자 이상)</span></p>
                         <input type="password" name="password" id="password" class="input-btn"
-                        required="required" placeholder="사용하실 비밀번호를 입력해주세요">
+                        required="required" maxlength="20" placeholder="사용하실 비밀번호를 입력해주세요">
                     </div>
                     <div>
-                        <p>비밀번호를 다시 입력해주세요</p>
+                        <p>비밀번호를 다시 입력해주세요&nbsp;&nbsp;&nbsp;<span id="pwChk2"></span></p>
                         <input type="password" name="pw_check" id="pw_check" class="input-btn"
                         required="required" placeholder="비밀번호를 다시 입력해주세요">
                     </div>
@@ -154,7 +155,8 @@
                     </div>
                     <div>
                         <p>사용할 닉네임을 입력해주세요</p>
-                        <input type="text" name="nickname" id="user_nickname" class="input-btn" required="required">
+                        <input type="text" name="nickname" id="user_nickname" class="input-btn"
+                        minlength="2" maxlength="8" required="required">
                     </div>
                     <div>
                         <p>성별을 선택해주세요</p>
@@ -183,6 +185,107 @@
             </form>
         </div>
     </div>
+
+    <script>
+        // 회언가입 입력값 검증 처리
+
+        // 입력값 검증 통과 여부 배열
+        const checkResultList = [false, false, false, false, false, false, false, false];
+
+        // 아이디 검사 정규표현식
+        const accountPattern = /^[a-zA-Z0-9]{4,14}$/;
+
+        const $idInput = document.getElementById('user_id');        
+        const $idCheck = document.getElementById('id_check');
+
+        // 버튼을 클릭하면 이벤트 발생
+        $idCheck.onclick = e => {
+
+            const idValue = $idInput.value;
+            console.log('idValue의 값: ' + idValue);
+
+            if (idValue.trim() === '') {
+                $idInput.style.borderColor = 'red';
+                document.getElementById('idChk').innerHTML = '<b style="color: red;">[아이디는 필수값입니다.]</b>'
+                checkResultList[0] = false;
+            } else if (!accountPattern.test(idValue)) {
+
+                // 정규표현식의 test 함수를 통해 입력값이 패턴에 유효한지 검증
+                $idInput.style.borderColor = 'red';
+                document.getElementById('idChk').innerHTML = 
+                    '<b style="color: red;">[아이디는 4~14글자의 영문, 숫자로 입력하세요.]</b>';
+                checkResultList[0] = false;
+            } else {
+                // 비동기 요청으로 아이디 중복 확인 진행
+                fetch('/members/check/account/' + idValue) // 어떻게 값이 들어올지는 확인 해야함!
+                    .then(res => res.json())
+                    .then(flag => {
+                        if (flag) { // 중복
+                            $idInput.style.boarderColor = 'red';
+                            document.getElementById('idChk').innerHTML =
+                                '<b style="color: red;">[아이디가 중복되었습니다.]</b>';
+                            checkResultList[0] = false;
+
+                        } else {
+                            $idInput.style.boarderColor = 'skyblue';
+                            document.getElementById('idChk').innerHTML =
+                                '<b style="color: skyblue;">[사용 가능한 아이디입니다.]</b>';
+                            checkResultList[0] = true;
+                        }
+                    });
+            }
+
+
+        }
+
+        // 패스워드 검사 정규표현식
+        const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&_~])[A-Za-z\d@$!%*#?&_~]{8,}$/;
+
+        // 패스워드 입력값 검증
+        const $pwInput = document.getElementById('password');
+        $pwInput.onkeyup = e => {
+            const pwValue = $pwInput.value;
+            console.log(pwValue);
+            if (pwValue.trim() === '') {
+                $pwInput.style.borderColor = 'red';
+                document.getElementById('pwChk').innerHTML = '<b style="color: red;">[비밀번호는 필수값입니다.]</b>';
+                checkResultList[1] = false;
+
+            } else if (!passwordPattern.test(pwValue)) {
+                $pwInput.style.borderColor = 'red';
+                document.getElementById('pwChk').innerHTML = '<b style="color: red;">[특수문자 포함 8자 이상 입력해주세요.]</b>';
+                checkResultList[1] = false;
+
+            } else {
+                $pwInput.style.borderColor = 'skyblue';
+                document.getElementById('pwChk').innerHTML = '<b style="color: skyblue;">[사용가능한 비밀번호입니다.]</b>';
+                checkResultList[1] = true;
+            }
+        };
+
+        // 패스워드 확인란 입력값 검증
+        const $pwCheckInput = document.getElementById('pw_check');
+        $pwCheckInput.onkeyup = e => {
+            const pwCheckValue = $pwCheckInput.value;
+            if (pwCheckValue.trim() === '') {
+                $pwCheckInput.style.borderColor = 'red';
+                document.getElementById('pwChk2').innerHTML = '<b style="color: red;">[비밀번호 확인란은 필수값입니다.]</b>';
+                checkResultList[2] = false;
+
+            } else if ($pwCheckInput.value !== $pwInput.value) {
+                $pwCheckInput.style.borderColor = 'red';
+                document.getElementById('pwChk2').innerHTML = '<b style="color: red;">[위와 동일하게 입력해주세요.]</b>';
+                checkResultList[2] = false;
+
+            } else {
+                $pwCheckInput.style.borderColor = 'skyblue';
+                document.getElementById('pwChk2').innerHTML = '<b style="color: skyblue;">[비밀번호와 동일하게 작성되었습니다.]</b>';
+                checkResultList[2] = true;
+            }
+
+        }
+
+    </script>
 
 
 </body>

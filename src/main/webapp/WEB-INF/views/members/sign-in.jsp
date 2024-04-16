@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
 
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/common.css">
+    <link rel="stylesheet" href="/assets/css/common.css">
 
     <style>
 
@@ -19,11 +19,18 @@
 
         .container {
             width: 60%;
-            margin: 0 auto;
+            margin: 100px auto;
             font-family: "Orbit", sans-serif;
             color: #7AA2E3;
             background-color: #F8F6E3;
             border-radius: 40px;
+        }
+
+        .container .wrap {
+            padding-top: 100px;
+            padding-bottom: 100px;
+            margin: 0 auto;
+            text-align: center;
         }
 
         .container .wrap h2 {
@@ -44,6 +51,7 @@
             height: 2em;
             border-color: #7AA2E3;
             border-width: 0 0 2px;
+            background-color: transparent;
         }
 
         .container .wrap .login input[type="text"]:focus,
@@ -109,14 +117,13 @@
             &:hover {
                 background-position: 0;
             }
+        }
 
     </style>
 
 </head>
 
 <body>
-
-    <%@ include file="../include/static-head.jsp" %>
 
     <div class="container">
         <div class="wrap">
@@ -125,13 +132,13 @@
 
             <div class="login">
 
-                <form action="members/sign-in" name="sign-in" method="get" id="login-form">
+                <form action="/users/sign-in" name="sign-in" method="post" id="login-form">
                     <div class="login-id">
                         <p>아이디를 입력해주세요 &nbsp;&nbsp;&nbsp; <span id="idCheck"></span></p>
-                        <input type="text" name="account" id="userId" required="required" placeholder="아이디">
+                        <input type="text" name="accountNumber" id="userId" required="required" placeholder="아이디">
                     </div>
                     <div class="login-pw">
-                        <p>비밀번호를 입력해주세요 &nbsp;&nbsp;&nbsp;<span id="pwCheck"></span>
+                        <p>비밀번호를 입력해주세요 &nbsp;&nbsp;&nbsp;<span id="pwCheck"></span></p>
                         <input type="password" name="password" id="userPw" required="required" placeholder="비밀번호">
                     </div>
                     <label for="auto-login">
@@ -143,14 +150,14 @@
                         <button>로그인</button>
                     </div>
                     <div class="social-btn">
-                        <a id="kakao-login" href="kakao/login">
-                            <img src="/src/main/resources/static/assets/img/loginBtn/kakaoLogin.png" alt="카카오로그인이미지">
+                        <a id="kakao-login" href="#">
+                            <img src="/assets/img/loginBtn/kakaoLogin.png" alt="카카오로그인이미지">
                         </a>
                         <a id="naver-login" href="#">
-                            <img src="/src/main/resources/static/assets/img/loginBtn/naverLogin.png" alt="네이버로그인이미지">
+                            <img src="/assets/img/loginBtn/naverLogin.png" alt="네이버로그인이미지">
                         </a>
                         <a id="google-login" href="#">
-                            <img src="/src/main/resources/static/assets/img/loginBtn/googleLogin.png" alt="구글로그인이미지">
+                            <img src="/assets/img/loginBtn/googleLogin.png" alt="구글로그인이미지">
                         </a>
                     </div>
                 </form>

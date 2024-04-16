@@ -43,7 +43,7 @@
 
 
       
-      <!-- 가위바위보 진행 -->
+      <!-- 가위바위보 선택 -->
       <div class="rps-game">
 
         <!-- <form id="gameForm" action="/home/rps/game" method="POST">
@@ -54,6 +54,13 @@
         <button id="paper" class="rps-btn" ><img src="/assets/img/paper_image.jpg" alt="Paper"></button>
         <button id="scissors" class="rps-btn" ><img src="/assets/img/scissors_image.jpg" alt="Scissors"></button>  
 
+      </div>
+
+      <!-- 가위바위보 진행중 -->
+      <div class="progress-box">
+        <div class="progress" role="progressbar" aria-label="Example 20px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 20px">
+          <div class="progress-bar"></div>
+        </div>
       </div>
 
       <!-- 가위바위보 결과 -->
@@ -176,10 +183,12 @@
       });
 
       $rpsArea.style.display = 'none';
+      document.querySelector('.progress-box').style.display = 'block';
 
       // 2초 뒤 실행
       setTimeout(function() {
         console.log('rpsResult: ', rpsResult);
+        document.querySelector('.progress-box').style.display = 'none';
         whatResultOnScreen(rpsResult);
       }, 2000);
 

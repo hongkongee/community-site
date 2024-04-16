@@ -34,6 +34,27 @@ section.rps .rps-game {
   display: none;
 }
 
+/* 가위바위보 진행중 */
+section.rps .progress-box {
+  display: none;
+  margin: 20px;
+}
+
+
+section.rps .progress-box .progress-bar {
+  animation: grow-up 2s ease-in-out 0s 1 forwards;
+}
+
+@keyframes grow-up {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+
 section.rps .result { /* 결과창 */
   display: none;
   font-size: 18px;

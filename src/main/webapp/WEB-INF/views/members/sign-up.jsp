@@ -9,10 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원 가입</title>
 
-    <link rel="stylesheet" href="/assets/css/common.css" >
+    <link rel="stylesheet" href="/assets/css/common.css">
 
     <style>
-
         body {
             background-color: #7AA2E3;
         }
@@ -107,9 +106,9 @@
                 outline: 0;
             }
 
-                background-image: linear-gradient(45deg, #7AA2E3 50%, transparent 50%);
-                background-position: 100%;
-                background-size: 400%;
+            background-image: linear-gradient(45deg, #7AA2E3 50%, transparent 50%);
+            background-position: 100%;
+            background-size: 400%;
 
 
             transition: background 300ms ease-in-out;
@@ -118,8 +117,6 @@
                 background-position: 0;
             }
         }
-
-
     </style>
 
 </head>
@@ -134,29 +131,29 @@
                 <div class="info">
                     <div id="info_id">
                         <p>아이디를 입력해주세요&nbsp; <span id="idChk"></span></p>
-                        <input type="text" name="account" id="user_id" class="input-btn"
-                        required="required" maxlength="14" placeholder="사용하실 아이디를 입력해주세요">
+                        <input type="text" name="account" id="user_id" class="input-btn" required="required"
+                            maxlength="14" placeholder="사용하실 아이디를 입력해주세요">
                         <button id="id_check">중복 확인</button>
                     </div>
                     <div>
                         <p>비밀번호를 입력해주세요&nbsp;<span id="pwChk">(영문과 특수문자를 포함해서 8자 이상)</span></p>
-                        <input type="password" name="password" id="password" class="input-btn"
-                        required="required" maxlength="20" placeholder="사용하실 비밀번호를 입력해주세요">
+                        <input type="password" name="password" id="password" class="input-btn" required="required"
+                            maxlength="20" placeholder="사용하실 비밀번호를 입력해주세요">
                     </div>
                     <div>
-                        <p>비밀번호를 다시 입력해주세요&nbsp;&nbsp;&nbsp;<span id="pwChk2"></span></p>
-                        <input type="password" name="pw_check" id="pw_check" class="input-btn"
-                        required="required" placeholder="비밀번호를 다시 입력해주세요">
+                        <p>비밀번호를 다시 입력해주세요&nbsp;<span id="pwChk2"></span></p>
+                        <input type="password" name="pw_check" id="pw_check" class="input-btn" required="required"
+                            placeholder="비밀번호를 다시 입력해주세요">
                     </div>
                     <div>
-                        <p>이름을 입력해주세요</p>
-                        <input type="text" name="name" id="user_name" class="input-btn"
-                        required="required" placeholder="한글만 입력가능합니다">
+                        <p>이름을 입력해주세요&nbsp;<span id="nameChk"></span></p>
+                        <input type="text" name="name" id="user_name" class="input-btn" required="required"
+                            placeholder="한글만 입력가능합니다">
                     </div>
                     <div>
-                        <p>사용할 닉네임을 입력해주세요</p>
-                        <input type="text" name="nickname" id="user_nickname" class="input-btn"
-                        minlength="2" maxlength="8" required="required">
+                        <p>사용할 닉네임을 입력해주세요&nbsp;<span id="nickChk"></span></p>
+                        <input type="text" name="nickname" id="user_nickname" class="input-btn" minlength="2"
+                            maxlength="8" required="required">
                     </div>
                     <div>
                         <p>성별을 선택해주세요</p>
@@ -166,9 +163,9 @@
                         <label for="gender_female">여자</label>
                     </div>
                     <div>
-                        <p>이메일을 입력해주세요</p>
-                        <input type="email" name="email" id="user_email" class="input-btn"
-                        required="required" placeholder="ex) abc123@gmail.com">
+                        <p>이메일을 입력해주세요&nbsp;<span id="emailChk"></span></p>
+                        <input type="email" name="email" id="user_email" class="input-btn" required="required"
+                            placeholder="ex) abc123@gmail.com">
                         <button>이메일 인증</button>
                     </div>
                     <div>
@@ -195,7 +192,7 @@
         // 아이디 검사 정규표현식
         const accountPattern = /^[a-zA-Z0-9]{4,14}$/;
 
-        const $idInput = document.getElementById('user_id');        
+        const $idInput = document.getElementById('user_id');
         const $idCheck = document.getElementById('id_check');
 
         // 버튼을 클릭하면 이벤트 발생
@@ -212,7 +209,7 @@
 
                 // 정규표현식의 test 함수를 통해 입력값이 패턴에 유효한지 검증
                 $idInput.style.borderColor = 'red';
-                document.getElementById('idChk').innerHTML = 
+                document.getElementById('idChk').innerHTML =
                     '<b style="color: red;">[아이디는 4~14글자의 영문, 숫자로 입력하세요.]</b>';
                 checkResultList[0] = false;
             } else {
@@ -279,12 +276,96 @@
 
             } else {
                 $pwCheckInput.style.borderColor = 'skyblue';
-                document.getElementById('pwChk2').innerHTML = '<b style="color: skyblue;">[비밀번호와 동일하게 작성되었습니다.]</b>';
+                document.getElementById('pwChk2').innerHTML =
+                    '<b style="color: skyblue;">[비밀번호와 동일하게 작성되었습니다.]</b>';
                 checkResultList[2] = true;
             }
 
-        }
+        };
 
+        // 이름 검사 정규표현식
+        const namePattern = /^[가-힣]+$/;
+        // 이름 입력값 검증
+        const $nameInput = document.getElementById('user_name');
+        $nameInput.onkeyup = e => {
+            const nameValue = $nameInput.value;
+            if (nameValue.trim() === '') {
+                $nameInput.style.borderColor = 'red';
+                document.getElementById('nameChk').innerHTML = '<b style="color: red;">[이름은 필수정보입니다.]</b>';
+                checkResultList[3] = false;
+
+            } else if (!namePattern.test(nameValue)) {
+                $nameInput.style.borderColor = 'red';
+                document.getElementById('nameChk').innerHTML = '<b style="color: red;">[이름은 한글로만 설정가능합니다.]</b>';
+                checkResultList[3] = false;
+
+            } else {
+                $nameInput.style.borderColor = 'skyblue';
+                document.getElementById('nameChk').innerHTML = '<b style="color: skyblue;">[사용가능한 이름입니다.]</b>';
+                checkResultList[3] = true;
+            }
+        };
+
+        // 닉네임 검사 정규표현식
+        const NickPattern = /^[가-힣]+$/;
+        // 닉네임 입력값 검증
+        const $nickInput = document.getElementById('user_nickname');
+        $nickInput.onkeyup = e => {
+            const nickValue = $nickInput.value;
+            if (nickValue.trim() === '') {
+                $nickInput.style.borderColor = 'red';
+                document.getElementById('nickChk').innerHTML = '<b style="color: red;">[이름은 필수정보입니다.]</b>';
+                checkResultList[3] = false;
+
+            } else if (!nickPattern.test(nickValue)) {
+                $nickInput.style.borderColor = 'red';
+                document.getElementById('nickChk').innerHTML = '<b style="color: red;">[이름은 한글로만 설정가능합니다.]</b>';
+                checkResultList[3] = false;
+
+            } else {
+                $nickInput.style.borderColor = 'skyblue';
+                document.getElementById('nickChk').innerHTML = '<b style="color: skyblue;">[사용가능한 이름입니다.]</b>';
+                checkResultList[3] = true;
+            }
+        };
+
+
+        // 이메일 검사 정규표현식
+        const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+
+        const $emailInput = document.getElementById('user_email');
+        $emailInput.onkeyup = e => {
+            const emailValue = $emailInput.value;
+
+            if (emailValue.trim() === '') {
+                $emailInput.style.borderColor = 'red';
+                document.getElementById('emailChk').innerHTML = '<b style="color: red;">[이메일 필수값입니다!]</b>';
+                checkResultList[6] = false;
+
+            } else if (!emailPattern.test(emailValue)) {
+                $emailInput.style.borderColor = 'red';
+                document.getElementById('emailChk').innerHTML = '<b style="color: red;">[이메일 형식을 지켜주세요~]</b>';
+                checkResultList[6 = false;
+
+            } else {
+                fetch('/members/check/email/' + emailValue) // 이메일 정보 DB와 연동해서 가져오기!!
+                    .then(res => res.json())
+                    .then(flag => {
+                        if (flag) { // 중복
+                            $emailInput.style.borderColor = 'red';
+                            document.getElementById('emailChk').innerHTML =
+                                '<b style="color: red;">[이메일이 중복되었습니다.]</b>';
+                            checkResultList[4] = false;
+
+                        } else {
+                            $emailInput.style.borderColor = 'skyblue';
+                            document.getElementById('emailChk').innerHTML =
+                                '<b style="color: skyblue;">[사용가능한 이메일입니다.]</b>';
+                            checkResultList[4] = true;
+                        }
+                    });
+            }
+        };
     </script>
 
 

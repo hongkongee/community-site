@@ -14,6 +14,7 @@ import project.blog.community.project.dto.request.LoginRequestDTO;
 import project.blog.community.project.dto.request.SignUpRequestDto;
 import project.blog.community.project.service.LoginResult;
 import project.blog.community.project.service.UserService;
+import project.blog.community.util.MailSenderService;
 
 @Controller
 @RequestMapping("/users")
@@ -22,6 +23,7 @@ import project.blog.community.project.service.UserService;
 public class UserController {
 
    private final UserService userService;
+   private final MailSenderService mailSenderService;
 
    @GetMapping("/sign-up")
    public void signUp() {
@@ -51,11 +53,25 @@ public class UserController {
 
    }
 
-   // 로그인 양식 화면 요청 처리
+   // 로그인 페이지
    @GetMapping("/sign-in")
    public void signIn() {
-      log.info("/users/sign-in: GET!!");
    }
+
+   // 이메일 인증
+   @PostMapping("/email")
+   @ResponseBody
+   public ResponseEntity<String> mailCheck(@RequestBody String email) {
+      log.info("이메일 인증 요청 들어옴: {}", email);
+      try {
+         String authNum = mailSenderService.joinEmail(email);
+         return ResponseEntity.ok().body(authNum);
+      } catch (Exception e) {
+         e.printStackTrace();
+         return ResponseEntity.internalServerError().body("이메일 전송 과정에서 에러 발생!");
+      }
+   }
+
 
    //로그인 검증 요청
    @PostMapping("/sign-in")

@@ -1,19 +1,7 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-  <style>
-    /* common css 가져오기 */
-    @import url('../common/common.css');
 
-   
-  </style>
-
-</head>
-<body>
   
   <div class="ad">
     <!-- 광고 테스트 -->
@@ -39,6 +27,3 @@
       </ul>
     </div>
   </div>
-
-</body>
-</html>

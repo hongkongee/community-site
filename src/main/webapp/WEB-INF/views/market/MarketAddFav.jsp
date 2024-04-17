@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
 
   <!-- common css -->
-  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="/assets/css/market.css">
 
   <!-- 부트스트랩 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -27,7 +27,7 @@
 
   <style>
     /* common css 가져오기 */
-    @import url('../common/common.css');
+    @import url('/assets/css/market.css');
 
 
     .productBox {

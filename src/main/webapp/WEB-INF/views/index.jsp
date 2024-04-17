@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -10,15 +11,8 @@
 
 <body>
 
-    <% String userName = "방문자!";
-        Cookie[] cookies = request.getCookies();
-        for(Cookie C: cookies) {
-            if (c.getName().equals("login")) {
-                username = c.getValue();
-            }
-        }
-    %>
-    <h1><%= userName %> 님 안녕하세요! </h1>
+   
+    <h1>하이하이</h1>
 
 
 </body>

@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원 가입</title>
 
+    <%@ include file="../include/headcss.jsp" %>
+
     <link rel="stylesheet" href="/assets/css/common.css">
 
     <style>
@@ -132,6 +134,7 @@
 
 <body>
 
+    <%@ include file="../include/header.jsp" %>
 
     <div class="container">
         <h2>회원 가입</h2>

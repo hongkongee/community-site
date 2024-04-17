@@ -10,6 +10,7 @@
 
   <%@ include file="../include/static-head.jsp" %>
 
+  <link rel="stylesheet" href="/assets/css/header.css">
   <link rel="stylesheet" href="/assets/css/detail.css" >
   <link rel="stylesheet" href="/assets/css/snb.css" >
 
@@ -19,6 +20,8 @@
 
 <body>
 
+  <!-- 헤더 -->
+  <%@ include file="../include/header.jsp" %>
   <!-- 사이드바 -->
   <%@ include file="../include/snb.jsp" %>
 

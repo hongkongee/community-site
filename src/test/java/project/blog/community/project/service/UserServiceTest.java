@@ -29,7 +29,7 @@ class UserServiceTest {
             .name("테스트4")
             .email("test444@gmail.com")
             .birthday(2002)
-            .gender(MALE)
+            .gender(String.valueOf(MALE))
             .nickname("mr.test2")
             .build();
 

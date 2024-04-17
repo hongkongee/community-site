@@ -31,7 +31,7 @@ public class BoardListResponseDTO {
         this.bno = board.getBno();
         this.category = board.getCategory().getDescription();
         this.title = makeShortTitle(board.getTitle());
-        this.writer = findNickname(board.getWriter());
+        this.writer = board.getWriter();
         this.regDate = makePrettierDateString(board.getRegDate());
         this.viewCount = board.getViewCount();
     }

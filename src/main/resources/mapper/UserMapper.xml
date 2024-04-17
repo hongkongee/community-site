@@ -27,5 +27,11 @@
         </if>
     </select>
 
+    <update id="updateReport">
+        UPDATE tbl_board
+        SET report = report + 1
+        WHERE account_number = #{accountNumber}
+    </update>
+
 
 </mapper>

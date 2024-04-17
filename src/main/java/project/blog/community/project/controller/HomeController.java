@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import project.blog.community.project.dto.request.ClaimRequestDTO;
+import project.blog.community.project.dto.request.ReportRequestDTO;
 import project.blog.community.project.dto.request.RpsRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
 import project.blog.community.project.dto.response.BoardListResponseDTO;
@@ -68,7 +68,7 @@ public class HomeController {
     // 게시글 작성자 신고 (비동기)
     @PostMapping("/detail/report")
     @ResponseBody
-    public ResponseEntity<String> claim(@RequestBody ClaimRequestDTO dto) {
+    public ResponseEntity<String> report(@RequestBody ReportRequestDTO dto) {
         log.info("/home/detail/report: POST: {}", dto);
 
         // 신고 체크박스, 신고 내용에 관련한 DB에 저장 (mapper)

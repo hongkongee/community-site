@@ -19,4 +19,6 @@ public interface BoardMapper {
 
 
     void updateViewCount(int bno);
+
+    void updateReportCount(int bno);
 }

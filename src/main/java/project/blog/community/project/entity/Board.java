@@ -9,6 +9,8 @@ CREATE TABLE `tbl_board` (
   `view_count` int DEFAULT '0',
   `like_count` int DEFAULT '0',
   `category` varchar(100) DEFAULT 'NORMAL',
+  `post_img` varchar(100),
+  `report_count` int DEFAULT '0',
   PRIMARY KEY (`bno`)
 )
 */
@@ -45,6 +47,8 @@ public class Board {
     private Category category;
 
     private String postImg;
+
+    private int reportCount;
 
 
 }

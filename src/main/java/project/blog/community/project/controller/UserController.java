@@ -59,7 +59,7 @@ public class UserController {
    }
 
    // 이메일 인증
-   @PostMapping("/email")
+   /*@PostMapping("/email")
    @ResponseBody
    public ResponseEntity<String> mailCheck(@RequestBody String email) {
       log.info("이메일 인증 요청 들어옴: {}", email);
@@ -70,7 +70,7 @@ public class UserController {
          e.printStackTrace();
          return ResponseEntity.internalServerError().body("이메일 전송 과정에서 에러 발생!");
       }
-   }
+   }*/
 
 
    //로그인 검증 요청

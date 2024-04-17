@@ -20,7 +20,7 @@ import project.blog.community.project.service.MarketService;
 public class MarketController {
     private final MarketService marketService;
 
-    @Value("${googleMap.app-key}")
+//    @Value("${googleMap.app-key}")
     private String googleMapKey;
 
     @GetMapping("/main")

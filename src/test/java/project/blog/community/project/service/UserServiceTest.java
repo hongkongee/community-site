@@ -10,6 +10,7 @@ import project.blog.community.project.entity.Gender;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static project.blog.community.project.entity.Gender.FEMALE;
+import static project.blog.community.project.entity.Gender.MALE;
 import static project.blog.community.project.service.LoginResult.*;
 
 @SpringBootTest
@@ -23,12 +24,13 @@ class UserServiceTest {
    void join() {
 
       SignUpRequestDto dto = SignUpRequestDto.builder()
-            .accountNumber("test222")
-            .password("test222!")
-            .name("테스트2")
-            .email("test222@gmail.com")
-            .birthday(2000)
-            .gender(FEMALE)
+            .accountNumber("test444")
+            .password("test44!")
+            .name("테스트4")
+            .email("test444@gmail.com")
+            .birthday(2002)
+            .gender(MALE)
+            .nickname("mr.test2")
             .build();
 
       userService.join(dto);

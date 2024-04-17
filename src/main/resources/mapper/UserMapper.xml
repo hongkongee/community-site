@@ -6,9 +6,9 @@
 
     <insert id="save">
         INSERT INTO tbl_user
-            (account_number, password, name, email, birthday, gender)
+            (account_number, password, name, email, birthday, gender, nickname)
         VALUES
-            (#{accountNumber}, #{password}, #{name}, #{email}, #{birthday}, #{gender})
+            (#{accountNumber}, #{password}, #{name}, #{email}, #{birthday}, #{gender}, #{nickname})
     </insert>
 
     <select id="findUser" resultType="user">

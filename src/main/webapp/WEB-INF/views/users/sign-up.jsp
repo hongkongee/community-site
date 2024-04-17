@@ -136,11 +136,11 @@
     <div class="container">
         <h2>회원 가입</h2>
         <div class="wrap">
-            <form action="/members/sign-up" name="signUp" id="signUpForm" method="post">
+            <form action="/users/sign-up" name="signUp" id="signUpForm" method="post">
                 <div class="info">
                     <div id="info_id">
                         <p>아이디를 입력해주세요&nbsp; <span id="idChk"></span></p>
-                        <input type="text" name="account" id="user_id" class="input-btn" required="required"
+                        <input type="text" name="accountNumber" id="user_id" class="input-btn" required="required"
                             maxlength="14" placeholder="사용하실 아이디를 입력해주세요">
                         <button id="id_check">중복 확인</button>
                     </div>
@@ -166,9 +166,9 @@
                     </div>
                     <div>
                         <p>성별을 선택해주세요</p>
-                        <input type="radio" name="gender" value="male">
+                        <input type="radio" name="gender" value="Male">
                         <label for="gender_male">남자</label>
-                        <input type="radio" name="gender" value="female">
+                        <input type="radio" name="gender" value="Female">
                         <label for="gender_female">여자</label>
                     </div>
                     <div>
@@ -183,14 +183,15 @@
                     <div>
                         <p>출생년도를 입력해주세요&nbsp;<span id="birthChk"></span></p>
                         <p>
-                            <input type="number" name="birth_year" id="birthYear" class="input-btn" maxlength="4"
-                                required="required">
+                            <input type="number" name="birthday" id="birth-btn" required="required">
+                            /*<input type="number" name="birth_year" id="birthYear" class="input-btn" maxlength="4"
+                                required="required">*/
                         </p>
                     </div>
                 </div>
                 <div class="main-btn">
-                    <div id="back-btn"><button>돌아가기</button></div>
-                    <div id="submit-btn"><button>회원가입</button></div>
+                    <div class="back-btn"><button type="button">돌아가기</button></div>
+                    <div class="submit-btn"><button type="submit">회원가입</button></div>
                 </div>
             </form>
         </div>
@@ -393,13 +394,13 @@
         // 성별 유효값 검증
         const $genderInput = document.getElementsByName('gender');
         $genderInput.onkeyup = e => {
-            const genderValue = $genderInput.value;
-            if (gender === "male" || gender === "female") {
-                checkResultList[5] = true;
-            } else {
-                checkResultList[5] = false;
-            }
-        };
+        const genderValue = $genderInput.value;
+        if (gender === "male" || gender === "female") {
+            checkResultList[5] = true;
+        } else {
+            checkResultList[5] = false;
+        }
+    };
 
 
         // 이메일 검사 정규표현식
@@ -442,17 +443,17 @@
         // 출생년도 유효값 검증
         const $birthInput = document.getElementById('birthYear');
         $birthInput.onkeyup = e => {
-            const birthValue = $birthInput.value;
-            if (birthValue.trim() === '') {
-                document.getElementById('birthChk').innerHTML = '<b style="color: red;">[출생년도는 필수값 입니다.]</b>';
-                checkResultList[7] = false;
-            } else if (birthValue.length !== 4) {
-                document.getElementById('birthChk').innerHTML = '<b style="color: red;">[출생년도는 4자리로 입력해주세요.]</b>';
-                checkResultList[7] = false;
-            } else {
-                document.getElementById('birthChk').innerHTML = '<b style="color: skyblue;">[사용가능합니다.]</b>';
-                checkResultList[7] = true;
-            }
+        const birthValue = $birthInput.value;
+        if (birthValue.trim() === '') {
+            document.getElementById('birthChk').innerHTML = '<b style="color: red;">[출생년도는 필수값 입니다.]</b>';
+            checkResultList[7] = false;
+         } else if (birthValue.length !== 4) {
+            document.getElementById('birthChk').innerHTML = '<b style="color: red;">[출생년도는 4자리로 입력해주세요.]</b>';
+            checkResultList[7] = false;
+         } else {
+            document.getElementById('birthChk').innerHTML = '<b style="color: skyblue;">[사용가능합니다.]</b>';
+            checkResultList[7] = true;
+         }
         };
         // 회원 가입 버튼 클릭 이벤트
         document.getElementById('submit-btn').onclick = e => {
@@ -467,6 +468,8 @@
             }
 
         };
+
+
     </script>
 
 

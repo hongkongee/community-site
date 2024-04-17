@@ -49,6 +49,7 @@
             </div>
             <a class="friend" href="#">asfasgas123</a>
             </li>
+
             <li>
             <div class="profile-box">
                 <img src="#" alt="프로필 사진">
@@ -97,3 +98,4 @@
 
 <!-- 사이드바 자바스크립트 -->
 <script src="/assets/js/snb.js"></script>
+

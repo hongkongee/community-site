@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="/assets/css/common.css">
 
     <style>
-
         body {
             background-color: #7AA2E3;
         }
@@ -118,12 +117,18 @@
                 background-position: 0;
             }
         }
-
     </style>
 
 </head>
 
 <body>
+
+    <c:if test="${login != null}">
+        <script>
+            alert("이미 로그인 하셨네요!");
+            location.href = "/home/main";
+        </script>
+    </c:if>
 
     <div class="container">
         <div class="wrap">
@@ -147,7 +152,7 @@
                         </span>
                     </label>
                     <div class="submit-btn">
-                        <button>로그인</button>
+                        <button type="submit">로그인</button>
                     </div>
                     <div class="social-btn">
                         <a id="kakao-login" href="#">

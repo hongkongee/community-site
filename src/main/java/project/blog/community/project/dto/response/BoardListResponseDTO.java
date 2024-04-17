@@ -4,8 +4,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import project.blog.community.project.entity.Board;
-import project.blog.community.project.entity.Category;
-import project.blog.community.project.entity.User;
 import project.blog.community.project.mapper.UserMapper;
 
 import java.time.LocalDateTime;
@@ -27,26 +25,16 @@ public class BoardListResponseDTO {
     private final int viewCount;
 
     // entity를 dto로 바꾸는 생성자
-    public BoardListResponseDTO(Board board) {
+    public BoardListResponseDTO(Board board, String nickname) {
         this.bno = board.getBno();
         this.category = board.getCategory().getDescription();
         this.title = makeShortTitle(board.getTitle());
-        this.writer = board.getWriter();
+        this.writer = nickname;
         this.regDate = makePrettierDateString(board.getRegDate());
         this.viewCount = board.getViewCount();
     }
 
-    // account를 주면 nickname을 반환하는 함수
-    private String findNickname(String account) {
-//        account = account.trim();
-        try {
-            User user = userMapper.findUser(account);
-            return user.getNickname();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-            return account;
-        }
-    }
+
 
     // 날짜 포맷을 바꾸는 함수
     public static String makePrettierDateString(LocalDateTime regDate) {

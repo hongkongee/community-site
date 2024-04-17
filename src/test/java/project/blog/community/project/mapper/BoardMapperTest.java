@@ -60,6 +60,29 @@ class BoardMapperTest {
     
         // then
     }
+    
+    @Test
+    @DisplayName("게시글 더미데이터 생성")
+    void dummyBoardTest() {
+        // given
+
+        // 100개의 게시물 생성
+        for (int i = 0; i < 100; i++) {
+            Board board = Board.builder()
+                    .title(i + 4 + "번째 게시물 제목")
+                    .content(String.format("%d번째 게시물의 내용을 작성합니다.\n 게시물 test용", i + 4))
+                    .writer("tjtkdvl")
+                    .category(i % 2 == 0 ? NORMAL : GAME)
+                    .build();
+
+            boardMapper.save(board);
+        }
+        
+        
+        // when
+    
+        // then
+    }
 
 
 }

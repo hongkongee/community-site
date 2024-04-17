@@ -27,11 +27,11 @@ public class BoardDetailResponseDTO {
 
     private final String content;
 
-    public BoardDetailResponseDTO(Board board) {
+    public BoardDetailResponseDTO(Board board, String nickname) {
         this.bno = board.getBno();
         this.category = board.getCategory().getDescription();
         this.title = board.getTitle();
-        this.writer = board.getWriter();
+        this.writer = nickname;
         this.regDate = makeDateString(board.getRegDate());
         this.viewCount = board.getViewCount();
         this.content = board.getContent();
@@ -42,15 +42,4 @@ public class BoardDetailResponseDTO {
         return dtf.format(regDate);
     }
 
-    // account를 주면 nickname을 반환하는 함수
-    private String findNickname(String account) {
-//        account = account.trim();
-        try {
-            User user = userMapper.findUser(account);
-            return user.getNickname();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-            return account;
-        }
-    }
 }

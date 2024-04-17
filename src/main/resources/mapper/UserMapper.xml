@@ -20,7 +20,7 @@
         SELECT COUNT(*)
         FROM tbl_user
         <if test="type == 'account'">
-            WHERE account = #{keyword}
+            WHERE account_number = #{keyword}
         </if>
         <if test="type == 'email'">
             WHERE email = #{keyword}
@@ -28,7 +28,7 @@
     </select>
 
     <update id="updateReport">
-        UPDATE tbl_board
+        UPDATE tbl_user
         SET report = report + 1
         WHERE account_number = #{accountNumber}
     </update>

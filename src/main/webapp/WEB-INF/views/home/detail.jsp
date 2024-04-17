@@ -29,22 +29,22 @@
 
     <!-- ==================== 게시글 영역 ==================== -->
     <section class="board">
-      <div id="wrap" class="form-container">
+      <div id="wrap" class="form-container"> 
 
-        <!-- 게시글 번호 (Primary key) -->
-        <h1 id="bno">3142번</h1>
+        <!-- 게시글 카테고리 (누르면 해당 메뉴로 이동) -->
+        <h1 id="bno">${b.category}</h1>
         
 
         <!-- 제목 -->
         <!-- <input type="text" id="title" name="title" value="${b.title}" readonly> -->
-        <h1 id="title">게시글 제목</h1>
+        <h1 id="title">${b.title}</h1>
 
         <div class="board-info">
 
           <div class="left-region">
             <!-- 작성자 -->
             <!-- 누르면 작성자가 쓴 글 목록, 작성자의 페이지, 1:1채팅, 신고하기, 차단하기 등 -->
-            <h2 id="writer"><a href="#" id="writer-a">작성자</a></h2> 
+            <h2 id="writer"><a href="#" id="writer-a">${b.writer}</a></h2> 
 
             <div class="writer-info">
               <ul>
@@ -56,7 +56,7 @@
             </div>
             
             <!-- 작성 날짜 시간 -->
-            <h2 id="date">2024-04-16 06:14</h2>
+            <h2 id="date">${b.regDate}</h2>
           </div>
 
   
@@ -65,7 +65,9 @@
             <h2 id="copy-url"> <a href="#">URL 복사</a> </h2>
   
             <!-- 댓글 개수 : 누르면 댓글영역으로 이동-->
-            <h2 id="see-reply"> <a href="#tag1"> 댓글 5</a></h2>
+            <h2 id="see-reply"> <a href="#tag1"> 댓글 5 </a></h2>
+
+            <h2 id="view-count"> ${b.viewCount} </h2>
   
           </div>
 
@@ -81,9 +83,7 @@
         
     
         <!-- <label for="content">내용</label> -->
-        <div id="content">${b.content} 여기는 게시글 내용이 들어갈 자리입니다. <br> 
-        게시글 내용을 자유롭게 써주세요 <br>
-        게시글 내용 test</div>
+        <div id="content">${b.content}</div>
 
         <div class="buttons">
             <button class="list-btn" type="button"

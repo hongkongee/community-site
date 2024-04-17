@@ -31,6 +31,7 @@ public class Board {
 
     private String title;
 
+    // User의 account로 입력 (중복 안되게)
     private String writer;
 
     private String content;
@@ -42,6 +43,8 @@ public class Board {
     private int likeCount;
 
     private Category category;
+
+    private String postImg;
 
 
 }

@@ -25,7 +25,6 @@ public class MarketModifyRequestDTO {
 
     public Market toEntity(){
         return Market.builder()
-                .boardNo(bno)
                 .textContent(text)
                 .build();
     }

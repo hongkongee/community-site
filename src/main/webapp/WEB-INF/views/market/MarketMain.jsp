@@ -62,12 +62,12 @@
       <!-- Content 내용 -->
       <div class="content">
         <div class="Content1">
-          <div class="content-Write">#글쓰기</div>
-          <div class="content-Del">#삭제</div>
-          <button id="modifyBtn" class="content-Rev" type="button" 
-            data-bs-toggle="modal" data-bs-target="#editModal">#수정</button>
+          <div class="content-Write">글쓰기</div>
+          <div class="content-Del">삭제</div>
+          <button id="modifyBtn" class="content-Rev" type="button" data-bs-toggle="modal"
+            data-bs-target="#editModal">수정</button>
           <button class="content-Close" type="button">닫기</button>
-          <div class="content-AddFav">#상품 즐겨찾기</div>
+          <div class="content-AddFav">상품 즐겨찾기</div>
           <div class="content-Otherproduct">#판매자의 다른상품</div>
         </div>
         <br>
@@ -126,56 +126,124 @@
 
 
   <script>
+    const URL = '/market/modify';
 
     // 수정 버튼 이벤트 발생
     const $modifyBtn = document.getElementById('modifyBtn');
+    const $saveBtn = document.getElementById('saveEdit'); //내가
     $modifyBtn.onclick = e => {
       console.log('수정 버튼 이벤트 발생!');
 
       document.getElementById('editedContent').value = document.getElementById('normal').textContent;
 
+    }
 
+    if ($saveBtn) {
+      $saveBtn.onclick = e => {
+        if (editedContent == '') {
+          alert('내용은 필수입니다.');
+          return;
+        }
+
+        const payload = {
+          text: editedContent
+        };
+
+        const requestInfo = {
+          method: 'POST',
+          header: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        }
+
+        fetch(URL, requestInfo)
+
+          .then(res => {
+            console.log(res.status);
+            if (res.status === 200) {
+              alert('내용 정상 변경');
+              return res.text();
+            } else {
+              alert('입력값에 문제가 있습니다.');
+              return res.text();
+            }
+          })
+
+          .then(data => {
+            console.log('응답 성공!', data);
+            $editedContent.value = '';
+
+          });
+
+      };
     }
 
 
-    /* 친구 정보 
-    const $friends = document.querySelector('.friends');
-    const $userInformation = document.getElementById('user-information');
-    const $xBtn = document.getElementById('x-btn');
-
-    $friends.onclick = e => {
-      if (!e.target.matches('.friend')) return;
-      e.preventDefault();
-
-      // #user-information 의 p태그가 누른 대상의 닉네임이 되어야 한다.
-      $userInformation.style.display = 'block';
-
-    };
-
-    $xBtn.onclick = e => {
-      console.log('x버튼 클릭');
-      $userInformation.style.display = 'none';
-    }
 
 
-    const $del = document.querySelector('.content-Del');
-    $del.onclick = e => {
-      if (!e.target.matches('.del')) return;
-      e.preventDefault();
+      /* 친구 정보 
+      const $friends = document.querySelector('.friends');
+      const $userInformation = document.getElementById('user-information');
+      const $xBtn = document.getElementById('x-btn');
 
-      $userInformation.style.display = 'block';
-    };
+      $friends.onclick = e => {
+        if (!e.target.matches('.friend')) return;
+        e.preventDefault();
 
-    $xBtn.onclick = e => {
-      console.log('x버튼 클릭');
-      $userInformation.style.display = 'none';
+        // #user-information 의 p태그가 누른 대상의 닉네임이 되어야 한다.
+        $userInformation.style.display = 'block';
 
-    }
+      };
 
-    */
+      $xBtn.onclick = e => {
+        console.log('x버튼 클릭');
+        $userInformation.style.display = 'none';
+      }
+
+
+      const $del = document.querySelector('.content-Del');
+      $del.onclick = e => {
+        if (!e.target.matches('.del')) return;
+        e.preventDefault();
+
+        $userInformation.style.display = 'block';
+      };
+
+      $xBtn.onclick = e => {
+        console.log('x버튼 클릭');
+        $userInformation.style.display = 'none';
+
+      }
+
+      */
+
+
+
+
+
+      
   </script>
 
 
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -16,7 +16,7 @@ public class DiaryController {
     public String diary(){
         log.info("/mypage/diary: GET!!!");
 
-        return "diary";
+        return "mypage/diary";
     }
 
 }

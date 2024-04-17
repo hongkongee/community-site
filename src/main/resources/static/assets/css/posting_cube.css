@@ -4,24 +4,36 @@ body {
     font-style: normal;
     width: 100%;
     height: 100%;
+    background: #7AA2E3;
+    position: relative;
+    display: flex;
+    overflow-y: auto;
+    margin: 0;
+    
 }
 
 .MypostcubeJsp {
-    width: 1440px;
-    height: 1024px;
-    position: relative;
+    width: 100%;
+    height: 100%;
     background: #7AA2E3;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    min-height: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+
 }
 
 .Frame42 {
     width: 1277px;
     height: 903px;
-    left: 76px;
     top: 60px;
     position: relative;
     background: #F8F6E3;
     border-radius: 60px;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .Frame42 .Frame39 {
@@ -148,14 +160,20 @@ body {
     /* background-color: yellow; */
 
     font-size: 20px;
+    font-family: inherit;
     padding: 15px;
-
     text-align: center;
     border: 1px solid #7AA2E3;
 
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.post-content contents {
+    font-family: inherit;
+    font-size: 20px;
+    overflow-y: auto;
 }
 
 .post-container .post .post-content-wrapper {

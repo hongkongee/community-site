@@ -7,15 +7,22 @@ body {
     background: #7AA2E3;
     position: relative;
     display: flex;
+    overflow-y: auto;
+    margin: 0;
     
 }
 
 .MydiaryJsp {
     width: 100%;
+    height: 100%;
     background: #7AA2E3;
     display: flex;
     justify-content: center; 
     align-items: center;
+    min-height: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+
 }
 
 .MydiaryJsp .Frame45 {
@@ -25,25 +32,23 @@ body {
     position: relative;
     background: #F8F6E3;
     border-radius: 60px;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     
 }
 
 
 .Frame45 .Frame46 {
     width: 100%;
-    left: 192px;
+    left: 190px;
     top: 13px;
     position: absolute;
-    flex: 1;
+    
 }
 
 .Frame45 .Frame46 .Diary {
     width: 100%;
     height: 100%;
-    left: 50px;
-    top: 11px;
-    position: relative;
     color: black;
     font-size: 48px;
     font-weight: bold;
@@ -53,13 +58,13 @@ body {
 /* ---------------------캘린더 시작--------------------- */
 
 table {
-    width: 60%;
-    height: 45%;
+    width: 70%;
+    height: 55%;
     border-radius: 60px;
     border: 1px solid #7aa2e3;
     padding: 30px;
     background: #F8F6E3;
-    margin-left: 20%;
+    margin-left: 15%;
     margin-top: 10%;
 }
 
@@ -69,7 +74,12 @@ table th {
 }
 
 table tbody {
+    background-color: #F8F6E3;
+}
+
+table td {
     background-color: white;
+    text-align: left;
 }
 
 .Sun {
@@ -120,69 +130,74 @@ table tbody {
 /* ----------------------년도 끝----------------------- */
 
 .Frame57 {
-    width: 60%;
-    height: 20%;
+    width: 70%;
+    height: auto; 
     background: #F8F6E3;
     border-radius: 60px;
     overflow: hidden;
-    border: 1px #7AA2E3 solid;
-    margin-left: 20%;
-    margin-top: 10%;
-
-    display: inline-flex;
+    border: 1px solid #7AA2E3;
+    margin: 5% auto; 
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
 }
 
-.Frame57 .date {
-    width: 300px;
+.todo {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center; 
+    margin: 20px; 
+    position: relative;
+    width: 40%;
+    padding: 10px;
+}
+.whatdo {
+    width: 60%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center; 
+    margin: 20px; 
+    position: relative;
+    padding: 10px;
+    left: 20px;
+}
+
+.date {
+    width: 100%;
+    height: auto;
     color: black;
     font-size: 20px;
     font-weight: bold;
-    margin-left: 5%;
-    margin-top: 10px;
-    
+    margin-top: 20px; 
     position: relative;
-}
-.Frame57 .date .list {
-    width: 90%;
-    height: 70%;
     background: white;
     border-radius: 60px;
-    position: absolute;
-    top: 35px;
+    padding: 20px;
+    overflow-y: auto;
 }
 
-.Frame57 .event-date {
-    font-family: inherit;
-    font-size: 20px;
-    width: 50%;
-    
-}
-.Frame57 .story {
-    width: 60%;
-    height: 100%;
-    color: black;
-    font-size: 20px;
-    font-weight: bold;
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    position: relative;
-    text-align: center;
+.story {
+    width: 100%;
+    height: 200px;
+    margin: 20px;
 }
 
-.Frame57 .story .story-write {
-    width: 90%;
-    height: 70%;
-    overflow: hidden;
+.story-write {
+    width: 100%;
+    height: 200px;
+    padding: 20px;
     border: none;
     border-radius: 60px;
     background: white;
     font-size: 20px;
     font-family: inherit;
+    box-sizing: border-box;
+    margin-bottom: 10px; 
+    overflow-y: auto;
 }
 
-.Frame57 .story button {
-    width: 70px;
+.story button {
+    width: 100px;
     height: 50px;
     border-radius: 60px;
     border: none;
@@ -190,8 +205,8 @@ table tbody {
     font-size: 20px;
     font-family: inherit;
     position: absolute;
-    top: 40%;
-    left: 70%;
+    right: 10px;
+    top: 50%;
 }
 
 
@@ -207,6 +222,23 @@ table tbody {
     border: 1px solid #7AA2E3;
     index: 100;
 }
+
+.side-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 33px;
+    height: 22px;
+    position: absolute;
+    left: 5%;
+    top: 10%;
+
+    text-decoration: none;
+    color: inherit;
+    transition: .3s all ease;
+}
+
+
 
 .Frame40 .Menu {
     margin: 150px 50px;

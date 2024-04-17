@@ -40,10 +40,10 @@
                         </div>
                         <div class="post-content-wrapper">
                             <div class="post-content">
-                                <p>내용 ex)오늘의 게시물</p>
+                                <textarea name="post-content" id="contents" cols="30" rows="5">내용 ex)오늘의 게시물</textarea>
                             </div>
                             <div class="time-view-wrapper">
-                                <div class="time">2024-04-15</div>
+                                <div id="this-month"></div>
                             </div>
                             <div class="post-reply">
                                 <div class="post-like">
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <div class="Frame40">
+        <!-- <div class="Frame40">
 
             <div class="Menu">
                 <button class="close-btn">X</button> <br>
@@ -72,30 +72,25 @@
                 <a href="">Market</a>
             </div>
 
-        </div>
+        </div> -->
 
 
 </body>
 
 <script>
+    // -------------------------------게시물 등록 날짜 시작-------------------------------------
+    var currentDate = new Date();
+    var year = currentDate.getFullYear();
+    var month = currentDate.getMonth() + 1;
+    var day = currentDate.getDate();
+    var formattedDate = year + "년 " + month + "월 " + day + "일";
 
-    const sidebar = document.querySelector('.Frame40');
+    var thisMonthElement = document.getElementById("this-month");
+    thisMonthElement.textContent = formattedDate;
 
-    document.querySelector('.Frame40').addEventListener('mouseover', function () {
-    // When the user hovers over the element, change its transform property to translateX(0)
-    this.style.transform = 'translateX(-100%)';
-    });
+    // -------------------------------게시물 등록 날짜 끝-------------------------------------
 
-    // Add a hover event listener to the Frame40 element
-    document.querySelector('.Frame40').addEventListener('mouseover', function () {
-        // When the user hovers over the element, change its transform property to translateX(0)
-        this.style.transform = 'translateX(0)';
-    });
-
-    document.querySelector('.close-btn').addEventListener('click', function () {
-        // When the user is not hovering over the element, change its transform property to translateX(-100%)
-        sidebar.setAttribute("style", "transform: translateX(-100%);");
-    });
+   
 </script>
 
 </html>

@@ -21,13 +21,13 @@ class UserMapperTest {
    @DisplayName("회원가입 성공해야 한다.")
    void save() {
       User user = User.builder()
-            .accountNumber("test333")
-            .password("test333!")
-            .name("테스트3")
-            .email("test333@gmail.com")
+            .accountNumber("test999")
+            .password("test999!")
+            .name("테스트9")
+            .email("test99@gmail.com")
             .birthday(2000)
             .gender(FEMALE)
-            .nickname("mr.test1")
+            .nickname("테스트9")
             .build();
 
       userMapper.save(user);

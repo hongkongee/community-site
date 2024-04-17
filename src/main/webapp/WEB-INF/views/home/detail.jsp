@@ -65,7 +65,7 @@
             <h2 id="copy-url"> <a href="#">URL 복사</a> </h2>
   
             <!-- 댓글 개수 : 누르면 댓글영역으로 이동-->
-            <h2 id="see-reply"> <a href="#tag1"> 댓글 5 </a></h2>
+            <h2 id="see-reply"> <a href="#tag1"> 댓글 53 </a></h2>
 
             <h2 id="view-count"> ${b.viewCount} </h2>
   

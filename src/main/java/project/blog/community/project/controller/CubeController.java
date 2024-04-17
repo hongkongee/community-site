@@ -16,6 +16,6 @@ public class CubeController {
     public String cube(){
         log.info("/mypage/posting_cube: GET!!!");
 
-        return "posting_cube";
+        return "mypage/posting_cube";
     }
 }

@@ -27,23 +27,18 @@ body {
 
 .MydiaryJsp .Frame45 {
     width: 1277px;
-    height: 903px;
+    height: inherit;
     top: 60px;
     position: relative;
     background: #F8F6E3;
     border-radius: 60px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    
 }
-
 
 .Frame45 .Frame46 {
     width: 100%;
     left: 190px;
     top: 13px;
     position: absolute;
-    
 }
 
 .Frame45 .Frame46 .Diary {
@@ -59,11 +54,11 @@ body {
 
 table {
     width: 70%;
-    height: 55%;
+    height: 560px;
     border-radius: 60px;
     border: 1px solid #7aa2e3;
     padding: 30px;
-    background: #F8F6E3;
+    background: white;
     margin-left: 15%;
     margin-top: 10%;
 }
@@ -72,15 +67,22 @@ table th {
     width: 14%;
     box-sizing: border-box;
 }
+table td {
+    background: white;
+}
 
 table tbody {
     background-color: #F8F6E3;
 }
 
-table td {
+table #this-month {
+    font-size: 30px;
+}
+
+/* table td {
     background-color: white;
     text-align: left;
-}
+} */
 
 .Sun {
     color: red;
@@ -132,7 +134,7 @@ table td {
 .Frame57 {
     width: 70%;
     height: auto; 
-    background: #F8F6E3;
+    background: white;
     border-radius: 60px;
     overflow: hidden;
     border: 1px solid #7AA2E3;
@@ -140,6 +142,7 @@ table td {
     position: relative;
     display: flex;
     justify-content: space-evenly;
+    padding: 10px;
 }
 
 .todo {
@@ -156,15 +159,16 @@ table td {
     display: inline-flex;
     flex-direction: column;
     align-items: center; 
-    margin: 20px; 
+    margin: 30px; 
     position: relative;
     padding: 10px;
     left: 20px;
+   
 }
 
-.date {
+.schedule-input {
     width: 100%;
-    height: auto;
+    height: 200px;
     color: black;
     font-size: 20px;
     font-weight: bold;
@@ -173,27 +177,59 @@ table td {
     background: white;
     border-radius: 60px;
     padding: 20px;
+}
+
+.todo textarea {
+    width: 50%;
+    height: 150px;
+    border: none;
+    border-radius: 60px;
+    padding: 20px;
+    font-size: 20px;
+    font-family: inherit;
     overflow-y: auto;
+    border: 1px solid black;
+    
+}
+
+.todo button {
+    width: 100px;
+    height: 50px;
+    border-radius: 60px;
+    border: none;
+    background: #6ad4dd;
+    font-size: 20px;
+    font-family: inherit;
+    position: absolute;
+    top: 40%;
+    right: 10px;
 }
 
 .story {
     width: 100%;
     height: 200px;
-    margin: 20px;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px; 
+    margin-right: 10px;
+    position: relative;
+    background: white;
+    border-radius: 60px;
+    padding: 20px;
 }
 
-.story-write {
-    width: 100%;
-    height: 200px;
-    padding: 20px;
+.whatdo textarea {
+    
+    width: 70%;
+    height: 150px;
     border: none;
     border-radius: 60px;
-    background: white;
+    padding: 20px;
     font-size: 20px;
     font-family: inherit;
-    box-sizing: border-box;
-    margin-bottom: 10px; 
     overflow-y: auto;
+    border: 1px solid black;
 }
 
 .story button {
@@ -205,75 +241,9 @@ table td {
     font-size: 20px;
     font-family: inherit;
     position: absolute;
+    top: 40%;
     right: 10px;
-    top: 50%;
-}
-
-
-/* ----------------------사이드바 메뉴 시작---------------------- */
-
-.Frame40 {
-    width: 20%;
-    height: 100%;
-    background: white;
-    /* position: absolute; */
-    left: 0px;
-    top: 0px;
-    border: 1px solid #7AA2E3;
-    index: 100;
-}
-
-.side-btn {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 33px;
-    height: 22px;
-    position: absolute;
-    left: 5%;
-    top: 10%;
-
-    text-decoration: none;
-    color: inherit;
-    transition: .3s all ease;
-}
-
-
-
-.Frame40 .Menu {
-    margin: 150px 50px;
-    text-align: center;
-}
-
-.Frame40 .Menu a {
-    
-    width: 93px;
-    height: 248px;
-    color: #7AA2E3;
-    font-size: 30px;
-    font-weight: 500;
-    text-decoration: none;
-    
     
 }
-
-.Frame40 .Menu a:hover {
-    text-decoration: underline;
-    color: black;
-}
-
-.Frame40 .Menu>button {
-    position: absolute;
-    right: 20px;
-    top: 15px;
-    width: 50px;
-    height: 50px;
-    background: none;
-    font-weight: bold;
-    border: none;
-    font-size: 30px;
-
-}
-
 
 /* ----------------------사이드바 메뉴 끝---------------------- */

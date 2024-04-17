@@ -22,6 +22,7 @@
 
     <div class="MypostcubeJsp">
         <div class="Frame42">
+
             <div class="Frame39">
                 <div class="PostingCube">Posting (cube)</div>
                 <button class="Cube">cube</button>
@@ -59,20 +60,7 @@
                 </div>
             </div>
         </div>
-
-        <!-- <div class="Frame40">
-
-            <div class="Menu">
-                <button class="close-btn">X</button> <br>
-                <a href="">HOME</a><br>
-                <a href="">Posting</a><br>
-                <a href="">Diary</a><br>
-                <a href="">Gallery</a><br>
-                <a href="">Chat</a><br>
-                <a href="">Market</a>
-            </div>
-
-        </div> -->
+    </div>
 
 
 </body>
@@ -89,8 +77,6 @@
     thisMonthElement.textContent = formattedDate;
 
     // -------------------------------게시물 등록 날짜 끝-------------------------------------
-
-   
 </script>
 
 </html>

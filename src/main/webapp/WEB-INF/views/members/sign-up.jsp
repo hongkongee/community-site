@@ -80,6 +80,13 @@
 
         }
 
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
         button {
             box-sizing: border-box;
             appearance: none;
@@ -169,15 +176,15 @@
                         <button>이메일 인증</button>
                     </div>
                     <div>
-                        <p>출생년도를 입력해주세요</p>
+                        <p>출생년도를 입력해주세요&nbsp;<span id="birthChk"></span></p>
                         <p>
-                            <input type="number" name="birth_year" id="birth-btn" required="required">
+                            <input type="number" name="birth_year" id="birthYear" maxlength="4" required="required">
                         </p>
                     </div>
                 </div>
                 <div class="main-btn">
-                    <div class="back-btn"><button>돌아가기</button></div>
-                    <div class="submit-btn"><button>회원가입</button></div>
+                    <div id="back-btn"><button>돌아가기</button></div>
+                    <div id="submit-btn"><button>회원가입</button></div>
                 </div>
             </form>
         </div>
@@ -231,9 +238,7 @@
                         }
                     });
             }
-
-
-        }
+        };
 
         // 패스워드 검사 정규표현식
         const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&_~])[A-Za-z\d@$!%*#?&_~]{8,}$/;
@@ -307,27 +312,38 @@
         };
 
         // 닉네임 검사 정규표현식
-        const NickPattern = /^[가-힣]+$/;
+        const nickPattern = /^[가-힣]+$/;
         // 닉네임 입력값 검증
         const $nickInput = document.getElementById('user_nickname');
         $nickInput.onkeyup = e => {
             const nickValue = $nickInput.value;
             if (nickValue.trim() === '') {
                 $nickInput.style.borderColor = 'red';
-                document.getElementById('nickChk').innerHTML = '<b style="color: red;">[이름은 필수정보입니다.]</b>';
-                checkResultList[3] = false;
+                document.getElementById('nickChk').innerHTML = '<b style="color: red;">[닉네임은 필수정보입니다.]</b>';
+                checkResultList[4] = false;
 
             } else if (!nickPattern.test(nickValue)) {
                 $nickInput.style.borderColor = 'red';
-                document.getElementById('nickChk').innerHTML = '<b style="color: red;">[이름은 한글로만 설정가능합니다.]</b>';
-                checkResultList[3] = false;
+                document.getElementById('nickChk').innerHTML = '<b style="color: red;">[닉네임은 한글로만 설정가능합니다.]</b>';
+                checkResultList[4] = false;
 
             } else {
                 $nickInput.style.borderColor = 'skyblue';
                 document.getElementById('nickChk').innerHTML = '<b style="color: skyblue;">[사용가능한 이름입니다.]</b>';
-                checkResultList[3] = true;
+                checkResultList[4] = true;
             }
         };
+
+        // 성별 유효값 검증
+        const $genderInput = document.getElementsByName('gender');
+        $genderInput.onkeyup = e => {
+        const genderValue = $genderInput.value;
+        if (gender === "male" || gender === "female") {
+            checkResultList[5] = true;
+        } else {
+            checkResultList[5] = false;
+        }
+    };
 
 
         // 이메일 검사 정규표현식
@@ -339,13 +355,13 @@
 
             if (emailValue.trim() === '') {
                 $emailInput.style.borderColor = 'red';
-                document.getElementById('emailChk').innerHTML = '<b style="color: red;">[이메일 필수값입니다!]</b>';
+                document.getElementById('emailChk').innerHTML = '<b style="color: red;">[이메일 필수값입니다.]</b>';
                 checkResultList[6] = false;
 
             } else if (!emailPattern.test(emailValue)) {
                 $emailInput.style.borderColor = 'red';
-                document.getElementById('emailChk').innerHTML = '<b style="color: red;">[이메일 형식을 지켜주세요~]</b>';
-                checkResultList[6 = false;
+                document.getElementById('emailChk').innerHTML = '<b style="color: red;">[이메일 형식을 지켜주세요.]</b>';
+                checkResultList[6] = false;
 
             } else {
                 fetch('/members/check/email/' + emailValue) // 이메일 정보 DB와 연동해서 가져오기!!
@@ -355,17 +371,48 @@
                             $emailInput.style.borderColor = 'red';
                             document.getElementById('emailChk').innerHTML =
                                 '<b style="color: red;">[이메일이 중복되었습니다.]</b>';
-                            checkResultList[4] = false;
+                            checkResultList[6] = false;
 
                         } else {
                             $emailInput.style.borderColor = 'skyblue';
                             document.getElementById('emailChk').innerHTML =
                                 '<b style="color: skyblue;">[사용가능한 이메일입니다.]</b>';
-                            checkResultList[4] = true;
+                            checkResultList[6] = true;
                         }
                     });
             }
         };
+
+        // 출생년도 유효값 검증
+        const $birthInput = document.getElementById('birthYear');
+        $birthInput.onkeyup = e => {
+        const birthValue = $birthInput.value;
+        if (birthValue.trim() === '') {
+            document.getElementById('birthChk').innerHTML = '<b style="color: red;">[출생년도는 필수값 입니다.]</b>';
+            checkResultList[7] = false;
+         } else if (birthValue.length !== 4) {
+            document.getElementById('birthChk').innerHTML = '<b style="color: red;">[출생년도는 4자리로 입력해주세요.]</b>';
+            checkResultList[7] = false;
+         } else {
+            document.getElementById('birthChk').innerHTML = '<b style="color: skyblue;">[사용가능합니다.]</b>';
+            checkResultList[7] = true;
+         }
+        };
+        // 회원 가입 버튼 클릭 이벤트
+        document.getElementById('submit-btn').onclick = e => {
+
+            // 8개의 입력칸이 모두 통과되었을 경우 폼을 서브밋.
+            const $form = document.getElementById('signUpForm');
+
+            if (checkResultList.includes(false)) {
+                alert('입력란을 다시 확인하세요!')
+            } else {
+                $form.submit();
+            }
+
+        };
+
+
     </script>
 
 

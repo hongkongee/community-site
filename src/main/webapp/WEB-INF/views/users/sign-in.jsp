@@ -18,11 +18,18 @@
 
         .container {
             width: 60%;
-            margin: 0 auto;
+            margin: 100px auto;
             font-family: "Orbit", sans-serif;
             color: #7AA2E3;
             background-color: #F8F6E3;
             border-radius: 40px;
+        }
+
+        .container .wrap {
+            padding-top: 100px;
+            padding-bottom: 100px;
+            margin: 0 auto;
+            text-align: center;
         }
 
         .container .wrap h2 {
@@ -43,6 +50,7 @@
             height: 2em;
             border-color: #7AA2E3;
             border-width: 0 0 2px;
+            background-color: transparent;
         }
 
         .container .wrap .login input[type="text"]:focus,
@@ -135,8 +143,8 @@
                         <input type="text" name="accountNumber" id="userId" required="required" placeholder="아이디">
                     </div>
                     <div class="login-pw">
-                        <p>비밀번호를 입력해주세요 &nbsp;&nbsp;&nbsp;<span id="pwCheck"></span>
-                            <input type="password" name="password" id="userPw" required="required" placeholder="비밀번호">
+                        <p>비밀번호를 입력해주세요 &nbsp;&nbsp;&nbsp;<span id="pwCheck"></span></p>
+                        <input type="password" name="password" id="userPw" required="required" placeholder="비밀번호">
                     </div>
                     <label for="auto-login">
                         <span>
@@ -147,14 +155,14 @@
                         <button type="submit">로그인</button>
                     </div>
                     <div class="social-btn">
-                        <a id="kakao-login" href="kakao/login">
-                            <img src="/src/main/resources/static/assets/img/kakaoLogin.png" alt="카카오로그인이미지">
+                        <a id="kakao-login" href="#">
+                            <img src="/assets/img/loginBtn/kakaoLogin.png" alt="카카오로그인이미지">
                         </a>
                         <a id="naver-login" href="#">
-                            <img src="/src/main/resources/static/assets/img/naverLogin.png" alt="네이버로그인이미지">
+                            <img src="/assets/img/loginBtn/naverLogin.png" alt="네이버로그인이미지">
                         </a>
                         <a id="google-login" href="#">
-                            <img src="/src/main/resources/static/assets/img/googleLogin.png" alt="구글로그인이미지">
+                            <img src="/assets/img/loginBtn/googleLogin.png" alt="구글로그인이미지">
                         </a>
                     </div>
                 </form>

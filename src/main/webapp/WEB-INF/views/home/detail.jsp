@@ -35,7 +35,7 @@
       <div id="wrap" class="form-container"> 
 
         <!-- 게시글 카테고리 (누르면 해당 메뉴로 이동) -->
-        <h1 id="bno">${b.category}</h1>
+        <h1 id="bno"> <a href="/home/board/\${b.category}">${b.category}</a> </h1>
         
 
         <!-- 제목 -->
@@ -88,6 +88,15 @@
         <!-- <label for="content">내용</label> -->
         <div id="content">${b.content}</div>
 
+        <!-- 좋아요 -->
+        <div class="like">
+          <!-- <i class="fa-solid fa-heart"></i> : check 됐을 때 -->
+          <i class="fa-regular fa-heart"></i>
+          <label class="like-label" for="flexCheckDefault">
+            좋아요 ${b.likeCount}
+          </label>
+        </div>
+
         <div class="buttons">
             <button class="list-btn" type="button"
                     onclick="location.href='/home/all'">
@@ -96,6 +105,8 @@
             <button id="modify">수정</button>
             <button id="delete">삭제</button>
         </div>
+
+      </div>
 
     </section>
 

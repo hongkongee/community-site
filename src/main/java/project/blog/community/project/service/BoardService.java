@@ -3,6 +3,7 @@ package project.blog.community.project.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
 import project.blog.community.project.dto.response.BoardListResponseDTO;
 import project.blog.community.project.entity.Board;
@@ -35,6 +36,20 @@ public class BoardService {
 
     }
 
+    // 카테고리에 따라 다른 게시판 목록을 보여주는 메서드
+    public List<BoardListResponseDTO> getCategoryList(String category) {
+        List<BoardListResponseDTO> dtoList = new ArrayList<>();
+        List<Board> boardList = boardMapper.findCategory(category);
+        for (Board board : boardList) {
+            String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
+            BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname);
+            dtoList.add(dto);
+        }
+
+        return dtoList;
+
+    }
+
     public BoardDetailResponseDTO getDetail(int bno) {
         boardMapper.updateViewCount(bno);
 
@@ -45,7 +60,7 @@ public class BoardService {
 
     }
 
-    // account를 주면 nickname을 반환하는 함수
+    // account를 주면 nickname을 반환하는 메서드
     private String findNickname(String account) {
 
         try {
@@ -55,5 +70,13 @@ public class BoardService {
             e.printStackTrace();
             return account;
         }
+    }
+
+
+    // 게시물의 좋아요 수 바꾸기
+    public void changeLike(LikeRequestDTO dto) {
+        int bno = dto.getBno();
+        int number = dto.getNumber();
+        boardMapper.updateLikeCount(bno, number);
     }
 }

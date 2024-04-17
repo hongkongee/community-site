@@ -17,6 +17,24 @@ class BoardMapperTest {
 
     @Autowired
     BoardMapper boardMapper;
+/*
+
+    @Test
+    @DisplayName("카테고리에 따른 게시물 조회")
+    void findCategoryTest() {
+        // given
+        String category = "game";
+        List<Board> normalList = boardMapper.findCategory(category);
+
+        for (Board board : normalList) {
+            System.out.println(board.toString());
+        }
+        // when
+
+        // then
+    }
+*/
+
 
     @Test
     @DisplayName("게시물 등록하기")
@@ -48,7 +66,7 @@ class BoardMapperTest {
 //        assertNotNull(board);
 
     }
-    
+
     @Test
     @DisplayName("모든 게시글 조회")
     void findAllTest() {
@@ -57,10 +75,10 @@ class BoardMapperTest {
 //
 //        // when
 //        assertEquals(boardList.size(), 2);
-    
+
         // then
     }
-    
+
     @Test
     @DisplayName("게시글 더미데이터 생성")
     void dummyBoardTest() {
@@ -75,14 +93,14 @@ class BoardMapperTest {
                     .category(i % 2 == 0 ? NORMAL : GAME)
                     .build();
 
-            boardMapper.save(board);*/
-        }
-        
-        
+            boardMapper.save(board);
+        }*/
+
+
         // when
-    
+
         // then
     }
-
-
 }
+
+

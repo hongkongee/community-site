@@ -51,12 +51,66 @@ $copyUrl.onclick = () => {
 
 };
 
+// 좋아요 누르면 게시물 좋아요 수 1 증가시키고 취소하면 1 감소시키기
+function likeCountUpDown(n) {
+
+
+  var formData = {
+    bno: bno, // 게시글 번호
+    number: n // likeCount에 더할 값
+  };
+
+  fetch("/home/detail/like", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(response => response.text())
+  .then(data => {
+      console.log("Form submission successful:", data);
+      // Handle server response as needed
+  })
+  .catch(error => {
+      console.error("Error submitting form:", error);
+  });
+
+}
+  
+
+
+
+
+// 좋아요 누르면 하트 색깔 바뀌기
+const $heartBtn = document.querySelector('.like>i.fa-heart');
+
+$heartBtn.addEventListener('click', function() {
+
+  if (this.classList.contains('fa-solid')) { // 체크가 된 상태'
+    likeCountUpDown(-1);
+    this.classList.remove('fa-solid');
+    this.classList.add('fa-regular');
+
+} else { // 체크가 해제된 상태
+    likeCountUpDown(1);
+    this.classList.remove('fa-regular');
+    this.classList.add('fa-solid');
+}
+});
+
+
+
+
+
+
 // 신고버튼 누르기
 const $clameWriter = document.getElementById('report-writer');
 $clameWriter.onclick = () => {
   console.log('신고!!');
   document.getElementById('clame-btn').click();
 };
+
 
 
 

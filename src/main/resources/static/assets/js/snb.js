@@ -68,6 +68,20 @@
 
       } else if (presentPage.includes("/home/rps")) { // 또는 가위바위보 페이지라면
         document.getElementById('game').firstChild.classList.add('highlight');
+
+      } else if (presentPage.includes("/home/board/game")) { // 게임 게시판이라면
+        console.log('현재 페이지는 게임 게시판~');
+        document.getElementById('game-board').firstChild.classList.add('highlight');
+
+      } else if (presentPage.includes("/home/board/movie")) { // 영화 게시판이라면
+        document.getElementById('movie').firstChild.classList.add('highlight');
+
+      } else if (presentPage.includes("/home/board/trip")) { // 여행 게시판이라면
+        document.getElementById('trip').firstChild.classList.add('highlight');
+        
+      } else if (presentPage.includes("/market/main")) { // 당근 마켓이라면
+        document.getElementById('second-hand').firstChild.classList.add('highlight');
+
       } else {
         console.log('아무것도 적용이 안됨');
       }

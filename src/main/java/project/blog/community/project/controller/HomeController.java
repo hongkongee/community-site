@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.request.ReportRequestDTO;
 import project.blog.community.project.dto.request.RpsRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
@@ -53,6 +54,19 @@ public class HomeController {
         return "home/all";
     }
 
+    // 카테고리에 따른 하위 게시판 목록 페이지 view
+    @GetMapping("/board/{category}")
+    public String categoryBoardList(@PathVariable("category") String category, Model model) {
+        log.info("/home/{}: GET", category);
+
+        List<BoardListResponseDTO> categoryList = boardService.getCategoryList(category);
+//        log.info(categoryList.toString());
+        model.addAttribute("bList", categoryList);
+
+        return "home/all";
+
+    }
+
     // 홈페이지 - 게시글 상세 페이지 view
     @GetMapping("/detail/{bno}")
     public String detail(@PathVariable("bno") int bno, Model model) {
@@ -78,6 +92,20 @@ public class HomeController {
 
 
         return ResponseEntity.ok().body("신고 완료");
+
+    }
+
+    // 좋아요 수 바꾸기
+    @PostMapping("/detail/like")
+    @ResponseBody
+    public ResponseEntity<String> report(@RequestBody LikeRequestDTO dto) {
+        log.info("/home/detail/like: POST: {}, {}", dto.getBno(), dto.getNumber());
+
+        // 좋아요 수 1 증가 또는 1 감소시키기
+        boardService.changeLike(dto);
+
+
+        return ResponseEntity.ok().body("좋아요 수 변경");
 
     }
 

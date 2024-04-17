@@ -1,0 +1,25 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mvc.chap05.mapperMarketMapper">
+
+
+    <insert id="save">
+        INSERT INTO tbl_market
+        (text_title, text_content, text_writer, board_no, account)
+        VALUES
+        (#{textTitle}, #{textContent}, #{textWriter}, #{boardNo}, #{account})
+        <!--VALUES는 SQL 문법에서 데이터 삽입(INSERT) 작업을 할 때,
+        특정 테이블의 컬럼에 삽입될 값들을 지정하는 데 사용되는 키워드입니다.-->
+    </insert>
+
+    <update id="modify">
+        UPDATE tbl_market
+        SET market_text = #{marketText}
+        <!-- update_date = NOW() --> <!-- update 시간업뎃-->
+        update_date = CURRENT_TIMESTAMP
+        WHERE board_no = #{boardNo}
+    </update>
+
+</mapper>

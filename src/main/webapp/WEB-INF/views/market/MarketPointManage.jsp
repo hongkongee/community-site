@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
 
   <!-- common css -->
-  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="/assets/css/market.css">
 
   <!-- 부트스트랩 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -27,40 +27,7 @@
 
   <style>
     /* common css 가져오기 */
-    @import url('../common/common.css');
-
-
-    .productBox {
-    width: 60vh;
-    text-align: left;
-    
-    display: flex;  /* flexbox 설정 */
-    justify-content: center;  /* 가운데 정렬 */
-    margin: auto; 
-  }
-
-  .productGroup {
-    display: flex;  /* flexbox 설정 */
-    list-style-type: none;  /* 기본 리스트 스타일 제거 */
-    padding: 0;  /* 패딩 제거 */
-    
-    
-  }
-
-  .productGroup li {
-    flex: 1;  /* 각 항목이 동일한 너비를 갖도록 설정 */
-    width: 25vh;
-    text-align: center;
-    box-sizing: border-box;
-    border: 1px solid red;
-    margin: 0 10px;  /* 각 항목 사이의 간격 설정 */
-    
-  }
-
-  .productGroup li img {
-    width: 100%;  /* 이미지 너비 100%로 설정 */
-    height: auto;  /* 이미지 비율 유지 */
-  }
+    @import url('/assets/css/market.css');
 
   </style>
 
@@ -174,7 +141,7 @@
         <div class="title">
           <!-- Title 내용 -->
             <div class="titleContent">
-              <span>코리안네이마루</span><span>(인증완료)</span><span>님의 상품보기</span>
+              <span>코리안네이마루</span><span>(인증완료)</span><span>님의 즐겨찾기</span>
           </div>
         </div>
 
@@ -183,7 +150,7 @@
 
 
         <div class="content">
-          
+
           <!-- Content 내용 -->
           <div class="contentHead">
             <div class="#content-Write">#글쓰기</div>
@@ -195,29 +162,22 @@
           <br>
           <br>
 
-          <section class="productBox">
-            <ul class="productGroup">
-              <li class="product1">
-                <img src="https://via.placeholder.com/150x138" />
-                <div class="Ad1content">#포켓몬 빵 팝니다<br />#6,000원</div>
+
+          <section class="pointBox">
+            <ul class="pointGroup">
+              <li>
+                <span class="pointUserName">#코리안네이마루</span><span>님의 포인트</span><br>
+                <span class="pointCharge">1.000.000</span> <span>원</span>
+                <input type="text">
+                <br><button class="sendButton">송금하기</button><button class="refundButton">환불하기</button>
               </li>
-              <li class="product2">
-                <img src="https://via.placeholder.com/150x142" />
-                <div class="Ad2content">조니워커 블루 빈병팝니다<br />#30,000원</div>
-              </li>
-              <li class="product3">
-                <img src="https://via.placeholder.com/150x138" />
-                <div class="Ad3content">#포켓몬 빵 팝니다<br />#6,000원</div>
-              </li>
-              <li class="product4">
-                <img src="https://via.placeholder.com/150x138" />
-                <div class="Ad4content">#포켓몬 빵 팝니다<br />#6,000원</div>
-              </li>
+
             </ul>
           </section>
 
 
         </div>
+
 
 
 

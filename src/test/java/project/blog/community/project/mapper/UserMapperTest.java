@@ -41,7 +41,7 @@ class UserMapperTest {
 
       User user = userMapper.findUser(id);
 
-      assertEquals(user.getName(), "테스트");
+      assertEquals(user.getNickname(), "테스트");
 
    }
 

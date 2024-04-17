@@ -22,10 +22,11 @@ public class GalleryRepositoryImpl implements GalleryRepository {
         public Gallery mapRow(ResultSet rs, int rowNum) throws SQLException {
             Gallery gallery = new Gallery(
             rs.getInt("photo_number"),
-            rs.getString("user_name"),
+                    rs.getString("title") ,
             rs.getTimestamp("reg_date").toLocalDateTime(),
                     rs.getString("photo_link"),
-            rs.getString("title")
+                    rs.getString("user_name")
+
             );
 
 
@@ -46,9 +47,9 @@ public class GalleryRepositoryImpl implements GalleryRepository {
 
     @Override
     public void save(Gallery gallery) {
-        String sql = "INSERT INTO gallery (user_name, reg_date, photo_link, title)" +
-                "VALUES (?, ?, ?, ?)";
-        template.update(sql, gallery.getUser(), gallery.getRegDate(), gallery.getPhotoLink(), gallery.getTitle());
+        String sql = "INSERT INTO gallery (title, photo_link, user_name )" +
+                "VALUES (?, ?, ?)";
+        template.update(sql, gallery.getTitle(), gallery.getPhotoLink(),gallery.getUser() );
     }
 
     @Override

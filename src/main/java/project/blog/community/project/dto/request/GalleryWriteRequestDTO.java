@@ -10,10 +10,10 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GalleryWriteRequestDTO {
+    private String title;
+    private String photoLink;
+    private String userName;
 
-private String user;
-private String title;
-private String photoLink;
 
 
 }

@@ -21,10 +21,10 @@ private GalleryRepository repository;
         // given
         for (int i = 1; i <= 10; i++) {
             Gallery gallery = new Gallery();
-            gallery.setUser("user" + i);
-            gallery.setPhotoLink("이미지" + i);
             gallery.setTitle("제목" + i);
-            gallery.setRegDate(LocalDateTime.now());
+            gallery.setPhotoLink("이미지" + i);
+            gallery.setUser("user" + i);
+
 
             // when
             repository.save(gallery);

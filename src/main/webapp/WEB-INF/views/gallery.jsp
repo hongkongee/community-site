@@ -45,32 +45,29 @@
     <div class="card-container">
       <c:forEach var="b" items="${gList}">
           <div class="card-wrapper">
-              <section class="card" data-bno="${b.PhotoNumber}">
+              <section class="card" data-bno="${b.photoNumber}">
                   <div class="card-title-wrapper">
                       <h2 class="card-title">${b.shortTitle}</h2>
                       <div class="time-view-wrapper">
                           <div class="time">
                               <i class="far fa-clock"></i>
                                   ${b.regDate} </div>
-                          <div class="view">
-                              <i class="fas fa-eye"></i>
-                              <span class="view-count">${b.viewCount}</span>
-                          </div>
+
                       </div>
                   </div>
                   <div class="card-content">
 
 
 
-                    ${b.shortContent}
+
 
                   </div>
               </section>
               
               <c:if test="${login.auth == '관리자회원' || login.account == b.writer}">
                   <div class="card-btn-group">
-                      <button class="del-btn" data-href="/board/delete?bno=${b.PhotoNumber}">
-                          <i class="fas fa-times"></i>
+                      <button class="del-btn" data-href="/wel/gallery">
+                          <i class="fas fa-times">&times;</i>
                       </button>
                   </div>
               </c:if>
@@ -80,20 +77,38 @@
   </div>
   </div>
 </div>
+
 <div class="Frame40">
 
             <div class="Menu">
-                <button class="close-btn">X</button> <br>
-                <a href="">HOME</a><br>
-                <a href="">Posting</a><br>
-                <a href="">Diary</a><br>
-                <a href="">Gallery</a><br>
-                <a href="">Chat</a><br>
-                <a href="">Market</a>
+
+                <a href=""></a><br>
+                <a href=""></a><br>
+                <a href=""></a><br>
+                <a href=""></a><br>
+                <a href=""></a><br>
+                <a href=""></a>
             </div>
 
         </div>
 
+        <div id="myModal" class="modal">
+          <div class="modal-detail">
+          <button class="close-btn"></button> <br>
+            <span class="close">&times;</span>
+            <p>모달 내용이 여기에 들어갑니다.</p>
+          </div>
+        </div>
+
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <p>정말로 삭제할까요?</p>
+        <div class="modal-buttons">
+            <button class="confirm" id="confirmDelete"><i class="fas fa-check"></i> 예</button>
+            <button class="cancel" id="cancelDelete"><i class="fas fa-times"></i> 아니오</button>
+        </div>
+    </div>
+</div>
 
 </body>
 
@@ -117,6 +132,97 @@
         // When the user is not hovering over the element, change its transform property to translateX(-100%)
         sidebar.setAttribute("style", "transform: translateX(-100%);");
     });
+const $cardContainer = document.querySelector('.card-container');
+const $modal = document.getElementById('modal');
+const $confirmDelete = document.getElementById('confirmDelete'); 
+let $cancelDelete = document.getElementById('cancelDelete'); 
+
+
+const modal = document.getElementById('myModal');
+const closeModal = modal.querySelector('.close');
+
+// $cardContainer.addEventListener('click', e => {
+
+//   if (e.target.matches('.card-container')) return;
+
+//   if (e.target.matches('.card-btn-group *')) {
+  
+//  $modal.style.display = 'flex';
+//  const deleteLocation = e.target.closest('.del-btn').dataset.href;
+//  $cancelDelete = e => {
+//   console.log('das',e.target);
+// location.href = deleteLocation;
+
+// $modal.style.display = 'none';
+ 
+
+//  }
+//  $cancelDelete.onclick = ()  => {
+// $modal.style.display = 'none';
+//  }
+
+ 
+// }else{
+
+//   const bno = e.target.closest('section.card').dataset.bno;
+//   console.log('bno: ' + bno);
+
+
+
+//   // 모달을 활성화
+//   modal.style.display = 'block';
+
+//   // 모달 닫기 버튼에 클릭 이벤트 추가
+//   closeModal.addEventListener('click', () => {
+//     modal.style.display = 'none';
+    
+//   });
+// }
+// });
+
+
+// $cardContainer.addEventListener('click', e=> {
+
+//   console.log('target',e.target);
+//   if (e.target.matches('.card-container'))return;
+    
+  
+//   const bno = e.target.closest('section.card').dataset.bno;
+//   console.log('bno'+bno);
+
+//   location.href='/wel/';
+
+
+// })
+$cardContainer.addEventListener('click', e => {
+  if (e.target.matches('.card-container')) return;
+
+  if (e.target.matches('.card-btn-group *')) {
+    $modal.style.display = 'flex';
+    const deleteLocation = e.target.closest('.del-btn').dataset.href;
+    
+    // $cancelDelete 변수를 선언하고 클릭 이벤트 핸들러를 할당합니다.
+    const cancelDelete = () => {
+      console.log('cancel delete');
+      location.href = deleteLocation;
+      $modal.style.display = 'none';
+    };
+
+    // 삭제 버튼에 클릭 이벤트 핸들러를 할당합니다.
+    document.getElementById('cancelDelete').addEventListener('click', cancelDelete);
+  } else {
+    const bno = e.target.closest('section.card').dataset.bno;
+    console.log('bno: ' + bno);
+
+    // 모달을 활성화
+    modal.style.display = 'block';
+
+    // 모달 닫기 버튼에 클릭 이벤트 추가
+    closeModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+  }
+});
 
     //========== 게시물 목록 스크립트 ============//
 

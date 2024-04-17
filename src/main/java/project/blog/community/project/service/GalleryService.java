@@ -19,7 +19,7 @@ public class GalleryService {
 
     public void register(GalleryWriteRequestDTO dto) {
         Gallery gallery = new Gallery(dto);
- repository.save(gallery);
+        repository.save(gallery);
     }
 
     public List<GalleryListResponseDTO> getList() {

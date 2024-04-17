@@ -21,18 +21,17 @@ photoLink varchar(100) not null
 @NoArgsConstructor
 @AllArgsConstructor
 public class Gallery {
-private int PhotoNumber;
-private String user;
+private int photoNumber;
+    private String title;
 private LocalDateTime regDate;//작성일자
 private String photoLink; //이미지
-private String title;
+    private String user;
 
     public Gallery(GalleryWriteRequestDTO dto) {
-        this.user = dto.getUser();
-    this.regDate = LocalDateTime.now();
-        this.photoLink = dto.getPhotoLink();
-
         this.title = dto.getTitle();
+        this.photoLink = dto.getPhotoLink();
+        this.user = dto.getUserName();
+
 
     }
 }

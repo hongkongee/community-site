@@ -48,8 +48,7 @@
             margin-bottom: 20px;
         }
 
-        .container .wrap .input-btn,
-        .container .wrap #birth-btn {
+        .container .wrap .input-btn {
             width: 300px;
             height: 2em;
             border-color: #7AA2E3;
@@ -83,8 +82,11 @@
         input[type="number"]::-webkit-outer-spin-button,
         input[type="number"]::-webkit-inner-spin-button {
             -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
+            width: 300px;
+            height: 2em;
+            border-color: #7AA2E3;
+            border-width: 0 0 2px;
+            background-color: transparent;
         }
 
         button {
@@ -160,7 +162,7 @@
                     <div>
                         <p>사용할 닉네임을 입력해주세요&nbsp;<span id="nickChk"></span></p>
                         <input type="text" name="nickname" id="user_nickname" class="input-btn" minlength="2"
-                            maxlength="8" required="required">
+                            maxlength="8" placeholder="2글자 이상 입력해주세요" required="required">
                     </div>
                     <div>
                         <p>성별을 선택해주세요</p>
@@ -173,12 +175,16 @@
                         <p>이메일을 입력해주세요&nbsp;<span id="emailChk"></span></p>
                         <input type="email" name="email" id="user_email" class="input-btn" required="required"
                             placeholder="ex) abc123@gmail.com">
-                        <button>이메일 인증</button>
+                        <button type="button" id="mail-check-btn">이메일 인증</button>
+                        <input type="text" id="mail-check-input" placeholder="인증번호 6자리를 입력하세요." maxlength="6" disabled>
+                        <br>
+                        <span id="mailCheckMsg"></span>
                     </div>
                     <div>
                         <p>출생년도를 입력해주세요&nbsp;<span id="birthChk"></span></p>
                         <p>
-                            <input type="number" name="birth_year" id="birthYear" maxlength="4" required="required">
+                            <input type="number" name="birth_year" id="birthYear" class="input-btn" maxlength="4"
+                                required="required">
                         </p>
                     </div>
                 </div>
@@ -191,6 +197,56 @@
     </div>
 
     <script>
+        // 이메일 인증버튼 클릭 이벤트
+
+        let code = ''; // 이메일 전송 인증번호 저장을 위한 변수수
+
+        document.getElementById('mail-check-btn').onclick = () => {
+            const email = document.getElementById('user_email').value.trim();
+            console.log('완성된 이메일: ', email);
+
+            fetch('/users/email', {
+                    method: 'post',
+                    headers: {
+                        'Content-type': 'text/plain'
+                    },
+                    body: email
+                })
+                .then(res => res.text())
+                .then(data => {
+                    console.log('인증번호: ', data);
+                    code = data;
+
+                    // 이메일 전송이 완료되면 이메일 입력창 readonly로 막기
+                    document.getElementById('user_email').readOnly = true;
+
+                    // 인증번호 입력창 활성화
+                    document.getElementById('mail-check-input').disabled = false;
+                    alert('인증번호가 전송되었습니다. 확인 후 입력란에 정확히 입력하세요.');
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert('이메일 전송에 실패했습니다. 존재하는 이메일인지 확인해주세요.');
+                })
+        };
+
+        // 인증번호 검증
+        // blur -> focus가 빠지는 경우 발생.
+        document.getElementById('mail-check-input').onblur = e => {
+            console.log('blur 이벤트 발생!');
+            const inputCode = e.target.value;
+            if (inputCode === code) {
+                document.getElementById('mailCheckMsg').textContent = '인증번호가 일치합니다!';
+                document.getElementById('mailCheckMsg').style.color = 'skyblue';
+                e.target.style.display = 'none';
+            } else {
+                document.getElementById('mailCheckMsg').textContent = '인증번호를 다시 확인하세요!';
+                document.getElementById('mailCheckMsg').style.color = 'red';
+                e.target.focus();
+            }
+        }
+
+
         // 회언가입 입력값 검증 처리
 
         // 입력값 검증 통과 여부 배열
@@ -337,13 +393,13 @@
         // 성별 유효값 검증
         const $genderInput = document.getElementsByName('gender');
         $genderInput.onkeyup = e => {
-        const genderValue = $genderInput.value;
-        if (gender === "male" || gender === "female") {
-            checkResultList[5] = true;
-        } else {
-            checkResultList[5] = false;
-        }
-    };
+            const genderValue = $genderInput.value;
+            if (gender === "male" || gender === "female") {
+                checkResultList[5] = true;
+            } else {
+                checkResultList[5] = false;
+            }
+        };
 
 
         // 이메일 검사 정규표현식
@@ -386,17 +442,17 @@
         // 출생년도 유효값 검증
         const $birthInput = document.getElementById('birthYear');
         $birthInput.onkeyup = e => {
-        const birthValue = $birthInput.value;
-        if (birthValue.trim() === '') {
-            document.getElementById('birthChk').innerHTML = '<b style="color: red;">[출생년도는 필수값 입니다.]</b>';
-            checkResultList[7] = false;
-         } else if (birthValue.length !== 4) {
-            document.getElementById('birthChk').innerHTML = '<b style="color: red;">[출생년도는 4자리로 입력해주세요.]</b>';
-            checkResultList[7] = false;
-         } else {
-            document.getElementById('birthChk').innerHTML = '<b style="color: skyblue;">[사용가능합니다.]</b>';
-            checkResultList[7] = true;
-         }
+            const birthValue = $birthInput.value;
+            if (birthValue.trim() === '') {
+                document.getElementById('birthChk').innerHTML = '<b style="color: red;">[출생년도는 필수값 입니다.]</b>';
+                checkResultList[7] = false;
+            } else if (birthValue.length !== 4) {
+                document.getElementById('birthChk').innerHTML = '<b style="color: red;">[출생년도는 4자리로 입력해주세요.]</b>';
+                checkResultList[7] = false;
+            } else {
+                document.getElementById('birthChk').innerHTML = '<b style="color: skyblue;">[사용가능합니다.]</b>';
+                checkResultList[7] = true;
+            }
         };
         // 회원 가입 버튼 클릭 이벤트
         document.getElementById('submit-btn').onclick = e => {
@@ -411,8 +467,6 @@
             }
 
         };
-
-
     </script>
 
 

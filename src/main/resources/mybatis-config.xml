@@ -19,6 +19,7 @@
         <typeAlias type="project.blog.community.project.entity.User" alias="user"/>
         <typeAlias type="project.blog.community.project.entity.Market" alias="market"/>
         <typeAlias type="project.blog.community.project.entity.Board" alias="board"/>
+        <typeAlias type="project.blog.community.project.entity.Reply" alias="reply"/>
     </typeAliases>
 
     <!-- SQL을 적어놓은 XML 파일의 위치를 설정 -->
@@ -27,6 +28,7 @@
         <mapper resource="mapper/UserMapper.xml"/>
         <mapper resource="mapper/MarketMapper.xml"/>
         <mapper resource="mapper/BoardMapper.xml"/>
+        <mapper resource="mapper/ReplyMapper.xml"/>
     </mappers>
 
 

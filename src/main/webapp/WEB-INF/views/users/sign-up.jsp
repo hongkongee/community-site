@@ -76,8 +76,8 @@
         }
 
         input[type="radio"]:checked::after {
-            content: '♥';
-            font-size: 1.8em;
+            content: "∨";
+            font-size: 1.5em;
 
         }
 
@@ -142,10 +142,10 @@
             <form action="/users/sign-up" name="signUp" id="signUpForm" method="post">
                 <div class="info">
                     <div id="info_id">
-                        <p>아이디를 입력해주세요</p>
-                        <input type="text" name="accountNumber" id="user_id" class="input-btn"
-                        required="required" placeholder="사용하실 아이디를 입력해주세요">
-                        <button>중복 확인</button>
+                        <p>아이디를 입력해주세요&nbsp; <span id="idChk"></span></p>
+                        <input type="text" name="accountNumber" id="user_id" class="input-btn" required="required"
+                            maxlength="14" placeholder="사용하실 아이디를 입력해주세요">
+                        <button type="button" id="id_check">중복 확인</button>
                     </div>
                     <div>
                         <p>비밀번호를 입력해주세요&nbsp;<span id="pwChk">(영문과 특수문자를 포함해서 8자 이상)</span></p>
@@ -167,33 +167,34 @@
                         <input type="text" name="nickname" id="user_nickname" class="input-btn" minlength="2"
                             maxlength="8" placeholder="2글자 이상 입력해주세요" required="required">
                     </div>
-                    <div>
+                    <div id="gender-box">
                         <p>성별을 선택해주세요</p>
-                        <input type="radio" name="gender" value="Male">
-                        <label for="gender_male">남자</label>
-                        <input type="radio" name="gender" value="Female">
-                        <label for="gender_female">여자</label>
+                        <label for="gender_male">
+                            <input type="radio" name="gender" value="Male">남자</label>
+                        <label for="gender_female">
+                            <input type="radio" name="gender" value="Female">여자</label>
                     </div>
                     <div>
                         <p>이메일을 입력해주세요&nbsp;<span id="emailChk"></span></p>
                         <input type="email" name="email" id="user_email" class="input-btn" required="required"
                             placeholder="ex) abc123@gmail.com">
                         <button type="button" id="mail-check-btn">이메일 인증</button>
-                        <input type="text" id="mail-check-input" placeholder="인증번호 6자리를 입력하세요." maxlength="6" disabled>
+                        <input style="width: 200px; display: none;" type="text" id="mail-check-input" class="input-btn"
+                            placeholder="인증번호 6자리를 입력하세요." maxlength="6">
+
                         <br>
                         <span id="mailCheckMsg"></span>
                     </div>
                     <div>
                         <p>출생년도를 입력해주세요&nbsp;<span id="birthChk"></span></p>
-                        <p>
-                            <input type="number" name="birthday" id="birthYear" class="input-btn" maxlength="4"
-                                required="required">
-                        </p>
+                        <input type="number" name="birthday" id="birthYear" class="input-btn" maxlength="4"
+                            required="required">
+
                     </div>
                 </div>
                 <div class="main-btn">
                     <div class="back-btn"><button type="button">돌아가기</button></div>
-                    <div class="submit-btn"><button type="submit">회원가입</button></div>
+                    <div id="submit-btn"><button type="button">회원가입</button></div>
                 </div>
             </form>
         </div>
@@ -251,9 +252,10 @@
 
 
         // 회언가입 입력값 검증 처리
-
         // 입력값 검증 통과 여부 배열
         const checkResultList = [false, false, false, false, false, false, false, false];
+
+        // 회원가입 입력값 검증 처리
 
         // 아이디 검사 정규표현식
         const accountPattern = /^[a-zA-Z0-9]{4,14}$/;
@@ -280,7 +282,7 @@
                 checkResultList[0] = false;
             } else {
                 // 비동기 요청으로 아이디 중복 확인 진행
-                fetch('/members/check/account/' + idValue) // 어떻게 값이 들어올지는 확인 해야함!
+                fetch('/users/check/account/' + idValue)
                     .then(res => res.json())
                     .then(flag => {
                         if (flag) { // 중복
@@ -306,7 +308,7 @@
         const $pwInput = document.getElementById('password');
         $pwInput.onkeyup = e => {
             const pwValue = $pwInput.value;
-            console.log(pwValue);
+            // console.log(pwValue);
             if (pwValue.trim() === '') {
                 $pwInput.style.borderColor = 'red';
                 document.getElementById('pwChk').innerHTML = '<b style="color: red;">[비밀번호는 필수값입니다.]</b>';
@@ -388,25 +390,29 @@
 
             } else {
                 $nickInput.style.borderColor = 'skyblue';
-                document.getElementById('nickChk').innerHTML = '<b style="color: skyblue;">[사용가능한 이름입니다.]</b>';
+                document.getElementById('nickChk').innerHTML = '<b style="color: skyblue;">[사용가능한 닉네임입니다.]</b>';
                 checkResultList[4] = true;
             }
         };
 
         // 성별 유효값 검증
-        const $genderInput = document.getElementsByName('gender');
-        $genderInput.onkeyup = e => {
-            const genderValue = $genderInput.value;
-            if (gender === "male" || gender === "female") {
+        const $genderInput = document.getElementById('gender-box');
+        $genderInput.onclick = e => {
+            const $genderValue = document.querySelector('input[type="radio"]:checked').value;
+            console.log($genderValue);
+            if ($genderValue === "Male" || $genderValue === "Female") {
+
                 checkResultList[5] = true;
             } else {
                 checkResultList[5] = false;
             }
-        };
+
+        }
 
 
         // 이메일 검사 정규표현식
-        const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+        const emailPattern =
+            /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
 
         const $emailInput = document.getElementById('user_email');
         $emailInput.onkeyup = e => {
@@ -414,16 +420,18 @@
 
             if (emailValue.trim() === '') {
                 $emailInput.style.borderColor = 'red';
-                document.getElementById('emailChk').innerHTML = '<b style="color: red;">[이메일 필수값입니다.]</b>';
+                document.getElementById('emailChk').innerHTML =
+                    '<b style="color: red;">[이메일 필수값입니다.]</b>';
                 checkResultList[6] = false;
 
             } else if (!emailPattern.test(emailValue)) {
                 $emailInput.style.borderColor = 'red';
-                document.getElementById('emailChk').innerHTML = '<b style="color: red;">[이메일 형식을 지켜주세요.]</b>';
+                document.getElementById('emailChk').innerHTML =
+                    '<b style="color: red;">[이메일 형식을 지켜주세요.]</b>';
                 checkResultList[6] = false;
 
             } else {
-                fetch('/members/check/email/' + emailValue) // 이메일 정보 DB와 연동해서 가져오기!!
+                fetch('/users/check/email/' + emailValue) // 이메일 정보 DB와 연동해서 가져오기!!
                     .then(res => res.json())
                     .then(flag => {
                         if (flag) { // 중복
@@ -436,7 +444,64 @@
                             $emailInput.style.borderColor = 'skyblue';
                             document.getElementById('emailChk').innerHTML =
                                 '<b style="color: skyblue;">[사용가능한 이메일입니다.]</b>';
-                            checkResultList[6] = true;
+
+                            // 이메일 인증버튼 클릭 이벤트
+
+                            let code = ''; // 이메일 전송 인증번호 저장을 위한 변수
+
+                            document.getElementById('mail-check-btn').onclick = () => {
+                                const email = document.getElementById('user_email').value.trim();
+                                console.log('완성된 이메일: ', email);
+
+                                // if (email === '') {
+                                //     alert('이메일을 입력해주세요.')
+                                // }
+
+                                fetch('/users/email', {
+                                        method: 'post',
+                                        headers: {
+                                            'Content-type': 'text/plain'
+                                        },
+                                        body: email
+                                    })
+                                    .then(res => res.text())
+                                    .then(data => {
+                                        console.log('인증번호: ', data);
+                                        code = data;
+
+                                        // 이메일 전송이 완료되면 이메일 입력창 readonly로 막기
+                                        document.getElementById('user_email').readOnly = true;
+
+                                        // 인증번호 입력창 활성화
+                                        document.getElementById('mail-check-input').style.display =
+                                            "inline";
+                                        alert('인증번호가 전송되었습니다. 확인 후 입력란에 정확히 입력하세요.');
+                                    })
+                                    .catch(error => {
+                                        console.log(error);
+                                        alert('이메일 전송에 실패했습니다. 존재하는 이메일인지 확인해주세요.');
+                                    })
+                            };
+
+
+                            // 인증번호 검증
+                            // blur -> focus가 빠지는 경우 발생.
+                            document.getElementById('mail-check-input').onblur = e => {
+                                console.log('blur 이벤트 발생!');
+                                const inputCode = e.target.value;
+                                if (inputCode === code) {
+                                    document.getElementById('mailCheckMsg').textContent = '인증번호가 일치합니다!';
+                                    document.getElementById('mailCheckMsg').style.color = 'skyblue';
+                                    e.target.style.display = 'none';
+                                    document.getElementById('mail-check-btn').style.display = 'none';
+                                    checkResultList[6] = true;
+                                } else {
+                                    document.getElementById('mailCheckMsg').textContent = '인증번호를 다시 확인하세요!';
+                                    document.getElementById('mailCheckMsg').style.color = 'red';
+                                    e.target.focus();
+                                    checkResultList[6] = false;
+                                }
+                            }
                         }
                     });
             }
@@ -445,15 +510,23 @@
         // 출생년도 유효값 검증
         const $birthInput = document.getElementById('birthYear');
         $birthInput.onkeyup = e => {
-            const birthValue = $birthInput.value;
-            if (birthValue.trim() === '') {
-                document.getElementById('birthChk').innerHTML = '<b style="color: red;">[출생년도는 필수값 입니다.]</b>';
+
+            const birthValue = $birthInput.value.trim();
+            if (birthValue === '') {
+                document.getElementById('birthChk').innerHTML =
+                    '<b style="color: red;">[출생년도는 필수값 입니다.]</b>';
                 checkResultList[7] = false;
             } else if (birthValue.length !== 4) {
-                document.getElementById('birthChk').innerHTML = '<b style="color: red;">[출생년도는 4자리로 입력해주세요.]</b>';
+                document.getElementById('birthChk').innerHTML =
+                    '<b style="color: red;">[출생년도는 4자리로 입력해주세요.]</b>';
+                checkResultList[7] = false;
+            } else if (birthValue > 2155 || birthValue < 1901) {
+                document.getElementById('birthChk').innerHTML =
+                    '<b style="color: red;">[1901 - 2155 사이의 값을 입력해주세요.]</b>';
                 checkResultList[7] = false;
             } else {
-                document.getElementById('birthChk').innerHTML = '<b style="color: skyblue;">[사용가능합니다.]</b>';
+                document.getElementById('birthChk').innerHTML =
+                    '<b style="color: skyblue;">[사용가능합니다.]</b>';
                 checkResultList[7] = true;
             }
         };
@@ -464,8 +537,11 @@
             const $form = document.getElementById('signUpForm');
 
             if (checkResultList.includes(false)) {
-                alert('입력란을 다시 확인하세요!')
+                alert('입력란을 다시 확인하세요.');
+                console.log(checkResultList);
+                return;
             } else {
+                alert('환영합니다.');
                 $form.submit();
             }
 

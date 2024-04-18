@@ -30,13 +30,14 @@ public class UserController {
       log.info("/users/sign-up: GET!!");
    }
 
+   // 아이디, 이메일 중복확인 메서드
    @GetMapping("/check/{type}/{keyword}")
    @ResponseBody
    public ResponseEntity<?> check(@PathVariable String type,
                                   @PathVariable String keyword) {
-      log.info("/users/check: GET!");
+      log.info("/users/check: async GET!");
       log.info("type = {}", type);
-      log.info("keyword = {]", keyword);
+      log.info("keyword = {}", keyword);
 
       boolean flag = userService.checkDuplicateValue(type, keyword);
 
@@ -121,6 +122,25 @@ public class UserController {
       return "redirect:/home/main";
 
    }
+
+
+   // 이메일 인증
+   @PostMapping("/email")
+   @ResponseBody
+   public ResponseEntity<String> mailCheck(@RequestBody String email) {
+      log.info("이메일 인증 요청 들어옴: {}", email);
+      try {
+         String authNum = mailSenderService.joinEmail(email);
+         return ResponseEntity.ok().body(authNum);
+      } catch (Exception e) {
+         e.printStackTrace();
+         return ResponseEntity.internalServerError().body("이메일 전송 과정에서 에러 발생!");
+      }
+   }
+
+
+
+
 
 
 }

@@ -82,7 +82,8 @@ public class HomeController {
 
         model.addAttribute("b", dto);
 
-        Cookie c = WebUtils.getCookie(request, "like");
+        Cookie c = WebUtils.getCookie(request, "like" + bno);
+
 
         if (c != null) { // 이미 좋아요를 눌렀다면
             model.addAttribute("l", 1);
@@ -110,7 +111,7 @@ public class HomeController {
 
     }
 
-    // 좋아요 수 바꾸기
+    // 좋아요 수 바꾸기 (비동기)
     @PostMapping("/detail/like")
     @ResponseBody
     public ResponseEntity<Integer> report(@RequestBody LikeRequestDTO dto,

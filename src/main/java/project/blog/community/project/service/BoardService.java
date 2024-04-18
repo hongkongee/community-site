@@ -19,6 +19,8 @@ import project.blog.community.project.mapper.UserMapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccount;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -88,13 +90,16 @@ public class BoardService {
         HttpSession session = request.getSession();
         session.getAttribute("login");
         // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
+        String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
 
         // 좋아요를 눌렀다면 해당 게시글에 대한 쿠키 만들기
         if (number > 0) {
-            Cookie cookie = new Cookie("like", Integer.toString(bno));
+            // 쿠키에 게시글 번호와 로그인 유저 ID 저장
+
+            Cookie cookie = new Cookie("like" + bno, currentLoginMemberAccount); // ex) "like125", "tjtkdvl"
             cookie.setMaxAge(60);
             cookie.setPath("/");
-            response.addCookie(cookie);
+            response.addCookie(cookie); // 클라이언트에 전송
 
             return 1;
 

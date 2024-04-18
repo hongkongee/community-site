@@ -3,6 +3,7 @@ package project.blog.community.project.controller;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,12 @@ import project.blog.community.project.service.BoardService;
 import project.blog.community.project.service.GameService;
 import project.blog.community.project.service.ManagementService;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
+
+import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccount;
 
 
 @Controller
@@ -32,6 +38,8 @@ public class HomeController {
     private final GameService gameService;
     private final ManagementService managementService;
     private final BoardService boardService;
+
+    private String rootPath = "C:/Cause/upload";
 
     // 홈페이지 - 메인페이지 view
     @GetMapping("/main")
@@ -143,15 +151,52 @@ public class HomeController {
     public String writeSubmit(@RequestParam("category") String category,
                               @RequestParam("title") String title,
                               @RequestParam("content") String content,
-                              @RequestParam("file") MultipartFile file) {
+                              @RequestParam("file") MultipartFile file,
+                              HttpServletRequest request) {
         log.info("/home/write: POST, {}, {}, {}", category, title, content);
         log.info("file-name: {}", file.getOriginalFilename());
         log.info("file-size: {}KB", file.getSize() / 1024.0); // getSize()는 MB 단위
         log.info("file-type: {}", file.getContentType());
 
         // 세션에서 자신의 account 가져오기
+        HttpSession session = request.getSession();
+        session.getAttribute("login");
+        String writer = getCurrentLoginMemberAccount(session);
 
-        // board에 게시글 저장하기: writer, title, content, file-image, category
+        /* ========================= 파일 저장하기 ========================= */
+        // 첨부파일을 서버 스토리지에 저장
+        // 1. 루트 디렉토리를 생성.
+        File root = new File(rootPath);
+        if (!root.exists()) root.mkdirs();
+
+        // 2. 랜덤한 문자조합을 이용해서 새 파일명을 생성.
+        UUID uuid = UUID.randomUUID();
+        log.info("uuid: {}", uuid.toString());
+
+        String fileName = uuid.toString();
+        fileName = fileName.replace("-", ""); // 하이픈 빼기
+        log.info("랜덤 파일명: {}", fileName);
+
+        // 원본파일명에서 확장자 뗴기
+        String fileExtension = file.getOriginalFilename()
+                .substring(file.getOriginalFilename().lastIndexOf("."));
+
+        log.info("확장자: {}", fileExtension);
+
+        // 3. 첨부파일을 파일 객체로 생성
+        File uploadFile = new File(rootPath, fileName + fileExtension);
+
+        try {
+            // 4. 지정한 경로로 파일을 전송
+            file.transferTo(uploadFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /* ========================= 파일 저장하기 end ========================= */
+
+        // board table 에 게시글 저장하기: writer, title, content, file-image, category
+        boardService.saveBoard(category, title, content, file, writer);
 
         return "home/all";
     }

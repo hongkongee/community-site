@@ -7,11 +7,13 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
 import project.blog.community.project.dto.response.BoardListResponseDTO;
 import project.blog.community.project.entity.Board;
+import project.blog.community.project.entity.Category;
 import project.blog.community.project.entity.User;
 import project.blog.community.project.mapper.BoardMapper;
 import project.blog.community.project.mapper.UserMapper;
@@ -104,12 +106,37 @@ public class BoardService {
             return 1;
 
         } else { // 좋아요를 안 눌렀다면 해당 게시글에 대한 쿠키 삭제하기
-            Cookie cookie = WebUtils.getCookie(request, "like");
+            Cookie cookie = WebUtils.getCookie(request, "like" + bno);
             cookie.setMaxAge(0);
             cookie.setPath("/");
             response.addCookie(cookie);
 
             return 0;
         }
+    }
+
+    public void saveBoard(String category, String title, String content, MultipartFile file, String writer) {
+
+
+        
+        Board.builder()
+                .category(stringToCategory(category))
+                        .title(title)
+                                .content(content)
+                                        .writer(writer)
+                                                .postImg(file)
+                                                        .build();
+
+
+
+
+        boardMapper.save();
+    }
+
+    // 문자열을 Category 타입으로 바꾸는 메서드
+    private Category stringToCategory(String str) {
+        String upperCategory = str.toUpperCase();
+        return Category.valueOf(upperCategory);
+
     }
 }

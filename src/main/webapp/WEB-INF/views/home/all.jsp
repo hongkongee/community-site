@@ -19,8 +19,6 @@
 </head>
 <body>
 
-    <!-- 헤더 -->
-    <%@ include file="../include/header.jsp" %>
 
     <!-- 사이드바 -->
     <%@ include file="../include/snb.jsp" %>
@@ -31,6 +29,10 @@
 
         <section class="all">
           <h2> 전체 게시글</h2>
+
+          <!-- <c:if test="${login != null}"> -->
+            <button class="add-btn"><a id="go-write-page" href="/home/write"> 글쓰기 </a></button>
+          <!-- </c:if> -->
     
           <div class="list-container">
     

@@ -1,0 +1,75 @@
+<!-- 이 파일이 mybatis의 mapper로 사용된다는 일종의 선언 (외우지 마세요) -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace에는 이 파일과 연동될
+  인터페이스의 전체 경로(패키지명 포함 클래스명)를 적는다. -->
+<mapper namespace="project.blog.community.project.mapper.MyCodeMapper">
+
+<!--
+CREATE TABLE my_code(
+	code_no INT PRIMARY KEY AUTO_INCREMENT,
+   title VARCHAR(100) NOT NULL,
+   content VARCHAR(2000),
+   reg_date DATETIME DEFAULT current_timestamp,
+	writer VARCHAR(50)
+
+);
+-->
+
+
+
+    <insert id="save">
+        INSERT INTO my_code
+        (title, content, writer )
+        VALUES (#{title}, #{content}, #{writer})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM my_code
+        WHERE code_no=#{codeNo}
+    </delete>
+
+
+
+    <!-- SELECT의 경우에는 반환되는 타입을 작성해 주어야 합니다.
+        resultType을 통해 리턴되는 객체의 타입을 얘기해 줍니다.
+        데이터베이스의 컬럼명과 엔터티의 필드명이 동일해야 합니다. (스네이크케이스 -> 카멜케이스 변환은 따로 설정을 통해 처리)
+        ex) board_no : boardNo (o)  board_num : bnum (x)
+
+        resultType에 List를 따로 언급할 필요 없습니다. -->
+    <select id="findAll" resultType="myCode">
+        SELECT * FROM my_code
+
+        ORDER BY code_no DESC
+        LIMIT #{pageStart}, #{amount}
+    </select>
+
+    <select id="findOne" resultType="myCode">
+        SELECT * FROM my_code
+        WHERE code_no = #{codeNo}
+    </select>
+
+<select id="getCount" resultType="int">
+    SELECT COUNT(*)
+    FROM my_code
+</select>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

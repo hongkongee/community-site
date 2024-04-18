@@ -2,17 +2,15 @@ package project.blog.community.project.dto.request;
 
 import lombok.*;
 
-import java.util.Date;
-
 @Setter
 @Getter@ToString
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class GalleryWriteRequestDTO {
+public class MyCodeWriteRequestDTO {
     private String title;
-    private String photoLink;
-    private String userName;
+    private String content;
+    private String writer;
 
 
 

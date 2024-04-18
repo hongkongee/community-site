@@ -4,30 +4,27 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import project.blog.community.project.entity.Gallery;
+import project.blog.community.project.entity.MyCode;
 
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
-class GalleryRepositoryImplTest {
+class MyCodeRepositoryImplTest {
 
     @Autowired
-private GalleryRepository repository;
+private MyCodeRepository repository;
 
     @Test
     @DisplayName("사진 등록10")
     void bulkInsertTest() {
         // given
         for (int i = 1; i <= 10; i++) {
-            Gallery gallery = new Gallery();
-            gallery.setTitle("제목" + i);
-            gallery.setPhotoLink("이미지" + i);
-            gallery.setUser("user" + i);
+            MyCode myCode = new MyCode();
+            myCode.setTitle("제목" + i);
+            myCode.setContent("이미지" + i);
+            myCode.setWriter("user" + i);
 
 
             // when
-            repository.save(gallery);
+            repository.save(myCode);
         }
         // then
         // 필요한 경우 예상 결과를 확인하는 코드를 작성합니다.

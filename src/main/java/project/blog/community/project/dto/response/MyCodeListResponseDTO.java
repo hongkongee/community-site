@@ -3,15 +3,15 @@ package project.blog.community.project.dto.response;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import project.blog.community.project.entity.Gallery;
+import project.blog.community.project.entity.MyCode;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter @ToString @EqualsAndHashCode
-public class GalleryListResponseDTO {
+public class MyCodeListResponseDTO {
 
-    private final int photoNumber;
+    private final int codeNo;
     private final String shortTitle;
     private final String regDate;
     private final String writer;
@@ -23,11 +23,11 @@ public class GalleryListResponseDTO {
 //        this.regDate = makePrettierDateString(gallery.getRegDate());
 //        this.writer = gallery.getUser();
 //    }
-public GalleryListResponseDTO(Gallery gallery) {
-    this.photoNumber = gallery.getPhotoNumber();
-    this.shortTitle = (gallery.getTitle() != null) ? makeShortTitle(gallery.getTitle()) : null;
-    this.regDate = makePrettierDateString(gallery.getRegDate());
-    this.writer = gallery.getUser();
+public MyCodeListResponseDTO(MyCode myCode) {
+    this.codeNo = myCode.getCodeNo();
+    this.shortTitle = (myCode.getTitle() != null) ? makeShortTitle(myCode.getTitle()) : null;
+    this.regDate = makePrettierDateString(myCode.getRegDate());
+    this.writer = myCode.getWriter();
 }
 
     private String makePrettierDateString(LocalDateTime regDate) {

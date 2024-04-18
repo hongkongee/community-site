@@ -444,31 +444,16 @@ margin-top: 25%;
 
 
 
-   /* 페이지 스타일 */
-   /* pagination style */
-   .bottom-section {
-       display: flex;
-       width: fit-content;
-       margin: 0 auto;
+   
+   ul.pagination.pagination-lg.pagination-custom{
+    display: flex;
+    list-style: none;
+    text-decoration:none;
+    padding-left: 50px;
    }
-
-   .bottom-section nav {
-       flex: 1;
-       justify-content: center;
-   }
-
-
-   .pagination-custom a {
-       color: #444 !important;
-   }
-
-   .pagination-custom li.active a,
-   .pagination-custom li:hover a {
-       background: #333 !important;
-       color: #fff !important;
-   }
-
-
+.page-link{
+    padding-left: 10px;
+}
 
 
   .card-container .card .card-title-wrapper .time-view-wrapper>div {
@@ -581,36 +566,6 @@ margin-top: 25%;
   }
 
 
-
-
-  /* 페이지 스타일 */
-  /* pagination style */
-  .bottom-section {
-      display: flex;
-      width: fit-content;
-      margin: 0 auto;
-  }
-
-  .bottom-section nav {
-      flex: 1;
-      justify-content: center;
-  }
-
-
-  .pagination-custom a {
-      color: #444 !important;
-  }
-
-  .pagination-custom li.active a,
-  .pagination-custom li:hover a {
-      background: #333 !important;
-      color: #fff !important;
-  }
-
-
-
-
-
   .top-section .amount {
       flex: 1;
       display: flex;
@@ -641,6 +596,17 @@ margin-top: 25%;
       font-size: 1.4em;
       text-decoration: none;
   }
+  .bottom-section {
+    display: flex;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.bottom-section nav {
+    flex: 1;
+    justify-content: center;
+}
+
 
 
 .modal-detail{
@@ -672,3 +638,10 @@ margin-top: 25%;
 .close{
     font-size: 50px;
 }
+
+
+
+
+
+
+

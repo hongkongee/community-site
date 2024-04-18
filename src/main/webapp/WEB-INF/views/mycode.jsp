@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="/assets/css/mygallery.css">
+  <link rel="stylesheet" href="/assets/css/mycode.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet">
@@ -45,7 +45,7 @@
     <div class="card-container">
       <c:forEach var="b" items="${gList}">
           <div class="card-wrapper">
-              <section class="card" data-bno="${b.photoNumber}">
+              <section class="card" data-bno="${b.codeNo}">
                   <div class="card-title-wrapper">
                       <h2 class="card-title">${b.shortTitle}</h2>
                       <div class="time-view-wrapper">
@@ -66,7 +66,7 @@
               
               <c:if test="${login.auth == '관리자회원' || login.account == b.writer}">
                   <div class="card-btn-group">
-                      <button class="del-btn" data-href="/wel/gallery">
+                      <button class="del-btn" data-href="/wel/delete?bno=${b.codeNo}">
                           <i class="fas fa-times">&times;</i>
                       </button>
                   </div>
@@ -75,10 +75,53 @@
           </div>
       </c:forEach>
   </div>
+ <!-- 게시글 목록 하단 영역 -->
+ <div class="bottom-section">
+
+  <!-- 페이지 버튼 영역 -->
+  <nav aria-label="Page navigation example">
+      <ul class="pagination pagination-lg pagination-custom">
+          <c:if test="${maker.page.pageNo != 1}">
+              <li class="page-item"><a class="page-link"
+                                       href="/wel/gallery?pageNo=1&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
+              </li>
+          </c:if>
+
+          <c:if test="${maker.prev}">
+              <li class="page-item"><a class="page-link"
+                                       href="/wel/gallery?pageNo=${maker.begin-1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">prev</a>
+              </li>
+          </c:if>
+
+          <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
+              <li data-page-num="${i}" class="page-item">
+                  <a class="page-link"
+                     href="/wel/gallery?pageNo=${i}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">${i}</a>
+              </li>
+          </c:forEach>
+
+          <c:if test="${maker.next}">
+              <li class="page-item"><a class="page-link"
+                                       href="/wel/gallery?pageNo=${maker.end+1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">next</a>
+              </li>
+          </c:if>    
+          
+          <c:if test="${maker.page.pageNo != maker.finalPage}">
+              <li class="page-item"><a class="page-link"
+                                       href="/wel/gallery?pageNo=${maker.finalPage}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&gt;&gt;</a>
+              </li>
+          </c:if>
+
+      </ul>
+  </nav>
+
+</div>
+    
+
   </div>
 </div>
-
-<div class="Frame40">
+<!-- 
+        <div class="Frame40">
 
             <div class="Menu">
 
@@ -90,7 +133,7 @@
                 <a href=""></a>
             </div>
 
-        </div>
+        </div> -->
 
         <div id="myModal" class="modal">
           <div class="modal-detail">
@@ -110,28 +153,31 @@
     </div>
 </div>
 
+
+
+
 </body>
 
 <script>
 
-    const sidebar = document.querySelector('.Frame40');
+    // const sidebar = document.querySelector('.Frame40');
 
+    // // document.querySelector('.Frame40').addEventListener('mouseover', function () {
+    // //     // When the user hovers over the element, change its transform property to translateX(0)
+    // //     this.style.transform = 'translateX(-100%)';
+    // // });
+
+    // // Add a hover event listener to the Frame40 element
     // document.querySelector('.Frame40').addEventListener('mouseover', function () {
     //     // When the user hovers over the element, change its transform property to translateX(0)
-    //     this.style.transform = 'translateX(-100%)';
+    //     this.style.transform = 'translateX(0)';
     // });
 
-    // Add a hover event listener to the Frame40 element
-    document.querySelector('.Frame40').addEventListener('mouseover', function () {
-        // When the user hovers over the element, change its transform property to translateX(0)
-        this.style.transform = 'translateX(0)';
-    });
 
-
-    document.querySelector('.close-btn').addEventListener('click', function () {
-        // When the user is not hovering over the element, change its transform property to translateX(-100%)
-        sidebar.setAttribute("style", "transform: translateX(-100%);");
-    });
+    // document.querySelector('.close-btn').addEventListener('click', function () {
+    //     // When the user is not hovering over the element, change its transform property to translateX(-100%)
+    //     sidebar.setAttribute("style", "transform: translateX(-100%);");
+    // });
 const $cardContainer = document.querySelector('.card-container');
 const $modal = document.getElementById('modal');
 const $confirmDelete = document.getElementById('confirmDelete'); 
@@ -194,23 +240,43 @@ const closeModal = modal.querySelector('.close');
 
 
 // })
-$cardContainer.addEventListener('click', e => {
-  if (e.target.matches('.card-container')) return;
+// $cardContainer.addEventListener('click', e => {
+//   if (e.target.matches('.card-container')) return;
 
-  if (e.target.matches('.card-btn-group *')) {
-    $modal.style.display = 'flex';
-    const deleteLocation = e.target.closest('.del-btn').dataset.href;
+//   if (e.target.matches('.card-btn-group *')) {
+//     $modal.style.display = 'flex';
+//     const deleteLocation = e.target.closest('.del-btn').dataset.href;
     
-    // $cancelDelete 변수를 선언하고 클릭 이벤트 핸들러를 할당합니다.
-    const cancelDelete = () => {
-      console.log('cancel delete');
-      location.href = deleteLocation;
-      $modal.style.display = 'none';
-    };
+//     // $cancelDelete 변수를 선언하고 클릭 이벤트 핸들러를 할당합니다.
+//     const cancelDelete = () => {
+//       console.log('cancel delete');
+//       location.href = deleteLocation;
+//       $modal.style.display = 'none';
+//     };
 
-    // 삭제 버튼에 클릭 이벤트 핸들러를 할당합니다.
-    document.getElementById('cancelDelete').addEventListener('click', cancelDelete);
-  } else {
+//     // 삭제 버튼에 클릭 이벤트 핸들러를 할당합니다.
+//     document.getElementById('cancelDelete').addEventListener('click', cancelDelete);
+//   } 
+
+
+$cardContainer.addEventListener('click', e => {
+    if (e.target.matches('.card-container')) return;
+
+    if (e.target.matches('.card-btn-group *')) {
+        $modal.style.display = 'flex';
+        const deleteLocation = e.target.closest('.del-btn').dataset.href;
+        
+        // $cancelDelete 변수를 선언하고 클릭 이벤트 핸들러를 할당합니다.
+        const cancelDelete = () => {
+            console.log('cancel delete');
+            location.href = '/wel/gallery';
+            $modal.style.display = 'none';
+        };
+
+        // 삭제 버튼에 클릭 이벤트 핸들러를 할당합니다.
+        document.getElementById('cancelDelete').addEventListener('click', cancelDelete);
+    } 
+else {
     const bno = e.target.closest('section.card').dataset.bno;
     console.log('bno: ' + bno);
 
@@ -221,7 +287,9 @@ $cardContainer.addEventListener('click', e => {
     closeModal.addEventListener('click', () => {
       modal.style.display = 'none';
     });
+    
   }
+  
 });
 
     //========== 게시물 목록 스크립트 ============//
@@ -267,14 +335,31 @@ $cardContainer.addEventListener('click', e => {
       $cardContainer.addEventListener('mouseout', removeHover);
 
       // write button event
-      const $addWriteBtn = document.querySelector('.add-btn');
+      const $addWriteBtn = document.querySelector('.add-photo');
       if ($addWriteBtn) {
         $addWriteBtn.onclick = e => {
         window.location.href = '/wel/write';
       };
       }
 
+  // 사용자가 현재 머물고 있는 페이지 버튼에 active 스타일 부여
+  function appendPageActive() {
 
+// 현재 서버에서 넘겨준 페이지 번호
+const currPage = '${maker.page.pageNo}';
+
+// li 태그들을 전부 확인해서
+// 현재 페이지 번호와 일치하는 li를 찾은 후 active 클래스 이름 붙이기
+const $ul = document.querySelector('.pagination');
+const $liList = [...$ul.children];
+
+$liList.forEach($li => {
+    if (currPage === $li.dataset.pageNum) {
+        $li.classList.add('active');
+    }
+});
+}
+appendPageActive();
 </script>
 
 

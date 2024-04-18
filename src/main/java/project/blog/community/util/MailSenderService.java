@@ -5,6 +5,7 @@ import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,8 @@ import java.util.Random;
 public class MailSenderService {
 
     // EmailConfig에 등록한 빈 주입
-    /*private final JavaMailSender mailSender;
+    private final JavaMailSender mailSender;
+
 
     // 난수 발생
     private int makeRandomNumber() {
@@ -37,8 +39,14 @@ public class MailSenderService {
         String title = "커뮤니티 회원 가입 인증 이메일입니다."; // 이메일 제목
         String content = "홈페이지 가입을 신청해 주셔서 감사합니다." +
                 "<br><br>" +
-                "인증 번호는 <strong>" + authNum + "</strong> 입니다. <br>" +
-                "해당 인증 번호를 인증번호 확인란에 기입해 주세요."; // 이메일에 삽입할 내용 (더 꾸며보세요)
+                "해당 인증 번호를 인증번호 확인란에 기입해 주세요." +
+                "<br><br>" +
+                "<div align='center' style='border:1px solid black; font-family:verdana';>" +
+                "<h3 style='color:#7AA2E3;'>회원가입 인증 코드입니다.</h3>" +
+                "<div style='font-size:130%'>" +
+                "CODE : <strong>" +
+        authNum + "</strong><div><br/> " + "</div>"; // 이메일에 삽입할 내용
+
 
         mailSend(setFrom, toMail, title, content);
 
@@ -51,11 +59,12 @@ public class MailSenderService {
 
         try {
             MimeMessage message = mailSender.createMimeMessage();
-            *//*
+            /*
             기타 설정들을 담당할 MimeMessageHelper 객체를 생성
             생성자의 매개값으로 MimeMessage 객체, bool, 문자 인코딩 설정
             true 매개값을 전달하면 MultiPart 형식의 메세지 전달이 가능 (첨부 파일)
-             *//*
+             */
+
             MimeMessageHelper helper = new MimeMessageHelper(message, false, "utf-8");
 
             helper.setFrom(setFrom);
@@ -71,6 +80,7 @@ public class MailSenderService {
             e.printStackTrace();
         }
 
-    }*/
+    }
+
 
 }

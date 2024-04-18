@@ -1,10 +1,14 @@
 package project.blog.community.project.service;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.SessionException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
 import project.blog.community.project.dto.response.BoardListResponseDTO;
+import project.blog.community.project.dto.response.BoardMyListResponseDTO;
 import project.blog.community.project.entity.Board;
 import project.blog.community.project.entity.User;
 import project.blog.community.project.mapper.BoardMapper;
@@ -56,4 +60,20 @@ public class BoardService {
             return account;
         }
     }
+
+    public List<BoardMyListResponseDTO> getMyList(HttpServletRequest request) {
+        List<BoardMyListResponseDTO> dtoList = new ArrayList<>();
+        HttpSession session = (HttpSession) request.getSession();
+        session.getAttribute("login");
+        String myAccount ="tjtkdvl";
+
+        List<Board> boardList = boardMapper.findMyList(myAccount);
+
+        for (Board board : boardList) {
+            BoardMyListResponseDTO dto = new BoardMyListResponseDTO(board);
+            dtoList.add(dto);
+        }
+        return dtoList;
+    }
+
 }

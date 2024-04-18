@@ -21,4 +21,6 @@ public interface BoardMapper {
     void updateViewCount(int bno);
 
     void updateReportCount(int bno);
+
+    List<Board> findMyList(String myAccount);
 }

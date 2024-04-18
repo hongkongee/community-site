@@ -23,17 +23,17 @@ class UserServiceTest {
    @DisplayName("회원정보를 전달하면 비밀번호가 암호화돠어 DB에 저장될 것이다.")
    void join() {
 
-/*      SignUpRequestDto dto = SignUpRequestDto.builder()
-            .accountNumber("test444")
-            .password("test44!")
-            .name("테스트4")
-            .email("test444@gmail.com")
-            .birthday(2002)
-            .gender(String.valueOf(MALE))
-            .nickname("mr.test2")
+     SignUpRequestDto dto = SignUpRequestDto.builder()
+            .accountNumber("alswjd427")
+            .password("aaa1111!")
+            .name("민정")
+            .email("bling427@gmail.com")
+            .birthday(1999)
+            .gender(String.valueOf(FEMALE))
+            .nickname("민정")
             .build();
 
-      userService.join(dto);*/
+      userService.join(dto);
 
    }
 

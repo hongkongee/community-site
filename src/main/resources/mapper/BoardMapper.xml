@@ -33,6 +33,12 @@
         WHERE bno = #{bno}
     </update>
 
+    <select id="findMyList" resultType="board">
+        SELECT * FROM tbl_board
+        WHERE writer = #{myAccount}
+        ORDER BY bno DESC
+    </select>
+
 
 
 

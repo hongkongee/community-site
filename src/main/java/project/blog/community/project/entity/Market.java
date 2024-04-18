@@ -1,8 +1,25 @@
 package project.blog.community.project.entity;
 
 import lombok.*;
+import project.blog.community.project.dto.request.MarketWriteRequestDTO;
 
 import java.time.LocalDateTime;
+
+/*
+CREATE TABLE tbl_market (
+    board_no INT PRIMARY KEY AUTO_INCREMENT,
+    text_writer VARCHAR(255) NOT NULL,
+	update_date datetime DEFAULT current_timestamp,
+	text_title VARCHAR(50),
+    rate LONG DEFAULT(5.0),
+    text_content VARCHAR(1000),
+    price INT,
+    location VARCHAR(255),
+    content_img VARCHAR(255),
+    login_method VARCHAR(50),
+    view_count INT DEFAULT 0
+);
+*/
 
 @Getter
 @ToString
@@ -17,10 +34,13 @@ public class Market{
     @Setter
     private int boardNo;
 
+    @Setter
     private String textWriter;
 
+    @Setter
     private LocalDateTime updateDate;
 
+    @Setter
     private String textTitle;
 
     private int rate;
@@ -34,11 +54,19 @@ public class Market{
 
     private String ContentImg; //XML profile_image 스네이크 케이스 자동 인식
     private String loginMethod; //sql tbl 타입과 일치 시켜야 함
+    private int viewCount;
 
 
 
-
+    public Market(MarketWriteRequestDTO dto) { //entity -> DTO
+        this.textTitle = dto.getTextTitle();
+        this.textContent = dto.getTextContent();
+        this.textWriter = dto.getTextWriter();
+        this.updateDate = dto.getUpdateDate();
+        this.viewCount = dto.getViewCount();
+    }
 }
+
 
 
 

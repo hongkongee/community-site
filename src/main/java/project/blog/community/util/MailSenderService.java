@@ -4,8 +4,6 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -45,7 +43,7 @@ public class MailSenderService {
                 "<h3 style='color:#7AA2E3;'>회원가입 인증 코드입니다.</h3>" +
                 "<div style='font-size:130%'>" +
                 "CODE : <strong>" +
-        authNum + "</strong><div><br/> " + "</div>"; // 이메일에 삽입할 내용
+                authNum + "</strong><div><br/> " + "</div>"; // 이메일에 삽입할 내용
 
 
         mailSend(setFrom, toMail, title, content);
@@ -56,7 +54,6 @@ public class MailSenderService {
     // 이메일을 실제로 전송하는 메서드
     private void mailSend(String setFrom, String toMail, String title, String content) {
 
-
         try {
             MimeMessage message = mailSender.createMimeMessage();
             /*
@@ -64,7 +61,6 @@ public class MailSenderService {
             생성자의 매개값으로 MimeMessage 객체, bool, 문자 인코딩 설정
             true 매개값을 전달하면 MultiPart 형식의 메세지 전달이 가능 (첨부 파일)
              */
-
             MimeMessageHelper helper = new MimeMessageHelper(message, false, "utf-8");
 
             helper.setFrom(setFrom);
@@ -81,6 +77,5 @@ public class MailSenderService {
         }
 
     }
-
 
 }

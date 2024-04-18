@@ -3,13 +3,18 @@ package project.blog.community.interceptor;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
+import project.blog.community.util.LoginUtils;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import static project.blog.community.util.LoginUtils.*;
+
 @Configuration
+@RequiredArgsConstructor
 public class AfterLoginInterceptor implements HandlerInterceptor {
 
    @Override
@@ -17,7 +22,7 @@ public class AfterLoginInterceptor implements HandlerInterceptor {
 
       HttpSession session = request.getSession();
 
-      if (session.getAttribute("login") != null) {
+      if (isLogin(session)) {
 
          response.setContentType("text/html; charset=UTF-8");
          PrintWriter w = response.getWriter();

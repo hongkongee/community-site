@@ -20,6 +20,28 @@
         WHERE bno = #{bno}
     </select>
 
+    <select id="findCategory" resultType="board">
+        SELECT * FROM tbl_board
+        <if test="category == 'normal'">
+            WHERE category = 'NORMAL'
+        </if>
+        <if test="category == 'game'">
+            WHERE category = 'GAME'
+        </if>
+        <if test="category == 'market'">
+            WHERE category = 'MARKET'
+        </if>
+        <if test="category == 'movie'">
+            WHERE category = 'MOVIE'
+        </if>
+        <if test="category == 'trip'">
+            WHERE category = 'TRIP'
+        </if>
+        ORDER BY bno DESC
+    </select>
+
+
+
 
     <update id="updateViewCount">
         UPDATE tbl_board
@@ -30,6 +52,12 @@
     <update id="updateReportCount">
         UPDATE tbl_board
         SET report_count = report_count + 1
+        WHERE bno = #{bno}
+    </update>
+
+    <update id="updateLikeCount">
+        UPDATE tbl_board
+        SET like_count = like_count + #{number}
         WHERE bno = #{bno}
     </update>
 

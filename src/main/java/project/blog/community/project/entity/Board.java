@@ -5,7 +5,7 @@ CREATE TABLE `tbl_board` (
   `title` varchar(100) NOT NULL,
   `writer` varchar(45) NOT NULL,
   `content` varchar(2000) NOT NULL,
-  `reg_date` datetime DEFAULT NULL,
+  `reg_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `view_count` int DEFAULT '0',
   `like_count` int DEFAULT '0',
   `category` varchar(100) DEFAULT 'NORMAL',

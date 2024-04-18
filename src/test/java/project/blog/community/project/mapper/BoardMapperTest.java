@@ -15,6 +15,7 @@ import static project.blog.community.project.entity.Category.*;
 @SpringBootTest
 class BoardMapperTest {
 
+
    @Autowired
    BoardMapper boardMapper;
 
@@ -47,16 +48,19 @@ class BoardMapperTest {
 //        System.out.println(board.toString());
 //        assertNotNull(board);
 
+
    }
 
    @Test
    @DisplayName("모든 게시글 조회")
    void findAllTest() {
       // given
+
 //        List<Board> boardList = boardMapper.findAll();
 //
 //        // when
 //        assertEquals(boardList.size(), 2);
+
 
       // then
    }
@@ -67,6 +71,7 @@ class BoardMapperTest {
       // given
 
       // 100개의 게시물 생성
+
 /*        for (int i = 0; i < 100; i++) {
             Board board = Board.builder()
                     .title(i + 4 + "번째 게시물 제목")
@@ -75,11 +80,15 @@ class BoardMapperTest {
                     .category(i % 2 == 0 ? NORMAL : GAME)
                     .build();
 
+
             boardMapper.save(board);*/
    }
 
 
+
    // when
+
 
    // then
 }
+

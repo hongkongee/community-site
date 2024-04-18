@@ -17,6 +17,7 @@
         <!-- 엔터티 클래스 별칭 붙이기 -->
         <!-- <typeAlias type="com.spring.mvc.chap05.entity.Board" alias="board"/> -->
         <typeAlias type="project.blog.community.project.entity.User" alias="user"/>
+        <typeAlias type="project.blog.community.project.entity.Market" alias="market"/>
         <typeAlias type="project.blog.community.project.entity.Board" alias="board"/>
         <typeAlias type="project.blog.community.project.entity.Reply" alias="reply"/>
     </typeAliases>
@@ -25,6 +26,7 @@
     <mappers>
         <!-- <mapper resource="mapper/BoardMapper.xml"/> -->
         <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="mapper/MarketMapper.xml"/>
         <mapper resource="mapper/BoardMapper.xml"/>
         <mapper resource="mapper/ReplyMapper.xml"/>
     </mappers>

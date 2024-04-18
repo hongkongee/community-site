@@ -3,32 +3,7 @@
 // img src 에 넣으면 된다. (innerHTML로 tag 추가, spring-webmvc의 detail.jsp 파일의 reply 참고)
 
 
-    
-    // 사용자가 현재 머물고 있는 페이지 버튼에 active 스타일 부여 (list.jsp 참고)
-    // function appendPageActive() {
 
-    //   // 현재 서버에서 넘겨준 페이지
-    //   const currPage = '${}'
-
-    //   if (currPage === '') {
-    //     document.getElementById('home').add('active');
-    //   } else if () {
-    //     document.getElementById('game').add('active');
-    //   } else if () {
-    //     document.getElementById('secondhand').add('active');
-    //   } else if () {
-    //     document.getElementById('sports').add('active');
-    //   } else if () {
-    //     document.getElementById('all').add('active');
-    //   } else if () {
-    //     document.getElementById('game-board').add('active');
-    //   } else if () {
-    //     document.getElementById('movie-board').add('active');
-    //   } else if () {
-    //     document.getElementById('trip-board').add('active');
-    //   }
-
-    // }
 
     /* 친구 정보 */
     const $friends = document.querySelector('.friends');
@@ -68,6 +43,20 @@
 
       } else if (presentPage.includes("/home/rps")) { // 또는 가위바위보 페이지라면
         document.getElementById('game').firstChild.classList.add('highlight');
+
+      } else if (presentPage.includes("/home/board/game")) { // 게임 게시판이라면
+        console.log('현재 페이지는 게임 게시판~');
+        document.getElementById('game-board').firstChild.classList.add('highlight');
+
+      } else if (presentPage.includes("/home/board/movie")) { // 영화 게시판이라면
+        document.getElementById('movie').firstChild.classList.add('highlight');
+
+      } else if (presentPage.includes("/home/board/trip")) { // 여행 게시판이라면
+        document.getElementById('trip').firstChild.classList.add('highlight');
+        
+      } else if (presentPage.includes("/market/main")) { // 당근 마켓이라면
+        document.getElementById('second-hand').firstChild.classList.add('highlight');
+
       } else {
         console.log('아무것도 적용이 안됨');
       }

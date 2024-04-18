@@ -23,13 +23,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/market")
-@Slf4j
 @RequiredArgsConstructor
-
+@Slf4j
 public class MarketController {
     private final MarketService marketService;
 
-    @Value("${googleMap.app-key}")
+//    @Value("${googleMap.app-key}")
     private String googleMapKey;
 
     @GetMapping("/main")

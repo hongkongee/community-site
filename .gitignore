@@ -1,3 +1,5 @@
+# Log file
+*.log
 application.properties
 .gradle
 build/

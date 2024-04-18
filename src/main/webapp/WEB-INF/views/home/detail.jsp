@@ -10,6 +10,7 @@
 
   <%@ include file="../include/static-head.jsp" %>
 
+  <link rel="stylesheet" href="/assets/css/header.css">
   <link rel="stylesheet" href="/assets/css/detail.css" >
   <link rel="stylesheet" href="/assets/css/snb.css" >
 
@@ -19,6 +20,8 @@
 
 <body>
 
+  <!-- 헤더 -->
+  <%@ include file="../include/header.jsp" %>
   <!-- 사이드바 -->
   <%@ include file="../include/snb.jsp" %>
 
@@ -29,34 +32,34 @@
 
     <!-- ==================== 게시글 영역 ==================== -->
     <section class="board">
-      <div id="wrap" class="form-container">
+      <div id="wrap" class="form-container"> 
 
-        <!-- 게시글 번호 (Primary key) -->
-        <h1 id="bno">3142번</h1>
+        <!-- 게시글 카테고리 (누르면 해당 메뉴로 이동) -->
+        <h1 id="bno">${b.category}</h1>
         
 
         <!-- 제목 -->
         <!-- <input type="text" id="title" name="title" value="${b.title}" readonly> -->
-        <h1 id="title">게시글 제목</h1>
+        <h1 id="title">${b.title}</h1>
 
-        <div class="board-info">
+        <div class="board-info" data-bno="${b.bno}" data-writer="${b.writer}">
 
           <div class="left-region">
             <!-- 작성자 -->
             <!-- 누르면 작성자가 쓴 글 목록, 작성자의 페이지, 1:1채팅, 신고하기, 차단하기 등 -->
-            <h2 id="writer"><a href="#" id="writer-a">작성자</a></h2> 
+            <h2 id="writer"><a href="#" id="writer-a">${b.writer}</a></h2> 
 
             <div class="writer-info">
               <ul>
                 <li><a href="#">게시글 보기</a></li>
                 <li><a href="#">1:1 채팅</a></li>
-                <li><a id="claim-writer" href="#">신고하기</a></li>
+                <li><a id="report-writer" href="#">신고하기</a></li>
                 <li><a href="#">차단하기</a></li>
               </ul>
             </div>
             
             <!-- 작성 날짜 시간 -->
-            <h2 id="date">2024-04-16 06:14</h2>
+            <h2 id="date">${b.regDate}</h2>
           </div>
 
   
@@ -65,7 +68,9 @@
             <h2 id="copy-url"> <a href="#">URL 복사</a> </h2>
   
             <!-- 댓글 개수 : 누르면 댓글영역으로 이동-->
-            <h2 id="see-reply"> <a href="#tag1"> 댓글 5</a></h2>
+            <h2 id="see-reply"> <a href="#tag1"> 댓글 53 </a></h2>
+
+            <h2 id="view-count"> ${b.viewCount} </h2>
   
           </div>
 
@@ -81,9 +86,7 @@
         
     
         <!-- <label for="content">내용</label> -->
-        <div id="content">${b.content} 여기는 게시글 내용이 들어갈 자리입니다. <br> 
-        게시글 내용을 자유롭게 써주세요 <br>
-        게시글 내용 test</div>
+        <div id="content">${b.content}</div>
 
         <div class="buttons">
             <button class="list-btn" type="button"
@@ -97,7 +100,7 @@
     </section>
 
     <!-- ==================== 신고 모달 영역 ==================== -->
-    <section class="claim">
+    <section class="report">
       <!-- Button trigger modal -->
       <button id="clame-btn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         신고하기
@@ -108,7 +111,7 @@
         <div class="modal-dialog">
 
 
-          <form id="claim-form" action="/home/detail/claim" method="post">
+          <form id="report-form" action="/home/detail/report" method="post">
             <div class="modal-content">
               <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">작성자 님을 신고</h1>
@@ -119,13 +122,13 @@
                 <!-- 모달 신고 내용 영역 -->
 
 
-                <label for="claim-object">신고 대상</label>
+                <label for="report-object">신고 대상</label>
                 <span> 작성자 </span>
                 <br>
 
                 
 
-                  <label for="claim-question">신고 사유</label>
+                  <label for="report-question">신고 사유</label>
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="clame-reason" value="advertisement" id="advertisement">
                     <label class="form-check-label" for="flexCheckDefault">
@@ -155,8 +158,8 @@
                   </div>
 
 
-                  <label for="claim-reason">기타 사유가 있으면 말씀해주세요</label>
-                  <textarea rows="3" id="claimText" name="claimText" class="form-control"
+                  <label for="report-reason">기타 사유가 있으면 말씀해주세요</label>
+                  <textarea rows="3" id="reportText" name="reportText" class="form-control"
                                             placeholder="신고 사유를 입력해주세요"></textarea>
 
 
@@ -253,125 +256,13 @@
   </div>
   
 
+  <!-- 사이드바 자바스크립트 -->
+  <script src="/assets/js/detail.js"></script>
 
 
-  <!-- ================================= JavaScript ================================= -->
+  <!-- bootstrap js -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script>
 
-  const $writer = document.getElementById('writer');
-  const $writerInformation = document.querySelector('.writer-info');
-
-  // 작성자 누르면 관련 기능 
-  document.querySelector('.wrapper').onclick = e => {
-
-    if(e.target.matches('#writer-a')) { // 작성자를 누르면
-
-      if ($writerInformation.style.display === 'none') {
-        $writerInformation.style.display = 'block'; // 창이 뜬다
-      } else {
-        $writerInformation.style.display = 'none'
-      }
-      
-      return;
-    }
-
-    if (e.target.matches('.writer-info a'))  { // 선택지를 누르면
-      return; // 창을 닫지 않는다.
-    }
-    // 그 외의 영역을 누르면
-    console.log('창 닫기');
-    $writerInformation.style.display = 'none'; // 창이 없어진다
-
-  };
-
-
-
-  // URL 복사하기
-  const $copyUrl = document.querySelector('h2#copy-url>a');
-  $copyUrl.onclick = () => {
-
-    console.log('url 복사!');
-    var currentPageUrl = window.location.href;
-    console.log(currentPageUrl);
-
-    var tempInput = document.createElement("input");
-    tempInput.setAttribute("value", currentPageUrl);
-    document.body.appendChild(tempInput);
-
-    tempInput.select();
-
-    document.execCommand("copy");
-
-    document.body.removeChild(tempInput);
-
-    alert("페이지 URL이 복사되었습니다.: " + currentPageUrl);
-
-  };
-
-  // 신고버튼 누르기
-  const $clameWriter = document.getElementById('claim-writer');
-  $clameWriter.onclick = () => {
-    console.log('신고!!');
-    document.getElementById('clame-btn').click();
-  };
-
-
-
-  // 신고 form 제출
-  document.getElementById('claim-form').addEventListener("submit", function(e) {
-
-    console.log('신고 제출!');
-    e.preventDefault(); // form 기능 없애기
-
-    // true or false checkbox 배열
-    var interests = [];
-    var checkboxes = document.querySelectorAll('input[name="clame-reason"]:checked');
-    console.log(checkboxes); // nodelist
-
-    checkboxes.forEach(function(checkbox) { // 배열 고차 함수
-        interests.push(checkbox.value); // 체크한 항목만 모아둔 배열 (정제된 형태의 배열)
-    });
-    console.log(interests);
-
-    var message = document.getElementById("claimText").value;
-
-    // *********************** AJAX : 서버에 요청 보내기 ***********************
-
-    var formData = {
-        message: message, // text area 기타 사유 메세지
-        interests: interests // 체크된 박스만 모아둔 배열
-    };
-
-    // Send the form data to the server
-    fetch("/home/detail/claim", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => response.text())
-    .then(data => {
-        console.log("Form submission successful:", data);
-        // Handle server response as needed
-    })
-    .catch(error => {
-        console.error("Error submitting form:", error);
-    });
-
-    alert('정상적으로 신고되었습니다.');
-    document.querySelector('.modal-content .modal-footer .btn-secondary').click(); 
-    document.getElementById("claimText").value='';
-
-    
-
-  });
-
-
-
-
-  </script>
   
 </body>
 </html>

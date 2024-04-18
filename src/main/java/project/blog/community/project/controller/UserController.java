@@ -31,13 +31,14 @@ public class UserController {
       log.info("/users/sign-up: GET!!");
    }
 
+   // 아이디, 이메일 중복확인 메서드
    @GetMapping("/check/{type}/{keyword}")
    @ResponseBody
    public ResponseEntity<?> check(@PathVariable String type,
                                   @PathVariable String keyword) {
-      log.info("/users/check: GET!");
+      log.info("/users/check: async GET!");
       log.info("type = {}", type);
-      log.info("keyword = {]", keyword);
+      log.info("keyword = {}", keyword);
 
       boolean flag = userService.checkDuplicateValue(type, keyword);
 

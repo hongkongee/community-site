@@ -82,7 +82,8 @@ public class UserController {
       log.info("/users/sign-in: POST!!");
       log.info("dto = {}", dto);
 
-      LoginResult result = userService.authenticate(dto);
+
+      LoginResult result = userService.authenticate(dto, request.getSession(), response);
       log.info("result = {}", result);
 
       ra.addFlashAttribute("result", result);

@@ -42,9 +42,6 @@
         font-weight: 600;
       }
       
-      aside .left-snb ul li.active { /* 현재 페이지가 뭐냐에 따라 active class 부여*/
-        font-weight: 600;
-      }
   
       aside .left-snb ul li>ul {
         color: #000;

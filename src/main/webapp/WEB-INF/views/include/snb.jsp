@@ -10,14 +10,14 @@
     <ul>
         <li id="home"><a href="/home/main">Home</a></li>
         <li id="game"><a href="/home/rps">게임</a></li>
-        <li id="second-hand"><a href="#">중고 장터</a></li>
-        <li id="sports"><a href="#">스포츠 예측</a></li>
+        <li id="second-hand"><a href="/market/main">중고 장터</a></li>
+        <li id="sports"><a href="#">로또</a></li>
         <li id="all"><a href="/home/all">
         전체 게시판
         <ul>
-            <li id="game-board"><a href="#">게임 게시판</a></li>
-            <li id="movie"><a href="#">영화 게시판</a></li>
-            <li id="trip"><a href="#">여행 게시판</a></li>
+            <li id="game-board"><a href="/home/board/game">게임 게시판</a></li>
+            <li id="movie"><a href="/home/board/movie">영화 게시판</a></li>
+            <li id="trip"><a href="/home/board/trip">여행 게시판</a></li>
         </ul>
         </a></li>
     </ul>

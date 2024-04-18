@@ -89,14 +89,16 @@
         <div id="content">${b.content}</div>
 
         <!-- 좋아요 -->
-        <div class="like">
+        <div class="like" data-like-cookie="${l}">
           <!-- <i class="fa-solid fa-heart"></i> : check 됐을 때 -->
           <i class="fa-regular fa-heart"></i>
-          <label class="like-label" for="flexCheckDefault">
+          <label class="like-label" for="flexCheckDefault" data-like-count="${b.likeCount}">
             좋아요 ${b.likeCount}
           </label>
         </div>
 
+
+        <!-- 화면 이동에 관련한 버튼 -->
         <div class="buttons">
             <button class="list-btn" type="button"
                     onclick="location.href='/home/all'">
@@ -125,7 +127,7 @@
           <form id="report-form" action="/home/detail/report" method="post">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">작성자 님을 신고</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">${b.writer} 님을 신고</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -134,7 +136,7 @@
 
 
                 <label for="report-object">신고 대상</label>
-                <span> 작성자 </span>
+                <span> ${b.writer} </span>
                 <br>
 
                 

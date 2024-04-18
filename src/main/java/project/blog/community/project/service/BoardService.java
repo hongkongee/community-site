@@ -1,8 +1,13 @@
 package project.blog.community.project.service;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.WebUtils;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
 import project.blog.community.project.dto.response.BoardListResponseDTO;
@@ -22,6 +27,7 @@ public class BoardService {
     private final BoardMapper boardMapper;
     private final UserMapper userMapper;
 
+    // 게시판 목록을 조회
     public List<BoardListResponseDTO> getList() {
         List<BoardListResponseDTO> dtoList = new ArrayList<>();
         List<Board> boardList = boardMapper.findAll();
@@ -74,9 +80,31 @@ public class BoardService {
 
 
     // 게시물의 좋아요 수 바꾸기
-    public void changeLike(LikeRequestDTO dto) {
+    public int changeLike(LikeRequestDTO dto, HttpServletRequest request, HttpServletResponse response) {
         int bno = dto.getBno();
         int number = dto.getNumber();
         boardMapper.updateLikeCount(bno, number);
+
+        HttpSession session = request.getSession();
+        session.getAttribute("login");
+        // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
+
+        // 좋아요를 눌렀다면 해당 게시글에 대한 쿠키 만들기
+        if (number > 0) {
+            Cookie cookie = new Cookie("like", Integer.toString(bno));
+            cookie.setMaxAge(60);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+
+            return 1;
+
+        } else { // 좋아요를 안 눌렀다면 해당 게시글에 대한 쿠키 삭제하기
+            Cookie cookie = WebUtils.getCookie(request, "like");
+            cookie.setMaxAge(0);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+
+            return 0;
+        }
     }
 }

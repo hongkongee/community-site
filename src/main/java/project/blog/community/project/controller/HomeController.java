@@ -1,11 +1,15 @@
 package project.blog.community.project.controller;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.WebUtils;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.request.ReportRequestDTO;
 import project.blog.community.project.dto.request.RpsRequestDTO;
@@ -48,7 +52,9 @@ public class HomeController {
         List<BoardListResponseDTO> dtoList = boardService.getList();
 
         model.addAttribute("bList", dtoList);
-        log.info(dtoList.toString());
+
+        // 로그인 정보 가져오기
+
 
         // /WEB-INF/views/~~~~~.jsp
         return "home/all";
@@ -69,11 +75,19 @@ public class HomeController {
 
     // 홈페이지 - 게시글 상세 페이지 view
     @GetMapping("/detail/{bno}")
-    public String detail(@PathVariable("bno") int bno, Model model) {
+    public String detail(@PathVariable("bno") int bno,  HttpServletRequest request, Model model) {
         log.info("/home/detail/{}: GET", bno);
         BoardDetailResponseDTO dto = boardService.getDetail(bno);
 
         model.addAttribute("b", dto);
+
+        Cookie c = WebUtils.getCookie(request, "like");
+
+        if (c != null) { // 이미 좋아요를 눌렀다면
+            model.addAttribute("l", 1);
+        } else { // 좋아요를 누르지 않았다면
+            model.addAttribute("l", 0);
+        }
 
         // /WEB-INF/views/~~~~~.jsp
         return "home/detail";
@@ -98,14 +112,17 @@ public class HomeController {
     // 좋아요 수 바꾸기
     @PostMapping("/detail/like")
     @ResponseBody
-    public ResponseEntity<String> report(@RequestBody LikeRequestDTO dto) {
+    public ResponseEntity<Integer> report(@RequestBody LikeRequestDTO dto,
+                                          HttpServletRequest request,
+                                          HttpServletResponse response) {
         log.info("/home/detail/like: POST: {}, {}", dto.getBno(), dto.getNumber());
 
+
         // 좋아요 수 1 증가 또는 1 감소시키기
-        boardService.changeLike(dto);
+        int isCookie = boardService.changeLike(dto, request, response);
 
 
-        return ResponseEntity.ok().body("좋아요 수 변경");
+        return ResponseEntity.ok().body(isCookie);
 
     }
 

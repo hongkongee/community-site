@@ -234,3 +234,8 @@
         margin-left: 15px;
         cursor: pointer;
       }
+
+      .highlight {
+        font-weight: 700;
+        color: #cce37a;
+      }

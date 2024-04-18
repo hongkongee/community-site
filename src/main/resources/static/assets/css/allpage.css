@@ -31,6 +31,7 @@ table {
     width: 100%;   
     border-collapse: separate; /* Ensure that borders are collapsed separately */
     border-spacing: 10px; /* Adjust the spacing between columns */
+    font-size: 16px;
 }
 
 table thead.head-wrapper tr {
@@ -39,23 +40,27 @@ table thead.head-wrapper tr {
 }
 
 table tr.post td#bno {
-    width: 10%;
+    width: 9%;
+}
+
+table tr.post td#category {
+    width: 11%;
 }
 
 table tr.post td#title {
-    width: 35%;
+    width: 33%;
 }
 
 table tr.post td#writer {
-    width: 17%;
+    width: 15%;
 }
 
 table tr.post td#date {
-    width: 28%;
+    width: 24%;
 }
 
 table tr.post td#view {
-    width: 10%;
+    width: 8%;
 }
 
 

@@ -1,6 +1,7 @@
 package project.blog.community.project.dto.request;
 
 import lombok.*;
+import project.blog.community.project.mapper.UserMapper;
 
 import java.util.List;
 
@@ -10,7 +11,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ClaimRequestDTO {
+public class ReportRequestDTO {
+    
+    private int bno; // 신고된 게시글 번호
+    private String writer; // 신고된 게시글의 작성자
     private String message; // 신고 기타 사유
     private List<String> interests; // 신고 사유 체크박스 배열
 }

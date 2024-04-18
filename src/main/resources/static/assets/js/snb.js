@@ -55,6 +55,37 @@
       $userInformation.style.display = 'none';
     }
 
+    // 텍스트의 디자인을 바꾸는 함수.
+    function checkPresentPage() {
+      const presentPage = window.location.href // 현재 페이지가
+      console.log('현재 페이지: ', presentPage);
+
+      if (presentPage.includes("/home/main")) { // 메인 페이지라면
+        document.getElementById('home').firstChild.classList.add('highlight');
+
+      } else if (presentPage.includes("/home/all")) { // 또는 전체 게시판 페이지라면
+        document.getElementById('all').firstChild.classList.add('highlight');
+
+      } else if (presentPage.includes("/home/rps")) { // 또는 가위바위보 페이지라면
+        document.getElementById('game').firstChild.classList.add('highlight');
+      } else {
+        console.log('아무것도 적용이 안됨');
+      }
+    }
+
+
+
+    // 즉시실행함수
+    (() => {
+
+      // 현재 페이지에 따라 메뉴 텍스트의 디자인을 바꾸는 함수.
+      checkPresentPage();
+        
+      
+    })();
+
+    
+
 
 
 

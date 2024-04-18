@@ -25,7 +25,6 @@ public class UserController {
    private final UserService userService;
    private final MailSenderService mailSenderService;
 
-
    @GetMapping("/sign-up")
    public void signUp() {
       log.info("/users/sign-up: GET!!");
@@ -106,7 +105,7 @@ public class UserController {
       // 세션 전체 무효화 (초기화)
       session.invalidate();
 
-      return "redirect:/";
+      return "redirect:/home/main";
 
    }
 

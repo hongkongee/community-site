@@ -16,6 +16,8 @@ public interface UserMapper {
    // 중복 체크
    boolean isDuplicate(@Param("type") String type, @Param("keyword") String keyword);
 
+   // 신고 횟수 1 증가
+   void updateReport(String accountNumber);
 }
 
 

@@ -13,6 +13,7 @@ CREATE TABLE tbl_user (
    birthday int NOT NULL,
    gender VARCHAR(20) NOT NULL,
    nickname VARCHAR(45) NOT NULL,
+   report int DEFAULT 0,
 
    CONSTRAINT pk_member PRIMARY KEY (account_number)
 );
@@ -51,6 +52,9 @@ public class User {
 
    // 회원 생일(year)
    private int birthday;
+
+   // 신고 횟수
+   private int report;
 
    // 쿠키
    private String sessionId;

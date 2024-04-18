@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
 
+    <!-- header css jsp -->
+    <%@ include file="../include/headcss.jsp" %>
+
     <link rel="stylesheet" href="/assets/css/common.css">
 
     <style>
@@ -72,7 +75,7 @@
             justify-content: center;
         }
 
-        img {
+        .social-btn img {
             width: 183px;
             height: 45px;
             margin-top: 20px;
@@ -122,6 +125,9 @@
 </head>
 
 <body>
+
+    <!-- 헤더 -->
+    <%@ include file="../include/header.jsp" %>
 
     <c:if test="${login != null}">
         <script>

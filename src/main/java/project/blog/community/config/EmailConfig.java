@@ -42,6 +42,7 @@ public class EmailConfig {
         javaMailProperties.put("mail.smtp.starttls.required", starttlsRequired);
         javaMailProperties.put("mail.debug", "true");//디버깅 정보 출력
 
+
         mailSender.setJavaMailProperties(javaMailProperties);//mailSender에 우리가 만든 properties 넣고
 
         return mailSender;//빈으로 등록한다.

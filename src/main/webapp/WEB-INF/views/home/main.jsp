@@ -8,7 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Page</title>
 
+    
     <%@ include file="../include/static-head.jsp" %>
+    <link rel="stylesheet" href="/assets/css/header.css">
 
     <link rel="stylesheet" href="/assets/css/mainpage.css" >
     <link rel="stylesheet" href="/assets/css/snb.css" >
@@ -17,8 +19,11 @@
   </head>
   <body>
   
+    <!-- 헤더 -->
+    <%@ include file="../include/header.jsp" %>
     <!-- 사이드바 -->
     <%@ include file="../include/snb.jsp" %>
+
 
 
     <!-- center 영역 -->

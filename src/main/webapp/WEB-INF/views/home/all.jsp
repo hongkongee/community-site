@@ -9,12 +9,18 @@
 
     <%@ include file="../include/static-head.jsp" %>
 
+    <!-- header css -->
+    <link rel="stylesheet" href="/assets/css/header.css" >
+
     <link rel="stylesheet" href="/assets/css/allpage.css" >
     <link rel="stylesheet" href="/assets/css/snb.css" >
 
 
 </head>
 <body>
+
+    <!-- 헤더 -->
+    <%@ include file="../include/header.jsp" %>
 
     <!-- 사이드바 -->
     <%@ include file="../include/snb.jsp" %>
@@ -35,6 +41,7 @@
               <thead class="head-wrapper"> <!-- 게시판 헤드 -->
                 <tr>
                   <th>글번호</th>
+                  <th>카테고리</th>
                   <th>제목</th>
                   <th>작성자</th>
                   <th>작성일</th>
@@ -46,56 +53,35 @@
               
     
               <tbody>
+
+                <c:forEach var="b" items="${bList}">
+                  <div class="one-board">
+                    <tr class="post"> <!-- 게시글 하나 -->
+                      <td id="bno">${b.bno}</td>
+                      <td id="category">${b.category}</td>
+                      <td id="title"> <a href="#" data-bno="${b.bno}"> ${b.title} </a></td> <!-- 게시글 페이지로-->
+                      <td id="writer"> <a href="#">${b.writer}</a></td> <!-- 유저 정보 페이지 -->
+                      <td id="date">${b.regDate}</td>
+                      <td id="view">${b.viewCount}</td>
+                    </tr>
+
+                  </div>
+
+
+                </c:forEach>
     
             
-                <tr class="post"> <!-- 게시글 하나 -->
-                  <td id="bno">1</td>
-                  <td id="title"> <a href="#"> Sample Post 1 </a></td> <!-- 게시글 페이지로-->
-                  <td id="writer"> <a href="#">김춘식</a></td> <!-- 유저 정보 페이지 -->
-                  <td id="date">2024-04-15</td>
-                  <td id="view">100</td>
-                </tr>
                 
                 
-                <tr class="post"> <!-- 게시글 하나 -->
+                
+                <!-- <tr class="post"> 
                   <td id="bno">2</td>
                   <td id="title"> <a href="#"> Sample Post 2 </a></td>
                   <td id="writer"><a href="#">홍길동</a></td></td>
                   <td id="date">2024-04-15</td>
                   <td id="view">100</td>
-                </tr>
+                </tr> -->
     
-                <tr class="post"> <!-- 게시글 하나 -->
-                  <td id="bno">3</td>
-                  <td id="title"> <a href="#"> Sample Post 3 </a></td>
-                  <td id="writer"><a href="#">김춘식</a></td>
-                  <td id="date">2024-04-15</td>
-                  <td id="view">100</td>
-                </tr>
-    
-                <tr class="post"> <!-- 게시글 하나 -->
-                  <td id="bno">4</td>
-                  <td id="title"> <a href="#"> Sample Post 4 </a></td>
-                  <td id="writer"><a href="#">김춘식</a></td>
-                  <td id="date">2024-04-15</td>
-                  <td id="view">100</td>
-                </tr>
-    
-                <tr class="post"> <!-- 게시글 하나 -->
-                  <td id="bno">5</td>
-                  <td id="title"> <a href="#"> Sample Post 5 </a></td>
-                  <td id="writer"><a href="#">김춘식</a></td>
-                  <td id="date">2024-04-15</td>
-                  <td id="view">100</td>
-                </tr>
-    
-                <tr class="post"> <!-- 게시글 하나 -->
-                  <td id="bno">6</td>
-                  <td id="title"> <a href="#"> Sample Post 6 </a></td>
-                  <td id="writer"><a href="#">김춘식</a></td>
-                  <td id="date">2024-04-15</td>
-                  <td id="view">100</td>
-                </tr>
     
     
                 
@@ -161,6 +147,27 @@
     
     
     </div> <!-- wrapper end -->
+
+    <script>
+
+
+      const $tbody = document.querySelector('tbody');
+
+      // 게시물 상세 조회
+      $tbody.addEventListener('click', e => {
+
+        console.log('이벤트 타겟: ', e.target);
+
+        if (e.target.matches('#title a')) {
+          const bno = e.target.dataset.bno;
+          console.log('bno: ', bno);
+          window.location.href = '/home/detail/' + bno;
+        }
+
+      });
+
+
+    </script>
 
     
 </body>

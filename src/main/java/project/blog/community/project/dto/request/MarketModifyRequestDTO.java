@@ -15,6 +15,7 @@ import project.blog.community.project.entity.Reply;
 
 public class MarketModifyRequestDTO {
 
+
     @NotNull
     private int bno;
 
@@ -25,6 +26,7 @@ public class MarketModifyRequestDTO {
 
     public Market toEntity(){
         return Market.builder()
+                .boardNo(bno)
                 .textContent(text)
                 .build();
     }

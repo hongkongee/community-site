@@ -13,10 +13,8 @@ import project.blog.community.project.service.MarketService;
 
 @Controller
 @RequestMapping("/market")
-@Slf4j
 @RequiredArgsConstructor
-
-
+@Slf4j
 public class MarketController {
     private final MarketService marketService;
 

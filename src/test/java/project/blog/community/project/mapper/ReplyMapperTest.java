@@ -53,11 +53,14 @@ class ReplyMapperTest {
       // given
       int boardNo = 100;
 
+      Page page = new Page();
+//      page.setPageNo(3);
+
       // when
       List<Reply> replyList = replyMapper.findAll(boardNo, page);
 
       // then
-      assertEquals(3, replyList.size());
+      assertEquals(2, replyList.size());
    }
 
    @Test

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.request.ReportRequestDTO;
@@ -124,6 +125,34 @@ public class HomeController {
 
         return ResponseEntity.ok().body(isCookie);
 
+    }
+
+    // 글쓰기 페이지 view
+    @GetMapping("/write")
+    public String writeBoard(Model model) {
+        log.info("/home/write: GET");
+
+
+        // /WEB-INF/views/~~~~~.jsp
+        return "home/write";
+    }
+    
+    // 글쓰기 제출 페이지
+    @PostMapping("/write")
+    public String writeSubmit(@RequestParam("category") String category,
+                              @RequestParam("title") String title,
+                              @RequestParam("content") String content,
+                              @RequestParam("file") MultipartFile file) {
+        log.info("/home/write: POST, {}, {}, {}", category, title, content);
+        log.info("file-name: {}", file.getOriginalFilename());
+        log.info("file-size: {}KB", file.getSize() / 1024.0); // getSize()는 MB 단위
+        log.info("file-type: {}", file.getContentType());
+
+        // 세션에서 자신의 account 가져오기
+
+        // board에 게시글 저장하기: writer, title, content, file-image, category
+
+        return "home/all";
     }
 
     // 홈페이지 - 가위바위보 view

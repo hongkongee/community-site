@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import project.blog.community.project.common.Page;
 import project.blog.community.project.entity.Board;
 import project.blog.community.project.entity.Reply;
 
@@ -18,6 +19,7 @@ class ReplyMapperTest {
    BoardMapper boardMapper;
    @Autowired
    ReplyMapper replyMapper;
+
 
    @Test
    @DisplayName("게시물을 100개 등록하고, 랜덤으로 100개의 댓글을 게시글에 등록한다.")
@@ -52,7 +54,7 @@ class ReplyMapperTest {
       int boardNo = 100;
 
       // when
-      List<Reply> replyList = replyMapper.findAll(boardNo);
+      List<Reply> replyList = replyMapper.findAll(boardNo, page);
 
       // then
       assertEquals(3, replyList.size());

@@ -33,6 +33,8 @@ public class Reply {
    private String replyWriter;
    private String content;
    private LocalDateTime replyDate;
+   private LocalDateTime updateDate;
+
 
 }
 

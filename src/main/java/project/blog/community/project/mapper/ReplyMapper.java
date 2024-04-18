@@ -1,6 +1,8 @@
 package project.blog.community.project.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import project.blog.community.project.common.Page;
 import project.blog.community.project.entity.Reply;
 
 import java.util.List;
@@ -21,12 +23,10 @@ public interface ReplyMapper {
    Reply findOne(int replyNo);
 
    // 댓글 전체 목록 조회
-   List<Reply> findAll(int boardNo);
+   List<Reply> findAll(@Param("bn") int boardNo, @Param("p") Page page);
 
    // 댓글 총 개수 조회
    int count(int boardNo);
-
-
 
 
 }

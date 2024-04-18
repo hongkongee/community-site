@@ -15,8 +15,28 @@ import static project.blog.community.project.entity.Category.*;
 @SpringBootTest
 class BoardMapperTest {
 
-   @Autowired
-   BoardMapper boardMapper;
+
+    @Autowired
+    BoardMapper boardMapper;
+/*
+
+    @Test
+    @DisplayName("카테고리에 따른 게시물 조회")
+    void findCategoryTest() {
+        // given
+        String category = "game";
+        List<Board> normalList = boardMapper.findCategory(category);
+
+        for (Board board : normalList) {
+            System.out.println(board.toString());
+        }
+        // when
+
+        // then
+    }
+*/
+
+
 
    @Test
    @DisplayName("게시물 등록하기")
@@ -47,26 +67,30 @@ class BoardMapperTest {
 //        System.out.println(board.toString());
 //        assertNotNull(board);
 
-   }
 
-   @Test
-   @DisplayName("모든 게시글 조회")
-   void findAllTest() {
-      // given
+    }
+
+    @Test
+    @DisplayName("모든 게시글 조회")
+    void findAllTest() {
+        // given
+
 //        List<Board> boardList = boardMapper.findAll();
 //
 //        // when
 //        assertEquals(boardList.size(), 2);
 
-      // then
-   }
 
-   @Test
-   @DisplayName("게시글 더미데이터 생성")
-   void dummyBoardTest() {
-      // given
+        // then
+    }
 
-      // 100개의 게시물 생성
+    @Test
+    @DisplayName("게시글 더미데이터 생성")
+    void dummyBoardTest() {
+        // given
+
+        // 100개의 게시물 생성
+
 /*        for (int i = 0; i < 100; i++) {
             Board board = Board.builder()
                     .title(i + 4 + "번째 게시물 제목")
@@ -75,12 +99,16 @@ class BoardMapperTest {
                     .category(i % 2 == 0 ? NORMAL : GAME)
                     .build();
 
-            boardMapper.save(board);*/
-//        }
+
+            boardMapper.save(board);
+        }*/
 
 
-      // when
+        // when
 
-      // then
-   }
+        // then
+    }
 }
+
+
+

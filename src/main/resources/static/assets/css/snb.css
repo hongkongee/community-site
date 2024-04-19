@@ -22,13 +22,10 @@
         width: 20vw;
         background: #7AA2E3;
         color: #666;
-        
         padding: 30px 30px;
-        height: 100vh; /* 상하방향으로 화면 가득히 */
-  
-        position: fixed;
-        top: 0;
-  
+        height: 300vh; /* 상하방향으로 화면 가득히 */
+        position: absolute;
+        top: 100px;
         /* transition: 0.8s; */
       }
       aside .left-snb ul>li {
@@ -73,14 +70,14 @@
       /* ========================== 오른쪽 사이드바 ============================== */
   
       aside .right-snb {
+        position: absolute;
+        right: 0;
+        top: 100px;
         width: 20vw;
         background: #7AA2E3;
         float: right;
         height: 300vh;
         box-sizing: border-box;
-  
-  
-  
       }
   
       aside .right-snb .point {

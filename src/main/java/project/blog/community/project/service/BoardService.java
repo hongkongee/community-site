@@ -1,5 +1,6 @@
 package project.blog.community.project.service;
 
+
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import org.springframework.web.util.WebUtils;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
 import project.blog.community.project.dto.response.BoardListResponseDTO;
+import project.blog.community.project.dto.response.BoardMyListResponseDTO;
 import project.blog.community.project.entity.Board;
 import project.blog.community.project.entity.Category;
 import project.blog.community.project.entity.User;

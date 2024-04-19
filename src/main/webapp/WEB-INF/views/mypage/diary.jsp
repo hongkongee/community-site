@@ -20,6 +20,9 @@
 
 <body>
 
+    <%@ include file="../include/headcss.jsp"%>
+    <%@ include file="../include/header.jsp"%>
+
     <div class="MydiaryJsp">
         <div class="Frame45">
 

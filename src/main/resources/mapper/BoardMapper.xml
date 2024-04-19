@@ -55,11 +55,18 @@
         WHERE bno = #{bno}
     </update>
 
+    <select id="findMyList" resultType="board">
+        SELECT * FROM tbl_board
+        WHERE writer = #{myAccount}
+        ORDER BY bno DESC
+    </select>
+
     <update id="updateLikeCount">
         UPDATE tbl_board
         SET like_count = like_count + #{number}
         WHERE bno = #{bno}
     </update>
+
 
 
 

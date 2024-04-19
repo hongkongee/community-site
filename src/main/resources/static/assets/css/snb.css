@@ -197,12 +197,12 @@
       aside .right-snb .friends #user-information>ul {
         margin-top: 30%;
         display: flex;
-        flex-flow: row wrap;
-        align-content: flex-end;
+        flex-direction: row;
+        justify-content: space-evenly;
       }
   
   
-      aside .right-snb .friends #user-information>ul>li#my-page::before {
+      /* aside .right-snb .friends #user-information>ul>li#my-page::before {
         content: '\f015'; 
         font-family:"Font Awesome 5 Free";
         font-weight:600;
@@ -227,7 +227,7 @@
         margin-right: 15px;
         margin-left: 15px;
         cursor: pointer;
-      }
+      } */
 
       .highlight {
         font-weight: 700;

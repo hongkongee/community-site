@@ -27,7 +27,7 @@ public interface UserMapper {
    User findMemberByCookie(String sessionId);
 
 
-
+    void findUserByFollower(String currentLoginMemberAccount);
 }
 
 

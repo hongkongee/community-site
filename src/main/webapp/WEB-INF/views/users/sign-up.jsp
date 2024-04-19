@@ -373,7 +373,7 @@
         };
 
         // 닉네임 검사 정규표현식
-        const nickPattern = /^[가-힣]+$/;
+        const nickPattern = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
         // 닉네임 입력값 검증
         const $nickInput = document.getElementById('user_nickname');
         $nickInput.onkeyup = e => {

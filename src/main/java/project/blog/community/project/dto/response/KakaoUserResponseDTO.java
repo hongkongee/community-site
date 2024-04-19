@@ -18,6 +18,9 @@ public class KakaoUserResponseDTO {
 
     private Properties properties; // 직접 생성한 Properties 클래스
 
+    @JsonProperty("kakao_account")
+    private KakaoAccount kakaoAccount; // 직접 생성한 KakaoAccount 클래스
+
     @Setter @Getter @ToString
     public static class Properties {
 
@@ -27,6 +30,11 @@ public class KakaoUserResponseDTO {
         @JsonProperty("thumbnail_image")
         private String thumbnailImage;
 
+    }
+
+    @Setter @Getter @ToString
+    public static class KakaoAccount {
+        private String email;
     }
 
 

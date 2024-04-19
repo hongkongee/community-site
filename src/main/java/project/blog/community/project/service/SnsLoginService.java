@@ -1,6 +1,8 @@
 package project.blog.community.project.service;
 
 
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -10,26 +12,50 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import project.blog.community.project.dto.request.SignUpRequestDto;
+import project.blog.community.project.dto.response.KakaoUserResponseDTO;
 
 import java.util.Map;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class SnsLoginService {
+
+    private final UserService userService;
     
     // 카카오 로그인 처리
-    public void kakaoLogin(Map<String, String> params) {
+    public void kakaoLogin(Map<String, String> params, HttpSession session) {
 
         String accessToken = getKakaoAccessToken(params);
         log.info("access_token: {}", accessToken);
         
         // 전달받은 엑세스 토큰을 활용하여 사용자의 정보 가져오기
-        getKakaoUserInfo(accessToken);
-        
-        
+        KakaoUserResponseDTO dto = getKakaoUserInfo(accessToken);
+
+        // 카카오에서 받은 회원정보로 우리 사이트 회원가입
+        String email = dto.getKakaoAccount().getEmail();
+        log.info("이메일: {}", email);
+
+        // 회원 중복 확인 (이메일)
+        if (!userService.checkDuplicateValue("email", email)) {
+            // 한 번도 카카오 로그인을 한 적이 없다면 회원가입 진행
+            userService.join(
+                    SignUpRequestDto.builder()
+                            .accountNumber(String.valueOf(dto.getId()))
+                            .password("0000")
+                            .name(dto.getProperties().getNickname())
+                            .email(email)
+                            .build() // 프로필사진 값 안불러옴. 불러와야 함!!
+            );
+        }
+
+        // 우리 사이트 로그인 처리
+        userService.maintainLoginState(session, String.valueOf(dto.getId()));
+
     }
 
-    private void getKakaoUserInfo(String accessToken) {
+    private KakaoUserResponseDTO getKakaoUserInfo(String accessToken) {
 
         String requestUri = "https://kapi.kakao.com/v2/user/me";
 
@@ -40,15 +66,17 @@ public class SnsLoginService {
 
         // 요청 보내기
         RestTemplate template = new RestTemplate();
-        ResponseEntity<Map> responseEntity = template.exchange(
+        ResponseEntity<KakaoUserResponseDTO> responseEntity = template.exchange(
                 requestUri,
                 HttpMethod.POST,
                 new HttpEntity<>(headers),
-                Map.class
+                KakaoUserResponseDTO.class
         );
 
-        Map<String, Object> responseJSON = (Map<String, Object>) responseEntity.getBody();
+        KakaoUserResponseDTO responseJSON = responseEntity.getBody();
         log.info("응답 데이터 결과 : {}", responseJSON);
+
+        return responseJSON;
 
     }
 

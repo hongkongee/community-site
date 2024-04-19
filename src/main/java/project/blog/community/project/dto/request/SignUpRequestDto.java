@@ -5,7 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import project.blog.community.project.entity.Gender;
+import org.springframework.web.multipart.MultipartFile;
+import project.blog.community.project.entity.LoginMethod;
 import project.blog.community.project.entity.User;
 
 @Setter @Getter @ToString
@@ -41,6 +42,11 @@ public class SignUpRequestDto {
    @Size(min = 2, max = 8)
    private String nickname;
 
+   // 프로필 사진 이미지
+   private MultipartFile profilePicture;
+
+   private LoginMethod loginMethod;
+
    public User toEntity(PasswordEncoder encoder) {
       return User.builder()
             .accountNumber(accountNumber)
@@ -48,8 +54,10 @@ public class SignUpRequestDto {
             .name(name)
             .email(email)
             .birthday(birthday)
-            .gender(gender.equals("Male") ? Gender.MALE : Gender.FEMALE)
+            .gender(gender)
             .nickname(nickname)
+            .profilePicture(null) // 나중에 경로 넣어야 함
+            .loginMethod(loginMethod)
             .build();
    }
 

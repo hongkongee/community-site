@@ -15,4 +15,6 @@ public interface MarketMapper {
 
     List<Market> findAll();
     void updateViewCount(int boardNo);
+
+    Market findOne(int boardNo);
 }

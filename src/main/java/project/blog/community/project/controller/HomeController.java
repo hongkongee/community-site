@@ -57,9 +57,9 @@ public class HomeController {
     @GetMapping("/detail/{bno}")
     public String detail(@PathVariable("bno") int bno, Model model) {
         log.info("/home/detail/{}: GET", bno);
-        BoardDetailResponseDTO dto = boardService.getDetail(bno);
+        BoardDetailResponseDTO dtoDetail = boardService.getDetail(bno);
 
-        model.addAttribute("b", dto);
+        model.addAttribute("b", dtoDetail);
 
         // /WEB-INF/views/~~~~~.jsp
         return "home/detail";

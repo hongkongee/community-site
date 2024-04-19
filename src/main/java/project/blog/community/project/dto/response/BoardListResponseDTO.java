@@ -24,6 +24,8 @@ public class BoardListResponseDTO {
     private final String regDate;
     private final int viewCount;
 
+    private final String postImg;
+
     // entity를 dto로 바꾸는 생성자
     public BoardListResponseDTO(Board board, String nickname) {
         this.bno = board.getBno();
@@ -32,6 +34,7 @@ public class BoardListResponseDTO {
         this.writer = nickname;
         this.regDate = makePrettierDateString(board.getRegDate());
         this.viewCount = board.getViewCount();
+        this.postImg = board.getPostImg();
     }
 
 

@@ -83,7 +83,12 @@
     
         <hr>
     
-        
+        <div id="board-img">
+          <c:if test="${b.postImg != null}">
+            <img src="/display${b.postImg}" alt="업로드 이미지">
+          </c:if>
+
+        </div>
     
         <!-- <label for="content">내용</label> -->
         <div id="content">${b.content}</div>

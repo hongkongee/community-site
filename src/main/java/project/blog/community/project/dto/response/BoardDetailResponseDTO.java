@@ -27,6 +27,7 @@ public class BoardDetailResponseDTO {
     private final int likeCount;
 
     private final String content;
+    private final String postImg;
 
     public BoardDetailResponseDTO(Board board, String nickname) {
         this.bno = board.getBno();
@@ -37,6 +38,7 @@ public class BoardDetailResponseDTO {
         this.viewCount = board.getViewCount();
         this.content = board.getContent();
         this.likeCount = board.getLikeCount();
+        this.postImg = board.getPostImg();
     }
 
     private String makeDateString(LocalDateTime regDate) {

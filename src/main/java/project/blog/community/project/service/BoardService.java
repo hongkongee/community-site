@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
@@ -115,22 +114,20 @@ public class BoardService {
         }
     }
 
-    public void saveBoard(String category, String title, String content, MultipartFile file, String writer) {
+    // 게시글 업로드
+    public void saveBoard(String category, String title, String content, String filePath, String writer) {
 
 
-        
-        Board.builder()
+        Board uploadedBoard = Board.builder()
                 .category(stringToCategory(category))
-                        .title(title)
-                                .content(content)
-                                        .writer(writer)
-                                                .postImg(file)
-                                                        .build();
+                .title(title)
+                .content(content)
+                .writer(writer)
+                .postImg(filePath)
+                .build();
 
 
-
-
-        boardMapper.save();
+        boardMapper.save(uploadedBoard);
     }
 
     // 문자열을 Category 타입으로 바꾸는 메서드

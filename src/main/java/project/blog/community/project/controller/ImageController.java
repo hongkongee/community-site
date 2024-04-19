@@ -26,6 +26,7 @@ public class ImageController {
     @Value("${file.upload.root-path}")
     private String rootPath;
 
+    // 이미지 출력하기
     @GetMapping("/{y}/{m}/{d}/{fileName}")
     public ResponseEntity<?> displayImage(
             @PathVariable String y,

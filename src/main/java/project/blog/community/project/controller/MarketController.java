@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import project.blog.community.project.common.marketSearch;
 import project.blog.community.project.dto.request.MarketModifyRequestDTO;
 import project.blog.community.project.dto.request.MarketWriteRequestDTO;
+import project.blog.community.project.dto.response.MarketDetailResponse;
 import project.blog.community.project.dto.response.MarketListResponseDTO;
 import project.blog.community.project.dto.response.MarketModifyResponse;
 import project.blog.community.project.entity.Reply;
@@ -47,7 +48,8 @@ public class MarketController {
         List<MarketListResponseDTO> dtoList = marketService.getList();
         log.info("dtoList: {}", dtoList);
 
-        model.addAttribute("bList", dtoList);
+        //정보를 jsp로 전달 -> key-value 형태로 데이터를 추가
+//        model.addAttribute("bList", dtoList);
 
 
         // /WEB-INF/views/~~~~~.jsp
@@ -68,6 +70,15 @@ public class MarketController {
         return "redirect:/market/list";
 
 
+    }
+
+    @GetMapping("/detail/{boardNo}")
+    public String detail(@PathVariable("boardNo") int boardNo, Model model){
+        log.info("/market/detail/{}: GET", boardNo);
+        MarketDetailResponse dto = marketService.getDetail(boardNo);
+
+        model.addAttribute("b", dto);
+        return "market/MarketDetail";
     }
 
 

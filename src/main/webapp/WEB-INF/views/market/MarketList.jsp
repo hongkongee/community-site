@@ -50,10 +50,10 @@
               <c:forEach var="s" items="${bList}">
                 <tr class="post"> <!-- 게시글 하나 -->
                   <td id="bno">${s.boardNo}</td>
-                  <td id="textTitle"> <a href="#"> ${s.textTitle} </a></td>
-                  <td id="textWriter"> <a href="#">${s.textWriter}</a></td>
-                  <td id="updateDate"> <a href="#">${s.updateDate}</a></td>
-                  <td id="viewCount"> <a href="#"> ${s.viewCount}</a></td>
+                  <td id="textTitle"> <a href="/market/detail/${s.boardNo}"> ${s.textTitle} </a></td>
+                  <td id="textWriter">${s.textWriter}</td>
+                  <td id="updateDate">${s.updateDate}</td>
+                  <td id="viewCount"> ${s.viewCount}</td>
                 
 
                   <!-- <td id="view">100</td> -->

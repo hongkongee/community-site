@@ -15,10 +15,18 @@
     </insert>
 
 
-    <select id = "findAll" resultType="market"> <!-- resultType 원래는 풀 경로이나, mybatis-config.xml에서 메서드화해서 줄임 // select 리턴 타입 설정 resultType, Board만 적음됨 List<Board> XXX @@-->
+    <select id = "findAll" resultType="market">
+        <!-- resultType 원래는 풀 경로이나, mybatis-config.xml에서 메서드화해서 줄임 // select 리턴 타입 설정 -->
+        <!-- selectType은 resultType(return) 필수)-->
         SELECT * FROM tbl_market
         ORDER BY board_no DESC
     </select>
+
+    <select id = "findOne" resultType="market">
+        SELECT * FROM tbl_market
+        WHERE board_no = #{boardNo}
+    </select>
+
 
 
 

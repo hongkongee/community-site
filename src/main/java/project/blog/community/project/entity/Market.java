@@ -21,31 +21,25 @@ CREATE TABLE tbl_market (
 );
 */
 
-@Getter
+@Setter @Getter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
-
 public class Market{
 
-    @Setter
     private int boardNo;
 
-    @Setter
     private String textWriter;
 
-    @Setter
     private LocalDateTime updateDate;
 
-    @Setter
     private String textTitle;
 
     private int rate;
 
-    @Setter //원하는 필드에만 Setter 생성
+    //@Setter //원하는 필드에만 Setter 생성
     private String textContent;
 
     private int price;
@@ -65,6 +59,9 @@ public class Market{
         this.updateDate = dto.getUpdateDate();
         this.viewCount = dto.getViewCount();
     }
+
+
+
 }
 
 

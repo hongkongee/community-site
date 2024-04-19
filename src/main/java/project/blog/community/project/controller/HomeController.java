@@ -78,9 +78,9 @@ public class HomeController {
     @GetMapping("/detail/{bno}")
     public String detail(@PathVariable("bno") int bno,  HttpServletRequest request, Model model) {
         log.info("/home/detail/{}: GET", bno);
-        BoardDetailResponseDTO dto = boardService.getDetail(bno);
+        BoardDetailResponseDTO dtoDetail = boardService.getDetail(bno);
 
-        model.addAttribute("b", dto);
+        model.addAttribute("b", dtoDetail);
 
         Cookie c = WebUtils.getCookie(request, "like");
 

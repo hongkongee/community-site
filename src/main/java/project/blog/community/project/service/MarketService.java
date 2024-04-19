@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import project.blog.community.project.common.marketSearch;
 import project.blog.community.project.dto.request.MarketModifyRequestDTO;
 import project.blog.community.project.dto.request.MarketWriteRequestDTO;
+import project.blog.community.project.dto.response.MarketDetailResponse;
 import project.blog.community.project.dto.response.MarketListResponseDTO;
+import project.blog.community.project.entity.Board;
 import project.blog.community.project.entity.Market;
 import project.blog.community.project.mapper.MarketMapper;
 
@@ -44,5 +46,11 @@ public class MarketService {
 //        market.setTextWriter(MarketUtils.getCurrentLoginMemberAccount(session));
         mapper.save(market);
 
+    }
+
+    public MarketDetailResponse getDetail(int boardNo) {
+        mapper.updateViewCount(boardNo);
+        Market market = mapper.findOne(boardNo);
+        return new MarketDetailResponse(market);
     }
 }

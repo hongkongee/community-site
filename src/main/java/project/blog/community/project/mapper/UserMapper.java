@@ -3,7 +3,10 @@ package project.blog.community.project.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import project.blog.community.project.dto.request.AutoLoginDTO;
+import project.blog.community.project.entity.Follow;
 import project.blog.community.project.entity.User;
+
+import java.util.List;
 
 @Mapper
 public interface UserMapper {
@@ -26,8 +29,11 @@ public interface UserMapper {
    // 쿠키값(세션아이디)으로 회원정보를 조회
    User findMemberByCookie(String sessionId);
 
+   // 내가 팔로우한 유저 찾기
+   List<Follow> findUserByFollower(String currentLoginMemberAccount);
 
-    void findUserByFollower(String currentLoginMemberAccount);
+   // 팔로우 추가하기
+   void addFollower(@Param("me") String currentLoginMemberAccount, @Param("you") String followerAccount);
 }
 
 

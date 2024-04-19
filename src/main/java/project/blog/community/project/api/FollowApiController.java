@@ -22,7 +22,7 @@ public class FollowApiController {
 
     private final FollowingService followingService;
 
-    @GetMapping("")
+/*    @GetMapping("")
     public ResponseEntity<?> list(HttpServletRequest request) {
         log.info("api/v1/follow: GET!!!");
 
@@ -31,5 +31,5 @@ public class FollowApiController {
         followingService.getFollowingList(request);
 
         return ResponseEntity.ok().body();
-    }
+    }*/
 }

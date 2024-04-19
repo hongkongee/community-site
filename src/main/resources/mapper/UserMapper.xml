@@ -46,4 +46,16 @@
         WHERE session_id = #{sessionId}
     </select>
 
+    <select id="findUserFollower" resultType="follow">
+        SELECT *
+        FROM tbl_follow
+        WHERE following = #{currentLoginMemberAccount}
+    </select>
+
+    <insert id="addFollower">
+        INSERT INTO tbl_follow
+        VALUES
+        (#{me}, #{you})
+    </insert>
+
 </mapper>

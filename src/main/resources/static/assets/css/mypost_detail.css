@@ -1,0 +1,125 @@
+m * {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Orbit", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  background: #7AA2E3;
+  
+}
+
+.MypostcubeJsp {
+  width: 100%;
+  height: 100%;
+  background: #7AA2E3;
+  padding: 20px;
+}
+
+.Frame42 {
+  background: #F8F6E3;
+  width: 80%;
+  border-radius: 60px;
+  margin: 10%;
+}
+
+
+/* ------------------게시글 시작----------------------- */
+section.board {
+  width: 95%;
+  margin: 25px auto;
+}
+
+section.board .board-info {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+section.board .form-container #bno {
+  font-size: 16px;
+}
+
+section.board .form-container #title {
+  font-size: 28px;
+  margin: 20px 0;
+}
+
+section.board .form-container #writer {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+section.board .left-region {
+  position: relative;
+}
+
+/* 작성자를 누르면 창이 뜬다 */
+section.board .writer-info {
+  display: none;
+  font-size: 18px;
+  width: 150px;
+  height: 130px;
+  background: #97E7E1;
+  padding: 10px;
+  position: absolute;
+  top: 75%;
+  left: 85%;
+  transform: translateX(-50%);
+  z-index: 1;
+
+}
+
+section.board .writer-info li {
+  line-height: 150%;
+}
+
+section.board .form-container #date {
+  font-size: 14px;
+}
+
+section.board .form-container .right-region {
+  font-weight: 700;
+  /* border: #000000 solid 1px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-size: 18px;
+
+}
+
+section.board .form-container #date #see-reply {
+  margin-top: 10px;
+}
+
+section.board .form-container hr {
+  margin-top: 10px;
+}
+
+
+
+section.board .form-container .buttons {
+  margin: 20px;
+  float: right;
+  font-size: 16px;
+}
+
+section.board .form-container .buttons #modify,
+section.board .form-container .buttons #delete {
+  /* 작성자만 삭제, 수정권한이 있음 */
+  display: none;
+}
+
+section.board #content {
+  font-size: 20px;
+}
+
+
+/* ========================== 댓글 영역 ================================= */
+section.reply {
+  margin-top: 100px;
+  border: blue 1px dashed;
+  font-size: 20px;
+}

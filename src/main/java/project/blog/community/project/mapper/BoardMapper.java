@@ -28,4 +28,5 @@ public interface BoardMapper {
     void updateReportCount(int bno);
 
     void updateLikeCount(@Param("bno") int bno, @Param("number") int number);
+
 }

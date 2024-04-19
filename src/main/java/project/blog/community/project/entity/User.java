@@ -14,6 +14,8 @@ CREATE TABLE tbl_user (
    gender VARCHAR(20) NOT NULL,
    nickname VARCHAR(45) NOT NULL,
    report int DEFAULT 0,
+   session_id VARCHAR(100),
+   limit_time DATETIME,
 
    CONSTRAINT pk_member PRIMARY KEY (account_number)
 );

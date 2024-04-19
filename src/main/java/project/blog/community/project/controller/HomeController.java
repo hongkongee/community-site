@@ -1,11 +1,17 @@
 package project.blog.community.project.controller;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.WebUtils;
+import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.request.ReportRequestDTO;
 import project.blog.community.project.dto.request.RpsRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
@@ -47,19 +53,42 @@ public class HomeController {
         List<BoardListResponseDTO> dtoList = boardService.getList();
 
         model.addAttribute("bList", dtoList);
-        log.info(dtoList.toString());
+
+        // 로그인 정보 가져오기
+
 
         // /WEB-INF/views/~~~~~.jsp
         return "home/all";
     }
 
+    // 카테고리에 따른 하위 게시판 목록 페이지 view
+    @GetMapping("/board/{category}")
+    public String categoryBoardList(@PathVariable("category") String category, Model model) {
+        log.info("/home/{}: GET", category);
+
+        List<BoardListResponseDTO> categoryList = boardService.getCategoryList(category);
+//        log.info(categoryList.toString());
+        model.addAttribute("bList", categoryList);
+
+        return "home/all";
+
+    }
+
     // 홈페이지 - 게시글 상세 페이지 view
     @GetMapping("/detail/{bno}")
-    public String detail(@PathVariable("bno") int bno, Model model) {
+    public String detail(@PathVariable("bno") int bno,  HttpServletRequest request, Model model) {
         log.info("/home/detail/{}: GET", bno);
         BoardDetailResponseDTO dto = boardService.getDetail(bno);
 
         model.addAttribute("b", dto);
+
+        Cookie c = WebUtils.getCookie(request, "like");
+
+        if (c != null) { // 이미 좋아요를 눌렀다면
+            model.addAttribute("l", 1);
+        } else { // 좋아요를 누르지 않았다면
+            model.addAttribute("l", 0);
+        }
 
         // /WEB-INF/views/~~~~~.jsp
         return "home/detail";
@@ -79,6 +108,51 @@ public class HomeController {
 
         return ResponseEntity.ok().body("신고 완료");
 
+    }
+
+    // 좋아요 수 바꾸기
+    @PostMapping("/detail/like")
+    @ResponseBody
+    public ResponseEntity<Integer> report(@RequestBody LikeRequestDTO dto,
+                                          HttpServletRequest request,
+                                          HttpServletResponse response) {
+        log.info("/home/detail/like: POST: {}, {}", dto.getBno(), dto.getNumber());
+
+
+        // 좋아요 수 1 증가 또는 1 감소시키기
+        int isCookie = boardService.changeLike(dto, request, response);
+
+
+        return ResponseEntity.ok().body(isCookie);
+
+    }
+
+    // 글쓰기 페이지 view
+    @GetMapping("/write")
+    public String writeBoard(Model model) {
+        log.info("/home/write: GET");
+
+
+        // /WEB-INF/views/~~~~~.jsp
+        return "home/write";
+    }
+    
+    // 글쓰기 제출 페이지
+    @PostMapping("/write")
+    public String writeSubmit(@RequestParam("category") String category,
+                              @RequestParam("title") String title,
+                              @RequestParam("content") String content,
+                              @RequestParam("file") MultipartFile file) {
+        log.info("/home/write: POST, {}, {}, {}", category, title, content);
+        log.info("file-name: {}", file.getOriginalFilename());
+        log.info("file-size: {}KB", file.getSize() / 1024.0); // getSize()는 MB 단위
+        log.info("file-type: {}", file.getContentType());
+
+        // 세션에서 자신의 account 가져오기
+
+        // board에 게시글 저장하기: writer, title, content, file-image, category
+
+        return "home/all";
     }
 
     // 홈페이지 - 가위바위보 view

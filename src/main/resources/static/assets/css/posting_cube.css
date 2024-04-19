@@ -1,180 +1,131 @@
+* {
+    box-sizing: border-box;
+    font-family: "Orbit", sans-serif;
+}
+
 body {
     font-family: "Orbit", sans-serif;
     font-weight: 400;
     font-style: normal;
-    width: 100vw;
-    height: 100vh;
     background: #7AA2E3;
-    position: relative;
-    display: flex;
-    overflow-y: auto;
-    margin: 0;
-    
 }
 
 .MypostcubeJsp {
     width: 100%;
     height: 100%;
     background: #7AA2E3;
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    min-height: 100%;
-    box-sizing: border-box;
     padding: 20px;
-
 }
 
-.MypostcubeJsp .Frame42 {
-    width: 1277px;
-    height:inherit;
-    top: 60px;
-    position: relative;
+.Frame42 {
     background: #F8F6E3;
+    width: 80%;
     border-radius: 60px;
+    margin: 10%;
 }
 
-.Frame42 .Frame39 {
-    width: 100%;
-    left: 190px;
-    top: 13px;
-    position: absolute;
-
+.main-title-wrapper {
+    position: relative;
+    top: 50px;
+    left: 10%;
 }
 
-.Frame42 .Frame39 .PostingCube {
+.main-title-wrapper .main-title {
     width: 100%;
     height: 100%;
-    left: 50px;
-    top: 11px;
-    position: absolute;
     color: black;
-    font-size: 48px;
+    font-size: 60px;
     font-weight: bold;
 }
 
-.Frame39 .Cube {
+.main-title-wrapper .Cube {
     width: 100px;
-    height: 40px;
-    left: 70%;
-    top: 50%;
+    height: 50px;
     position: absolute;
+    left: 60%;
+    top: 50%;
     color: black;
     font-size: 30px;
-    font-weight: 500;
+    font-weight: bold;
     background-color: #F8F6E3;
-    border: 5px solid #7AA2E3;
+    border: 3px solid #7AA2E3;
     border-radius: 60px;
+   
 }
 
-.Frame39 .List {
+.main-title-wrapper .List {
     width: 100px;
-    height: 40px;
-    left: 80%;
-    top: 50%;
+    height: 50px;
     position: absolute;
+    left: 70%;
+    top: 50%;
     color: black;
     font-size: 30px;
-    font-weight: 500;
+    font-weight: bold;
     background-color: #F8F6E3;
-    border: 5px solid #7AA2E3;
+    border: 3px solid #7AA2E3;
     border-radius: 60px;
+    
 }
 
 /* ================================================================= */
+
+
+.post-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10%;
+    margin-top: 30px;
+    justify-content: space-between;
+}
+
 .post-container .post-wrapper {
-    background-color: green;
     position: relative;
-    left: 130px;
-    top: 120px;
-    width: 25%;
-    /* padding: 10px 5px; */
+    width: 30%;
+    height: 350px;
     cursor: pointer;
     transition: 0.5s;
-    margin-right: 3%;
+   
 }
 
 .post-container .post {
-    width: 100%;
-    height: auto;
+    /* height: 300px; */
     transition: 0.5s;
     border: 1px solid #7AA2E3;
     display: flex;
-
-    left: 24px;
-    top: 20px;
     position: absolute;
     background: white;
     flex-wrap: wrap;
 }
 
+.post-container .post:last-child {
+    margin-right: 0;
+}
+
 .post-container .post .post-photo {
     width: 100%;
-
-    /* background-color: skyblue; */
+    height: 200px;
 }
 
 .post-container .post img {
     width: 100%;
     height: 100%;
-    display: inline-flex;
-    flex-direction: column;
-    position: relative;
 }
 
-/* ------------------------게시물 사진 넘기기 버튼 시작--------------------- */
 
-.post-container .post .post-photo>button {
-    text-align: center;
-    background: none;
-    align-items: center;
-    flex-wrap: wrap;
-
-    border: none;
-    font-size: 20px;
-
-    position: absolute;
-    top: 115px;
-    color: white;
-}
-
-.post-container .post .photo-before {
-    width: 30px;
-    height: 30px;
-    left: 5px;
-}
-
-.post-container .post .photo-next {
-    width: 30px;
-    height: 30px;
-    right: 5px;
-}
-
-/* ------------------------게시물 사진 넘기기 버튼 끝--------------------- */
-
-/* -----------------------내용 시작-------------------------- */
+/* -----------------------게시글 제목 시작-------------------------- */
 .post-container .post-wrapper .post-content {
     /* background-color: yellow; */
-
-    font-size: 20px;
-    font-family: inherit;
     padding: 15px;
     text-align: center;
-    border: 1px solid #7AA2E3;
-
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.post-content contents {
-    font-family: inherit;
-    font-size: 20px;
-    overflow-y: auto;
-}
-
 .post-container .post .post-content-wrapper {
     width: 100%;
+    background: white;
 }
 
 .post-container .post .post-content-wrapper .time-view-wrapper {
@@ -185,33 +136,36 @@ body {
     padding: 5px 10px;
 }
 
-/* -----------------------내용 & 시간 끝-------------------------- */
+/* -----------------------게시글 제목 시작-------------------------- */
 
 
 /* ----------------------댓글 & 좋아요 시작----------------------- */
 .post-container .post .post-reply {
-
     width: 100%;
     display: inline-flex;
     justify-content: space-between;
-
+    background: white;
 }
 
 .post-container .post .post-reply .reply {
-    display: inlineflex;
     justify-content: space-between;
     border: 1px solid #97E7E1;
     background: #97E7E1;
     width: 100px;
     margin-left: 10px;
-
 }
 
 .post-container .post .post-reply .post-like {
-    display: inline-flex;
     width: 90px;
+}
+.post-like .like {
+    background: #97E7E1;
+    border: none;
+    border-radius: 60px;
+}
 
-
+.post-like .like:hover {
+    background: #e797c3;
 }
 
 .post-container .post .post-reply .reply-rec {
@@ -220,3 +174,33 @@ body {
 }
 
 /* ----------------------댓글 & 좋아요 끝----------------------- */
+
+* 페이지 스타일 */
+/* pagination style */
+.bottom-section {
+    display: inline-flex;
+    width: 100%;
+    height: 50px;
+    margin: 0 auto;
+}
+
+.bottom-section nav {
+    flex: 1;
+    justify-content: center;
+}
+
+.bottom-section nav ul {
+    text-align: center;
+}
+
+
+.pagination-custom a {
+    color: #444 !important;
+    font-size: 25px;
+}
+
+.pagination-custom li.active a,
+.pagination-custom li:hover a {
+    background: #333 !important;
+    color: #fff !important;
+}

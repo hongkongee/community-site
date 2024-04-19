@@ -48,14 +48,13 @@ class BoardMapperTest {
 //        System.out.println(board.toString());
 //        assertNotNull(board);
 
-
    }
 
    @Test
    @DisplayName("모든 게시글 조회")
    void findAllTest() {
       // given
-
+     
 //        List<Board> boardList = boardMapper.findAll();
 //
 //        // when
@@ -91,4 +90,3 @@ class BoardMapperTest {
 
    // then
 }
-

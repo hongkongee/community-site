@@ -69,6 +69,7 @@ public class HomeController {
         List<BoardListResponseDTO> dtoList = boardService.getList();
 
         model.addAttribute("bList", dtoList);
+        model.addAttribute("li", "전체 게시판");
 
         // 로그인 정보 가져오기
 
@@ -86,6 +87,9 @@ public class HomeController {
 //        log.info(categoryList.toString());
         model.addAttribute("bList", categoryList);
 
+        String listName = boardService.stringToCategoryDescription(category);
+        model.addAttribute("li", listName);
+
         return "home/all";
 
     }
@@ -98,6 +102,7 @@ public class HomeController {
 
         model.addAttribute("b", dto);
         log.info("image path: " + dto.getPostImg());
+        log.info("b.category: " + dto.getCategory());
 
         Cookie c = WebUtils.getCookie(request, "like" + bno);
 

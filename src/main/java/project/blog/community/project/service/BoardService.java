@@ -155,5 +155,11 @@ public class BoardService {
 
     }
 
+    public String stringToCategoryDescription(String str) { // str = "movie"
+        String upperCategory = str.toUpperCase(); // upperCategory = "MOVIE"
+        Category category = Category.valueOf(upperCategory); // category = Category.MOVIE
+        return category.getDescription(); // return value = "영화글"
+    }
+
 
 }

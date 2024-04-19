@@ -16,9 +16,9 @@
     margin: auto;
     border: #000 solid 2px;
     width: 100%;
-    height: 700px;
-    
+    height: 700px;    
     position: relative;
+    top: 90px;
 
   }
 

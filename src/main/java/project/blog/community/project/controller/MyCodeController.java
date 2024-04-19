@@ -1,15 +1,16 @@
 package project.blog.community.project.controller;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import project.blog.community.project.common.CodeSearch;
 import project.blog.community.project.common.MyCodePage;
 import project.blog.community.project.common.MyCodeMaker;
 import project.blog.community.project.dto.request.MyCodeWriteRequestDTO;
+import project.blog.community.project.dto.response.MyCodeDetailResponseDTO;
 import project.blog.community.project.dto.response.MyCodeListResponseDTO;
 import project.blog.community.project.service.MyCodeService;
 
@@ -39,7 +40,7 @@ public String gallery(Model model, MyCodePage page){
 
     model.addAttribute("gList", dtoList);
     model.addAttribute("maker", myCodeMaker);
-    return "myCode";
+    return "mycode";
 }
 @PostMapping("write")
 public String write(MyCodeWriteRequestDTO dto){
@@ -47,7 +48,7 @@ public String write(MyCodeWriteRequestDTO dto){
     System.out.println("dto = {}" + dto);
 
     service.register(dto);
-    return "redirect:/wel/mycode";
+    return "redirect:/wel/myCode";
 }
 
 
@@ -60,14 +61,26 @@ public String write(MyCodeWriteRequestDTO dto){
 
     return "mycodewrite";
 }
-@GetMapping("/delete")
-    public String delete(int bno){
+    @GetMapping("/codedelete")
+        public String delete(int bno){
+        log.info("codedelete: GET!!");
+        service.delete(bno);
 
-    service.delete(bno);
-
-    return "redirect:/wel/mycode";
+        return "redirect:/wel/myCode";
 
 }
+    @GetMapping("/codedetail")
+    public String detail(int bno,Model model) {
+        log.info("detail get!!");
+
+
+        MyCodeDetailResponseDTO dto = service.getDetail(bno);
+        log.info("dto: {}", dto);
+
+        model.addAttribute("b",dto);
+        return "codedetail";
+    }
+
 
 }
 

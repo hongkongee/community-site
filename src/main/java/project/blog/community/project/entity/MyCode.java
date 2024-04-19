@@ -15,15 +15,14 @@ public class MyCode {
 
     private int codeNo;
     private String title;
-    private String content; //이미지
-    private LocalDateTime regDate;//작성일자
-
+    private String content;
+    private LocalDateTime regDate;
     private String writer;
 
     public MyCode(MyCodeWriteRequestDTO dto) {
         this.title = dto.getTitle();
         this.content = dto.getContent();
-        this.writer = dto.getWriter();
+
 
 
     }

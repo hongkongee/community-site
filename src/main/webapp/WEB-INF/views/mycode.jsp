@@ -57,6 +57,7 @@
                   </div>
                   <div class="card-content">
 
+                      ${b.shortContent}
 
 
 
@@ -64,13 +65,13 @@
                   </div>
               </section>
               
-              <c:if test="${login.auth == '관리자회원' || login.account == b.writer}">
+
                   <div class="card-btn-group">
-                      <button class="del-btn" data-href="/wel/delete?bno=${b.codeNo}">
+                      <button class="del-btn" data-href="/wel/codedelete">
                           <i class="fas fa-times">&times;</i>
                       </button>
                   </div>
-              </c:if>
+
 
           </div>
       </c:forEach>
@@ -83,32 +84,32 @@
       <ul class="pagination pagination-lg pagination-custom">
           <c:if test="${maker.page.pageNo != 1}">
               <li class="page-item"><a class="page-link"
-                                       href="/wel/gallery?pageNo=1&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
+                                       href="/wel/myCode?pageNo=1&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
               </li>
           </c:if>
 
           <c:if test="${maker.prev}">
               <li class="page-item"><a class="page-link"
-                                       href="/wel/gallery?pageNo=${maker.begin-1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">prev</a>
+                                       href="/wel/myCode?pageNo=${maker.begin-1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">prev</a>
               </li>
           </c:if>
 
           <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
               <li data-page-num="${i}" class="page-item">
                   <a class="page-link"
-                     href="/wel/gallery?pageNo=${i}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">${i}</a>
+                     href="/wel/myCode?pageNo=${i}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">${i}</a>
               </li>
           </c:forEach>
 
           <c:if test="${maker.next}">
               <li class="page-item"><a class="page-link"
-                                       href="/wel/gallery?pageNo=${maker.end+1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">next</a>
+                                       href="/wel/myCode?pageNo=${maker.end+1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">next</a>
               </li>
           </c:if>    
           
           <c:if test="${maker.page.pageNo != maker.finalPage}">
               <li class="page-item"><a class="page-link"
-                                       href="/wel/gallery?pageNo=${maker.finalPage}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&gt;&gt;</a>
+                                       href="/wel/myCode?pageNo=${maker.finalPage}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&gt;&gt;</a>
               </li>
           </c:if>
 
@@ -135,14 +136,14 @@
 
         </div> -->
 
-        <div id="myModal" class="modal">
+     <!--  <div id="myModal" class="modal">
           <div class="modal-detail">
           <button class="close-btn"></button> <br>
             <span class="close">&times;</span>
             <p>모달 내용이 여기에 들어갑니다.</p>
           </div>
         </div>
-
+--> 
 <div class="modal" id="modal">
     <div class="modal-content">
         <p>정말로 삭제할까요?</p>
@@ -160,137 +161,106 @@
 
 <script>
 
-    // const sidebar = document.querySelector('.Frame40');
-
-    // // document.querySelector('.Frame40').addEventListener('mouseover', function () {
-    // //     // When the user hovers over the element, change its transform property to translateX(0)
-    // //     this.style.transform = 'translateX(-100%)';
-    // // });
-
-    // // Add a hover event listener to the Frame40 element
-    // document.querySelector('.Frame40').addEventListener('mouseover', function () {
-    //     // When the user hovers over the element, change its transform property to translateX(0)
-    //     this.style.transform = 'translateX(0)';
-    // });
-
-
-    // document.querySelector('.close-btn').addEventListener('click', function () {
-    //     // When the user is not hovering over the element, change its transform property to translateX(-100%)
-    //     sidebar.setAttribute("style", "transform: translateX(-100%);");
-    // });
-const $cardContainer = document.querySelector('.card-container');
-const $modal = document.getElementById('modal');
-const $confirmDelete = document.getElementById('confirmDelete'); 
-let $cancelDelete = document.getElementById('cancelDelete'); 
-
-
-const modal = document.getElementById('myModal');
-const closeModal = modal.querySelector('.close');
+   
+// const $cardContainer = document.querySelector('.card-container');
+// const $modal = document.getElementById('modal');
+// const $confirmDelete = document.getElementById('confirmDelete');
+// let $cancelDelete = document.getElementById('cancelDelete');
+// const modal = document.getElementById('myModal');
+// const closeModal = modal.querySelector('.close');
 
 // $cardContainer.addEventListener('click', e => {
+//     if (e.target.matches('.card-container')) return;
 
-//   if (e.target.matches('.card-container')) return;
+//     if (e.target.matches('.card-btn-group *')) {
+//         $modal.style.display = 'flex';
+//         const deleteLocation = e.target.closest('.del-btn').dataset.href;
+        
+//         // $cancelDelete 변수를 선언하고 클릭 이벤트 핸들러를 할당합니다.
+//         const cancelDelete = () => {
+//             console.log('cancel delete');
+//             location.href = '/wel/gallery';
+//             $modal.style.display = 'none';
+//         };
 
-//   if (e.target.matches('.card-btn-group *')) {
-  
-//  $modal.style.display = 'flex';
-//  const deleteLocation = e.target.closest('.del-btn').dataset.href;
-//  $cancelDelete = e => {
-//   console.log('das',e.target);
-// location.href = deleteLocation;
+//         // 삭제 버튼에 클릭 이벤트 핸들러를 할당합니다.
+//         document.getElementById('cancelDelete').addEventListener('click', cancelDelete);
+//     } 
+// else {
+//     const bno = e.target.closest('section.card').dataset.bno;
+//     console.log('bno: ' + bno);
 
-// $modal.style.display = 'none';
- 
+//     // 모달을 활성화
+//     modal.style.display = 'block';
 
-//  }
-//  $cancelDelete.onclick = ()  => {
-// $modal.style.display = 'none';
-//  }
-
- 
-// }else{
-
-//   const bno = e.target.closest('section.card').dataset.bno;
-//   console.log('bno: ' + bno);
-
-
-
-//   // 모달을 활성화
-//   modal.style.display = 'block';
-
-//   // 모달 닫기 버튼에 클릭 이벤트 추가
-//   closeModal.addEventListener('click', () => {
-//     modal.style.display = 'none';
+//     // 모달 닫기 버튼에 클릭 이벤트 추가
+//     closeModal.addEventListener('click', () => {
+//       modal.style.display = 'none';
+//     });
     
-//   });
-// }
+//   }
+  
 // });
 
-
-// $cardContainer.addEventListener('click', e=> {
-
-//   console.log('target',e.target);
-//   if (e.target.matches('.card-container'))return;
-    
-  
-//   const bno = e.target.closest('section.card').dataset.bno;
-//   console.log('bno'+bno);
-
-//   location.href='/wel/';
+ 
+ const $cardContainer = document.querySelector('.card-container');
 
 
-// })
-// $cardContainer.addEventListener('click', e => {
-//   if (e.target.matches('.card-container')) return;
-
-//   if (e.target.matches('.card-btn-group *')) {
-//     $modal.style.display = 'flex';
-//     const deleteLocation = e.target.closest('.del-btn').dataset.href;
-    
-//     // $cancelDelete 변수를 선언하고 클릭 이벤트 핸들러를 할당합니다.
-//     const cancelDelete = () => {
-//       console.log('cancel delete');
-//       location.href = deleteLocation;
-//       $modal.style.display = 'none';
-//     };
-
-//     // 삭제 버튼에 클릭 이벤트 핸들러를 할당합니다.
-//     document.getElementById('cancelDelete').addEventListener('click', cancelDelete);
-//   } 
+const $modal = document.getElementById('modal'); 
+const $confirmDelete = document.getElementById('confirmDelete'); 
+const $cancelDelete = document.getElementById('cancelDelete'); 
 
 
 $cardContainer.addEventListener('click', e => {
+    console.log('이벤트 타겟: ', e.target);
     if (e.target.matches('.card-container')) return;
 
-    if (e.target.matches('.card-btn-group *')) {
-        $modal.style.display = 'flex';
-        const deleteLocation = e.target.closest('.del-btn').dataset.href;
-        
-        // $cancelDelete 변수를 선언하고 클릭 이벤트 핸들러를 할당합니다.
-        const cancelDelete = () => {
-            console.log('cancel delete');
-            location.href = '/wel/gallery';
-            $modal.style.display = 'none';
-        };
-
-        // 삭제 버튼에 클릭 이벤트 핸들러를 할당합니다.
-        document.getElementById('cancelDelete').addEventListener('click', cancelDelete);
-    } 
-else {
-    const bno = e.target.closest('section.card').dataset.bno;
-    console.log('bno: ' + bno);
-
-    // 모달을 활성화
-    modal.style.display = 'block';
-
-    // 모달 닫기 버튼에 클릭 이벤트 추가
-    closeModal.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
     
-  }
-  
+    if (e.target.matches('.card-btn-group *')) {
+        console.log('삭제 버튼 클릭됨!');
+        $modal.style.display = 'flex'; 
+
+
+        
+        const deleteLocation = e.target.closest('.del-btn').dataset.href;
+        const bno = e.target.closest('div.card-btn-group').previousElementSibling.dataset.bno;
+        console.log('deleteLocation: ', deleteLocation);
+        console.log('bno: ', bno);
+
+        
+        $confirmDelete.onclick = e => { 
+          
+            location.href = deleteLocation + '?bno=' + bno;
+
+           
+            $modal.style.display = 'none';
+        }
+
+        
+        $cancelDelete.onclick = () => {
+            $modal.style.display = 'none'; 
+        }
+
+    } else { 
+
+       
+      
+        const bno = e.target.closest('section.card').dataset.bno;
+        console.log('bno: ' + bno);
+
+       
+        location.href='/wel/codedetail'+ '?bno=' + bno ;
+    }
+
+   
+
 });
+
+
+
+
+
+
 
     //========== 게시물 목록 스크립트 ============//
 

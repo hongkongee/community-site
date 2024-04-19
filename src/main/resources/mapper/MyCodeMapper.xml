@@ -47,7 +47,8 @@ CREATE TABLE my_code(
     </select>
 
     <select id="findOne" resultType="myCode">
-        SELECT * FROM my_code
+        SELECT *
+        FROM my_code
         WHERE code_no = #{codeNo}
     </select>
 

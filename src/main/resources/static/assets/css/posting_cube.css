@@ -92,10 +92,8 @@ body {
     /* height: 300px; */
     transition: 0.5s;
     border: 1px solid #7AA2E3;
-    display: flex;
     position: absolute;
     background: white;
-    flex-wrap: wrap;
 }
 
 .post-container .post:last-child {
@@ -118,9 +116,6 @@ body {
     /* background-color: yellow; */
     padding: 15px;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .post-container .post .post-content-wrapper {
@@ -145,12 +140,13 @@ body {
     display: inline-flex;
     justify-content: space-between;
     background: white;
+    border-top: #7AA2E3;
 }
 
 .post-container .post .post-reply .reply {
     justify-content: space-between;
-    border: 1px solid #97E7E1;
-    background: #97E7E1;
+    border: 1px solid #7AA2E3;
+    background: #7AA2E3;
     width: 100px;
     margin-left: 10px;
 }
@@ -159,9 +155,8 @@ body {
     width: 90px;
 }
 .post-like .like {
-    background: #97E7E1;
-    border: none;
-    border-radius: 60px;
+    background: #7AA2E3;
+    border: 1px solid #7AA2E3;
 }
 
 .post-like .like:hover {
@@ -177,10 +172,16 @@ body {
 
 * 페이지 스타일 */
 /* pagination style */
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+}
+
 .bottom-section {
-    display: inline-flex;
-    width: 100%;
-    height: 50px;
+    display: flex;
+    width: fit-content;
+    /* height: 50px; */
     margin: 0 auto;
 }
 
@@ -191,6 +192,7 @@ body {
 
 .bottom-section nav ul {
     text-align: center;
+    display: inline-flex;
 }
 
 

@@ -40,6 +40,21 @@
         ORDER BY bno DESC
     </select>
 
+    <sql id="search">
+        <if test="type == 'title'">
+            WHERE title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'content'">
+            WHERE content LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'writer'">
+            WHERE writer LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'tc'">
+            WHERE title LIKE CONCAT('%', #{keyword}, '%')
+            OR content LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+    </sql>
 
 
 
@@ -67,7 +82,17 @@
         WHERE bno = #{bno}
     </update>
 
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_board
+        <include refid="search" />
+    </select>
 
+    <select id="findMine" resultType="board">
+        SELECT * FROM tbl_board
+        WHERE writer = #{currentLoginMemberAccount}
+        ORDER BY bno DESC
+    </select>
 
 
 

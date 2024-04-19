@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 public class BoardMyListResponseDTO {
 
     private final int bno;
-    private final String title;
+    private final String title; //5글자 이상이면 잘라내기
     private final String regDate; // 날짜패턴 yyyy-MM-dd HH:mm
     private int likeCount;
     private String postImg;
@@ -41,7 +41,7 @@ public class BoardMyListResponseDTO {
     }
 
     private String makeShortContent(String content) {
-        return sliceString(content, 30);
+        return sliceString(content, 10);
     }
 
     private static String sliceString(String targetString, int wishLength) {

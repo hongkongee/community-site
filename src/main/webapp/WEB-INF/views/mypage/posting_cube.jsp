@@ -16,6 +16,10 @@
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -35,11 +39,14 @@
 
             <div class="post-container">
                 <c:forEach var="b" items="${bList}">
+
                     <div class="post-wrapper">
                         <section class="post" data-bno="${b.bno}">
-                            <div class="post-photo">
-                                <img src="/assets/img/java_logo.png" alt="게시물 사진">
-                            </div>
+                            <a href="/home/detail/${b.bno}">
+                                <div class="post-photo">
+                                    <img src="/assets/img/java_logo.png" alt="게시물 사진">
+                                </div>
+                            </a>
                             <div class="post-content-wrapper">
                                 <div class="post-content">
                                     ${b.title}
@@ -55,6 +62,7 @@
                                     <button class="reply">댓글 쓰기</button>
                                 </div>
                             </div>
+
                         </section>
                     </div>
                 </c:forEach>
@@ -121,6 +129,23 @@
     var thisMonthElement = document.getElementById("this-month");
     thisMonthElement.textContent = formattedDate;
     */
+    // 사용자가 현재 머물고 있는 페이지 버튼에 active 스타일 부여
+    function appendPageActive() {
+
+        // 현재 서버에서 넘겨준 페이지 번호
+        const currPage = '${maker.page.pageNo}';
+
+        // li 태그들을 전부 확인해서
+        // 현재 페이지 번호와 일치하는 li를 찾은 후 active 클래스 이름 붙이기
+        const $ul = document.querySelector('.pagination');
+        const $liList = [...$ul.children];
+
+        $liList.forEach($li => {
+            if (currPage === $li.dataset.pageNum) {
+                $li.classList.add('active');
+            }
+        });
+    }
 
     // -------------------------------게시물 등록 날짜 끝-------------------------------------
 </script>

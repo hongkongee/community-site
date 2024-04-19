@@ -25,7 +25,7 @@ class ReplyMapperTest {
    @DisplayName("게시물을 100개 등록하고, 랜덤으로 100개의 댓글을 게시글에 등록한다.")
    void bulkInsertTest() {
       // given
-      /*
+
       for (int i = 1; i <= 100; i++) {
          Board b = Board.builder()
                .title("Test 글" + i)
@@ -35,7 +35,7 @@ class ReplyMapperTest {
          boardMapper.save(b);
       }
 
-      for (int i = 1; i <= 100; i++) {
+      for (int i = 1; i <= 500; i++) {
          Reply reply = Reply.builder()
                .content("Test 댓글" + i)
                .replyWriter("Test 댓글 작성자" + i)
@@ -44,7 +44,7 @@ class ReplyMapperTest {
 
          replyMapper.save(reply);
       }
-      */
+
    }
 
    @Test
@@ -67,20 +67,20 @@ class ReplyMapperTest {
    @DisplayName("100번 게시물의 댓글 중 n번 댓글을 삭제하면 n번 댓글 조회되지 않을 것이다. 100번 전체조회하면 리스트 하나 줄어있어야 한다.")
    void deleteTest() {
       int boardNo = 77;
-      int replyNo = 18;
+      int replyNo = 124;
 
       replyMapper.delete(replyNo);
       Reply reply = replyMapper.findOne(replyNo);
 
       assertNull(reply);
-      assertNotEquals(3, replyMapper.count(boardNo));
+      assertNotEquals(6, replyMapper.count(boardNo));
    }
 
    @Test
    @DisplayName("63번 댓글의 댓글 내용을 수정하면 다시 조회했을 때 수정된 내용이 조회되어야 한다.")
    void modifyTest() {
-      int replyNo = 63;
-      String newReplyText = "수정수정 테스트";
+      int replyNo = 98;
+      String newReplyText = "내용을 수정함";
       Reply reply = Reply.builder()
             .content(newReplyText)
             .replyNo(replyNo)

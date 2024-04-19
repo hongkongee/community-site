@@ -5,10 +5,12 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.SessionException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.WebUtils;
+import project.blog.community.project.common.Search;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
 import project.blog.community.project.dto.response.BoardListResponseDTO;
@@ -20,6 +22,8 @@ import project.blog.community.project.mapper.UserMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccount;
 
 @Service
 @RequiredArgsConstructor
@@ -108,5 +112,38 @@ public class BoardService {
 
             return 0;
         }
+    }
+
+    public List<BoardMyListResponseDTO> getMyList(HttpServletRequest request) {
+        List<BoardMyListResponseDTO> dtoList = new ArrayList<>();
+        List<Board> boardList = boardMapper.findAll();
+
+        for (Board board : boardList) {
+            BoardMyListResponseDTO dto = new BoardMyListResponseDTO(board);
+            dtoList.add(dto);
+        }
+
+        return dtoList;
+
+    }
+
+    public int getCount(Search page) {
+        return boardMapper.getCount(page);
+    }
+
+    public List<BoardMyListResponseDTO> getMyList(Search page, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        session.getAttribute("login");
+
+        String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
+
+        List<BoardMyListResponseDTO> dtoList = new ArrayList<>();
+        List<Board> boardList = boardMapper.findMine(currentLoginMemberAccount);
+        for (Board board : boardList) {
+            BoardMyListResponseDTO dto = new BoardMyListResponseDTO(board);
+            dtoList.add(dto);
+        }
+        return dtoList;
     }
 }

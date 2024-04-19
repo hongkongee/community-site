@@ -20,6 +20,7 @@
         <typeAlias type="project.blog.community.project.entity.Market" alias="market"/>
         <typeAlias type="project.blog.community.project.entity.Board" alias="board"/>
         <typeAlias type="project.blog.community.project.entity.Reply" alias="reply"/>
+        <typeAlias type="project.blog.community.project.entity.Favorite" alias="favorite"/>
     </typeAliases>
 
     <!-- SQL을 적어놓은 XML 파일의 위치를 설정 -->

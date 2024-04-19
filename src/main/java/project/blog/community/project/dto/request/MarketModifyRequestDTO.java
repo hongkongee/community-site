@@ -15,9 +15,12 @@ import project.blog.community.project.entity.Reply;
 
 public class MarketModifyRequestDTO {
 
-
+//유효성을 검증할 때 null 값이나 공백 문자열이 포함되어 있는지 확인
     @NotNull
-    private int bno;
+    private int boardNo;
+
+    @NotBlank
+    private String title;
 
     @NotBlank
     private String text;
@@ -26,7 +29,8 @@ public class MarketModifyRequestDTO {
 
     public Market toEntity(){
         return Market.builder()
-                .boardNo(bno)
+                .boardNo(boardNo)
+                .textTitle(title)
                 .textContent(text)
                 .build();
     }

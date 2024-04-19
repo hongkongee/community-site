@@ -17,7 +17,8 @@ CREATE TABLE tbl_market (
     location VARCHAR(255),
     content_img VARCHAR(255),
     login_method VARCHAR(50),
-    view_count INT DEFAULT 0
+    view_count INT DEFAULT 0,
+    favorite BOOLEAN DEFAULT FALSE
 );
 */
 
@@ -49,7 +50,7 @@ public class Market{
     private String ContentImg; //XML profile_image 스네이크 케이스 자동 인식
     private String loginMethod; //sql tbl 타입과 일치 시켜야 함
     private int viewCount;
-
+    private boolean addFav;
 
 
     public Market(MarketWriteRequestDTO dto) { //entity -> DTO

@@ -61,11 +61,12 @@
       <!-- Content 내용 -->
       <div class="content-group">
         <div class="Content1">
-          <span class="content-Write"><a href="/market/write">글쓰기</a></span>
-          <span class="content-Del">삭제</span>
-          <span id="modifyBtn" class="content-Rev" type="button" data-bs-toggle="modal"
-            data-bs-target="#editModal">수정</span>
-          <!-- data-bs-target="#editModal" 속성은 Bootstrap의 JavaScript 모달 -->
+
+          <button class="content-list"><a href="/market/list">목록</a></button></button>
+          <button class="content-Write"><a href="/market/write">글쓰기</a></button>
+          <button id="content-Del">삭제</button>
+          <button id="modifyBtn" class="content-Rev" type="button" data-bs-toggle="modal"
+            data-bs-target="#editModal">간단수정</button>
           <span class="content-AddFav">상품 즐겨찾기</span>
           <span class="content-Otherproduct">#판매자의 다른상품</span>
 
@@ -95,8 +96,11 @@
               <!-- 내용 수정 폼 -->
               <form id="editForm">
                 <div class="form-group">
+                  <label for="editedTitle">수정할 제목</label>
+                  <input type="text" class="form-control" id="editedTitle" style="width: 100%;" placeholder="수정할 제목 입력하세요">
                   <label for="editedContent">수정할 내용</label>
-                  <textarea class="form-control-lg" id="editedContent" rows="10"></textarea>
+                  <textarea class="form-control-lg" id="editedContent" rows="20" cols="50" style="width: 100%;"></textarea>
+
                 </div>
               </form>
             </div>
@@ -127,21 +131,27 @@
 
 
   <script>
-    const URL = '/market';
+    const URL = '/market/detail/${b.boardNo}';
     const bno = '${b.boardNo}';
+    console.log('bno: ', bno);
 
     // 수정 버튼 이벤트 발생
     const $modifyBtn = document.getElementById('modifyBtn');
     const $saveBtn = document.getElementById('saveEdit');
+    const $editedTitle = document.getElementById('editedTitle');
     const $editedContent = document.getElementById('editedContent');
-    const $boardNo = document.getElementById('boardNo'); //. 찍기
+    const $boardNo = document.getElementById('boardNo'); //class . 찍기
     const $closeBtn = document.getElementById('closeBtn');
+    const $modal = document.getElementById('editModal');
+    const $deleteBtn = document.getElementById('content-Del');
+
 
 
     $modifyBtn.onclick = e => {
       console.log('수정 버튼 이벤트 발생!');
-
+      $editedTitle.value = document.getElementById('textTitle').textContent;
       $editedContent.value = document.getElementById('textContent').textContent;
+      console.log($editedTitle.value);
       console.log($editedContent.value);
       makeModifyClickHandler();
       makeCloseClickHandler();
@@ -149,26 +159,25 @@
 
     function makeCloseClickHandler() {
       $closeBtn.onclick = e => {
+        console.log('에딧타이틀 클릭', $editedTitle);
         console.log('닫기 버튼 클릭!');
-        const modal = document.getElementById('editModal');
-        modal.style.display = "none"; // 모달을 숨김
-        
+        $modal.style.display = "none"; // 모달을 숨김
+        location.reload(); // 화면 새로고침
       };
     }
 
     function makeModifyClickHandler() {
-
-
       if ($saveBtn) {
         $saveBtn.onclick = e => {
-          if ($editedContent.value === '') {
+          if ($editedTitle.value === '' && $editedContent.value === '') {
             alert('내용은 필수입니다.');
             return;
           }
 
           const payload = {
-            text: $editedContent.value,
-            boardNo: $boardNo
+            title: $editedTitle.value,
+            content: $editedContent.value,
+            boardNo: bno
           };
 
           const requestInfo = {
@@ -194,6 +203,7 @@
 
             .then(data => {
               console.log('응답 성공!', data);
+              $editedTitle.value = '';
               $editedContent.value = '';
 
             });
@@ -201,6 +211,45 @@
         };
       }
     }
+
+    // 삭제버튼
+    $deleteBtn.onclick = e => {
+      console.log('삭제 버튼 클릭!');
+
+      if (confirm('정말로 삭제하시겠습니까?')) {
+        deleteBoard();
+        alert('삭제 되었습니다');
+        window.location.href = '/market/list';
+      }
+    };
+
+    function deleteBoard() {
+      const requestInfo = {
+
+        method: 'DELETE',
+        headers: {
+          'content-type': 'application/json; charset=utf-8'
+        },
+      };
+
+      fetch(URL, requestInfo)
+        .then(res => {
+          console.log(res.status);
+          if (res.status === 200) {
+            alert('게시물이 성공적으로 삭제되었습니다.');
+            // 삭제 후 목록 페이지로 이동하거나, 홈 페이지로 리다이렉트할 수 있습니다.
+            window.location.href = '/market/list'; // 목록 페이지로 이동
+          } else {
+            alert('게시물 삭제에 실패했습니다.');
+          }
+        });
+    }
+
+
+
+
+
+
 
 
     /* 친구 정보 

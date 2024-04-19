@@ -32,8 +32,7 @@
 
     <update id="modify">
         UPDATE tbl_market
-        SET text_content = #{textContent}
-<!--        update_date = CURRENT_TIMESTAMP-->
+        SET text_title = #{textTitle}, text_content = #{textContent}
         WHERE board_no = #{boardNo}
     </update>
 
@@ -42,6 +41,23 @@
         SET view_count = view_count + 1
         WHERE board_no = #{boardNo}
     </update>
+
+    <delete id="delete">
+        DELETE FROM tbl_market
+        WHERE board_no = #{boardNo}
+    </delete>
+
+    <insert id="addFav">
+        INSERT INTO market_favorite
+        VALUES
+        (#{accountNumber}, #{boardNo})
+    </insert>
+
+    <select id="checkFav" resultType="favorite">
+        SELECT *
+        FROM market_favorite
+        WHERE account_number = #{accountNumber}
+    </select>
 
 
 

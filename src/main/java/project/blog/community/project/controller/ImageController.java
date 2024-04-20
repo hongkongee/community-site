@@ -27,6 +27,7 @@ public class ImageController {
     private String rootPath;
 
     // 이미지 출력하기
+    // jsp 파일에서 '/display${이미지 파일 경로에 관련한 변수명}' 을 작성
     @GetMapping("/{y}/{m}/{d}/{fileName}")
     public ResponseEntity<?> displayImage(
             @PathVariable String y,

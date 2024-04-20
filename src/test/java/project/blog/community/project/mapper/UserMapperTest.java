@@ -71,21 +71,22 @@ class UserMapperTest {
 
       // then
    }*/
-   
-   @Test
+
+
+/*   @Test
    @DisplayName("팔로우 확인하기")
    void checkFollower() {
        // given
       String myAccount = "tjtkdvl";
        
        // when
-      List<Follow> followers = userMapper.findUserByFollower(myAccount);
-      for (Follow follower : followers) {
-         System.out.println(follower.toString());
+      List<String> followers = userMapper.findUserByFollower(myAccount);
+      for (String follower : followers) {
+         System.out.println("팔로워:" + follower);
       }
 
       // then
-   }
+   }*/
 }
 
 

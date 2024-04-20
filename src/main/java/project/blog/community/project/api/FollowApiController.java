@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import project.blog.community.project.dto.response.FollowerResponseDTO;
 import project.blog.community.project.dto.response.ReplyListResponseDTO;
 import project.blog.community.project.service.FollowingService;
+
+import java.util.List;
 
 import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccount;
 
@@ -22,14 +25,14 @@ public class FollowApiController {
 
     private final FollowingService followingService;
 
-/*    @GetMapping("")
-    public ResponseEntity<?> list(HttpServletRequest request) {
+    @GetMapping("/{number}")
+    public ResponseEntity<?> followList(@PathVariable int number, HttpServletRequest request) {
         log.info("api/v1/follow: GET!!!");
 
+        // 팔로우한 사람 목록 (닉네임, id, 프로필 사진 등이 저장)
+        // number: 목록에 뜰 사람 수
+        List<FollowerResponseDTO> dtoList = followingService.getFollowingList(number, request);
 
-
-        followingService.getFollowingList(request);
-
-        return ResponseEntity.ok().body();
-    }*/
+        return ResponseEntity.ok().body(dtoList);
+    }
 }

@@ -46,16 +46,16 @@
         WHERE session_id = #{sessionId}
     </select>
 
-    <select id="findUserFollower" resultType="follow">
-        SELECT *
+    <select id="findUserByFollower" resultType="java.lang.String">
+        SELECT follower
         FROM tbl_follow
-        WHERE following = #{currentLoginMemberAccount}
+        WHERE following = #{account}
+        LIMIT 0, #{number}
     </select>
 
     <insert id="addFollower">
         INSERT INTO tbl_follow
-        VALUES
-        (#{me}, #{you})
+        VALUES (#{me}, #{you})
     </insert>
 
 </mapper>

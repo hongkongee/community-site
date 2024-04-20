@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="/assets/css/allpage.css">
   <link rel="stylesheet" href="/assets/css/snb.css">
 
+  <script src="/assets/js/MarketList.js" defer></script>
+
 
 </head>
 
@@ -59,7 +61,17 @@
                 <td id="textWriter">${s.textWriter}</td>
                 <td id="updateDate">${s.updateDate}</td>
                 <td id="viewCount"> ${s.viewCount}</td>
+                
+                <td class="favorite" data-bno="${s.boardNo}">
+                  <c:if test="${s.isFavorite == 1}">
+                    <i class="fa-solid fa-star"></i>
+                  </c:if>
 
+                  <c:if test="${s.isFavorite == 0}">
+                    <i class="fa-regular fa-star"></i>
+                  </c:if>
+
+                </td>
               </tr>
             </c:forEach>
 

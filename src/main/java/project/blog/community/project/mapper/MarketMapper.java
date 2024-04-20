@@ -19,11 +19,16 @@ public interface MarketMapper {
 
     void delete(int boardNo);
 
-    List<Board> getAddFavList(int boardNo, boolean addFav);
+//    List<Board> getAddFavList(int boardNo, boolean addFav);
 
     // 즐겨찾기 추가
     void addFav(Favorite favorite);
 
     // 유저가 즐겨찾기한 boardNo를 찾기
-    Favorite checkFav(String accountNumber);
+    List<Integer> checkFav(String accountNumber);
+
+    // 기존 즐겨찾기 삭제
+    void removeFav(Favorite favorite);
+
+//    List<Board> addFavList(int boardNo, boolean addFav);
 }

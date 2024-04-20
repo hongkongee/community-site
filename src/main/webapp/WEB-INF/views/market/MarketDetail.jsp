@@ -97,9 +97,11 @@
               <form id="editForm">
                 <div class="form-group">
                   <label for="editedTitle">수정할 제목</label>
-                  <input type="text" class="form-control" id="editedTitle" style="width: 100%;" placeholder="수정할 제목 입력하세요">
+                  <input type="text" class="form-control" id="editedTitle" style="width: 100%;"
+                    placeholder="수정할 제목 입력하세요">
                   <label for="editedContent">수정할 내용</label>
-                  <textarea class="form-control-lg" id="editedContent" rows="20" cols="50" style="width: 100%;"></textarea>
+                  <textarea class="form-control-lg" id="editedContent" rows="20" cols="50"
+                    style="width: 100%;"></textarea>
 
                 </div>
               </form>

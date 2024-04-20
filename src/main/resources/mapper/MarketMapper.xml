@@ -53,11 +53,16 @@
         (#{accountNumber}, #{boardNo})
     </insert>
 
-    <select id="checkFav" resultType="favorite">
-        SELECT *
+    <select id="checkFav" resultType="java.lang.Integer">
+        SELECT board_no
         FROM market_favorite
         WHERE account_number = #{accountNumber}
     </select>
+
+    <delete id="removeFav">
+        DELETE FROM market_favorite
+        WHERE account_number = #{accountNumber}
+    </delete>
 
 
 

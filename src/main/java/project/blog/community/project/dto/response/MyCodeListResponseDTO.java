@@ -16,6 +16,7 @@ public class MyCodeListResponseDTO {
     private final String shortContent;
     private final String regDate;
     private final String writer;
+    private final String programming;
 
 //    public GalleryListResponseDTO(Gallery gallery) {
 //        this.PhotoNumber = gallery.getPhotoNumber();
@@ -31,6 +32,7 @@ public MyCodeListResponseDTO(MyCode myCode) {
     this.shortContent = (myCode.getContent() != null) ? makeShortContent(myCode.getContent()) : null;
     this.regDate = makePrettierDateString(myCode.getRegDate());
     this.writer = myCode.getWriter();
+    this.programming = myCode.getProgramming();
 }
 
     public static String makePrettierDateString(LocalDateTime regDate) {

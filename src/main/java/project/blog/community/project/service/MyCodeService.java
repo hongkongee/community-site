@@ -36,6 +36,16 @@ public class MyCodeService {
         }
         return dtoList;
     }
+public List<MyCodeListResponseDTO> endgetList(MyCodePage page){
+        List<MyCodeListResponseDTO> mylist = new ArrayList<>();
+        List<MyCode> endlist = mapper.endAll(page);
+    for (MyCode myCode : endlist) {
+        MyCodeListResponseDTO dto = new MyCodeListResponseDTO(myCode);
+        mylist.add(dto);
+
+    }
+    return mylist;
+}
 
 
     public void delete(int bno) {

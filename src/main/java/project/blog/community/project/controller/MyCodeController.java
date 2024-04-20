@@ -42,7 +42,16 @@ public String gallery(Model model, MyCodePage page){
     model.addAttribute("maker", myCodeMaker);
     return "mycode";
 }
-@PostMapping("write")
+@GetMapping("/endMyCode")
+public String endCode(Model model, MyCodePage page){
+   List<MyCodeListResponseDTO> endList = service.endgetList(page);
+    MyCodeMaker myCodeMaker = new MyCodeMaker(page, service.getCount());
+    model.addAttribute("gList",endList);
+    model.addAttribute("maker",myCodeMaker);
+    return "mycode";
+}
+
+@PostMapping("/write")
 public String write(MyCodeWriteRequestDTO dto){
     System.out.println("write post get");
     System.out.println("dto = {}" + dto);

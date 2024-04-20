@@ -22,8 +22,8 @@ CREATE TABLE my_code(
 
     <insert id="save">
         INSERT INTO my_code
-        (title, content, writer )
-        VALUES (#{title}, #{content}, #{writer})
+        (title, content, writer, programming)
+        VALUES (#{title}, #{content}, #{writer}, #{programming})
     </insert>
 
     <delete id="delete">
@@ -43,6 +43,11 @@ CREATE TABLE my_code(
         SELECT * FROM my_code
 
         ORDER BY code_no DESC
+        LIMIT #{pageStart}, #{amount}
+    </select>
+    <select id="endAll" resultType="myCode">
+        SELECT * FROM my_code
+        ORDER BY code_no
         LIMIT #{pageStart}, #{amount}
     </select>
 

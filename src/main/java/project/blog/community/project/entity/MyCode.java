@@ -18,10 +18,12 @@ public class MyCode {
     private String content;
     private LocalDateTime regDate;
     private String writer;
+    private String programming;
 
     public MyCode(MyCodeWriteRequestDTO dto) {
         this.title = dto.getTitle();
         this.content = dto.getContent();
+        this.programming = dto.getProgramming();
 
 
 

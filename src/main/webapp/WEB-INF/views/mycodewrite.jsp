@@ -89,14 +89,35 @@
         button.list-btn:hover {
             background: #e61e8c93;
         }
+        select{
+            font-size: 18px;
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 2px solid #ffffff;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+
+        }
     </style>
 </head>
 <body>
 <div id="wrap" class="form-container">
     <h1>꾸러기 게시판 글쓰기</h1>
-    <form action="/wel/write" method="post">
+    <form action="/wel/write" method="post" enctype="multipart/form-data">
+        
+        <select class="form-select" id="programming" name="programming" aria-label="Default select example">                
+            <option value="HTML">HTML</option>
+            <option value="CSS">CSS</option>
+            <option value="JAVA">JAVA</option>
+            <option value="C">C</option>
+            <option value="C++">C++</option>
+            <option value="Python">Python</option>        
+        </select>           
         <label for="title">제목</label>
         <input type="text" id="title" name="title" required>
+        
         <label for="content">내용</label>
         <textarea id="content" name="content" maxlength="200" required></textarea>
         <div class="buttons">
@@ -107,6 +128,9 @@
 </div>
 <script>
   CKEDITOR.replace('content');
+
+ 
+
 </script>
 </body>
 </html>

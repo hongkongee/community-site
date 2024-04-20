@@ -9,7 +9,7 @@ import java.util.List;
 public interface MyCodeMapper {
     List<MyCode> findAll(MyCodePage page);
 
-
+List<MyCode> endAll(MyCodePage page);
 
 
     MyCode findOne(int codeNo);

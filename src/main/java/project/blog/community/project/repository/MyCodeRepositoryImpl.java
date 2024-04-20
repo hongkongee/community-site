@@ -35,7 +35,8 @@ public class MyCodeRepositoryImpl implements MyCodeRepository {
                     rs.getString("title") ,
                     rs.getString("content"),
                     rs.getTimestamp("reg_date").toLocalDateTime(),
-                    rs.getString("writer")
+                    rs.getString("writer"),
+                    rs.getString("programming")
 
             );
 
@@ -48,7 +49,7 @@ public class MyCodeRepositoryImpl implements MyCodeRepository {
 
     @Override
     public List<MyCode> findAll(MyCodePage page) {
-        String sql ="SELECT * FROM my_code ORDER BY code_no DESC LIMIT ?, ?";
+        String sql ="SELECT * FROM my_code ORDER BY code_no DESC LIMIT ?, ?, ?";
         return template.query(sql, new Object[]{page.getPageStart(), page.getAmount()}, new MyCodeMapper());
     }
 
@@ -64,9 +65,9 @@ public class MyCodeRepositoryImpl implements MyCodeRepository {
 
     @Override
     public void save(MyCode myCode) {
-        String sql = "INSERT INTO my_code (title, content, writer )" +
-                "VALUES (?, ?, ?)";
-        template.update(sql, myCode.getTitle(), myCode.getContent(),myCode.getWriter() );
+        String sql = "INSERT INTO my_code (title, content, writer, programming )" +
+                "VALUES (?, ?, ?, ?)";
+        template.update(sql, myCode.getTitle(), myCode.getContent(),myCode.getWriter(), myCode.getProgramming());
     }
 
     @Override

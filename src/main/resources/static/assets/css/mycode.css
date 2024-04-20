@@ -40,7 +40,13 @@ overflow-x: hidden;
 
 }
 
-
+a{
+    text-decoration:none;
+}
+a:hover{
+    cursor: pointer;
+    color: blue;
+}
 
 .Rectangle1::-webkit-scrollbar-thumb {
   background-color: #D9D9D9; 
@@ -230,7 +236,12 @@ margin-top: 25%;
        flex-wrap: wrap;
 
    }
-
+   .card-container .card .card-title-wrapper .time-view-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+}
 
    .main-title-wrapper {
        position: relative;

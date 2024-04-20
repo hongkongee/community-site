@@ -28,9 +28,9 @@
     </div>
     </div>
     <div class="let2">
-      <span class="new">최신순</span>
+      <span class="new" id="recent"><a href="/wel/myCode">최신순</a></span>
       /
-      <span class="abc">가나다순</span>
+      <span class="abc" id="past"> <a href="/wel/endMyCode">과거순</a></span>
     </div>
 
     <button class="Ellipse12">4</button>
@@ -52,6 +52,11 @@
                           <div class="time">
                               <i class="far fa-clock"></i>
                                   ${b.regDate} </div>
+
+                        <div class="view">
+                                <i class="fas fa-eye"></i>
+                                <span class="view-count">${b.programming}</span>
+                            </div>
 
                       </div>
                   </div>
@@ -204,11 +209,11 @@
 
  
  const $cardContainer = document.querySelector('.card-container');
-
-
 const $modal = document.getElementById('modal'); 
 const $confirmDelete = document.getElementById('confirmDelete'); 
 const $cancelDelete = document.getElementById('cancelDelete'); 
+
+
 
 
 $cardContainer.addEventListener('click', e => {
@@ -311,6 +316,11 @@ $cardContainer.addEventListener('click', e => {
         window.location.href = '/wel/write';
       };
       }
+      const $post = document.getElementById('post');
+      $post.onclick = e=>{
+        window.location.href = '/wel/endMyCode';
+      }
+
 
   // 사용자가 현재 머물고 있는 페이지 버튼에 active 스타일 부여
   function appendPageActive() {

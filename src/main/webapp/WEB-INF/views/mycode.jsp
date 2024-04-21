@@ -20,17 +20,33 @@
     <div class="Rectangle1" >
       <button class="add-photo"><div>+ 사진 추가</div></button>
 
-    <div class="Rectangle70">
-    <div class="e20232022">
-      <span class="let3" >2024<br/></span>
-      <span class="let4">2023<br/></span>
-      <span class="let5" >2022<br/></span>
-    </div>
-    </div>
+
     <div class="let2">
       <span class="new" id="recent"><a href="/wel/myCode">최신순</a></span>
       /
       <span class="abc" id="past"> <a href="/wel/endMyCode">과거순</a></span>
+    </div>
+<div class="top-section">
+        <!-- 검색창 영역 -->
+        <div class="search">
+            <form action="/board/list" method="get">
+
+                <select class="form-select" name="type" id="search-type">
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
+                    <option value="tc">제목+내용</option>
+                    <option value="programming">언어</option>
+                </select>
+
+                <input type="text" class="form-control" name="keyword" value="${s.keyword}">
+
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search">검색</i>
+                </button>
+
+            </form>
+        </div>
+
     </div>
 
     <button class="Ellipse12">4</button>
@@ -38,7 +54,10 @@
 
     <button class="Ellipse14">16</button>
 
+
+
     <div class="Rectangle51" ></div>
+
     <div class="Frame20" >
       <div class="Gallery">Gallery</div>
     </div>
@@ -257,8 +276,6 @@ $cardContainer.addEventListener('click', e => {
         location.href='/wel/codedetail'+ '?bno=' + bno ;
     }
 
-   
-
 });
 
 
@@ -339,13 +356,27 @@ $liList.forEach($li => {
     }
 });
 }
+ // 검색조건 셀렉트박스 옵션타입 고정하기
+  function fixSearchOption() {
+    const $select = document.getElementById('search-type');
+
+    const $options = [...$select.children];
+
+    $options.forEach($opt => {
+        if ($opt.value === '${s.type}') {
+
+            $opt.setAttribute('selected', 'selected');
+        }
+    });
+
+  }
+
 appendPageActive();
+  fixSearchOption();
 </script>
 
 
 
-  </div>
-  </div>
 
 
 

@@ -18,8 +18,22 @@ CREATE TABLE my_code(
 );
 -->
 
+    <sql id="search">
+        <if test="type == 'title'">
+            WHERE title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'content'">
+            WHERE content LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'tc'">
+            WHERE title LIKE CONCAT('%', #{keyword}, '%')
+            OR content LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'programming'">
+            WHERE programming LIKE CONCAT('%', #{keyword}, '%')
+        </if>
 
-
+    </sql>
     <insert id="save">
         INSERT INTO my_code
         (title, content, writer, programming)
@@ -41,7 +55,7 @@ CREATE TABLE my_code(
         resultType에 List를 따로 언급할 필요 없습니다. -->
     <select id="findAll" resultType="myCode">
         SELECT * FROM my_code
-
+        <include refid="search" />
         ORDER BY code_no DESC
         LIMIT #{pageStart}, #{amount}
     </select>
@@ -60,8 +74,12 @@ CREATE TABLE my_code(
 <select id="getCount" resultType="int">
     SELECT COUNT(*)
     FROM my_code
+    <include refid="search" />
 </select>
-
+    <select id="getEndCount" resultType="int">
+        SELECT COUNT(*)
+        FROM my_code
+    </select>
 
 </mapper>
 

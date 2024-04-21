@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import project.blog.community.project.common.CodeSearch;
 import project.blog.community.project.common.MyCodePage;
 import project.blog.community.project.dto.request.MyCodeWriteRequestDTO;
 import project.blog.community.project.dto.response.MyCodeDetailResponseDTO;
@@ -26,7 +27,7 @@ public class MyCodeService {
         mapper.save(myCode);
     }
 
-    public List<MyCodeListResponseDTO> getList(MyCodePage page) {
+    public List<MyCodeListResponseDTO> getList(CodeSearch page) {
         List<MyCodeListResponseDTO> dtoList = new ArrayList<>();
         //List<MyCode> galleryList = mapper.findAll(page);
         List<MyCode> myCodeList = mapper.findAll(page);
@@ -52,11 +53,14 @@ public List<MyCodeListResponseDTO> endgetList(MyCodePage page){
         mapper.delete(bno);
     }
 
-    public int getCount() {
+    public int getCount(CodeSearch page) {
         return mapper.getCount();
 
     }
+    public int getEndCount(MyCodePage page) {
+        return mapper.getEndCount();
 
+    }
     public MyCodeDetailResponseDTO getDetail(int bno) {
         log.info("detail GET!");
         log.info(String.valueOf(bno));

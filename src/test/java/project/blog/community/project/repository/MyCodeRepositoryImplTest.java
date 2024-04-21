@@ -25,6 +25,7 @@ class MyCodeRepositoryImplTest {
             myCode.setTitle("html" + i);
             myCode.setContent("내용" + i);
             myCode.setWriter("user" + i);
+            myCode.setProgramming("user" + i);
 
 
             // when

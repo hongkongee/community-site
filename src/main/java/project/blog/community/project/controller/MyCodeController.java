@@ -1,6 +1,5 @@
 package project.blog.community.project.controller;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -31,12 +30,12 @@ public class MyCodeController {
 
     private final MyCodeService service;
 @GetMapping("/myCode")
-public String gallery(Model model, MyCodePage page){
+public String gallery(Model model,@ModelAttribute("s") CodeSearch page){
     log.info("page: {}", page);
     List<MyCodeListResponseDTO> dtoList = service.getList(page);
 
 
-    MyCodeMaker myCodeMaker = new MyCodeMaker(page, service.getCount());
+    MyCodeMaker myCodeMaker = new MyCodeMaker(page, service.getCount(page));
 
     model.addAttribute("gList", dtoList);
     model.addAttribute("maker", myCodeMaker);
@@ -45,7 +44,7 @@ public String gallery(Model model, MyCodePage page){
 @GetMapping("/endMyCode")
 public String endCode(Model model, MyCodePage page){
    List<MyCodeListResponseDTO> endList = service.endgetList(page);
-    MyCodeMaker myCodeMaker = new MyCodeMaker(page, service.getCount());
+    MyCodeMaker myCodeMaker = new MyCodeMaker(page, service.getEndCount(page));
     model.addAttribute("gList",endList);
     model.addAttribute("maker",myCodeMaker);
     return "mycode";

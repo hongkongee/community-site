@@ -100,6 +100,33 @@
             background-color: rgba(255, 255, 255, 0.8);
 
         }
+        /*색추가*/
+
+        select option[value="HTML"] {
+            background-color: #FF5733; /* Orange */
+        }
+
+        select option[value="CSS"] {
+            background-color: #FFC300; /* Yellow */
+        }
+
+        select option[value="JAVA"] {
+            background-color: #33FF57; /* Green */
+        }
+
+        select option[value="C"] {
+            background-color: #33C0FF; /* Blue */
+        }
+
+        select option[value="C++"] {
+            background-color: #BB33FF; /* Purple */
+        }
+
+        select option[value="Python"] {
+            background-color: #FF33DA; /* Pink */
+        }
+
+/*색추가*/
     </style>
 </head>
 <body>

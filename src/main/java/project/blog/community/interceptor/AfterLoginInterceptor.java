@@ -18,7 +18,7 @@ import static project.blog.community.util.LoginUtils.*;
 public class AfterLoginInterceptor implements HandlerInterceptor {
 
    @Override
-   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
+   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
       HttpSession session = request.getSession();
 

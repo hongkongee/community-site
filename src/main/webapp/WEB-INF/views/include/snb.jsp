@@ -41,53 +41,24 @@
     <div class="friends">
         
         <div class="friends">
-        <h2> 친구 목록 </h2>
-        <ul>
-            <li>
-            <div class="profile-box">
-                <img src="/assets/img/test.jpg" alt="프로필 사진">
-            </div>
-            <a class="friend" href="#">asfasgas123</a>
-            </li>
+            <h2> 팔로우 목록 </h2>
 
-            <li>
-            <div class="profile-box">
-                <img src="#" alt="프로필 사진">
+            <div id="followCollapse">
+                <div id="followData">
+                    <!-- JS로 팔로우 정보 DIV 삽입 -->
+                </div>
             </div>
-            <a class="friend" href="#">fontfont3</a>
-            </li>
-            <li>
-            <div class="profile-box">
-                <img src="#" alt="프로필 사진">
-            </div>
-            <a class="friend" href="#">hello99</a>
-            </li>
-            <li>
-            <div class="profile-box">
-                <img src="#" alt="프로필 사진">
-            </div>
-            <a class="friend" href="#">panda423aa</a>
-            </li>
-        </ul>
         </div>
+
+     
         
 
-        <div id="user-information"> <!-- 친구 정보 창 -->
-        <p>
-            
-            sdfa99asdf 님<span id="x-btn"></span>
-        </p>
-        <ul>
-            <li id="my-page"></li>
-            <li id="chatting"></li>
-            <li id="ban"></li>
-        </ul>
+        <div id="follow-information"> <!-- 친구 정보 창 -->
+            <!-- JS로 팔로우 디테일 정보 DIV 삽입 -->      
+        
         </div>
 
-        <div id="chatting">
-
-        </div>
-
+        
 
     </div>
 

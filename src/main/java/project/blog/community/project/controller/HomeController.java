@@ -3,8 +3,10 @@ package project.blog.community.project.controller;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +21,14 @@ import project.blog.community.project.dto.response.BoardListResponseDTO;
 import project.blog.community.project.service.BoardService;
 import project.blog.community.project.service.GameService;
 import project.blog.community.project.service.ManagementService;
+import project.blog.community.util.FileUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
+
+import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccount;
 
 
 @Controller
@@ -33,10 +41,18 @@ public class HomeController {
     private final ManagementService managementService;
     private final BoardService boardService;
 
+    // rootPath = "C:/MyWorkspace/pictures/"
+    @Value("${file.upload.root-path}")
+    private String rootPath;
+
     // 홈페이지 - 메인페이지 view
     @GetMapping("/main")
-    public String main() {
+    public String main(Model model) {
         log.info("/home/main: GET");
+
+        List<BoardListResponseDTO> dtoList = boardService.getHotList();
+
+        model.addAttribute("bList", dtoList);
 
 
         // /WEB-INF/views/~~~~~.jsp
@@ -53,6 +69,7 @@ public class HomeController {
         List<BoardListResponseDTO> dtoList = boardService.getList();
 
         model.addAttribute("bList", dtoList);
+        model.addAttribute("li", "전체 게시판");
 
         // 로그인 정보 가져오기
 
@@ -70,6 +87,9 @@ public class HomeController {
 //        log.info(categoryList.toString());
         model.addAttribute("bList", categoryList);
 
+        String listName = boardService.stringToCategoryDescription(category);
+        model.addAttribute("li", listName);
+
         return "home/all";
 
     }
@@ -81,8 +101,11 @@ public class HomeController {
         BoardDetailResponseDTO dto = boardService.getDetail(bno);
 
         model.addAttribute("b", dto);
+        log.info("image path: " + dto.getPostImg());
+        log.info("b.category: " + dto.getCategory());
 
-        Cookie c = WebUtils.getCookie(request, "like");
+        Cookie c = WebUtils.getCookie(request, "like" + bno);
+
 
         if (c != null) { // 이미 좋아요를 눌렀다면
             model.addAttribute("l", 1);
@@ -110,7 +133,7 @@ public class HomeController {
 
     }
 
-    // 좋아요 수 바꾸기
+    // 좋아요 수 바꾸기 (비동기)
     @PostMapping("/detail/like")
     @ResponseBody
     public ResponseEntity<Integer> report(@RequestBody LikeRequestDTO dto,
@@ -137,20 +160,31 @@ public class HomeController {
         return "home/write";
     }
     
-    // 글쓰기 제출 페이지
+    // 글쓰기 제출 페이지 (DTO 안쓰고)
     @PostMapping("/write")
     public String writeSubmit(@RequestParam("category") String category,
                               @RequestParam("title") String title,
                               @RequestParam("content") String content,
-                              @RequestParam("file") MultipartFile file) {
+                              @RequestParam("file") MultipartFile uploadedImage,
+                              HttpServletRequest request) {
+
         log.info("/home/write: POST, {}, {}, {}", category, title, content);
-        log.info("file-name: {}", file.getOriginalFilename());
-        log.info("file-size: {}KB", file.getSize() / 1024.0); // getSize()는 MB 단위
-        log.info("file-type: {}", file.getContentType());
+        log.info("file-name: {}", uploadedImage.getOriginalFilename());
+        log.info("file-size: {}KB", uploadedImage.getSize() / 1024.0); // getSize()는 MB 단위
+        log.info("file-type: {}", uploadedImage.getContentType());
 
         // 세션에서 자신의 account 가져오기
+        HttpSession session = request.getSession();
+        session.getAttribute("login");
+        String writer = getCurrentLoginMemberAccount(session);
 
-        // board에 게시글 저장하기: writer, title, content, file-image, category
+        // 서버에 파일 업로드 지시
+        String savePath = FileUtils.uploadFile(uploadedImage, rootPath);
+        log.info("save-path: {}", savePath);
+
+
+        // board table 에 게시글 저장하기: writer, title, content, file-image (파일 경로), category
+        boardService.saveBoard(category, title, content, savePath, writer);
 
         return "home/all";
     }

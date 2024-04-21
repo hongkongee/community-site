@@ -16,6 +16,7 @@ import java.util.Random;
 @RequiredArgsConstructor
 @Slf4j
 public class MailSenderService {
+/*
 
     // EmailConfig에 등록한 빈 주입
     private final JavaMailSender mailSender;
@@ -59,11 +60,13 @@ public class MailSenderService {
 
         try {
             MimeMessage message = mailSender.createMimeMessage();
-            /*
+            */
+/*
             기타 설정들을 담당할 MimeMessageHelper 객체를 생성
             생성자의 매개값으로 MimeMessage 객체, bool, 문자 인코딩 설정
             true 매개값을 전달하면 MultiPart 형식의 메세지 전달이 가능 (첨부 파일)
-             */
+             *//*
+
 
             MimeMessageHelper helper = new MimeMessageHelper(message, false, "utf-8");
 
@@ -81,6 +84,7 @@ public class MailSenderService {
         }
 
     }
+*/
 
 
 }

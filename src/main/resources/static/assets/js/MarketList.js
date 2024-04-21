@@ -3,12 +3,13 @@ const $addFavButtons = document.querySelectorAll('.favorite');
 console.log($addFavButtons);
 let isAddFav = false;
 
-[...$addFavButtons].forEach( e => {
+[...$addFavButtons].forEach( e => { //... 배열화
   e.addEventListener('click', function (e) {
 
     console.log('즐겨찾기 클릭 이벤트 발생!');
     console.log('이벤트 발생 타겟: ', e.target);
     const boardNo = e.target.closest('td.favorite').dataset.bno;
+    //가까운 bno 호출
     console.log('이벤트 발생 타겟 글번호: ', boardNo);
 
     if (e.target.classList.contains('fa-regular')) {
@@ -50,9 +51,7 @@ let isAddFav = false;
       });
   });
 
-//   <!-- <td id="addFav" data-boardNo="${s.boardNo}" data-favorite="${s.addFav}">
-//   ${s.addFav == true ? '&#x2661;' : (s.addFav == false ? '&#x2665;' : '')}
-// </td> -->
+
 });
 
 

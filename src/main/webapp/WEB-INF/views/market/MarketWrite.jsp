@@ -21,6 +21,10 @@
   <link rel="stylesheet" href="/assets/css/market.css">
   <link rel="stylesheet" href="/assets/css/snb.css">
 
+    <!-- 부트스트랩 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
   <!-- ck editor -->
   <!-- 게시판 라이브러리 -->
   <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
@@ -47,9 +51,18 @@
           <label for="textTitle">제목</label>
           <input type="text" id="textTitle" name="textTitle" required>
 
-          <label for="textWriter">작성자</label>
+          <label for="textWriter">${s.textWriter}</label>
           <input type="text" id="textWriter" name="textWriter" required>
 
+          <select name="category">
+            <option value="sale">판매중</option>
+            <option value="sold">판매완료</option>
+          </select>
+
+          <label for="price">가격</label>
+          <input type="text" id="price" name="price" required>
+
+          <br>
           <label for="textContent">내용</label>
           <textarea id="textContent" name="textContent" maxlength="200" required></textarea>
 
@@ -74,5 +87,11 @@
   </script>
 
 </body>
+<script>
+
+
+
+
+</script>
 
 </html>

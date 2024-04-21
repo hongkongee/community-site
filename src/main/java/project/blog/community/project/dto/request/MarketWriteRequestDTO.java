@@ -14,6 +14,7 @@ public class MarketWriteRequestDTO {
     private String textContent;
     private LocalDateTime updateDate;
     private int viewCount;
+    private String category;
 
 
 }

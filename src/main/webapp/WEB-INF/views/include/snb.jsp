@@ -10,7 +10,7 @@
     <ul>
         <li id="home"><a href="/home/main">Home</a></li>
         <li id="game"><a href="/home/rps">게임</a></li>
-        <li id="second-hand"><a href="/market/main">중고 장터</a></li>
+        <li id="second-hand"><a href="/market/list">중고 장터</a></li>
         <li id="sports"><a href="#">로또</a></li>
         <li id="all"><a href="/home/all">
         전체 게시판

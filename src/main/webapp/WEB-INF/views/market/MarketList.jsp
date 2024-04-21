@@ -16,6 +16,19 @@
   <script src="/assets/js/MarketList.js" defer></script>
 
 
+  <style>
+    .all {}
+
+    .btn-primary {
+      padding: auto;
+    }
+
+    .anchor {
+      display: block;
+      background-color: red;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -28,7 +41,9 @@
   <div class="wrapper">
 
     <section class="all">
-      <h2> 전체 게시글</h2>
+      <h2> 중고 거래 게시글</h2>
+      <button type="button" class="btn btn-primary"><a href="/market/write">글쓰기</a></button>
+
 
       <div class="list-container">
 
@@ -45,6 +60,7 @@
               <th>작성일</th>
               <th>조회수</th>
               <th>즐겨찾기</th>
+              <th>판태상태</th>
             </tr>
           </thead>
 
@@ -61,7 +77,8 @@
                 <td id="textWriter">${s.textWriter}</td>
                 <td id="updateDate">${s.updateDate}</td>
                 <td id="viewCount"> ${s.viewCount}</td>
-                
+                <td id="category">${s.category}</td>
+
                 <td class="favorite" data-bno="${s.boardNo}">
                   <c:if test="${s.isFavorite == 1}">
                     <i class="fa-solid fa-star"></i>
@@ -83,6 +100,22 @@
     </section>
 
     <script>
+      const $post = document.querySelector('post');
+
+      $post.addEventListener('click', e => {
+        if (e.target === e.currentTarget) {
+          location.href='/market/detail/${s.boardNo}';
+          console.log("e.target === e.currentTarget");
+
+
+        }
+        console.log("클릭됨");
+        location.href='/market/detail/${s.boardNo}';
+
+      });
+
+
+
       // const $addFavButtons = document.querySelectorAll('#addFav');
 
       // $addFavButtons.forEach(button => {

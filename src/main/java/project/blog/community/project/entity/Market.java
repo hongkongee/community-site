@@ -51,7 +51,7 @@ public class Market{
     private String loginMethod; //sql tbl 타입과 일치 시켜야 함
     private int viewCount;
     private boolean addFav;
-
+    private String category;
 
     public Market(MarketWriteRequestDTO dto) { //entity -> DTO
         this.textTitle = dto.getTextTitle();
@@ -59,6 +59,7 @@ public class Market{
         this.textWriter = dto.getTextWriter();
         this.updateDate = dto.getUpdateDate();
         this.viewCount = dto.getViewCount();
+        this.category = dto.getCategory();
     }
 
 

@@ -16,6 +16,7 @@ public class MarketDetailResponse {
     private final String textContent;
     private final LocalDateTime updateDate;
     private final String textWriter;
+    private final String category;
 
 
 
@@ -27,6 +28,7 @@ public class MarketDetailResponse {
         this.textContent = market.getTextContent();
         this.updateDate = market.getUpdateDate();
         this.textWriter = market.getTextWriter();
+        this.category = market.getCategory();
     }
 
 }

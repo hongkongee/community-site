@@ -46,7 +46,8 @@
 
 
         <div class="titleContentBox">
-          <span>#작성자 : </span><span id="textWriter">${b.textWriter}</span><span>(본인인증완료)</span>
+          <span>#작성자 : </span><span id="textWriter">${b.textWriter}</span>
+          <span>#글번호 : </span><span id="boardNo">${b.boardNo}</span>
           <span>#신용도 : </span><span id="rate">9.3/10</span>
           <span>#작성시간 : </span><span id="updateDate">${b.updateDate}</span><br>
           <span>#제목 : </span><span id="textTitle">${b.textTitle}</span>
@@ -73,12 +74,15 @@
         </div>
         <br>
         <div class="ContentBox">
-          <span>#글번호 : </span><span id="boardNo">${b.boardNo}</span>
+          
           <img id="ContentImg" src="https://img3.yna.co.kr/etc/inner/EN/2023/08/13/AEN20230813000200315_01_i_P2.jpg" />
           <div class="normal" id="textContent">${b.textContent}</div>
         </div>
         <!-- 지도 -->
         <%@ include file="../market/subMap.jsp" %>
+      
+      <!-- 광고 영역 -->
+      <%@ include file="../market/subMarketAD.jsp" %>
       </div>
 
 
@@ -102,6 +106,11 @@
                   <label for="editedContent">수정할 내용</label>
                   <textarea class="form-control-lg" id="editedContent" rows="20" cols="50"
                     style="width: 100%;"></textarea>
+                  <select name="category">
+                    <option value="sale">판매중</option>
+                    <option value="sold">판매완료</option>
+                  </select>
+
 
                 </div>
               </form>
@@ -118,11 +127,7 @@
         </div>
       </div>
 
-      <!-- Reply 내용 -->
-      <%@ include file="../market/subMarketReply.jsp" %>
 
-      <!-- 광고 영역 -->
-      <%@ include file="../market/subMarketAD.jsp" %>
 
     </div>
 

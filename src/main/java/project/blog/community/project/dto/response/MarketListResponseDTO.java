@@ -23,10 +23,10 @@ MarketListResponseDTO {
 //    private LocalDateTime updateDate;
     private final String textTitle;
 //    private int rate;
-    private int isFavorite;
-
-
     private int viewCount;
+    private final String category;
+
+    private int isFavorite;
 //    private int price;
 //    private String location;
 //    private String ContentImg; //XML profile_image 스네이크 케이스 자동 인식
@@ -39,6 +39,7 @@ MarketListResponseDTO {
         this.updateDate = market.getUpdateDate();
         this.textTitle = market.getTextTitle();
         this.viewCount = market.getViewCount();
+        this.category = market.getCategory();
 
         this.isFavorite = 0;
 

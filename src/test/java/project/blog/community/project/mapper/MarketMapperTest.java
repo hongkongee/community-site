@@ -20,7 +20,7 @@ class MarketMapperTest {
         // given
         Favorite favorite = Favorite.builder()
                 .accountNumber("tjtkdvl")
-                .boardNo(123123)
+                .boardNo(1)
                 .build();
 
         // when

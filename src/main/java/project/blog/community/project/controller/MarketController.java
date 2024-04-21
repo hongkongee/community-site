@@ -115,11 +115,18 @@ public class MarketController {
 
     // boardNo 게시물에 즐겨찾기를 눌렀을 때 발생
     @PostMapping("/list/{boardNo}")
-    @ResponseBody
+    @ResponseBody //메서드의 반환 값이 HTTP 응답 본문으로 사용
     public ResponseEntity<?> addFavList(Model model,
                                              @PathVariable("boardNo") int boardNo,
                                              @RequestBody Map<String, Object> isAddFav,
                                              HttpSession session) {
+
+        //@RequestBody Map<String, Object> isAddFav
+        //HTTP 요청 본문에서 JSON 형식으로 전달된 데이터를
+        //Map<String, Object> 타입으로 받습니다.
+        // 여기서 isAddFav 키의 값은 즐겨찾기에 추가할지 제거할지를 나타내는
+        // 불리언(boolean) 값입니다.
+
 
 
         log.info("/list/{}: POST!", boardNo);

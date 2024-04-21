@@ -49,28 +49,16 @@
                 </div>
             </div>
         </div>
+
+     
         
 
         <div id="follow-information"> <!-- 친구 정보 창 -->
-            <div id="follow-detail">
-                <!-- JS로 팔로우 디테일 정보 DIV 삽입 -->
-                <p>    
-                    sdfa99asdf 님<span id="x-btn"></span>
-                </p>
-            </div>
+            <!-- JS로 팔로우 디테일 정보 DIV 삽입 -->      
         
-        <ul>
-            <li id="my-page"><i class="fa-solid fa-house"></i></li>
-            <li id="chatting"><i class="fa-solid fa-message"></i></li>
-            <li id="follow"><i class="fa-solid fa-user-plus"></i></li>
-            <li id="ban"><i class="fa-solid fa-ban"></i></li>   
-        </ul>
         </div>
 
-        <div id="chatting">
-
-        </div>
-
+        
 
     </div>
 

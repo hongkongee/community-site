@@ -2,6 +2,8 @@
 // 객체 디스트럭처링 후 친구 user의 image 컬럼에 들어있는 image 주소를 불러와서
 // img src 에 넣으면 된다. (innerHTML로 tag 추가, spring-webmvc의 detail.jsp 파일의 reply 참고)
 
+
+
 /* 팔로우 리스트 */
 const URL = '/api/v1/follow'; // 팔로우에 관련된 요청 url
 const currentAccount = '${login.account}'; // 현재 로그인
@@ -11,16 +13,20 @@ const number = 6; // 팔로우 목록에 뜨는 팔로워 수
 function renderFollows(follows) {
   let tag = '';
   let tagDetail = '';
+  console.log('팔로우 정보 렌더링!');
 
   if (follows !== null && follows.length > 0) { // 팔로우가 존재한다면
 
     for (let follower of follows) {
 
       const {accountNumber, name, email, nickname, profilePicture} = follower;
+      console.log('nickname:', nickname);
+      console.log('email:', email);
 
-      tag += `<div id='followContent' class='card-body' data-userId='\${accountNumber}'>
+      tag += `<div id='followContent' class='card-body' data-userId='${accountNumber}'>
         <div class='row user-block'>
-        <span class='col-md-8'>`;
+        <span class='col-md-8'>
+        <div class="profile-box">`;
 
       // 프로필 사진
       let profileTag = '';
@@ -34,12 +40,24 @@ function renderFollows(follows) {
 
       tag += profileTag;
 
-      tag += `<a class="friendName" href="#">\${nickname}</a>
-                <b>(\${email})</b>
+      tag += `</div><a class="friendName" data-userId='\${accountNumber}' href="#">${nickname}</a>
+                <b>(${email})</b>
               </span>
             </div>
           </div>`;
 
+      tagDetail += `<div id="follow-detail" data-userAccount="${accountNumber}">`;
+
+      tagDetail += `<p>    
+                        ${nickname} 님<i class="fa-solid fa-x"></i>
+                    </p>`;
+
+      tagDetail += `<ul>
+                        <li id="my-page"><i class="fa-solid fa-house"></i></li>
+                        <li id="chatting"><i class="fa-solid fa-message"></i></li>
+                        <li id="follow"><i class="fa-solid fa-user-plus"></i></li>
+                        <li id="ban"><i class="fa-solid fa-ban"></i></li>
+                    </ul></div>`;
       
     }
 
@@ -52,48 +70,81 @@ function renderFollows(follows) {
   // 팔로우 렌더링
   // 반복문을 이용해서 문자열로 작성한 tag를 댓글영역 div에 innerHTML로 그대로 삽입
   document.getElementById('followData').innerHTML = tag;
-  document.getElementById('follow-detail').innerHTML = tagDetail;
+  document.getElementById('follow-information').innerHTML = tagDetail;
+
+  // 팔로워 이름 클릭하면 정보창 나오게 하기
+  clickMyFollower(follows);
   
 
 };
 
 
 // 서버에 POST 요청 보내기
-fetch(`\${URL}/\${number}`)
-.then(res => res.json())
-.then(followList => {
-  console.log('Server response:', followList);
+function requestPost() {
+  console.log('서버에 fetch!');
 
-  renderFollows(followList);
+  fetch('/api/v1/follow/following/6')
+  .then(res => res.json())
+  .then(followList => {
+    console.log('Server response:', followList);
+
+    renderFollows(followList);
 });
+}
+
 
 
 
 
 /* 친구 정보 */
 const $friends = document.querySelector('.friends');
-const $userInformation = document.getElementById('user-information');
-const $xBtn = document.getElementById('x-btn');
+// const $userInformation = document.getElementById('user-information');
+const $xBtn = document.querySelector('.x-btn');
 
-$friends.onclick = e => {
-  if(!e.target.matches('.friend')) return;
-  e.preventDefault();
+function clickMyFollower(followList) {
+
+  $friends.onclick = e => {
+    if (!e.target.matches('.friendName')) return;
+    e.preventDefault();
+    console.log(e.target);
+
+    // 이벤트가 발생된 곳(수정, 삭제버튼)에서 가장 가까운 #followContent에 붙은 유저 계정
+    const userId = e.target.closest('#followContent').dataset.userId;
+    console.log('클릭한 유저 아이디: ', userId);
+
+    const $followDetail = document.querySelector(`#follow-detail[data-userAccount="${userId}"]`);
+    $followDetail.style.display = 'block';
+
+
+    
+    
+    // #user-information 의 p태그가 누른 대상의 닉네임이 되어야 한다.
+    // $userInformation.style.display = 'block';
+    // $userInformation.classList.add("animate");
   
-  // #user-information 의 p태그가 누른 대상의 닉네임이 되어야 한다.
-  $userInformation.style.display = 'block';
-  $userInformation.classList.add("animate");
+    // 애니메이션이 끝나면 animate 클래스 제거하기
+    setTimeout(function() {
+        image.classList.remove("animate");
+    }, 500); // Adjust the duration to match the transition duration
+    
+  };
 
-  // 애니메이션이 끝나면 animate 클래스 제거하기
-  setTimeout(function() {
-      image.classList.remove("animate");
-  }, 500); // Adjust the duration to match the transition duration
-  
-};
 
-$xBtn.onclick = e => {
-  console.log('x버튼 클릭');
-  $userInformation.style.display = 'none';
+
 }
+
+
+
+
+
+
+
+
+// x버튼을 누르면 창닫기
+// $xBtn.onclick = e => {
+//   console.log('x버튼 클릭');
+//   $userInformation.style.display = 'none';
+// }
 
 // 텍스트의 디자인을 바꾸는 함수.
 function checkPresentPage() {
@@ -134,6 +185,9 @@ function checkPresentPage() {
 
   // 현재 페이지에 따라 메뉴 텍스트의 디자인을 바꾸는 함수.
   checkPresentPage();
+
+  // 서버에 팔로우 정보 요청보내기
+  requestPost();
     
   
 })();

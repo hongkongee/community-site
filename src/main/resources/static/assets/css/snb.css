@@ -135,9 +135,15 @@
         justify-content: flex-start;
       }
   
-      /* aside .right-snb .friends .friends>ul>li:hover {
-        display: block;
-      } */
+      #followCollapse {
+        margin-top: 15px;
+      }
+
+      #followContent {
+        margin-top: 10px;
+      }
+
+      
   
       .profile-box { /* 프로필 사진 */
         width: 45px;
@@ -154,12 +160,17 @@
         width: 100%;
       }
   
-      aside .right-snb .friends .friends>ul>li a.friend {
+      aside .right-snb .friends .friendName {
+        line-height: 26px;
+        font-size: 18px;
+      }
+
+      aside .right-snb .friends b {
         line-height: 26px;
         font-size: 16px;
       }
   
-      aside .right-snb .friends #user-information { /* 친구 유저 정보 */
+      aside .right-snb .friends #follow-detail { /* 친구 유저 정보 */
         width: 90%;
         height: 200px;
         background: #cce37a;
@@ -179,57 +190,32 @@
         transform: scale(1.1);
       }
   
-      aside .right-snb .friends #user-information p {
+      aside .right-snb .friends #follow-detail p {
         margin-top: 10%;
         margin-left: 10%;
       }
-  
-      aside .right-snb .friends #user-information p>span#x-btn::after { /* x자 아이콘 */
-        content: '\58'; 
-        font-family:"Font Awesome 5 Free"; /*폰트어썸 fas, far 글꼴 연결*/
-        font-weight:600; /*폰트어썸 굵기 Solid Style(fas) 600필수*/
-        margin-right: 15px;
-        margin-left: 15px;
+
+      aside .right-snb .friends #follow-detail p>i.fa-x {
         float: right;
-        cursor: pointer;
       }
   
-      aside .right-snb .friends #user-information>ul {
+  
+      aside .right-snb .friends #follow-detail>ul {
         margin-top: 30%;
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
       }
-  
-  
-      /* aside .right-snb .friends #user-information>ul>li#my-page::before {
-        content: '\f015'; 
-        font-family:"Font Awesome 5 Free";
-        font-weight:600;
-        margin-right: 15px;
-        margin-left: 15px;
+
+      aside .right-snb .friends #follow-detail i {
         cursor: pointer;
       }
   
-      aside .right-snb .friends #user-information>ul>li#chatting::before {
-        content: '\f075'; 
-        font-family:"Font Awesome 5 Free";
-        font-weight:600;
-        margin-right: 15px;
-        margin-left: 15px;
-        cursor: pointer;
-      }
   
-      aside .right-snb .friends #user-information>ul>li#ban::before {
-        content: '\f05e'; 
-        font-family:"Font Awesome 5 Free";
-        font-weight:600;
-        margin-right: 15px;
-        margin-left: 15px;
-        cursor: pointer;
-      } */
+      
 
       .highlight {
         font-weight: 700;
         color: #cce37a;
       }
+

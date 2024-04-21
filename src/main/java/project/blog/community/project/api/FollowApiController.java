@@ -25,13 +25,16 @@ public class FollowApiController {
 
     private final FollowingService followingService;
 
-    @GetMapping("/{number}")
+    @GetMapping("/following/{number}")
     public ResponseEntity<?> followList(@PathVariable int number, HttpServletRequest request) {
         log.info("api/v1/follow: GET!!!");
 
         // 팔로우한 사람 목록 (닉네임, id, 프로필 사진 등이 저장)
         // number: 목록에 뜰 사람 수
         List<FollowerResponseDTO> dtoList = followingService.getFollowingList(number, request);
+        for (FollowerResponseDTO dto : dtoList) {
+            log.info("My Follow List: {}, {}", dto.getAcccountNumber(), dto.getNickname());
+        }
 
         return ResponseEntity.ok().body(dtoList);
     }

@@ -30,6 +30,21 @@ $copyUrl.onclick = () => {
 
 };
 
+function followingPost() {
+    let f = document.createElement('form');
+    const writerAccount = document.querySelector('.board-info').dataset.writerAccount;
+    console.log('board-info: ', document.querySelector('.board-info'));
+    const postURL = '/api/v1/follow/add/' + writerAccount;
+    console.log(writerAccount);
+
+
+    // f.setAttribute('method', 'post');
+    // f.setAttribute('action', postURL);
+    // document.body.appendChild(f);
+    // f.submit();
+
+}
+
 
 
 

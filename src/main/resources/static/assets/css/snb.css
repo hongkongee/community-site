@@ -170,7 +170,7 @@
         font-size: 16px;
       }
   
-      aside .right-snb .friends #follow-detail { /* 친구 유저 정보 */
+      aside .right-snb .friends .follow-detail { /* 친구 유저 정보 */
         width: 90%;
         height: 200px;
         background: #cce37a;
@@ -190,24 +190,24 @@
         transform: scale(1.1);
       }
   
-      aside .right-snb .friends #follow-detail p {
+      aside .right-snb .friends .follow-detail p {
         margin-top: 10%;
         margin-left: 10%;
       }
 
-      aside .right-snb .friends #follow-detail p>i.fa-x {
+      aside .right-snb .friends .follow-detail p>i.fa-x {
         float: right;
       }
   
   
-      aside .right-snb .friends #follow-detail>ul {
+      aside .right-snb .friends .follow-detail>ul {
         margin-top: 30%;
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
       }
 
-      aside .right-snb .friends #follow-detail i {
+      aside .right-snb .friends .follow-detail i {
         cursor: pointer;
       }
   
@@ -217,5 +217,9 @@
       .highlight {
         font-weight: 700;
         color: #cce37a;
+      }
+
+      p.myAccountNumber {
+        display: none;
       }
 

@@ -23,10 +23,7 @@ import project.blog.community.project.service.GameService;
 import project.blog.community.project.service.ManagementService;
 import project.blog.community.util.FileUtils;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccount;
 
@@ -50,12 +47,27 @@ public class HomeController {
     public String main(Model model) {
         log.info("/home/main: GET");
 
-        List<BoardListResponseDTO> dtoList = boardService.getHotList();
+        List<BoardListResponseDTO> dtoList = boardService.getHotList("popular");
 
         model.addAttribute("bList", dtoList);
-
+        model.addAttribute("r", 0);
 
         // /WEB-INF/views/~~~~~.jsp
+        return "home/main";
+    }
+    // 메인페이지 인기 게시글 정렬 선택
+    @GetMapping("/main/recent")
+    public String sortBoard(Model model) {
+        log.info("/home/main/sort: GET ");
+
+
+
+        List<BoardListResponseDTO> dtoList = boardService.getHotList("recent");
+
+        model.addAttribute("bList", dtoList);
+        model.addAttribute("r", 1);
+
+
         return "home/main";
     }
 

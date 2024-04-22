@@ -23,7 +23,7 @@ function renderFollows(follows) {
       console.log('nickname:', nickname);
       console.log('email:', email);
 
-      tag += `<div id='followContent' class='card-body' data-userId='${accountNumber}'>
+      tag += `<div id='followContent' class='card-body' data-userid='${accountNumber}'>
         <div class='row user-block'>
         <span class='col-md-8'>
         <div class="profile-box">`;
@@ -40,13 +40,13 @@ function renderFollows(follows) {
 
       tag += profileTag;
 
-      tag += `</div><a class="friendName" data-userId='\${accountNumber}' href="#">${nickname}</a>
+      tag += `</div><a class="friendName" data-userId='${accountNumber}' href="#">${nickname}</a>
                 <b>(${email})</b>
               </span>
             </div>
           </div>`;
 
-      tagDetail += `<div id="follow-detail" data-userAccount="${accountNumber}">`;
+      tagDetail += `<div class="follow-detail" data-userAccount="${accountNumber}">`;
 
       tagDetail += `<p>    
                         ${nickname} 님<i class="fa-solid fa-x"></i>
@@ -73,7 +73,10 @@ function renderFollows(follows) {
   document.getElementById('follow-information').innerHTML = tagDetail;
 
   // 팔로워 이름 클릭하면 정보창 나오게 하기
-  clickMyFollower(follows);
+  clickMyFollower();
+
+  // x버튼을 클릭하면 정보창 닫기
+  clickXbutton();
   
 
 };
@@ -89,48 +92,40 @@ function requestPost() {
     console.log('Server response:', followList);
 
     renderFollows(followList);
-});
+  });
 }
 
 
 
 
 
-/* 친구 정보 */
-const $friends = document.querySelector('.friends');
-// const $userInformation = document.getElementById('user-information');
-const $xBtn = document.querySelector('.x-btn');
+/* 팔로워 정보 */
 
-function clickMyFollower(followList) {
+// 팔로워 이름을 누르면 정보창 뜨기
+function clickMyFollower() {
 
-  $friends.onclick = e => {
+  document.getElementById('followCollapse').onclick = e => {
     if (!e.target.matches('.friendName')) return;
     e.preventDefault();
-    console.log(e.target);
+    console.log('e.target: ', e.target);
 
-    // 이벤트가 발생된 곳(수정, 삭제버튼)에서 가장 가까운 #followContent에 붙은 유저 계정
-    const userId = e.target.closest('#followContent').dataset.userId;
+    const userId = e.target.dataset.userid;
     console.log('클릭한 유저 아이디: ', userId);
 
-    const $followDetail = document.querySelector(`#follow-detail[data-userAccount="${userId}"]`);
-    $followDetail.style.display = 'block';
+    console.log(document.querySelector(`.follow-detail[data-useraccount=${userId}]`));
+    document.querySelector(`.follow-detail[data-useraccount=${userId}]`).style.display = 'block';
 
-
-    
-    
-    // #user-information 의 p태그가 누른 대상의 닉네임이 되어야 한다.
-    // $userInformation.style.display = 'block';
-    // $userInformation.classList.add("animate");
-  
-    // 애니메이션이 끝나면 animate 클래스 제거하기
-    setTimeout(function() {
-        image.classList.remove("animate");
-    }, 500); // Adjust the duration to match the transition duration
-    
   };
 
+}
 
-
+// x버튼을 누르면 창닫기
+function clickXbutton() {
+  document.getElementById('follow-information').onclick = e => {
+    if (!e.target.matches('.fa-x')) return;
+    console.log('x버튼 클릭');
+    e.target.parentNode.parentNode.style.display = 'none';
+  }
 }
 
 
@@ -138,13 +133,6 @@ function clickMyFollower(followList) {
 
 
 
-
-
-// x버튼을 누르면 창닫기
-// $xBtn.onclick = e => {
-//   console.log('x버튼 클릭');
-//   $userInformation.style.display = 'none';
-// }
 
 // 텍스트의 디자인을 바꾸는 함수.
 function checkPresentPage() {

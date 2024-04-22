@@ -12,7 +12,6 @@ import org.springframework.web.util.WebUtils;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
 import project.blog.community.project.dto.response.BoardListResponseDTO;
-import project.blog.community.project.dto.response.BoardMyListResponseDTO;
 import project.blog.community.project.entity.Board;
 import project.blog.community.project.entity.Category;
 import project.blog.community.project.entity.User;
@@ -35,7 +34,7 @@ public class BoardService {
     // 게시판 목록을 조회
     public List<BoardListResponseDTO> getList() {
         List<BoardListResponseDTO> dtoList = new ArrayList<>();
-        List<Board> boardList = boardMapper.findAll();
+        List<Board> boardList = boardMapper.findAll("recent",20);
 
         for (Board board : boardList) {
             String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
@@ -48,11 +47,13 @@ public class BoardService {
     }
 
     // 메인화면에서 목록을 조회
-    public List<BoardListResponseDTO> getHotList() {
+    public List<BoardListResponseDTO> getHotList(String option) {
         List<BoardListResponseDTO> dtoList = new ArrayList<>();
-        
+
         // 전체 게시판과 달리 좋아요 순으로 6개 게시물만 정렬
-        List<Board> boardList = boardMapper.findAll();
+        String type = option;
+        int amount = 6;
+        List<Board> boardList = boardMapper.findAll(type, amount);
 
         for (Board board : boardList) {
             String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기

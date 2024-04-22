@@ -3,6 +3,7 @@ package project.blog.community.project.service;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.connector.Request;
 import org.springframework.stereotype.Service;
 import project.blog.community.project.dto.response.FollowerResponseDTO;
 import project.blog.community.project.entity.User;
@@ -25,6 +26,8 @@ public class FollowingService {
     public List<FollowerResponseDTO> getFollowingList(int number, HttpServletRequest request) {
 
         String currentLoginMemberAccount = getMyAccount(request);
+
+        if (currentLoginMemberAccount == null) return null;
 
         // 내(로그인한 유저)가 팔로우한 유저 정보 찾기
         List<String> followers = userMapper.findUserByFollower(number, currentLoginMemberAccount);
@@ -51,15 +54,28 @@ public class FollowingService {
 
     }
 
+    public void addFollower(String writerAccount, HttpServletRequest request) {
+        String myAccount = getMyAccount(request);
+        userMapper.addFollower(myAccount, writerAccount);
+    }
+
     // 내 (로그인한 유저) 계정 찾기
     private String getMyAccount(HttpServletRequest request) {
 
-        HttpSession session = request.getSession();
-        session.getAttribute("login");
+        try {
 
-        // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
-        return getCurrentLoginMemberAccount(session);
+            HttpSession session = request.getSession();
+            session.getAttribute("login");
+
+            // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
+            return getCurrentLoginMemberAccount(session);
+
+        } catch (NullPointerException e) {
+            return null;
+        }
+
 
     }
+
 
 }

@@ -57,4 +57,15 @@ public class FollowApiController {
         return ResponseEntity.ok().body(flag);
 
     }
+
+    // 팔로잉 제거하기
+    @PostMapping("/delete")
+    public ResponseEntity<String> deleteFollow(@RequestBody Map<String, String> requestBody, HttpServletRequest request) {
+        String userAccount = requestBody.get("userAccount");
+        log.info("api/v1/follow/delete: POST! {}", userAccount);
+
+        followingService.deleteFollower(userAccount, request);
+
+        return ResponseEntity.ok().body("정상적으로 삭제되었습니다.");
+    }
 }

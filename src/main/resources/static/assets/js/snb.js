@@ -82,7 +82,7 @@ function renderFollows(follows) {
 };
 
 
-// 서버에 POST 요청 보내기
+// 서버에 팔로잉 리스트 조회 POST 요청 보내기
 function requestPost() {
   console.log('서버에 fetch!');
 
@@ -93,6 +93,27 @@ function requestPost() {
 
     renderFollows(followList);
   });
+}
+
+// 서버에 팔로잉 취소(삭제) POST 요청 보내기
+function deleteFollow(userAccount) {
+  var formData = {
+    userAccount: userAccount
+  };
+
+  fetch('/api/v1/follow/delete', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(response => response.text())
+  .then(data => {
+    console.log(data);
+    alert('정상적으로 팔로잉을 취소했습니다.')
+  });
+    
 }
 
 
@@ -122,9 +143,17 @@ function clickMyFollower() {
 // x버튼을 누르면 창닫기
 function clickXbutton() {
   document.getElementById('follow-information').onclick = e => {
-    if (!e.target.matches('.fa-x')) return;
-    console.log('x버튼 클릭');
-    e.target.parentNode.parentNode.style.display = 'none';
+    if (e.target.matches('.fa-x')) { // x버튼 클릭
+      console.log('x버튼 클릭');
+      e.target.parentNode.parentNode.style.display = 'none';
+
+    } else if (e.target.matches('.fa-ban')) { // 팔로우 취소버튼 클릭
+      console.log('팔로잉 취소!');
+      const userAccount = e.target.parentNode.parentNode.parentNode.dataset.useraccount;
+      console.log(userAccount);
+      deleteFollow(userAccount);
+    }
+    
   }
 }
 

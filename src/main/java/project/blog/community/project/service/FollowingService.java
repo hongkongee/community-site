@@ -71,7 +71,11 @@ public class FollowingService {
             return 3; // 중복 데이터 following
         }
 
+    }
 
+    public void deleteFollower(String userAccount, HttpServletRequest request) {
+        String myAccount = getMyAccount(request);
+        userMapper.removeFollower(myAccount, userAccount);
     }
 
     // 내 (로그인한 유저) 계정 찾기
@@ -91,6 +95,7 @@ public class FollowingService {
 
 
     }
+
 
 
 }

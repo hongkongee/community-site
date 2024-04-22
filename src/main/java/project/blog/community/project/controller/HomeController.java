@@ -23,10 +23,7 @@ import project.blog.community.project.service.GameService;
 import project.blog.community.project.service.ManagementService;
 import project.blog.community.util.FileUtils;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccount;
 
@@ -37,7 +34,6 @@ import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccoun
 @Slf4j
 public class HomeController {
 
-    private final GameService gameService;
     private final ManagementService managementService;
     private final BoardService boardService;
 
@@ -47,15 +43,30 @@ public class HomeController {
 
     // 홈페이지 - 메인페이지 view
     @GetMapping("/main")
-    public String main(Model model) {
+    public String mainPage(Model model) {
         log.info("/home/main: GET");
 
-        List<BoardListResponseDTO> dtoList = boardService.getHotList();
+        List<BoardListResponseDTO> dtoList = boardService.getHotList("popular");
 
         model.addAttribute("bList", dtoList);
-
+        model.addAttribute("r", 0);
 
         // /WEB-INF/views/~~~~~.jsp
+        return "home/main";
+    }
+    // 메인페이지 인기 게시글 정렬 선택
+    @GetMapping("/main/recent")
+    public String sortBoard(Model model) {
+        log.info("/home/main/sort: GET ");
+
+
+
+        List<BoardListResponseDTO> dtoList = boardService.getHotList("recent");
+
+        model.addAttribute("bList", dtoList);
+        model.addAttribute("r", 1);
+
+
         return "home/main";
     }
 
@@ -104,10 +115,11 @@ public class HomeController {
         log.info("image path: " + dto.getPostImg());
         log.info("b.category: " + dto.getCategory());
 
-        Cookie c = WebUtils.getCookie(request, "like" + bno);
+//        Cookie c = WebUtils.getCookie(request, "like" + bno);
+        // 좋아요 이미 눌렀는지 확인하기
+        int like = boardService.checkLike(request, bno);
 
-
-        if (c != null) { // 이미 좋아요를 눌렀다면
+        if (like > 0) { // 이미 좋아요를 눌렀다면
             model.addAttribute("l", 1);
         } else { // 좋아요를 누르지 않았다면
             model.addAttribute("l", 0);
@@ -137,13 +149,13 @@ public class HomeController {
     @PostMapping("/detail/like")
     @ResponseBody
     public ResponseEntity<Integer> report(@RequestBody LikeRequestDTO dto,
-                                          HttpServletRequest request,
-                                          HttpServletResponse response) {
+                                          HttpServletRequest request) {
         log.info("/home/detail/like: POST: {}, {}", dto.getBno(), dto.getNumber());
 
 
+
         // 좋아요 수 1 증가 또는 1 감소시키기
-        int isCookie = boardService.changeLike(dto, request, response);
+        int isCookie = boardService.changeLike(dto, request);
 
 
         return ResponseEntity.ok().body(isCookie);
@@ -189,32 +201,6 @@ public class HomeController {
         return "home/all";
     }
 
-    // 홈페이지 - 가위바위보 view
-    @GetMapping("/rps")
-    public String list() {
-        log.info("/home/rps: GET");
 
-        // /WEB-INF/views/~~~~~.jsp
-        return "home/gamerps";
-    }
-
-
-    // 가위바위보 게임 (비동기)
-    @PostMapping("/rps/game")
-    @ResponseBody
-    public ResponseEntity<String> rpsGame(@RequestBody RpsRequestDTO dto) {
-        // bp: 유저가 입력한 가위바위보를 위한 베팅 금액
-        log.info("/home/rps/game: POST, {}", dto.toString());
-        // scissors: 가위, rock: 바위, paper: 보
-
-
-        // 가위바위보 결과
-        String result = gameService.rpsPointCalc(dto);
-        System.out.println(result);
-
-
-        return ResponseEntity.ok().body(result);
-
-    }
 
 }

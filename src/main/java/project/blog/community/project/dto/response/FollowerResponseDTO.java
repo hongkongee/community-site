@@ -12,7 +12,7 @@ import project.blog.community.project.entity.User;
 @Builder
 public class FollowerResponseDTO {
 
-    private String acccountNumber;
+    private String accountNumber;
     private String name;
     private String email;
     private String nickname;
@@ -23,7 +23,7 @@ public class FollowerResponseDTO {
         this.email = user.getEmail();
         this.nickname = user.getNickname();
         this.profilePicture = user.getProfilePicture();
-        this.acccountNumber =  user.getAccountNumber();
+        this.accountNumber =  user.getAccountNumber();
     }
 
 

@@ -4,15 +4,22 @@
 
 <mapper namespace="project.blog.community.project.mapper.BoardMapper">
 
-    <select id="save">
+    <insert id="save">
         INSERT INTO tbl_board
         (title, content, writer, category, post_img)
         VALUES (#{title}, #{content}, #{writer}, #{category}, #{postImg})
-    </select>
+    </insert>
 
     <select id="findAll" resultType="board">
         SELECT * FROM tbl_board
-        ORDER BY bno DESC
+
+        <if test="type == 'popular'">
+            ORDER BY like_count DESC
+        </if>
+        <if test="type == 'recent'">
+            ORDER BY bno DESC
+        </if>
+        LIMIT 0, #{amount}
     </select>
 
     <select id="findOne" resultType="board">
@@ -38,6 +45,7 @@
             WHERE category = 'TRIP'
         </if>
         ORDER BY bno DESC
+        LIMIT 0, #{amount}
     </select>
 
 

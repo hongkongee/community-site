@@ -40,9 +40,9 @@ public class BoardMyListResponseDTO {
         return dtf.format(regDate);
     }
 
-    private String makeShortContent(String content) {
-        return sliceString(content, 10);
-    }
+//    private String makeShortContent(String content) {
+//        return sliceString(content, 10);
+//    }
 
     private static String sliceString(String targetString, int wishLength) {
         return (targetString.length() > wishLength)

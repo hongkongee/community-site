@@ -37,5 +37,5 @@ public interface BoardMapper {
 
 
     // 내 게시물만 보이는 findMine
-    List<Board> findMine(String currentLoginMemberAccount);
+    List<Board> findMine(@Param("page") Search page, @Param("account") String currentLoginMemberAccount);
 }

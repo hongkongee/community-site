@@ -5,9 +5,9 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.SessionException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.WebUtils;
 import project.blog.community.project.common.Search;
@@ -15,10 +15,12 @@ import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
 import project.blog.community.project.dto.response.BoardListResponseDTO;
 import project.blog.community.project.dto.response.BoardMyListResponseDTO;
+import project.blog.community.project.dto.response.LoginUserResponseDTO;
 import project.blog.community.project.entity.Board;
 import project.blog.community.project.entity.User;
 import project.blog.community.project.mapper.BoardMapper;
 import project.blog.community.project.mapper.UserMapper;
+import project.blog.community.project.repository.JdbcRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,16 +116,16 @@ public class BoardService {
         }
     }
 
-    public List<BoardMyListResponseDTO> getMyList(HttpServletRequest request) {
-        List<BoardMyListResponseDTO> dtoList = new ArrayList<>();
-        List<Board> boardList = boardMapper.findAll();
+    public List<BoardMyListResponseDTO> getMyList(HttpServletRequest request, Search page) {
+        List<BoardMyListResponseDTO> myList = new ArrayList<>();
+        List<Board> boardList = boardMapper.findAll(page);
 
         for (Board board : boardList) {
             BoardMyListResponseDTO dto = new BoardMyListResponseDTO(board);
-            dtoList.add(dto);
+            myList.add(dto);
         }
 
-        return dtoList;
+        return myList;
 
     }
 
@@ -134,16 +136,18 @@ public class BoardService {
     public List<BoardMyListResponseDTO> getMyList(Search page, HttpServletRequest request) {
 
         HttpSession session = request.getSession();
-        session.getAttribute("login");
+        LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+        log.info("dto: {}", loginDto);
 
         String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
 
-        List<BoardMyListResponseDTO> dtoList = new ArrayList<>();
-        List<Board> boardList = boardMapper.findMine(currentLoginMemberAccount);
+        List<BoardMyListResponseDTO> myList = new ArrayList<>();
+        List<Board> boardList = boardMapper.findMine(page, currentLoginMemberAccount);
         for (Board board : boardList) {
             BoardMyListResponseDTO dto = new BoardMyListResponseDTO(board);
-            dtoList.add(dto);
+            myList.add(dto);
         }
-        return dtoList;
+        return myList;
     }
+
 }

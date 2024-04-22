@@ -13,4 +13,7 @@ public class LikeRequestDTO {
     private int bno;
     private int number;
 
+    private Long postId;
+    private Long userId;
+
 }

@@ -23,7 +23,7 @@ import java.util.List;
 @Slf4j
 public class DiaryController {
 
-    private final BoardService boardService;
+    private final BoardService service;
 
     @GetMapping("/diary")
     public String diary() {
@@ -38,11 +38,11 @@ public class DiaryController {
         log.info("/mypage/posting_cube: GET!!!");
 
         //보여주고 싶은 게시물 리스트
-        List<BoardMyListResponseDTO> myList = boardService.getMyList(page, request);
+        List<BoardMyListResponseDTO> myList = service.getMyList(page, request);
 
         // 페이징 버튼 알고리즘 적용 -> 사용자가 요청한 페이지 정보, 총 게시물 개수를 전달.
         // 페이징 알고리즘 자동 호출.
-        PageMaker pageMaker = new PageMaker(page, boardService.getCount(page));
+        PageMaker pageMaker = new PageMaker(page, service.getCount(page));
 
         model.addAttribute("bList", myList);
         model.addAttribute("maker", pageMaker);
@@ -56,7 +56,7 @@ public class DiaryController {
     @GetMapping("/posting_cube/{bno}")
     public String detail(@PathVariable("bno") int bno, @ModelAttribute("s") Search search, Model model) {
         System.out.println("/board/detail: GET! " + bno);
-        BoardDetailResponseDTO dto = boardService.getDetail(bno);
+        BoardDetailResponseDTO dto = service.getDetail(bno);
 
         model.addAttribute("b", dto);
         return "home/detail";

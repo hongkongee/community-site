@@ -14,6 +14,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import project.blog.community.project.dto.request.SignUpRequestDto;
 import project.blog.community.project.dto.response.KakaoUserResponseDTO;
+import project.blog.community.project.entity.User;
 
 import java.util.Map;
 
@@ -46,7 +47,9 @@ public class SnsLoginService {
                             .password("0000")
                             .name(dto.getProperties().getNickname())
                             .email(email)
-                            .build() // 프로필사진 값 안불러옴. 불러와야 함!!
+                            .loginMethod(User.LoginMethod.KAKAO)
+                            .build(),
+                    dto.getProperties().getProfileImage()
             );
         }
 

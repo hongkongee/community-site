@@ -68,8 +68,15 @@ public class User {
    // 회원 프사
    private String profilePicture;
 
-   // 회원 가입 방법
+   //로그인 방법
    private LoginMethod loginMethod;
+
+   public enum LoginMethod {
+
+      COMMON, KAKAO, NAVER, GOOGLE
+
+   }
+
 
 
 

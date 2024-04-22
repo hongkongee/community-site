@@ -18,6 +18,24 @@
   <link rel="stylesheet" href="/assets/css/market.css">
   <link rel="stylesheet" href="/assets/css/snb.css">
 
+  <style>
+    #map-container {
+        text-align: center;
+    }
+
+    #address-container {
+        margin-top: 20px;
+    }
+
+    #googleMap {
+        display: inline-block;
+        /* inline-block으로 변경 */
+        width: 500px;
+        height: 500px;
+    }
+</style>
+
+
 
 
 </head>
@@ -80,7 +98,9 @@
           <div class="normal" id="textContent">${b.textContent}</div>
         </div>
         <!-- 지도 -->
-        <%@ include file="../market/subMap.jsp" %>
+        <div id="map-container">
+          <div id="googleMap"></div>
+      </div>
 
         <!-- 광고 영역 -->
         <%@ include file="../market/subMarketAD.jsp" %>
@@ -287,6 +307,41 @@
         });
     }
 
+    let map;
+    let center;
+
+
+    function myMap() { //Google Maps 초기화
+        var mapOptions = { //지도 초기화 정보
+            center: new google.maps.LatLng(37.552550, 126.937703),
+            zoom: 18
+        };
+
+        map = new google.maps.Map(document.getElementById("googleMap"), mapOptions); //mapOptions 사용자 설정 위치 
+    }
+
+    function searchAddress() { //입력한 주소를 받아 해당 주소의 위도와 경도를 검색
+        var geocoder = new google.maps.Geocoder();//주소 위도/경도 변환
+        var address = '${b.address}';
+
+        geocoder.geocode({ 'address': address }, function(results, status) { //변환할 주소, 콜백함수
+            if (status === 'OK') {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            } else {
+                alert('주소를 찾을 수 없습니다. 다른 주소를 입력해주세요.');
+            }
+        });
+    }
+
+    window.onload = function() {
+      searchAddress();
+    }
+
+
 
 
 
@@ -330,6 +385,10 @@
 
     */
   </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOCNKI6eODqFYglsYcSTmd0GDwNWUz8FU&callback=myMap">
+</script>
+  
 
 
 </body>

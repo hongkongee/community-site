@@ -262,6 +262,7 @@ $addFollowing.onclick = () => {
 
     if (data === 1) {
       alert('정상적으로 팔로잉 했습니다.');
+      location.reload(); // 새로고침
     } else if (data === 2) {
       alert('자기 자신은 팔로잉할 수 없습니다.');
     } else if (data === 3) {

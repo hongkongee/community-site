@@ -45,6 +45,7 @@
             WHERE category = 'TRIP'
         </if>
         ORDER BY bno DESC
+        LIMIT 0, #{amount}
     </select>
 
 

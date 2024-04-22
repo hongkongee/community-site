@@ -47,15 +47,22 @@ $recent.onclick = () => {
   window.location.href = '/home/main/recent';
 }
 
+document.querySelector('.card-container').onclick = e => {
+  if (!e.target.matches('img')) return;
+  const bno = e.target.parentNode.parentNode.dataset.bno;
+  // console.log(bno);
+  window.location.href = '/home/detail/' + bno;
+}
+
 // 즉시실행함수
 (() => {
+  console.log('r = ', r);
 
-  if (r === 1) {
-    $popular.classList.remove('active');
+  if (r === 1) { // 최신순
     $recent.classList.add('active');
-  } else {
+
+  } else { // 인기순
     $popular.classList.add('active');
-    $recent.classList.remove('active');
   }
   
 })();

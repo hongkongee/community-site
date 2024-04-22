@@ -34,7 +34,6 @@ import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccoun
 @Slf4j
 public class HomeController {
 
-    private final GameService gameService;
     private final ManagementService managementService;
     private final BoardService boardService;
 
@@ -202,32 +201,6 @@ public class HomeController {
         return "home/all";
     }
 
-    // 홈페이지 - 가위바위보 view
-    @GetMapping("/rps")
-    public String list() {
-        log.info("/home/rps: GET");
 
-        // /WEB-INF/views/~~~~~.jsp
-        return "home/gamerps";
-    }
-
-
-    // 가위바위보 게임 (비동기)
-    @PostMapping("/rps/game")
-    @ResponseBody
-    public ResponseEntity<String> rpsGame(@RequestBody RpsRequestDTO dto) {
-        // bp: 유저가 입력한 가위바위보를 위한 베팅 금액
-        log.info("/home/rps/game: POST, {}", dto.toString());
-        // scissors: 가위, rock: 바위, paper: 보
-
-
-        // 가위바위보 결과
-        String result = gameService.rpsPointCalc(dto);
-        System.out.println(result);
-
-
-        return ResponseEntity.ok().body(result);
-
-    }
 
 }

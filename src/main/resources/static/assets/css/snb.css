@@ -33,6 +33,12 @@
         color: #000;
         line-height: 160%;
       }
+
+      aside .left-snb #game a {
+        margin-top: 22px;
+        color: #000;
+        line-height: 160%;
+      }
   
       aside .left-snb ul li a:hover {
         color: #97E7E1;
@@ -46,13 +52,6 @@
         line-height: 160%;
       }
   
-      aside .left-snb ul li>ul>li::before {
-        content: '\f061'; 
-        color: #000;
-        font-family:"Font Awesome 5 Free"; /*폰트어썸 fas, far 글꼴 연결*/
-        font-weight:600; /*폰트어썸 굵기 Solid Style(fas) 600필수*/
-        margin-right: 15px;
-      }
   
       
   
@@ -82,18 +81,9 @@
   
       aside .right-snb .point {
         margin: 20px 20px;
+        margin-top: 50px;
       }
-  
-      aside .right-snb .point p::before {
-        content: '\f51e'; 
-        font-family:"Font Awesome 5 Free"; /*폰트어썸 fas, far 글꼴 연결*/
-        font-weight:600; /*폰트어썸 굵기 Solid Style(fas) 600필수*/
-        margin-right: 15px;
-      }
-  
-  
-  
-  
+
   
   
   
@@ -158,6 +148,7 @@
   
       .profile-box img {
         width: 100%;
+        cursor: pointer;
       }
   
       aside .right-snb .friends .friendName {

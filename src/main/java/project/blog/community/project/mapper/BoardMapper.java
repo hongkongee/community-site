@@ -17,7 +17,7 @@ public interface BoardMapper {
     List<Board> findAll(@Param("type") String type, @Param("amount") int amount);
 
     // 특정 카테고리의 게시글 조회
-    List<Board> findCategory(String category);
+    List<Board> findCategory(@Param("category") String category, @Param("amount") int amount);
 
     // 상세 조회
     Board findOne(int bno);

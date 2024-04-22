@@ -41,7 +41,7 @@
         </a>
         
         <div class="btn-group" data-recent="${r}"> <!-- 버튼 그룹 (부트스트랩) -->
-          <a href="#" id="popular" class="btn btn-primary active" aria-current="page">인기순</a>
+          <a href="#" id="popular" class="btn btn-primary" aria-current="page">인기순</a>
           <a href="#" id="recent" class="btn btn-primary">최신순</a>
         </div>
 
@@ -56,7 +56,7 @@
         <c:forEach var="b" items="${bList}">
 
           <div class="card-wrapper"> <!-- 게시물 하나 영역 -->
-            <section class="card" data-detail = "/home/detail/${b.bno}">
+            <section class="card" data-detail="/home/detail/${b.bno}" data-bno="${b.bno}">
               <div class="card-image">
 
                 

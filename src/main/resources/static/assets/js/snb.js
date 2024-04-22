@@ -26,7 +26,7 @@ function renderFollows(follows) {
       tag += `<div id='followContent' class='card-body' data-userid='${accountNumber}'>
         <div class='row user-block'>
         <span class='col-md-8'>
-        <div class="profile-box">`;
+        <div class="profile-box" data-userid='${accountNumber}'>`;
 
       // 프로필 사진
       let profileTag = '';
@@ -72,7 +72,7 @@ function renderFollows(follows) {
   document.getElementById('followData').innerHTML = tag;
   document.getElementById('follow-information').innerHTML = tagDetail;
 
-  // 팔로워 이름 클릭하면 정보창 나오게 하기
+  // 팔로워 이름 또는 프로필 이미지를 클릭하면 정보창 나오게 하기
   clickMyFollower();
 
   // x버튼을 클릭하면 정보창 닫기
@@ -112,6 +112,7 @@ function deleteFollow(userAccount) {
   .then(data => {
     console.log(data);
     alert('정상적으로 팔로잉을 취소했습니다.')
+    location.reload(); // 새로고침
   });
     
 }
@@ -126,15 +127,25 @@ function deleteFollow(userAccount) {
 function clickMyFollower() {
 
   document.getElementById('followCollapse').onclick = e => {
-    if (!e.target.matches('.friendName')) return;
-    e.preventDefault();
-    console.log('e.target: ', e.target);
+    if (e.target.matches('.friendName')) {
 
-    const userId = e.target.dataset.userid;
-    console.log('클릭한 유저 아이디: ', userId);
+      e.preventDefault();
+      console.log('e.target: ', e.target);
 
-    console.log(document.querySelector(`.follow-detail[data-useraccount=${userId}]`));
-    document.querySelector(`.follow-detail[data-useraccount=${userId}]`).style.display = 'block';
+      const userId = e.target.dataset.userid;
+      console.log('클릭한 유저 아이디: ', userId);
+
+      console.log(document.querySelector(`.follow-detail[data-useraccount=${userId}]`));
+      document.querySelector(`.follow-detail[data-useraccount=${userId}]`).style.display = 'block';
+
+    } else if (e.target.matches('.profile-box>img')) {
+      console.log('e.target: ', e.target);
+      const userId = e.target.parentNode.dataset.userid;
+      console.log(document.querySelector(`.follow-detail[data-useraccount=${userId}]`));
+      document.querySelector(`.follow-detail[data-useraccount=${userId}]`).style.display = 'block';
+
+    }
+    
 
   };
 
@@ -174,21 +185,21 @@ function checkPresentPage() {
   } else if (presentPage.includes("/home/all")) { // 또는 전체 게시판 페이지라면
     document.getElementById('all').firstChild.classList.add('highlight');
 
-  } else if (presentPage.includes("/home/rps")) { // 또는 가위바위보 페이지라면
-    document.getElementById('game').firstChild.classList.add('highlight');
+  } else if (presentPage.includes("/game/rps")) { // 또는 가위바위보 페이지라면
+    document.getElementById('rsp').lastChild.classList.add('highlight');
 
   } else if (presentPage.includes("/home/board/game")) { // 게임 게시판이라면
     console.log('현재 페이지는 게임 게시판~');
-    document.getElementById('game-board').firstChild.classList.add('highlight');
+    document.getElementById('game-board').lastChild.classList.add('highlight');
 
   } else if (presentPage.includes("/home/board/movie")) { // 영화 게시판이라면
-    document.getElementById('movie').firstChild.classList.add('highlight');
+    document.getElementById('movie').lastChild.classList.add('highlight');
 
   } else if (presentPage.includes("/home/board/trip")) { // 여행 게시판이라면
-    document.getElementById('trip').firstChild.classList.add('highlight');
+    document.getElementById('trip').lastChild.classList.add('highlight');
     
   } else if (presentPage.includes("/market/main")) { // 당근 마켓이라면
-    document.getElementById('second-hand').firstChild.classList.add('highlight');
+    document.querySelector('#second-hand>a').classList.add('highlight');
 
   } else {
     console.log('아무것도 적용이 안됨');

@@ -65,8 +65,10 @@ public class BoardService {
 
     // 카테고리에 따라 다른 게시판 목록을 보여주는 메서드
     public List<BoardListResponseDTO> getCategoryList(String category) {
+        int amount = 20;
+
         List<BoardListResponseDTO> dtoList = new ArrayList<>();
-        List<Board> boardList = boardMapper.findCategory(category);
+        List<Board> boardList = boardMapper.findCategory(category, amount);
         for (Board board : boardList) {
             String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
             BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname);

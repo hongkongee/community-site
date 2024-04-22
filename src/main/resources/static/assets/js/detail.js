@@ -30,20 +30,6 @@ $copyUrl.onclick = () => {
 
 };
 
-function followingPost() {
-    let f = document.createElement('form');
-    const writerAccount = document.querySelector('.board-info').dataset.writerAccount;
-    console.log('board-info: ', document.querySelector('.board-info'));
-    const postURL = '/api/v1/follow/add/' + writerAccount;
-    console.log(writerAccount);
-
-
-    // f.setAttribute('method', 'post');
-    // f.setAttribute('action', postURL);
-    // document.body.appendChild(f);
-    // f.submit();
-
-}
 
 
 
@@ -209,7 +195,7 @@ document.getElementById('report-form').addEventListener("submit", function(e) {
 
   var message = document.getElementById("reportText").value;
 
-  // *********************** AJAX : 서버에 요청 보내기 ***********************
+  // *********************** AJAX : 서버에 유저 신고 요청 보내기 ***********************
 
   var formData = {
       bno: bno, // 게시글 번호
@@ -246,6 +232,46 @@ document.getElementById('report-form').addEventListener("submit", function(e) {
   
 
 });
+
+// 팔로잉 누르기
+const $addFollowing = document.getElementById('add-following');
+$addFollowing.onclick = () => {
+  console.log('팔로잉!!');
+  const writerAccount = $addFollowing.dataset.writeraccount;
+  console.log(writerAccount);
+
+  var formData = {
+    writerAccount: writerAccount
+  };
+
+  fetch('/api/v1/follow/add', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(response => {
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    // Parse the response body as JSON
+    return response.json();})
+  .then(data => {
+    console.log('1인 경우에만 정상 팔로우 처리 완료: ', data);
+
+    if (data === 1) {
+      alert('정상적으로 팔로잉 했습니다.');
+    } else if (data === 2) {
+      alert('자기 자신은 팔로잉할 수 없습니다.');
+    } else if (data === 3) {
+      alert('이미 팔로잉한 회원입니다.');
+    }
+
+
+  });
+  
+};
 
 
 // 즉시 실행 함수

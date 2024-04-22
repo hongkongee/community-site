@@ -3,7 +3,9 @@ package project.blog.community.project.service;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.connector.Request;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import project.blog.community.project.dto.response.FollowerResponseDTO;
 import project.blog.community.project.entity.User;
@@ -16,6 +18,7 @@ import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccoun
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class FollowingService {
     // following : 팔로우 하는 유저
     // follower : 팔로우 당하는 유저 (내가 팔로우 하는 유저)
@@ -54,9 +57,21 @@ public class FollowingService {
 
     }
 
-    public void addFollower(String writerAccount, HttpServletRequest request) {
+    public int addFollower(String writerAccount, HttpServletRequest request) {
         String myAccount = getMyAccount(request);
-        userMapper.addFollower(myAccount, writerAccount);
+        if (myAccount.equals(writerAccount)) {
+            log.info("자기 자신은 팔로잉 불가능");
+            return 2; // 자기 자신 following
+        }
+
+        try {
+            userMapper.addFollower(myAccount, writerAccount);
+            return 1; // 정상 insert
+        } catch (DuplicateKeyException e) {
+            return 3; // 중복 데이터 following
+        }
+
+
     }
 
     // 내 (로그인한 유저) 계정 찾기

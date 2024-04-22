@@ -44,7 +44,7 @@ public class HomeController {
 
     // 홈페이지 - 메인페이지 view
     @GetMapping("/main")
-    public String main(Model model) {
+    public String mainPage(Model model) {
         log.info("/home/main: GET");
 
         List<BoardListResponseDTO> dtoList = boardService.getHotList("popular");

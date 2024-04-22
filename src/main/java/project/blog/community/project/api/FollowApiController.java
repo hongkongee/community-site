@@ -4,12 +4,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import project.blog.community.project.dto.response.FollowerResponseDTO;
 import project.blog.community.project.service.FollowingService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/follow")
@@ -46,13 +46,15 @@ public class FollowApiController {
     }
 
     // 작성자 팔로잉 추가하기
-    @PostMapping("/add/{writer}")
-    public String addFollow(@PathVariable String writer, HttpServletRequest request) {
-        log.info("api/v1/follow/add/{}: POST!", writer); // writer : accountNumber
+    @PostMapping("/add")
+    public ResponseEntity<Integer> addFollow(@RequestBody Map<String, String> requestBody, HttpServletRequest request) {
+        String writerAccount = requestBody.get("writerAccount");
+        log.info("api/v1/follow/add: POST! {}", writerAccount); // writer : accountNumber
 
-//        followingService.addFollower(writer, request);
+        int flag = followingService.addFollower(writerAccount, request);
+        log.info("following code number: " + flag);
 
+        return ResponseEntity.ok().body(flag);
 
-        return null;
     }
 }

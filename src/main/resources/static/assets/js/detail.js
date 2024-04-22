@@ -67,7 +67,7 @@ function likeCountUpDown(n) {
 // 페이지 진입 부터 좋아요 하트 체크여부 부여 (과거 이미 체크했다면 부여)
 function alreadyLike() {
 
-  // 쿠키 존재 (이미 클릭) -> likeFlag = 1
+  // DB에 이미 저장됨 (이미 클릭) -> likeFlag = 1
   likeFlag = document.querySelector('.like').dataset.likeCookie;
   likeFlag = Number(likeFlag);
   console.log('이미 좋아요를 눌렀나요?', likeFlag);

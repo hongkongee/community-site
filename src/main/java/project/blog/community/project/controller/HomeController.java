@@ -116,10 +116,11 @@ public class HomeController {
         log.info("image path: " + dto.getPostImg());
         log.info("b.category: " + dto.getCategory());
 
-        Cookie c = WebUtils.getCookie(request, "like" + bno);
+//        Cookie c = WebUtils.getCookie(request, "like" + bno);
+        // 좋아요 이미 눌렀는지 확인하기
+        int like = boardService.checkLike(request, bno);
 
-
-        if (c != null) { // 이미 좋아요를 눌렀다면
+        if (like > 0) { // 이미 좋아요를 눌렀다면
             model.addAttribute("l", 1);
         } else { // 좋아요를 누르지 않았다면
             model.addAttribute("l", 0);
@@ -149,13 +150,13 @@ public class HomeController {
     @PostMapping("/detail/like")
     @ResponseBody
     public ResponseEntity<Integer> report(@RequestBody LikeRequestDTO dto,
-                                          HttpServletRequest request,
-                                          HttpServletResponse response) {
+                                          HttpServletRequest request) {
         log.info("/home/detail/like: POST: {}, {}", dto.getBno(), dto.getNumber());
 
 
+
         // 좋아요 수 1 증가 또는 1 감소시키기
-        int isCookie = boardService.changeLike(dto, request, response);
+        int isCookie = boardService.changeLike(dto, request);
 
 
         return ResponseEntity.ok().body(isCookie);

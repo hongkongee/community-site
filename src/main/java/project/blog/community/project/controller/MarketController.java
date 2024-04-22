@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccount;
+
 @Controller
 @RequestMapping("/market")
 @RequiredArgsConstructor
@@ -66,10 +68,16 @@ public class MarketController {
     }
 
     @PostMapping("/write")
-    public String write(MarketWriteRequestDTO dto){
+    public String write(MarketWriteRequestDTO dto, HttpServletRequest request){
         log.info("/board/write : POST, dto: {}", dto);
 
-        marketService.register(dto);
+        //현재 로그인한 유저 ID
+        HttpSession session = request.getSession();
+        session.getAttribute("login");
+        // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
+        String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
+
+        marketService.register(dto, currentLoginMemberAccount);
         return "redirect:/market/list";
 
 

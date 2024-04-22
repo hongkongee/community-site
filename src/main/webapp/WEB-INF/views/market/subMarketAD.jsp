@@ -34,47 +34,47 @@
 
     <!-- 광고 더미리스트 -->
     <div class="adSampleList" style="display:none;">
-      <li class="ad">
+      <div class="ad">
         <img src="https://image.msscdn.net/images/goods_img/20200306/1338015/1338015_2_500.jpg" />
-        <div class="ad-content">#111111<br />#100원</div>
-      </li>
-      <li class="ad">
+        <div class="ad-content">#흰 셔츠<br />#50000원</div>
+      </div>
+      <div class="ad">
         <img src="https://static.lookpin.co.kr/20230211105113-07e7/a75da881ce8b00e52b77abe98f126239.jpg" />
-        <div class="ad-content">#22222<br />#200원</div>
-      </li>
-      <li class="ad">
+        <div class="ad-content">#브라운 셔츠<br />#50000원</div>
+      </div>
+      <div class="ad">
         <img
           src="https://shop-phinf.pstatic.net/20210526_75/1622030604426uM1Nz_JPEG/%EB%82%A8%EC%9E%90%EB%82%A8%EC%84%B1%EC%85%94%EC%B8%A0_25.jpg" />
-        <div class="ad-content">#3333<br />#30원</div>
-      </li>
-      <li class="ad">
+        <div class="ad-content">#그린셔츠<br />#10000원</div>
+      </div>
+      <div class="ad">
         <img src="https://m.uremind.co.kr/web/product/big/202208/07221d255ebc9781e55b5a1b0c2fb90c.jpg" />
-        <div class="ad-content">#44444<br />#400원</div>
-      </li>
-      <li class="ad">
+        <div class="ad-content">#스카이셔츠<br />#40000원</div>
+      </div>
+      <div class="ad">
         <img src="https://m.boom-style.com/web/product/big/202210/12109c0b6d851c1b5a249286528da487.jpg">
-        <div class="ad-content">#555555<br />#500원</div>
-      </li>
-      <li class="ad">
+        <div class="ad-content">#스카이돌고래셔츠<br />#45000원</div>
+      </div>
+      <div class="ad">
         <img src="https://cafe24img.poxo.com/meetkmi0/web/product/big/20200430/c80d4d226ae9d8b1ae3b767c2dcc680a.jpg" />
-        <div class="ad-content">#6666<br />#600원</div>
-      </li>
-      <li class="ad">
+        <div class="ad-content">#네이비셔츠<br />#60000원</div>
+      </div>
+      <div class="ad">
         <img src="https://image.msscdn.net/images/goods_img/20210215/1793989/1793989_2_500.jpg" />
-        <div class="ad-content">#77777<br />#700원</div>
-      </li>
-      <li class="ad">
+        <div class="ad-content">#화이트셔츠<br />#70000원</div>
+      </div>
+      <div class="ad">
         <img src="https://nareum.co.kr/web/product/big/202209/9aaf16bb15f345cc5464a52699f17921.jpg" />
-        <div class="ad-content">#88888<br />#800원</div>
-      </li>
-      <li class="ad">
+        <div class="ad-content">#체크셔츠<br />#37000원</div>
+      </div>
+      <div class="ad">
         <img src="https://img.mbn.co.kr/filewww/news/2023/04/25/16824160556447a1b7287b7.png" />
-        <div class="ad-content">#99999<br />#900원</div>
-      </li>
-      <li class="ad">
+        <div class="ad-content">#게임셔츠<br />#80000원</div>
+      </div>
+      <div class="ad">
         <img src="https://img.mbn.co.kr/filewww/news/2023/04/25/16824160556447a1b7287b7.png" />
         <div class="ad-content">#1010101010<br />#1,000원</div>
-      </li>
+      </div>
     </div>
 
   </div>
@@ -105,6 +105,7 @@
 
     // 배열을 랜덤하게 섞음
     const shuffledAds = shuffle(adsArray);
+    console.log('shuffledAds: ', shuffledAds);
 
     // ad1, ad2, ad3, ad4에 랜덤하게 배치
     const adContainers = { //객체 리터럴 문법 : key - value
@@ -116,8 +117,8 @@
 
     // 각 컨테이너에 랜덤한 광고 삽입
     for (let i = 0; i < 4; i++) {
-      adContainers[`ad${i + 1}`].innerHTML = ''; //템플릿 리터럴
-      adContainers[`ad${i + 1}`].appendChild(shuffledAds[i]);
+      adContainers[`ad\${i + 1}`].innerHTML = ''; //템플릿 리터럴 \
+      adContainers[`ad\${i + 1}`].appendChild(shuffledAds[i]);
     }
   }
 

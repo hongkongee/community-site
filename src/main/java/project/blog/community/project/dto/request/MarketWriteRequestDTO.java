@@ -9,12 +9,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 
 public class MarketWriteRequestDTO {
-    private String textWriter;
     private String textTitle;
     private String textContent;
     private LocalDateTime updateDate;
     private int viewCount;
     private String category;
+    private int price;
+    private String address;
 
 
 }

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.ToString;
 import project.blog.community.project.entity.Market;
 
+import javax.management.loading.PrivateClassLoader;
 import java.time.LocalDateTime;
 
 @Getter
@@ -17,7 +18,8 @@ public class MarketDetailResponse {
     private final LocalDateTime updateDate;
     private final String textWriter;
     private final String category;
-
+    private final int price;
+    private final String address;
 
 
     public MarketDetailResponse(Market market) {
@@ -29,6 +31,8 @@ public class MarketDetailResponse {
         this.updateDate = market.getUpdateDate();
         this.textWriter = market.getTextWriter();
         this.category = market.getCategory();
+        this.price = market.getPrice();
+        this.address = market.getAddress();
     }
 
 }

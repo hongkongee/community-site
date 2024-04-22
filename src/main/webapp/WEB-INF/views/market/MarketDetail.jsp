@@ -48,11 +48,12 @@
         <div class="titleContentBox">
           <span>#작성자 : </span><span id="textWriter">${b.textWriter}</span>
           <span>#글번호 : </span><span id="boardNo">${b.boardNo}</span>
-          <span>#신용도 : </span><span id="rate">9.3/10</span>
+          <span>#신용도 : </span><span id="rate">5.0</span>
           <span>#작성시간 : </span><span id="updateDate">${b.updateDate}</span><br>
           <span>#제목 : </span><span id="textTitle">${b.textTitle}</span>
-          <span>#가격 : </span><span id="price">200000</span><span>원</span>
-          <span>#판매자 선호 거래지역 : </span><span id="location">신촌역</span>
+          <span>#가격 : </span><span id="price">${b.price}</span><span>원</span>
+          <span>#판매자 선호 거래지역 : </span><span id="address">${b.address}</span>
+          <span>#판매상태 : </span><span id="selectedCategory">${b.category}</span>
         </div>
       </div>
 
@@ -68,21 +69,21 @@
           <button id="content-Del">삭제</button>
           <button id="modifyBtn" class="content-Rev" type="button" data-bs-toggle="modal"
             data-bs-target="#editModal">간단수정</button>
-          <span class="content-AddFav">상품 즐겨찾기</span>
-          <span class="content-Otherproduct">#판매자의 다른상품</span>
+
+
+
 
         </div>
         <br>
         <div class="ContentBox">
-          
-          <img id="ContentImg" src="https://img3.yna.co.kr/etc/inner/EN/2023/08/13/AEN20230813000200315_01_i_P2.jpg" />
+
           <div class="normal" id="textContent">${b.textContent}</div>
         </div>
         <!-- 지도 -->
         <%@ include file="../market/subMap.jsp" %>
-      
-      <!-- 광고 영역 -->
-      <%@ include file="../market/subMarketAD.jsp" %>
+
+        <!-- 광고 영역 -->
+        <%@ include file="../market/subMarketAD.jsp" %>
       </div>
 
 
@@ -106,10 +107,14 @@
                   <label for="editedContent">수정할 내용</label>
                   <textarea class="form-control-lg" id="editedContent" rows="20" cols="50"
                     style="width: 100%;"></textarea>
-                  <select name="category">
+                  <select name="category" id="editedCategory">
                     <option value="sale">판매중</option>
                     <option value="sold">판매완료</option>
                   </select>
+
+                  <br>
+                  <label for="categorySelect">수정할 가격</label>
+                  <input type="int" class="form-control" id="categorySelect" style="width: 100%;">
 
 
                 </div>
@@ -145,11 +150,24 @@
     // 수정 버튼 이벤트 발생
     const $modifyBtn = document.getElementById('modifyBtn');
     const $saveBtn = document.getElementById('saveEdit');
+
+    //수정요소
+    const $boardNo = document.getElementById('boardNo'); //class . 찍기
     const $editedTitle = document.getElementById('editedTitle');
     const $editedContent = document.getElementById('editedContent');
-    const $boardNo = document.getElementById('boardNo'); //class . 찍기
+
+    //수정 카테고리
+    const $categorySelect = document.getElementById('categorySelect');
+    const $selectedCategory = document.getElementById('selectedCategory');
+
+    //가격
+    const $editedPrice = document.getElementById('editedPrice');
+
+    //닫기 버튼
     const $closeBtn = document.getElementById('closeBtn');
     const $modal = document.getElementById('editModal');
+
+    //삭제 버튼
     const $deleteBtn = document.getElementById('content-Del');
 
 
@@ -158,15 +176,27 @@
       console.log('수정 버튼 이벤트 발생!');
       $editedTitle.value = document.getElementById('textTitle').textContent;
       $editedContent.value = document.getElementById('textContent').textContent;
+      $editedPrice.value = document.getElementById('price').textContent;
+      $editedCategory.value = document.getElementById('editedCategory').textContent;
+
       console.log($editedTitle.value);
       console.log($editedContent.value);
       makeModifyClickHandler();
       makeCloseClickHandler();
     }
 
+
+    if ($categorySelect) {
+      $categorySelect.addEventListener('change', function () {
+        $selectedCategory.textContent = $categorySelect.value === 'sale' ? '판매중' : '판매완료';
+      });
+    }
+
+
+
+
     function makeCloseClickHandler() {
       $closeBtn.onclick = e => {
-        console.log('에딧타이틀 클릭', $editedTitle);
         console.log('닫기 버튼 클릭!');
         $modal.style.display = "none"; // 모달을 숨김
         location.reload(); // 화면 새로고침
@@ -181,10 +211,14 @@
             return;
           }
 
+
           const payload = {
+            boardNo: bno,
             title: $editedTitle.value,
             content: $editedContent.value,
-            boardNo: bno
+            category: category.value,
+            price: $editedPrice.value
+
           };
 
           const requestInfo = {
@@ -212,7 +246,8 @@
               console.log('응답 성공!', data);
               $editedTitle.value = '';
               $editedContent.value = '';
-
+              $category.value = '';
+              $price.value = '';
             });
 
         };

@@ -61,6 +61,8 @@
               <th>조회수</th>
               <th>즐겨찾기</th>
               <th>판태상태</th>
+              <th>가격</th>
+              <th>거래장소</th>
             </tr>
           </thead>
 
@@ -73,13 +75,12 @@
               <tr class="post">
                 <!-- 게시글 하나 -->
                 <td id="bno">${s.boardNo}</td>
-                <td id="textTitle"> <a href="/market/detail/${s.boardNo}"> ${s.textTitle} </a></td>
-                <td id="textWriter">${s.textWriter}</td>
-                <td id="updateDate">${s.updateDate}</td>
-                <td id="viewCount"> ${s.viewCount}</td>
-                <td id="category">${s.category}</td>
+                <td id="textTitle" name="textTitle"> <a href="/market/detail/${s.boardNo}"> ${s.textTitle} </a></td>
+                <td id="textWriter" name="textWriter">${s.textWriter}</td>
+                <td id="updateDate" name="updateDate">${s.updateDate}</td>
+                <td id="viewCount" name="viewCount"> ${s.viewCount}</td>
 
-                <td class="favorite" data-bno="${s.boardNo}">
+                <td class="favorite" name="favorite" data-bno="${s.boardNo}">
                   <c:if test="${s.isFavorite == 1}">
                     <i class="fa-solid fa-star"></i>
                   </c:if>
@@ -89,6 +90,12 @@
                   </c:if>
 
                 </td>
+
+                <td id="category" name="category">${s.category}</td>
+                <td id="price" name="price">${s.price}</td>
+                <td id="address" name="address">${s.address}</td>
+
+
               </tr>
             </c:forEach>
 

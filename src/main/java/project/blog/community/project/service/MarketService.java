@@ -51,8 +51,8 @@ public class MarketService {
         mapper.modify(marketContent);
     }
 
-    public void register(MarketWriteRequestDTO dto) {
-        Market market = new Market(dto); //DTO -> Entity
+    public void register(MarketWriteRequestDTO dto, String currentLoginMemberAccount) {
+        Market market = new Market(dto, currentLoginMemberAccount);//DTO -> Entity
 //        market.setTextWriter(MarketUtils.getCurrentLoginMemberAccount(session));
         mapper.save(market);
 

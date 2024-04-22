@@ -21,8 +21,9 @@
   <link rel="stylesheet" href="/assets/css/market.css">
   <link rel="stylesheet" href="/assets/css/snb.css">
 
-    <!-- 부트스트랩 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <!-- 부트스트랩 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 
   <!-- ck editor -->
@@ -44,6 +45,9 @@
 
 
       <!-- 게시판 글쓰기 폼 -->
+
+
+
       <div id="wrap" class="form-container">
         <h1>게시판 글쓰기</h1>
         <form action="/market/write" method="post">
@@ -51,12 +55,9 @@
           <label for="textTitle">제목</label>
           <input type="text" id="textTitle" name="textTitle" required>
 
-          <label for="textWriter">${s.textWriter}</label>
-          <input type="text" id="textWriter" name="textWriter" required>
-
-          <select name="category">
+          
+          <select name="category" id="categorySelect" style="display:none;">
             <option value="sale">판매중</option>
-            <option value="sold">판매완료</option>
           </select>
 
           <label for="price">가격</label>
@@ -66,21 +67,22 @@
           <label for="textContent">내용</label>
           <textarea id="textContent" name="textContent" maxlength="200" required></textarea>
 
+          <%@ include file="../market/subMap.jsp" %>
+
           <div class="buttons">
             <button class="list-btn" type="button" onclick="window.location.href='/market/list'">목록</button>
             <button type="submit">글쓰기</button>
           </div>
         </form>
+
+        <!-- 광고 영역 -->
+        <%@ include file="../market/subMarketAD.jsp" %>
       </div>
 
     </div>
   </div>
 
-  <!-- Reply 내용 -->
-  <%@ include file="../market/subMarketReply.jsp" %>
 
-  <!-- 광고 영역 -->
-  <%@ include file="../market/subMarketAD.jsp" %>
 
   <script>
     CKEDITOR.replace('textContent');

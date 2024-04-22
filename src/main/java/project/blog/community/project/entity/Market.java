@@ -46,6 +46,7 @@ public class Market{
     private int price;
 
     private String location;
+    private String address;
 
     private String ContentImg; //XML profile_image 스네이크 케이스 자동 인식
     private String loginMethod; //sql tbl 타입과 일치 시켜야 함
@@ -53,13 +54,16 @@ public class Market{
     private boolean addFav;
     private String category;
 
-    public Market(MarketWriteRequestDTO dto) { //entity -> DTO
+    public Market(MarketWriteRequestDTO dto, String writer) { //dto -> Entity
         this.textTitle = dto.getTextTitle();
         this.textContent = dto.getTextContent();
-        this.textWriter = dto.getTextWriter();
         this.updateDate = dto.getUpdateDate();
         this.viewCount = dto.getViewCount();
         this.category = dto.getCategory();
+        this.price = dto.getPrice();
+        this.address = dto.getAddress();
+
+        this.textWriter = writer;
     }
 
 

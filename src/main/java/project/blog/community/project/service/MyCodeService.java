@@ -53,14 +53,18 @@ public List<MyCodeListResponseDTO> endgetList(MyCodePage page){
         mapper.delete(bno);
     }
 
+    public void update(MyCodeWriteRequestDTO dto){
+        MyCode myCode = new MyCode(dto);
+        mapper.update(myCode);
+    }
+
+
+
     public int getCount(CodeSearch page) {
         return mapper.getCount();
 
     }
-    public int getEndCount(MyCodePage page) {
-        return mapper.getEndCount();
 
-    }
     public MyCodeDetailResponseDTO getDetail(int bno) {
         log.info("detail GET!");
         log.info(String.valueOf(bno));
@@ -68,4 +72,6 @@ public List<MyCodeListResponseDTO> endgetList(MyCodePage page){
 
         return new MyCodeDetailResponseDTO(myCode);
     }
+
+
 }

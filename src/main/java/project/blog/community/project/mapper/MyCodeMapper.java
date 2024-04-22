@@ -10,19 +10,21 @@ import java.util.List;
 public interface MyCodeMapper {
     List<MyCode> findAll(CodeSearch page);
 
-List<MyCode> endAll(MyCodePage page);
+    List<MyCode> endAll(MyCodePage page);
 
 
     MyCode findOne(int codeNo);
 
-    //사진등록
+
     void save(MyCode myCode);
 
-    //사진삭제
+
     void delete(int codeNo);
 
+    void update(MyCode myCode);
 
     int getCount();
+
 
     int getEndCount();
 }

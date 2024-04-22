@@ -45,6 +45,15 @@ CREATE TABLE my_code(
         WHERE code_no=#{codeNo}
     </delete>
 
+    <update id="update">
+        UPDATE my_code
+        SET
+        title = #{title},
+        content = #{content},
+        writer = #{writer},
+        programming = #{programming}
+        WHERE code_no = #{codeNo}
+    </update>
 
 
     <!-- SELECT의 경우에는 반환되는 타입을 작성해 주어야 합니다.

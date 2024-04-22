@@ -18,7 +18,7 @@
             width: 500px;
             margin: auto;
             padding: 20px;
-            background-image: linear-gradient(135deg, #a1c4fd, #fbc2eb);
+            background-color: #000080;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border-radius: 4px;
             font-size: 18px;
@@ -35,7 +35,7 @@
 
         .form-container h2 {
             font-size: 30px;
-            color: #222;
+            color: white;
             text-align: center;
             margin-bottom: 20px;
         }
@@ -44,9 +44,12 @@
             display: block;
             margin-bottom: 5px;
             font-size: 20px;
+            color: white;
         }
-
-        #title, #writer {
+h2{
+    color: white;
+}
+        #title, #programming {
             font-size: 18px;
             width: 100%;
             padding: 8px;
@@ -150,10 +153,8 @@
 <div id="wrap" class="form-container">
     <h1>${b.codeNo}번 게시물 내용~ </h1>
     <h2># 작성일자: ${b.regDate}</h2>
-
-    <label for="writer">작성자</label>
-    <input type="text" id="writer" name="writer" value="${b.writer}" readonly>
-
+    <input type="text" id="programming" name="programming" value="${b.programming}" readonly>
+    
     <label for="title">제목</label>
     <input type="text" id="title" name="title" value="${b.title}" readonly>
 
@@ -164,6 +165,13 @@
                 onclick="location.href='/wel/myCode'">
             목록
         </button>
+        <button  type="button"
+                onclick="location.href='/wel/edit/${b.codeNo}'">
+            수정
+        </button>
+       
+
+
     </div>
 
 
@@ -178,19 +186,6 @@
 </div>
 
     <script>
-
-
-
-           
-
-
-
-
-
-        
-       
-
-
 
 
 

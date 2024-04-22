@@ -24,6 +24,8 @@ public class MyCode {
         this.title = dto.getTitle();
         this.content = dto.getContent();
         this.programming = dto.getProgramming();
+        this.codeNo = dto.getCodeNo();
+
 
 
 

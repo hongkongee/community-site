@@ -18,7 +18,7 @@
   <div class="mar">
     <div class="background">
     <div class="Rectangle1" >
-      <button class="add-photo"><div>+ 사진 추가</div></button>
+      <button class="add-photo"><div>+ 코드 추가</div></button>
 
 
     <div class="let2">
@@ -29,7 +29,7 @@
 <div class="top-section">
         <!-- 검색창 영역 -->
         <div class="search">
-            <form action="/board/list" method="get">
+            <form action="/wel/myCode" method="get">
 
                 <select class="form-select" name="type" id="search-type">
                     <option value="title">제목</option>
@@ -49,23 +49,18 @@
 
     </div>
 
-    <button class="Ellipse12">4</button>
-    <button class="Ellipse13">8</button>
-
-    <button class="Ellipse14">16</button>
-
-
+    
 
     <div class="Rectangle51" ></div>
 
     <div class="Frame20" >
-      <div class="Gallery">Gallery</div>
+      <div class="Gallery">My Code</div>
     </div>
     <div class="card-container">
       <c:forEach var="b" items="${gList}">
           <div class="card-wrapper">
               <section class="card" data-bno="${b.codeNo}">
-                  <div class="card-title-wrapper">
+                  <div class="card-title-wrapper ${b.programming}">
                       <h2 class="card-title">${b.shortTitle}</h2>
                       <div class="time-view-wrapper">
                           <div class="time">
@@ -184,47 +179,6 @@
 </body>
 
 <script>
-
-   
-// const $cardContainer = document.querySelector('.card-container');
-// const $modal = document.getElementById('modal');
-// const $confirmDelete = document.getElementById('confirmDelete');
-// let $cancelDelete = document.getElementById('cancelDelete');
-// const modal = document.getElementById('myModal');
-// const closeModal = modal.querySelector('.close');
-
-// $cardContainer.addEventListener('click', e => {
-//     if (e.target.matches('.card-container')) return;
-
-//     if (e.target.matches('.card-btn-group *')) {
-//         $modal.style.display = 'flex';
-//         const deleteLocation = e.target.closest('.del-btn').dataset.href;
-        
-//         // $cancelDelete 변수를 선언하고 클릭 이벤트 핸들러를 할당합니다.
-//         const cancelDelete = () => {
-//             console.log('cancel delete');
-//             location.href = '/wel/gallery';
-//             $modal.style.display = 'none';
-//         };
-
-//         // 삭제 버튼에 클릭 이벤트 핸들러를 할당합니다.
-//         document.getElementById('cancelDelete').addEventListener('click', cancelDelete);
-//     } 
-// else {
-//     const bno = e.target.closest('section.card').dataset.bno;
-//     console.log('bno: ' + bno);
-
-//     // 모달을 활성화
-//     modal.style.display = 'block';
-
-//     // 모달 닫기 버튼에 클릭 이벤트 추가
-//     closeModal.addEventListener('click', () => {
-//       modal.style.display = 'none';
-//     });
-    
-//   }
-  
-// });
 
  
  const $cardContainer = document.querySelector('.card-container');
@@ -370,9 +324,25 @@ $liList.forEach($li => {
     });
 
   }
+  document.addEventListener('DOMContentLoaded', function () {
+        var programmingValue = "${b.programming}";
+        if (programmingValue === "HTML") {
+            var cardTitles = document.querySelectorAll('.card-title-wrapper');
+            cardTitles.forEach(function (cardTitle) {
+                cardTitle.classList.add('HTML');
+            });
+        }
+    });
+
+
 
 appendPageActive();
   fixSearchOption();
+
+
+
+
+
 </script>
 
 

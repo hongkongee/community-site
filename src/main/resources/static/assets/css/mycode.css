@@ -24,7 +24,7 @@ margin: 30px;
   width: 1077px;
    height: 903px; 
  left: 2%;
- margin: 0 -23px;
+ margin: 0 -10px;
     position: absolute; 
     background: #F8F6E3;
      border-radius: 60px;
@@ -145,72 +145,106 @@ margin-top: 25%;
   }
 
 
-  .main-title-wrapper {
-      position: relative;
+  .card-title-wrapper.HTML{
+    background-color: #fe992edc;
   }
+  .card-title-wrapper.CSS  {
+    background-color: #4169e1c9;
+}
 
-  .main-title-wrapper h1 {
-      font-size: 40px;
-      font-weight: 700;
-      letter-spacing: 10px;
-      text-align: center;
-      margin-bottom: 70px;
-  }
+/* JAVA에 대한 색상 지정 */
+.card-title-wrapper.JAVA  {
+    background-color: #4bb68dc9;
+}
 
-  .main-title-wrapper .add-btn {
-      width: fit-content;
-      padding: 10px 25px;
-      background: rgb(216, 112, 147);
-      border-radius: 15px;
-      color: #fff;
-      font-size: 18px;
-      position: absolute;
-      right: 120px;
-      top: 0;
-      cursor: pointer;
-  }
-  .main-title-wrapper .add-btn:hover {
-      background: rgba(216, 112, 147, 0.7);
-  }
+/* C에 대한 색상 지정 */
+.card-title-wrapper.C {
+    background-color: #60b2ff;
+}
 
-  .card-container .card-wrapper {
-      position: relative;
-      width: 30.3%;
-      margin-right: 3%;
-      height: 400px;
-      margin-bottom: 100px;
-      cursor: pointer;
-      transition: 0.5s;
-  }
+/* C++에 대한 색상 지정 */
+.card-title-wrapper.JavaScript  {
+    background-color: #e8f34f;
+}
 
-  .card-container .card {
-      height: 370px;
-      border-radius: 20px;
-      box-shadow: 0 15px 0 #999;
-      overflow: hidden;
-      transition: 0.5s;
-      border: 2px solid transparent;
-  }
+/* Python에 대한 색상 지정 */
+.card-title-wrapper.Python  {
+    background-color: #4163d3;
+    
+}
+.card-title-wrapper.Other-than {
+    background-color: #000000;
+    
+}
 
-  .card-container .card:last-child {
-      margin-right: 0;
-  }
 
-  .card-container .card .card-title-wrapper {
-      color: #333;
-  }
+  .card-title-wrapper.HTML .card-title {
+    background-color: #fe992edc;
+}
 
-  .card-container .card-wrapper:nth-child(3n) .card-title-wrapper {
-      background: aquamarine;
-  }
 
-  .card-container .card-wrapper:nth-child(3n - 1) .card-title-wrapper {
-      background: violet;
-  }
+/* CSS에 대한 색상 지정 */
+.card-title-wrapper.CSS .card-title {
+    background-color: #4169e1c9;
+}
 
-  .card-container .card-wrapper:nth-child(3n - 2) .card-title-wrapper {
-      background: dodgerblue;
-  }
+/* JAVA에 대한 색상 지정 */
+.card-title-wrapper.JAVA .card-title {
+    background-color: #4bb68dc9;
+}
+
+/* C에 대한 색상 지정 */
+.card-title-wrapper.C .card-title {
+    background-color: #60b2ff;
+}
+
+/* C++에 대한 색상 지정 */
+.card-title-wrapper.JavaScript .card-title {
+    background-color: #e8f34f;
+}
+
+/* Python에 대한 색상 지정 */
+.card-title-wrapper.Python .card-title {
+    background-color: #4163d3;
+    color: white;
+}
+.card-title-wrapper.Other-than .card-title{
+    background-color: #000000;
+    color: white;
+}
+
+.card-title-wrapper.HTML .time-view-wrapper {
+    background-color: #fe992edc;
+}
+/* CSS에 대한 색상 지정 */
+.card-title-wrapper.CSS .time-view-wrapper {
+    background-color: #4169e1c9;
+}
+
+/* JAVA에 대한 색상 지정 */
+.card-title-wrapper.JAVA .time-view-wrapper {
+    background-color: #4bb68dc9;
+}
+
+/* C에 대한 색상 지정 */
+.card-title-wrapper.C .time-view-wrapper {
+    background-color: #60b2ff;
+}
+
+/* C++에 대한 색상 지정 */
+.card-title-wrapper.JavaScript .time-view-wrapper {
+    background-color: #e8f34f;
+}
+
+/* Python에 대한 색상 지정 */
+.card-title-wrapper.Python .time-view-wrapper {
+    background-color: rgb(251, 255, 0);
+}
+.card-title-wrapper.Other-than .time-view-wrapper{
+    background-color: #000000;
+}
+
+
 
   .card-container .card-wrapper .card-title-wrapper .card-title {
       /* width: 50%; */
@@ -226,23 +260,13 @@ margin-top: 25%;
 
   }
 
-  .card-container .card .card-title-wrapper .time-view-wrapper {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 5px 10px;
-  }.card-container {
+  
+  .card-container {
        display: flex;
        flex-wrap: wrap;
 
    }
-   .card-container .card .card-title-wrapper .time-view-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 10px;
-}
-
+ 
    .main-title-wrapper {
        position: relative;
    }
@@ -283,8 +307,8 @@ margin-top: 25%;
 
    .card-container .card {
        height: 370px;
-       border-radius: 20px;
-       box-shadow: 0 15px 0 #999;
+       
+       
        overflow: hidden;
        transition: 0.5s;
        border: 2px solid transparent;
@@ -296,18 +320,6 @@ margin-top: 25%;
 
    .card-container .card .card-title-wrapper {
        color: #333;
-   }
-
-   .card-container .card-wrapper:nth-child(3n) .card-title-wrapper {
-       background: aquamarine;
-   }
-
-   .card-container .card-wrapper:nth-child(3n - 1) .card-title-wrapper {
-       background: violet;
-   }
-
-   .card-container .card-wrapper:nth-child(3n - 2) .card-title-wrapper {
-       background: dodgerblue;
    }
 
    .card-container .card-wrapper .card-title-wrapper .card-title {
@@ -328,7 +340,9 @@ margin-top: 25%;
        display: flex;
        justify-content: space-between;
        align-items: center;
-       padding: 5px 10px;
+       padding: 10px 10px;
+       position:relative;
+       top: 250px;
    }
 
    .card-container .card .card-title-wrapper .time-view-wrapper>div {
@@ -337,6 +351,7 @@ margin-top: 25%;
        background: #fff;
        padding: 3px 5px;
        margin-bottom: 10px;
+       
    }
 
 
@@ -365,28 +380,13 @@ margin-top: 25%;
        border: 2px solid;
    }
 
-   .card-container .card-wrapper:nth-child(3n) .card-hover.card {
-       border-color: aquamarine;
-       box-shadow: 0 15px 0 aquamarine;
-   }
-
-   .card-container .card-wrapper:nth-child(3n - 1) .card-hover.card {
-       border-color: violet;
-       box-shadow: 0 15px 0 violet;
-   }
-
-   .card-container .card-wrapper:nth-child(3n - 2) .card-hover.card {
-       border-color: dodgerblue;
-       box-shadow: 0 15px 0 dodgerblue;
-   }
-
    .card-container .card-btn-group {
        display: flex;
        justify-content: center;
        align-items: center;
        position: absolute;
-       right: -10px;
-       top: -10px;
+       right: 0px;
+       top: 0px;
        z-index: 100;
    }
 
@@ -395,10 +395,10 @@ margin-top: 25%;
        /* border: 3px solid #000; */
        width: 40px;
        height: 40px;
-       border-radius: 50%;
-       background: #f00;
+       
+       background: #fff;
        opacity: 0;
-       color: #fff;
+       color: #000000;
        font-weight: 700;
        font-size: 25px;
 
@@ -467,114 +467,11 @@ margin-top: 25%;
 }
 
 
-  .card-container .card .card-title-wrapper .time-view-wrapper>div {
-      width: fit-content;
-      border-radius: 10px;
-      background: #fff;
-      padding: 3px 5px;
-      margin-bottom: 10px;
-  }
-
-
-  .card-container .card .card-title-wrapper .time-view-wrapper i {
-      margin-right: 4px;
-  }
-
-  .card-container .card .card-content {
-      background-color: #fff;
-      height: 100%;
-      text-align: justify;
-      font-size: 18px;
-      line-height: 1.4;
-      padding: 40px 25px;
-  }
-
-
-  #card-down.card-wrapper {
-      transform: translateY(15px);
-  }
-  #card-down .card {
-      box-shadow: none;
-  }
-
-  .card-container .card-hover.card {
-      border: 2px solid;
-  }
 
 
 
-  .card-container .card-btn-group {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: absolute;
-      right: -10px;
-      top: -10px;
-      z-index: 100;
-  }
-
-  .card-container .card-btn-group .del-btn {
-      outline: none;
-      /* border: 3px solid #000; */
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #f00;
-      opacity: 0;
-      color: #fff;
-      font-weight: 700;
-      font-size: 25px;
-
-      cursor: pointer;
-  }
 
 
-  /* 모달 스타일 */
-  .modal {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      align-items: center;
-      justify-content: center;
-      padding: 50px;
-  }
-
-  .modal-content {
-      position: relative;
-      background-color: #fff;
-      width: 300px;
-      padding: 20px;
-      border-radius: 8px;
-      text-align: center;
-  }
-
-  .modal-content p {
-      font-size: 24px;
-      margin-bottom: 15px;
-  }
-
-
-  .modal-buttons button {
-      padding: 5px 15px;
-      font-size: 20px;
-  }
-
-  .modal-buttons .confirm {
-      color: white;
-      background-color: #007bff;
-      border-radius: 4px;
-  }
-
-  .modal-buttons .cancel {
-      color: #f5f5f5;
-      background-color: #dd1111;
-      border-radius: 4px;
-  }
 
 
   .top-section .amount {

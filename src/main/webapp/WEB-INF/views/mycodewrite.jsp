@@ -30,10 +30,12 @@
             width: 500px;
             margin: auto;
             padding: 20px;
-            background-image: linear-gradient(135deg, #a1c4fd, #fbc2eb);
+           /* background-image: linear-gradient(135deg, #a1c4fd, #fbc2eb);*/
+            background-color: #000080;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border-radius: 4px;
             font-size: 18px;
+            
         }
         .form-container h1 {
             font-size: 40px;
@@ -47,6 +49,7 @@
             display: block;
             margin-bottom: 5px;
             font-size: 20px;
+            color: white;
         }
         input[type="text"],
         textarea {
@@ -100,38 +103,17 @@
             background-color: rgba(255, 255, 255, 0.8);
 
         }
-        /*색추가*/
+label{
+    color: white;
+}
 
-        select option[value="HTML"] {
-            background-color: #FF5733; /* Orange */
-        }
 
-        select option[value="CSS"] {
-            background-color: #FFC300; /* Yellow */
-        }
 
-        select option[value="JAVA"] {
-            background-color: #33FF57; /* Green */
-        }
-
-        select option[value="C"] {
-            background-color: #33C0FF; /* Blue */
-        }
-
-        select option[value="C++"] {
-            background-color: #BB33FF; /* Purple */
-        }
-
-        select option[value="Python"] {
-            background-color: #FF33DA; /* Pink */
-        }
-
-/*색추가*/
     </style>
 </head>
 <body>
 <div id="wrap" class="form-container">
-    <h1>꾸러기 게시판 글쓰기</h1>
+    <h1>My Code</h1>
     <form action="/wel/write" method="post" enctype="multipart/form-data">
         
         <select class="form-select" id="programming" name="programming" aria-label="Default select example">                
@@ -139,9 +121,11 @@
             <option value="CSS">CSS</option>
             <option value="JAVA">JAVA</option>
             <option value="C">C</option>
-            <option value="C++">C++</option>
-            <option value="Python">Python</option>        
-        </select>           
+            <option value="JavaScript">JavaScript</option>
+            <option value="Python">Python</option>
+            <option value="Other-than">Other-than</option>          
+        </select>
+
         <label for="title">제목</label>
         <input type="text" id="title" name="title" required>
         
@@ -156,7 +140,10 @@
 <script>
   CKEDITOR.replace('content');
 
- 
+  
+        
+
+     
 
 </script>
 </body>

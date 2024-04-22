@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MyCodeWriteRequestDTO {
+    private int codeNo;
     private String title;
     private String content;
     private String writer;

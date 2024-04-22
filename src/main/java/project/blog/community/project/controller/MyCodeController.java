@@ -42,9 +42,9 @@ public String gallery(Model model,@ModelAttribute("s") CodeSearch page){
     return "mycode";
 }
 @GetMapping("/endMyCode")
-public String endCode(Model model, MyCodePage page){
+public String endCode(Model model,@ModelAttribute("s") CodeSearch page){
    List<MyCodeListResponseDTO> endList = service.endgetList(page);
-    MyCodeMaker myCodeMaker = new MyCodeMaker(page, service.getEndCount(page));
+    MyCodeMaker myCodeMaker = new MyCodeMaker(page, service.getCount(page));
     model.addAttribute("gList",endList);
     model.addAttribute("maker",myCodeMaker);
     return "mycode";
@@ -59,16 +59,15 @@ public String write(MyCodeWriteRequestDTO dto){
     return "redirect:/wel/myCode";
 }
 
-
-
-@GetMapping("/write")
+    @GetMapping("/write")
     public String write(){
 
 
 
 
-    return "mycodewrite";
-}
+        return "mycodewrite";
+    }
+
     @GetMapping("/codedelete")
         public String delete(int bno){
         log.info("codedelete: GET!!");
@@ -89,6 +88,28 @@ public String write(MyCodeWriteRequestDTO dto){
         return "codedetail";
     }
 
+    // 수정 페이지로 넘어가는 과정
+    @GetMapping("/edit/{codeNo}")
+    public String edit(@PathVariable int codeNo, Model model) {
+        log.info("edit: GET!!" + codeNo);
+
+        MyCodeDetailResponseDTO dto = service.getDetail(codeNo);
+        log.info(dto.toString());
+        model.addAttribute("b", dto);
+
+
+        return "mycodemodify";
+    }
+
+    // 수정 완료 후 실제 update
+    @PostMapping("/modify")
+    public String modify(MyCodeWriteRequestDTO dto) {
+        log.info("edit: POST!! {}", dto.toString());
+        service.update(dto);
+
+
+        return "redirect:/wel/codedetail?bno=" + dto.getCodeNo();
+    }
 
 }
 

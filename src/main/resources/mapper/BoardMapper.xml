@@ -98,6 +98,13 @@
         LIMIT #{page.pageStart}, #{page.amount}
     </select>
 
+    <select id="findMyHot" resultType="board">
+        SELECT * FROM tbl_board
+        WHERE writer = #{account}
+        ORDER BY like_count DESC
+        LIMIT #{page.pageStart}, #{page.amount}
+    </select>
+
 
 
 </mapper>

@@ -1,7 +1,7 @@
 package project.blog.community.project.dto.response;
 
 import lombok.*;
-import project.blog.community.project.entity.Gender;
+//import project.blog.community.project.entity.Gender;
 import project.blog.community.project.entity.User;
 
 @Getter
@@ -18,7 +18,7 @@ public class MypageUserResponseDTO {
 
     private String nickname;
 
-    private Gender gender;
+//    private Gender gender;
 
     private int birthday; // year
 
@@ -28,7 +28,7 @@ public class MypageUserResponseDTO {
         this.accountNumber = user.getAccountNumber();
         this.email = user.getEmail();
         this.nickname = user.getNickname();
-        this.gender = user.getGender();
+//        this.gender = user.getGender();
         this.birthday = user.getBirthday();
         this.profilePicture = user.getProfilePicture();
     }

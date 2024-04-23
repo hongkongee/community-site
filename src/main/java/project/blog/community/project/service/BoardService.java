@@ -1,14 +1,12 @@
 package project.blog.community.project.service;
 
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.WebUtils;
+import project.blog.community.project.common.Page;
 import project.blog.community.project.common.Search;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
@@ -21,7 +19,6 @@ import project.blog.community.project.entity.User;
 import project.blog.community.project.mapper.BoardMapper;
 import project.blog.community.project.mapper.LikeMapper;
 import project.blog.community.project.mapper.UserMapper;
-import project.blog.community.project.repository.JdbcRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -180,6 +177,7 @@ public class BoardService {
       return boardMapper.getCount(page);
    }
 
+   // 나의 게시글 불러오기
    public List<BoardMyListResponseDTO> getMyList(Search page, HttpServletRequest request) {
 
       HttpSession session = request.getSession();
@@ -196,6 +194,23 @@ public class BoardService {
       }
       return myList;
    }
+
+   // 특정 인물의 게시글 가져오기
+   public List<BoardMyListResponseDTO> getUserList(String account) {
+
+      Search page = new Search();
+
+      List<BoardMyListResponseDTO> hisList = new ArrayList<>();
+      List<Board> boardList = boardMapper.findMyHot(page, account);
+
+      for (Board board : boardList) {
+         BoardMyListResponseDTO dto = new BoardMyListResponseDTO(board);
+         hisList.add(dto);
+      }
+      return hisList;
+
+   }
+
 
 
    // 게시글 업로드

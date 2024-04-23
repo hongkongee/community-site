@@ -133,7 +133,7 @@ public class HomeController {
    @PostMapping("/detail/report")
    @ResponseBody
    public ResponseEntity<String> report(@RequestBody ReportRequestDTO dto) {
-      log.info("/home/detail/report: POST: {}", dto);
+      log.info("/home/detail/report: POST: {}", dto.toString());
 
       // 신고 체크박스, 신고 내용에 관련한 DB에 저장 (mapper)
       managementService.report(dto);

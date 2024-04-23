@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +21,7 @@
 </head>
 
 <body>
+    
 
     <div id="wrapper">
 
@@ -70,76 +72,123 @@
 
 
             <div class="user-friends">
-                <div class="friends-category">
-                    <div class="followers">
-                        <div class="follow-text"><button type="button">팔로워</button></div>
-                    </div>
-                    <div class="following">
-                        <div class="follow-text"><button type="button">팔로잉</button></div>
-                    </div>
-                </div>
+        
 
-                <!-- 팔로잉 리스트 -->
-                <div class="following-list">
 
-                    <c:forEach var="following" items="${followings}">
+                <div class="ff">
 
-                    <div class="user-wrapper">
-
-                        <div class="profile-box">
-                            <c:if test="${empty following.profilePicture}">
-                                <img src="/assets/img/jjanggu.jpg" alt="기본 프사">
-                            </c:if>
-
-                            <c:if test="${not empty following.profilePicture}">
-                                <img src="/display\${following.profilePicture}" alt="프사">
-                            </c:if>
+                        <!-- 팔로잉 리스트 -->
+                    <div class="following-list">
+                        <div class="following">
+                            <div class="follow-text"><button type="button">팔로잉</button></div>
                         </div>
+
+                        <c:forEach var="following" items="${followings}">
+
+                            <div class="user-wrapper">
+
+                                <div class="profile-box">
+                                    <c:if test="${empty following.profilePicture}">
+                                        <img src="/assets/img/jjanggu.jpg" alt="기본 프사">
+                                    </c:if>
+
+                                    <c:if test="${not empty following.profilePicture}">
+                                        <img src="/display\${following.profilePicture}" alt="프사">
+                                    </c:if>
+                                </div>
+                                
+                                <div class="name-box">
+                                    <a class="friendName" href="/mypage/home/${following.accountNumber}">
+                                        ${following.nickname}&nbsp;
+                                    </a>
+                                </div>
+                                
+
+                                <div class="icon-box" data-followingid="${following.accountNumber}">
+                                    <!-- 자기 자신이 아닌 경우만 아이콘 표시 -->
+                                    <c:if test="${login.accountNumber ne following.accountNumber}">
+
+                                        <!-- 내(로그인한 유저)가 팔로잉을 이미 한 경우 -->
+                                        <c:if test="${fn:contains(myfollowings, following.accountNumber)}">
+                                            <i class="fa-solid fa-user-minus"></i>
+                                        </c:if>
+
+                                        <!-- 내(로그인한 유저)가 팔로잉을 아직 안 한 경우 -->
+                                        <c:if test="${not fn:contains(myfollowings, following.accountNumber)}">
+                                            <i class="fa-solid fa-user-plus"></i>
+                                        </c:if>
+
+                                    </c:if>
+                                    
+                                    
+                                </div>
+
+                            </div>
+                            
                         
-                        <div class="name-box">
-                            <a class="friendName" href="/mypage/home/${following.accountNumber}">
-                                ${following.nickname}&nbsp;
-                            </a>
-                        </div>
 
-                        <div class="icon-box">
-                            <i class="fa-solid fa-user-plus"></i>
-                        </div>
+                        </c:forEach>
 
-                    </div>
-                        
                     
+                    </div>
 
-                    </c:forEach>
+                    <!-- 팔로워 리스트 -->
+                    <div class="follower-list">
+
+                        <div class="followers">
+                            <div class="follow-text"><button type="button">팔로워</button></div>
+                        </div>
+
+                        <c:forEach var="follower" items="${followers}">
+
+                            <div class="user-wrapper">
+
+                                <div class="profile-box">
+                                    <c:if test="${empty follower.profilePicture}">
+                                        <img src="/assets/img/jjanggu.jpg" alt="기본 프사">
+                                    </c:if>
+
+                                    <c:if test="${not empty follower.profilePicture}">
+                                        <img src="/display\${follower.profilePicture}" alt="프사">
+                                    </c:if>
+                                </div>
+                                
+                                <div class="name-box">
+                                    <a class="friendName" href="/mypage/home/${follower.accountNumber}">
+                                        ${follower.nickname}&nbsp;
+                                    </a>
+                                </div>
+                                
+                                <div class="icon-box" data-followingid="${follower.accountNumber}">
+                                    <!-- 자기 자신이 아닌 경우만 아이콘 표시 -->
+                                    <c:if test="${login.accountNumber ne follower.accountNumber}">
+
+                                        <!-- 내(로그인한 유저)가 팔로잉을 이미 한 경우 -->
+                                        <c:if test="${fn:contains(myfollowings, follower.accountNumber)}">
+                                            <i class="fa-solid fa-user-minus"></i>
+                                        </c:if>
+
+                                        <!-- 내(로그인한 유저)가 팔로잉을 아직 안 한 경우 -->
+                                        <c:if test="${not fn:contains(myfollowings, follower.accountNumber)}">
+                                            <i class="fa-solid fa-user-plus"></i>
+                                        </c:if>
+
+                                    </c:if>
+                                    
+                                    
+                                </div>
+
+                            </div>
+                        
+
+                        </c:forEach>
+
+                    
+                    </div>
+
+                </div>
 
                 
-                </div>
-
-                <!-- 팔로워 리스트 -->
-                <div class="follower-list">
-
-                    <c:forEach var="follower" items="${followers}">
-
-                        <div class="profile-box">
-                            <c:if test="${empty follower.profilePicture}">
-                                <img src="/assets/img/jjanggu.jpg" alt="기본 프사">
-                            </c:if>
-
-                            <c:if test="${not empty follower.profilePicture}">
-                                <img src="/display\${follower.profilePicture}" alt="프사">
-                            </c:if>
-                        </div>
-
-                        <a class="friendName" href="#">
-                            ${follower.nickname}
-                        </a>
-                        <i class="fa-solid fa-user-plus"></i>
-                    
-
-                    </c:forEach>
-
-                
-                </div>
 
             </div>
 
@@ -179,15 +228,15 @@
 
                 <div class="popular-post">
                     <div class="popular-title">
-                        <div class="best-three">${user.nickname} 님의 인기 게시글 BEST3</div>
+                        <div class="best-three">${user.nickname} 님의 인기 게시글</div>
                     </div>
                     <div class="popular-list">
-                        <c:forEach var="following" items="${followings}">
-
+                        <c:forEach var="post" items="${posts}">
+                            <div class="popular-title-container"><a href="/home/detail/${post.bno}">제목 ${post.title}</a>
+                                <span class="popular-content">${post.regDate}</span>
+                            </div>
                         </c:forEach>
-                        <div class="popular-title-container"><span class="popular-title-list">제목 ㅇㅇㅇㅇㅇ</span>
-                            <span class="popular-content">작성날짜</span>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -206,6 +255,11 @@
                 <div class="music-wrapper">
                     <div class="musicborder">
                         <div>재생중인 음악</div>
+                        
+                        <audio id="myAudio" controls>
+                            <source src="/assets/audio/testmusic.mp3" type="audio/mpeg">
+                            이 브라우저에서는 음악 기능을 지원하지 않습니다.
+                        </audio>
 
 
 
@@ -223,6 +277,9 @@
 
 
 
+
+  <!-- 마이페이지 자바스크립트 -->
+  <script src="/assets/js/mypagehome.js"></script>
 
 
 

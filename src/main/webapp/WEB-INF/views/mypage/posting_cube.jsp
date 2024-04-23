@@ -36,7 +36,7 @@
             <div class="main-title-wrapper">
                 <h1 class="main-title">My Posts</h1>
                 <c:if test="${login != null}">
-                    <a href="#">
+                    <a href="/mypage/newposting">
                         <button class="add-btn">글 작성하기</button>
                     </a>
                 </c:if>
@@ -142,7 +142,7 @@
 
 <script>
    
-   
+
 </script>
 
 <script src="/assets/js/mypage.js">

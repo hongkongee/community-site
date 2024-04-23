@@ -33,7 +33,7 @@ public class DiaryController {
         return "mypage/diary";
     }
 
-/*
+
     @GetMapping("/posting_cube")
     public String posting_cube(Model model, @ModelAttribute("s") Search page, HttpServletRequest request) {
         System.out.println("search = " + page);
@@ -53,7 +53,7 @@ public class DiaryController {
 
         return "mypage/posting_cube";
     }
-*/
+
 
 
     // 큐브 게시물 누르면 그 게시물로 이동
@@ -73,6 +73,7 @@ public class DiaryController {
 
         return "mypage/newposting";
     }
+
 
 
 }

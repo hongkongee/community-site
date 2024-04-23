@@ -1,0 +1,234 @@
+* {
+    box-sizing: border-box;
+    font-family: "Orbit", sans-serif;
+}
+
+body {
+    font-family: "Orbit", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background: #00196b;
+}
+
+.MypostcubeJsp {
+    width: 100%;
+    height: 100%;
+    background: #00196b;
+    padding: 20px;
+}
+
+.Frame42 {
+    background: white;
+    width: 80%;
+    border-radius: 60px;
+    margin: 10%;
+}
+
+.main-title-wrapper {
+    position: relative;
+    top: 50px;
+    left: 10%;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-title-wrapper .main-title {
+    color: black;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.add-btn {
+    width: 110px;
+    height: 40px;
+    background: #7AA2E3;
+    border: 1px solid #7AA2E3;
+    border-radius: 60px;
+    font-size: 15px;
+    font-family: "Orbit", sans-serif;
+    margin-left: 600px;
+    margin-top: 15px;
+}
+
+.add-btn:hover {
+    background: white;
+}
+
+.amount {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.amount div {
+    margin-left: 15px;
+    padding: 12px;
+    width: 30px;
+    height: 30px;
+    border-radius: 60px;
+    background: #7AA2E3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.amount div:hover {
+    border-radius: 0;
+    background: white;
+}
+
+.amount div:last-child {
+    margin-right: 10%;
+}
+
+/* ================================================================= */
+
+
+.post-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10%;
+    margin-top: 30px;
+    justify-content: flex-start;
+}
+
+.post-container .post-wrapper {
+    position: relative;
+    width: 30%;
+    height: 350px;
+    cursor: pointer;
+    transition: 0.5s;
+    margin: 10px;
+   
+}
+
+.post-container .post {
+    /* height: 300px; */
+    transition: 0.5s;
+    border: 1px solid #7AA2E3;
+    position: absolute;
+    background: white;
+}
+
+.post-container .post:last-child {
+    margin-right: 0;
+}
+
+.post-container .post .post-photo {
+    width: 100%;
+    height: 200px;
+}
+
+.post-container .post img {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* -----------------------게시글 제목 시작-------------------------- */
+.post-container .post-wrapper .post-content {
+    /* background-color: yellow; */
+    padding: 15px;
+    text-align: center;
+}
+
+.post-container .post .post-content-wrapper {
+    width: 100%;
+    background: white;
+}
+
+.post-container .post .post-content-wrapper .time-view-wrapper {
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+}
+
+/* -----------------------게시글 제목 시작-------------------------- */
+
+
+/* ----------------------댓글 & 좋아요 시작----------------------- */
+.post-container .post .post-reply {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    background: white;
+    border-top: #7AA2E3;
+}
+
+.post-container .post .post-reply .reply {
+    justify-content: space-between;
+    border: 1px solid #7AA2E3;
+    background: #7AA2E3;
+    width: 120px;
+    font-size: 15px;
+    margin-left: 10px;
+}
+/* 
+.post-container .post .post-reply .post-like {
+    width: 90px;
+}
+.post-like .like {
+    background: #7AA2E3;
+    border: 1px solid #7AA2E3;
+}
+
+.post-like .like:hover {
+    background: #e797c3;
+} */
+
+.post-container .post .post-reply .reply-rec {
+    border: 1px solid #7AA2E3;
+    width: 60%;
+}
+
+.like {
+    text-align: center;
+  }
+
+.like label.like-label {
+    font-size: 16px;
+  }
+
+/* ----------------------댓글 & 좋아요 끝----------------------- */
+
+* 페이지 스타일 */
+/* pagination style */
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+}
+
+.bottom-section {
+    display: flex;
+    width: fit-content;
+    /* height: 50px; */
+    margin: 0 auto;
+}
+
+.bottom-section nav {
+    flex: 1;
+    justify-content: center;
+}
+
+.bottom-section nav ul {
+    text-align: center;
+    display: inline-flex;
+}
+
+
+.pagination-custom a {
+    color: #444 !important;
+    font-size: 25px;
+}
+
+.pagination-custom li.active a,
+.pagination-custom li:hover a {
+    background: #333 !important;
+    color: #fff !important;
+}
+
+

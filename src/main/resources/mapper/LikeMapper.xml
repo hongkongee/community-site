@@ -1,0 +1,26 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.blog.community.project.mapper.LikeMapper">
+
+    <insert id="addLike">
+        INSERT INTO tbl_like
+        (account_number, bno)
+        VALUES (#{accountNumber}, #{bno})
+    </insert>
+
+    <delete id="deleteLike">
+        DELETE FROM tbl_like
+        WHERE account_number = #{accountNumber}
+        AND bno = #{bno}
+    </delete>
+
+    <select id="checkLike" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_like
+        WHERE account_number = #{accountNumber}
+        AND bno = #{bno}
+    </select>
+
+</mapper>

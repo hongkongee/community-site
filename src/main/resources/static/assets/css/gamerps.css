@@ -1,0 +1,71 @@
+.wrapper {
+  margin: auto;
+  padding: 5%;
+  width: 60vw;
+  height: 100vh;
+  background: #F8F6E3;
+  margin: auto;
+  position: relative;
+}
+
+section.rps {
+  border: yellowgreen solid 1px;
+  position: absolute;
+  width: 80%;
+  top: 180px;
+
+}
+
+section.rps h2 {
+  margin: 20px;
+}
+
+section.rps .rps-bet {
+  margin: 20px;
+}
+
+
+section.rps input#bet-money {
+  color: #adadad;
+  font-size: 18px;
+  margin: 20px;
+}
+
+section.rps input#bet-btn {
+  margin: 20px;
+}
+
+section.rps .rps-game {
+  display: none;
+}
+
+/* 가위바위보 진행중 */
+section.rps .progress-box {
+  display: none;
+  margin: 20px;
+}
+
+
+section.rps .progress-box .progress-bar {
+  animation: grow-up 2s ease-in-out 0s 1 forwards;
+}
+
+@keyframes grow-up {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+
+section.rps .result { /* 결과창 */
+  display: none;
+  font-size: 18px;
+  margin: 20px;
+}
+
+section.rps .result .btn-primary {
+  margin: 20px;
+}

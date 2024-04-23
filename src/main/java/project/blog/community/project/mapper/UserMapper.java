@@ -33,6 +33,8 @@ public interface UserMapper {
 
    // 팔로우 추가하기
    void addFollower(@Param("me") String currentLoginMemberAccount, @Param("you") String followerAccount);
+
+   void removeFollower(@Param("me") String myAccount, @Param("you") String userAccount);
 }
 
 

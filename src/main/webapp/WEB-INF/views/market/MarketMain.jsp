@@ -78,7 +78,11 @@
         </div>
         <!-- 지도 -->
         <%@ include file="../market/subMap.jsp" %>
+        <%@ include file="../market/subMarketAD.jsp" %>
+
+        
       </div>
+
 
 
       <!-- 수정 내용 입력 모달 -->
@@ -108,11 +112,6 @@
         </div>
       </div>
 
-      <!-- Reply 내용 -->
-      <%@ include file="../market/subMarketReply.jsp" %>
-
-      <!-- 광고 영역 -->
-      <%@ include file="../market/subMarketAD.jsp" %>
 
     </div>
 

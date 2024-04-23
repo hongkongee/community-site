@@ -25,7 +25,8 @@ public class BoardDetailResponseDTO {
 
     private final String title;
     private final String regDate;
-    private final String writer;
+    private final String writer; // nickname
+    private final String writerAccount;
     private final int viewCount;
     private final int likeCount;
 
@@ -38,6 +39,7 @@ public class BoardDetailResponseDTO {
         this.categoryDescription = board.getCategory().getDescription();
         this.title = board.getTitle();
         this.writer = nickname;
+        this.writerAccount = board.getWriter();
         this.regDate = makeDateString(board.getRegDate());
         this.viewCount = board.getViewCount();
         this.content = board.getContent();

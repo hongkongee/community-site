@@ -37,6 +37,7 @@ $copyUrl.onclick = () => {
 
 
 
+
 // 좋아요 누르면 게시물 좋아요 수 1 증가시키고 취소하면 1 감소시키기
 function likeCountUpDown(n) {
   console.log('좋아요 수를 변경합니다.');
@@ -66,7 +67,7 @@ function likeCountUpDown(n) {
 // 페이지 진입 부터 좋아요 하트 체크여부 부여 (과거 이미 체크했다면 부여)
 function alreadyLike() {
 
-  // 쿠키 존재 (이미 클릭) -> likeFlag = 1
+  // DB에 이미 저장됨 (이미 클릭) -> likeFlag = 1
   likeFlag = document.querySelector('.like').dataset.likeCookie;
   likeFlag = Number(likeFlag);
   console.log('이미 좋아요를 눌렀나요?', likeFlag);
@@ -194,7 +195,7 @@ document.getElementById('report-form').addEventListener("submit", function(e) {
 
   var message = document.getElementById("reportText").value;
 
-  // *********************** AJAX : 서버에 요청 보내기 ***********************
+  // *********************** AJAX : 서버에 유저 신고 요청 보내기 ***********************
 
   var formData = {
       bno: bno, // 게시글 번호
@@ -231,6 +232,47 @@ document.getElementById('report-form').addEventListener("submit", function(e) {
   
 
 });
+
+// 팔로잉 누르기
+const $addFollowing = document.getElementById('add-following');
+$addFollowing.onclick = () => {
+  console.log('팔로잉!!');
+  const writerAccount = $addFollowing.dataset.writeraccount;
+  console.log(writerAccount);
+
+  var formData = {
+    writerAccount: writerAccount
+  };
+
+  fetch('/api/v1/follow/add', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(response => {
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    // Parse the response body as JSON
+    return response.json();})
+  .then(data => {
+    console.log('1인 경우에만 정상 팔로우 처리 완료: ', data);
+
+    if (data === 1) {
+      alert('정상적으로 팔로잉 했습니다.');
+      location.reload(); // 새로고침
+    } else if (data === 2) {
+      alert('자기 자신은 팔로잉할 수 없습니다.');
+    } else if (data === 3) {
+      alert('이미 팔로잉한 회원입니다.');
+    }
+
+
+  });
+  
+};
 
 
 // 즉시 실행 함수

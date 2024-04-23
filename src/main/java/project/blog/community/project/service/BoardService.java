@@ -1,9 +1,7 @@
 package project.blog.community.project.service;
 
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +18,7 @@ import project.blog.community.project.entity.Board;
 import project.blog.community.project.entity.Category;
 import project.blog.community.project.entity.User;
 import project.blog.community.project.mapper.BoardMapper;
+import project.blog.community.project.mapper.LikeMapper;
 import project.blog.community.project.mapper.UserMapper;
 import project.blog.community.project.repository.JdbcRepository;
 
@@ -35,11 +34,12 @@ public class BoardService {
 
     private final BoardMapper boardMapper;
     private final UserMapper userMapper;
+    private final LikeMapper likeMapper;
 
     // 게시판 목록을 조회
     public List<BoardListResponseDTO> getList() {
         List<BoardListResponseDTO> dtoList = new ArrayList<>();
-        List<Board> boardList = boardMapper.findAll();
+        List<Board> boardList = boardMapper.findAll("recent",20);
 
         for (Board board : boardList) {
             String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
@@ -52,11 +52,13 @@ public class BoardService {
     }
 
     // 메인화면에서 목록을 조회
-    public List<BoardListResponseDTO> getHotList() {
+    public List<BoardListResponseDTO> getHotList(String option) {
         List<BoardListResponseDTO> dtoList = new ArrayList<>();
 
         // 전체 게시판과 달리 좋아요 순으로 6개 게시물만 정렬
-        List<Board> boardList = boardMapper.findAll();
+        String type = option;
+        int amount = 6;
+        List<Board> boardList = boardMapper.findAll(type, amount);
 
         for (Board board : boardList) {
             String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
@@ -69,8 +71,10 @@ public class BoardService {
 
     // 카테고리에 따라 다른 게시판 목록을 보여주는 메서드
     public List<BoardListResponseDTO> getCategoryList(String category) {
+        int amount = 20;
+
         List<BoardListResponseDTO> dtoList = new ArrayList<>();
-        List<Board> boardList = boardMapper.findCategory(category);
+        List<Board> boardList = boardMapper.findCategory(category, amount);
         for (Board board : boardList) {
             String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
             BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname);
@@ -105,17 +109,20 @@ public class BoardService {
 
 
     // 게시물의 좋아요 수 바꾸기
-    public int changeLike(LikeRequestDTO dto, HttpServletRequest request, HttpServletResponse response) {
+    public int changeLike(LikeRequestDTO dto, HttpServletRequest request) {
         int bno = dto.getBno();
         int number = dto.getNumber();
+        
+        // 게시물 테이블의 좋아요 수 업데이트
         boardMapper.updateLikeCount(bno, number);
 
         HttpSession session = request.getSession();
         session.getAttribute("login");
         // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
 
-        // 좋아요를 눌렀다면 해당 게시글에 대한 쿠키 만들기
+        // 좋아요를 눌렀다면 Like 테이블에 insert
         if (number > 0) {
+
             Cookie cookie = new Cookie("like", Integer.toString(bno));
             cookie.setMaxAge(60);
             cookie.setPath("/");
@@ -127,7 +134,9 @@ public class BoardService {
             Cookie cookie = WebUtils.getCookie(request, "like");
             cookie.setMaxAge(0);
             cookie.setPath("/");
-            response.addCookie(cookie);
+            response.addCookie(cookie);*/
+
+            likeMapper.deleteLike(currentLoginMemberAccount, bno);
 
             return 0;
         }
@@ -196,6 +205,7 @@ public class BoardService {
         Category category = Category.valueOf(upperCategory); // category = Category.MOVIE
         return category.getDescription(); // return value = "영화글"
     }
+
 
 
 }

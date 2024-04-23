@@ -7,25 +7,32 @@
 
     <insert id="save">
         INSERT INTO tbl_market
-        (text_title, text_content, text_writer)
+        (text_title, text_content, text_writer, category, price, address)
         VALUES
-        (#{textTitle}, #{textContent}, #{textWriter})
+        (#{textTitle}, #{textContent}, #{textWriter}, #{category}, #{price}, #{address})
         <!--VALUES는 SQL 문법에서 데이터 삽입(INSERT) 작업을 할 때,
         특정 테이블의 컬럼에 삽입될 값들을 지정하는 데 사용되는 키워드입니다.-->
     </insert>
 
 
-    <select id = "findAll" resultType="market"> <!-- resultType 원래는 풀 경로이나, mybatis-config.xml에서 메서드화해서 줄임 // select 리턴 타입 설정 resultType, Board만 적음됨 List<Board> XXX @@-->
+    <select id = "findAll" resultType="market">
+        <!-- resultType 원래는 풀 경로이나, mybatis-config.xml에서 메서드화해서 줄임 // select 리턴 타입 설정 -->
+        <!-- selectType은 resultType(return) 필수)-->
         SELECT * FROM tbl_market
         ORDER BY board_no DESC
     </select>
+
+    <select id = "findOne" resultType="market">
+        SELECT * FROM tbl_market
+        WHERE board_no = #{boardNo}
+    </select>
+
 
 
 
     <update id="modify">
         UPDATE tbl_market
-        SET text_content = #{textContent}
-<!--        update_date = CURRENT_TIMESTAMP-->
+        SET text_title = #{textTitle}, text_content = #{textContent}, category = #{category}, price = #{price}
         WHERE board_no = #{boardNo}
     </update>
 
@@ -34,6 +41,28 @@
         SET view_count = view_count + 1
         WHERE board_no = #{boardNo}
     </update>
+
+    <delete id="delete">
+        DELETE FROM tbl_market
+        WHERE board_no = #{boardNo}
+    </delete>
+
+    <insert id="addFav">
+        INSERT INTO market_favorite
+        VALUES
+        (#{accountNumber}, #{boardNo})
+    </insert>
+
+    <select id="checkFav" resultType="java.lang.Integer">
+        SELECT board_no
+        FROM market_favorite
+        WHERE account_number = #{accountNumber}
+    </select>
+
+    <delete id="removeFav">
+        DELETE FROM market_favorite
+        WHERE account_number = #{accountNumber}
+    </delete>
 
 
 

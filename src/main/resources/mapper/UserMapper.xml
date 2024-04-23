@@ -58,4 +58,10 @@
         VALUES (#{me}, #{you})
     </insert>
 
+    <delete id="removeFollower">
+        DELETE FROM tbl_follow
+        WHERE following = #{me}
+        AND follower = #{you}
+    </delete>
+
 </mapper>

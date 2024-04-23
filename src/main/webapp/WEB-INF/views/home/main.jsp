@@ -68,7 +68,7 @@
                   <c:if test="${b.postImg != null}">
                     <img class="thumbnail" src="/display${b.postImg}" alt="업로드 이미지">
                   </c:if>
-                
+                  
                 
               </div>
               <div class="card-title-wrapper">

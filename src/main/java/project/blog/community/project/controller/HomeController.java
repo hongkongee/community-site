@@ -197,7 +197,7 @@ public class HomeController {
       // board table 에 게시글 저장하기: writer, title, content, file-image (파일 경로), category
       boardService.saveBoard(category, title, content, savePath, writer);
 
-      return "home/all";
+      return "redirect:/home/all";
    }
 
 

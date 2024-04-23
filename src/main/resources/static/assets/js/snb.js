@@ -56,7 +56,7 @@ function renderFollows(follows) {
                         <li id="my-page"><i class="fa-solid fa-house"></i></li>
                         <li id="chatting"><i class="fa-solid fa-message"></i></li>
                         <li id="follow"><i class="fa-solid fa-user-plus"></i></li>
-                        <li id="ban"><i class="fa-solid fa-ban"></i></li>
+                        <li id="ban"><i class="fa-solid fa-user-minus"></i></i></li>
                     </ul></div>`;
       
     }
@@ -158,7 +158,7 @@ function clickXbutton() {
       console.log('x버튼 클릭');
       e.target.parentNode.parentNode.style.display = 'none';
 
-    } else if (e.target.matches('.fa-ban')) { // 팔로우 취소버튼 클릭
+    } else if (e.target.matches('.fa-user-minus')) { // 팔로우 취소버튼 클릭
       console.log('팔로잉 취소!');
       const userAccount = e.target.parentNode.parentNode.parentNode.dataset.useraccount;
       console.log(userAccount);

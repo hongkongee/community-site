@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyPage</title>
 
+    <%@ include file="../include/static-head.jsp" %>
+
     <link rel="stylesheet" href="/assets/css/mypage.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,23 +27,48 @@
             <!-- <a href="#" class="moreInfoBtn"> + </a> -->
             <!-- Name of Page -->
             <div class="home">My Page</div>
+
+            <div class="home-icon">
+                <a href="/home/main">
+                    <i class="fa-solid fa-house"></i>
+                </a>
+            </div>
+
         </div>
+
+        
+        
 
         <div class="body-wrapper1">
 
             <!-- profile information -->
-            <img class="user-profile-pic" src="https://via.placeholder.com/233x233" />
+            <div class="user-profile-box">
+                <c:if test="${empty user.profilePicture}">
+                    <img class="user-profile-pic" src="/assets/img/jjanggu.jpg" alt="기본 프사">
+                </c:if>
+
+                <c:if test="${not empty user.profilePicture}">
+                    <img class="user-profile-pic" src="/display\${following.profilePicture}" alt="프사">
+                </c:if>
+            </div>
+
             <div class="user-info">
                 <div class="profile-name">
-                    김짱구<br /></div>
+                    ${user.nickname}<br /></div>
                 <div class="email">
-                    jjanggu@gmail.com</div>
+                    ${user.email}</div>
                 <div class="bio">
                     안녕하세요 저는 짱구입니다. <br>저는 맛집 가는걸 좋아해요!</div>
                 <div class="points">
                     point : <span class="points-value">200</span></div>
-                <button class="follow-btn" type="button">팔로우하기</button>
+
+                    <c:if test="${login.accountNumber ne user.accountNumber}">
+                        <button class="follow-btn" type="button">팔로우하기</button>
+                    </c:if>
             </div>
+
+
+
             <div class="user-friends">
                 <div class="friends-category">
                     <div class="followers">
@@ -52,22 +79,66 @@
                     </div>
                 </div>
 
-                <!-- friendlist/followlist -->
-                <div class="friend-list">
+                <!-- 팔로잉 리스트 -->
+                <div class="following-list">
 
-                    <div class="friend-profile">
-                        <img src="#">
-                        <div class="friend-name">이름 <button class="friend-btn">+</button></div>
-                    </div>
-                    <div class="friend-profile">
-                        <img src="#">
-                        <div class="friend-name">이름 <button class="friend-btn">+</button></div>
-                    </div>
-                    <div class="friend-profile">
-                        <img src="#">
-                        <div class="friend-name">이름 <button class="friend-btn">+</button></div>
-                    </div>
+                    <c:forEach var="following" items="${followings}">
 
+                    <div class="user-wrapper">
+
+                        <div class="profile-box">
+                            <c:if test="${empty following.profilePicture}">
+                                <img src="/assets/img/jjanggu.jpg" alt="기본 프사">
+                            </c:if>
+
+                            <c:if test="${not empty following.profilePicture}">
+                                <img src="/display\${following.profilePicture}" alt="프사">
+                            </c:if>
+                        </div>
+                        
+                        <div class="name-box">
+                            <a class="friendName" href="/mypage/home/${following.accountNumber}">
+                                ${following.nickname}&nbsp;
+                            </a>
+                        </div>
+
+                        <div class="icon-box">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </div>
+
+                    </div>
+                        
+                    
+
+                    </c:forEach>
+
+                
+                </div>
+
+                <!-- 팔로워 리스트 -->
+                <div class="follower-list">
+
+                    <c:forEach var="follower" items="${followers}">
+
+                        <div class="profile-box">
+                            <c:if test="${empty follower.profilePicture}">
+                                <img src="/assets/img/jjanggu.jpg" alt="기본 프사">
+                            </c:if>
+
+                            <c:if test="${not empty follower.profilePicture}">
+                                <img src="/display\${follower.profilePicture}" alt="프사">
+                            </c:if>
+                        </div>
+
+                        <a class="friendName" href="#">
+                            ${follower.nickname}
+                        </a>
+                        <i class="fa-solid fa-user-plus"></i>
+                    
+
+                    </c:forEach>
+
+                
                 </div>
 
             </div>
@@ -81,14 +152,14 @@
             <div class="my-market">
 
                 <div class="user-market">
-                    <div class="title-market">김짱구님의 중고 장터</div>
+                    <div class="title-market">${user.nickname}님의 중고 장터</div>
                     <div class="market-image">
                         <img src="#" class="user-market-photo">
                         <img src="#" class="user-market-photo">
                     </div>
                 </div>
                 <div class="user-game">
-                    <div class="title-market">김짱구님에게 게임신청</div>
+                    <div class="title-market">${user.nickname}님에게 게임신청</div>
                     <div class="all-games">
                         <div class="game-name">게임 1 <button class="register-to-game">신청걸기</button></div>
                         <div class="game-name">게임 2 <button class="register-to-game">신청걸기</button></div>
@@ -108,15 +179,12 @@
 
                 <div class="popular-post">
                     <div class="popular-title">
-                        <div class="best-three">인기 게시글 BEST3</div>
+                        <div class="best-three">${user.nickname} 님의 인기 게시글 BEST3</div>
                     </div>
                     <div class="popular-list">
-                        <div class="popular-title-container"><span class="popular-title-list">제목 ㅇㅇㅇㅇㅇ</span>
-                            <span class="popular-content">작성날짜</span>
-                        </div>
-                        <div class="popular-title-container"><span class="popular-title-list">제목 ㅇㅇㅇㅇㅇ</span>
-                            <span class="popular-content">작성날짜</span>
-                        </div>
+                        <c:forEach var="following" items="${followings}">
+
+                        </c:forEach>
                         <div class="popular-title-container"><span class="popular-title-list">제목 ㅇㅇㅇㅇㅇ</span>
                             <span class="popular-content">작성날짜</span>
                         </div>

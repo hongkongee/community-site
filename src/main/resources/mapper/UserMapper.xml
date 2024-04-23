@@ -53,6 +53,12 @@
         LIMIT 0, #{number}
     </select>
 
+    <select id="findUserByFollowing" resultType="java.lang.String">
+        SELECT following
+        FROM tbl_follow
+        WHERE follower = #{account}
+    </select>
+
     <insert id="addFollower">
         INSERT INTO tbl_follow
         VALUES (#{me}, #{you})

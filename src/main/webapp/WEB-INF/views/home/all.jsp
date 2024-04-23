@@ -65,11 +65,20 @@
                       <td id="bno">${b.bno}</td>
                       <td id="category">${b.category}</td>
                       <td id="title"> <a href="#" data-bno="${b.bno}"> ${b.title} </a></td> <!-- 게시글 페이지로-->
-                      <td id="writer"> <a href="#">${b.writer}</a></td> <!-- 유저 정보 페이지 -->
+                      <td id="writer" data-writeraccount="${b.writerAccount}"> <a href="#">${b.writer}</a></td> <!-- 유저 정보 페이지 -->
                       <td id="date">${b.regDate}</td>
                       <td id="view">${b.viewCount}</td>
                     </tr>
 
+                  </div>
+
+                  <!-- 작성자 정보 -->
+                  <div class="writer-info" data-writeraccount="${b.writerAccount}">
+                    <ul>
+                      <li><a href="#">게시글 보기</a></li>
+                      <li><a href="#">1:1 채팅</a></li>
+                      <li><a id="add-following" href="#" data-writeraccount="${b.writerAccount}">팔로잉</a></li>
+                    </ul>
                   </div>
 
 
@@ -98,6 +107,8 @@
           
     
         </section>
+
+        
     
      
     
@@ -153,26 +164,9 @@
     
     </div> <!-- wrapper end -->
 
-    <script>
 
-
-      const $tbody = document.querySelector('tbody');
-
-      // 게시물 상세 조회
-      $tbody.addEventListener('click', e => {
-
-        console.log('이벤트 타겟: ', e.target);
-
-        if (e.target.matches('#title a')) {
-          const bno = e.target.dataset.bno;
-          console.log('bno: ', bno);
-          window.location.href = '/home/detail/' + bno;
-        }
-
-      });
-
-
-    </script>
+    <!-- 목록페이지 자바스크립트 -->
+    <script src="/assets/js/list.js"></script>
 
     
 </body>

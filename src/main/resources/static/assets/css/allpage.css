@@ -113,6 +113,19 @@ section.all .list-container .head-wrapper {
 }
 
 
+.writer-info {
+    display: none;
+    font-size: 18px;
+    width: 150px;
+    height: 130px;
+    background: #97E7E1;
+    padding: 10px;
+    position: absolute;
+    top: 75%;
+    left: 85%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
 
 
 

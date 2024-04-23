@@ -11,9 +11,9 @@ import project.blog.community.project.dto.request.AutoLoginDTO;
 import project.blog.community.project.dto.request.LoginRequestDTO;
 import project.blog.community.project.dto.request.SignUpRequestDto;
 import project.blog.community.project.dto.response.LoginUserResponseDTO;
+import project.blog.community.project.dto.response.MypageUserResponseDTO;
 import project.blog.community.project.entity.User;
 import project.blog.community.project.mapper.UserMapper;
-import project.blog.community.util.LoginUtils;
 
 import java.time.LocalDateTime;
 
@@ -107,6 +107,13 @@ public class UserService {
    }
 
 
+    public MypageUserResponseDTO getUserInformation(String account) {
+       User user = userMapper.findUser(account);
+       log.info("In UserService process, user = " + user.toString());
+
+       MypageUserResponseDTO dto = new MypageUserResponseDTO(user);
+       return dto;
+    }
 }
 
 

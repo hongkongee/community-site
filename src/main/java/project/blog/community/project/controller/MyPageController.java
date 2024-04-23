@@ -1,10 +1,24 @@
 package project.blog.community.project.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import project.blog.community.project.dto.response.FollowerResponseDTO;
+import project.blog.community.project.dto.response.LoginUserResponseDTO;
+import project.blog.community.project.dto.response.MypageUserResponseDTO;
+import project.blog.community.project.service.BoardService;
+import project.blog.community.project.service.FollowingService;
+import project.blog.community.project.service.UserService;
+
+import java.util.List;
+
+import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccount;
 
 @Controller
 @RequiredArgsConstructor
@@ -12,9 +26,53 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class MyPageController {
 
-   @GetMapping("/home")
-   public String home(){
-      log.info("/mypage/home: GET!");
+   private final UserService userService;
+   private final FollowingService followingService;
+   private final BoardService boardService;
+
+   @GetMapping("/home/{account}")
+   public String myHome(@PathVariable String account, HttpServletRequest request, Model model){
+      log.info("/mypage/home/{}: GET!", account);
+      
+      // 홈페이지 유저 정보 가져오기
+      MypageUserResponseDTO userInformation = userService.getUserInformation(account);
+      model.addAttribute("user", userInformation);
+
+      log.info("user: " + userInformation.toString());
+
+
+      // 로그인한 유저의 정보가져오기
+      HttpSession session = request.getSession();
+      LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+
+//      String loginAccount = getCurrentLoginMemberAccount(session);
+      model.addAttribute("login", loginDto);
+      log.info(loginDto.toString());
+
+
+      
+      // 팔로잉 정보 가져오기
+      List<FollowerResponseDTO> userFollowing = followingService.findUserFollowing(account);
+      log.info(" ===== 팔로잉 유저 목록: ===== ");
+      for (FollowerResponseDTO dto : userFollowing) {
+         log.info(dto.toString());
+      }
+
+      model.addAttribute("followings", userFollowing);
+
+
+      // 팔로워 정보 가져오기
+      List<FollowerResponseDTO> userFollower = followingService.findUserFollower(account);
+
+      log.info(" ===== 팔로워 유저 목록: ===== ");
+      for (FollowerResponseDTO dto : userFollower) {
+         log.info(dto.toString());
+      }
+      model.addAttribute("followers", userFollower);
+      
+      // 내 인기 게시물 가져오기
+      boardService
+
 
       return "mypage/mypage";
    }

@@ -28,6 +28,7 @@ public class BoardListResponseDTO {
     private final String postImg;
 
     private final String regDate2;
+    private final String writerAccount;
 
     // entity를 dto로 바꾸는 생성자
     public BoardListResponseDTO(Board board, String nickname) {
@@ -40,6 +41,7 @@ public class BoardListResponseDTO {
         this.viewCount = board.getViewCount();
         this.postImg = board.getPostImg();
         this.likeCount = board.getLikeCount();
+        this.writerAccount = board.getWriter();
     }
 
     private String makePrettierDateString2(LocalDateTime regDate) {

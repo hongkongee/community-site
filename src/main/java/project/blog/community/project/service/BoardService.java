@@ -5,16 +5,22 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.WebUtils;
+import project.blog.community.project.common.Search;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
 import project.blog.community.project.dto.response.BoardListResponseDTO;
+import project.blog.community.project.dto.response.BoardMyListResponseDTO;
+import project.blog.community.project.dto.response.LoginUserResponseDTO;
 import project.blog.community.project.entity.Board;
 import project.blog.community.project.entity.Category;
 import project.blog.community.project.entity.User;
 import project.blog.community.project.mapper.BoardMapper;
 import project.blog.community.project.mapper.LikeMapper;
 import project.blog.community.project.mapper.UserMapper;
+import project.blog.community.project.repository.JdbcRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,27 +119,19 @@ public class BoardService {
         HttpSession session = request.getSession();
         session.getAttribute("login");
         // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
-        String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
 
         // 좋아요를 눌렀다면 Like 테이블에 insert
         if (number > 0) {
 
-            // 쿠키에 게시글 번호와 로그인 유저 ID 저장
-       /*     Cookie cookie = new Cookie("like" + bno, currentLoginMemberAccount); // ex) "like125", "tjtkdvl"
+            Cookie cookie = new Cookie("like", Integer.toString(bno));
             cookie.setMaxAge(60);
             cookie.setPath("/");
-            response.addCookie(cookie); // 클라이언트에 전송*/
-
-            // Like 테이블에 로그인 유저 ID와 좋아요 누른 게시글 번호 저장
-            likeMapper.addLike(currentLoginMemberAccount, bno);
-
-
+            response.addCookie(cookie);
 
             return 1;
 
-        } else { // 좋아요를 안 눌렀다면 Like 테이블로부터 delete
-
-            /*Cookie cookie = WebUtils.getCookie(request, "like" + bno);
+        } else { // 좋아요를 안 눌렀다면 해당 게시글에 대한 쿠키 삭제하기
+            Cookie cookie = WebUtils.getCookie(request, "like");
             cookie.setMaxAge(0);
             cookie.setPath("/");
             response.addCookie(cookie);*/
@@ -144,16 +142,40 @@ public class BoardService {
         }
     }
 
-    // 좋아요를 이전에 눌렀는지 확인 (from tbl_like)
-    public int checkLike(HttpServletRequest request, int bno) {
-        HttpSession session = request.getSession();
-        session.getAttribute("login");
-        // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
-        String myAccount = getCurrentLoginMemberAccount(session);
+    public List<BoardMyListResponseDTO> getMyList(HttpServletRequest request, Search page) {
+        List<BoardMyListResponseDTO> myList = new ArrayList<>();
+        List<Board> boardList = boardMapper.findAll(page);
 
-        int likeCount = likeMapper.checkLike(myAccount, bno);
-        return likeCount;
+        for (Board board : boardList) {
+            BoardMyListResponseDTO dto = new BoardMyListResponseDTO(board);
+            myList.add(dto);
+        }
+
+        return myList;
+
     }
+
+    public int getCount(Search page) {
+        return boardMapper.getCount(page);
+    }
+
+    public List<BoardMyListResponseDTO> getMyList(Search page, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+        log.info("dto: {}", loginDto);
+
+        String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
+
+        List<BoardMyListResponseDTO> myList = new ArrayList<>();
+        List<Board> boardList = boardMapper.findMine(page, currentLoginMemberAccount);
+        for (Board board : boardList) {
+            BoardMyListResponseDTO dto = new BoardMyListResponseDTO(board);
+            myList.add(dto);
+        }
+        return myList;
+    }
+
 
     // 게시글 업로드
     public void saveBoard(String category, String title, String content, String filePath, String writer) {

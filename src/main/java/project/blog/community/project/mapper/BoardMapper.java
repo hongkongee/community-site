@@ -2,8 +2,8 @@ package project.blog.community.project.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import project.blog.community.project.common.Search;
 import project.blog.community.project.entity.Board;
-import project.blog.community.project.entity.Category;
 
 import java.util.List;
 
@@ -29,4 +29,13 @@ public interface BoardMapper {
 
     void updateLikeCount(@Param("bno") int bno, @Param("number") int number);
 
+    // 총 게시물의 개수 리턴
+    int getCount(Search page);
+
+    // 페이지 findAll
+    List<Board> findAll(Search page);
+
+
+    // 내 게시물만 보이는 findMine
+    List<Board> findMine(@Param("page") Search page, @Param("account") String currentLoginMemberAccount);
 }

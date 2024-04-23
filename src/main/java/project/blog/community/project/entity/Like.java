@@ -1,12 +1,12 @@
 package project.blog.community.project.entity;
 
+import lombok.*;
+
 /*CREATE TABLE tbl_like (
         account_number VARCHAR(50),
 bno INT,
 UNIQUE (account_number, bno)
 );*/
-
-import lombok.*;
 
 // 유저와 게시물의 좋아요 관계 테이블
 

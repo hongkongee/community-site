@@ -36,7 +36,7 @@
     <update id="saveAutoLogin">
         UPDATE tbl_user
         SET session_id = #{sessionId}, limit_time = #{limitTime}
-        WHERE account_number = #{accountNumber}
+        WHERE account_number = #{account}
     </update>
     
     <select id="findMemberByCookie" resultType="user">

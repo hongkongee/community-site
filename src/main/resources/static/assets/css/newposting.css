@@ -40,59 +40,47 @@ body {
 
 .second-wrapper form {
   margin-top: 100px;
+  width: 80%;
+  border: 1px solid black;
+  border-radius: 60px;
+  margin: 10%;
+  padding: 5%;
 }
 
-.second-wrapper form label {
-  display: block;
-  margin-left: 50px;
-  margin-bottom: 10px;
+form .form-select {
+  margin: 20px auto;
+  width: 100%;
   font-size: 20px;
 }
 
-.second-wrapper form input[type="text"],
-textarea {
-  font-size: 18px;
-  width: 90%;
-  padding: 8px;
-  box-sizing: border-box;
-  border: 2px solid black;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  margin-left: 50px;
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-textarea {
-  resize: none;
-  height: 800px;
-}
-
-.buttons {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
-
-button {
+form .form-control {
+  margin: 20px auto;
+  width: 100%;
   font-size: 20px;
-  padding: 10px 20px;
-  border: none;
-  margin-right: 10px;
-  background-color: #4CAF50;
+}
+
+.upload-box {
+  margin: 20px auto;
+  font-size: 20px;
+}
+
+.mb-3 textarea {
+  width: 100%;
+  font-size: 20px;
+}
+
+form .buttons {
+  font-size: 20px;
+  text-align: right;
+}
+
+.buttons button {
+  font-size: 20px;
+  background: white;
+  border: 2px solid #00196b;
+}
+
+.buttons button:hover {
+  background: #00196b;
   color: white;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-
-button.list-btn {
-  background: #e61e8c;
-}
-
-button:hover {
-  background-color: #3d8b40;
-}
-
-button.list-btn:hover {
-  background: #e61e8c93;
 }

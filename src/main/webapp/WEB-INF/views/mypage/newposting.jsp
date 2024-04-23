@@ -27,18 +27,50 @@
   <div class="newposting-wrapper">
     <div class="second-wrapper">
       <div class="main-title-wrapper">
-        <h1 class="main-title">게시글 작성하기</h1>
+        <h1 class="main-title">게시글 작성</h1>
       </div>
 
-      <form action="/mypage/posting_cube" method="post">
-        <label for="title">제목</label>
-        <input type="text" id="title" name="title" required>
-        <label for="content">내용</label>
-        <textarea id="content" name="content" maxlength="200" required></textarea>
+      <form action="/mypage/newposting" method="post" enctype="multipart/form-data">
+        <!-- 카테고리 선택 영역 -->
+        <select class="form-select" name="category" aria-label="Default select example">
+          <option selected>게시판을 선택해 주세요</option>
+          <option value="game">게임 게시판</option>
+          <option value="market">중고 거래 게시판</option>
+          <option value="movie">영화 게시판</option>
+          <option value="trip">여행 게시판</option>
+        </select>
+
+        <!-- 제목 입력 영역 -->
+        <div class="mb-3">
+          <!-- <label for="exampleFormControlInput1" class="form-label"></label> -->
+          <input type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력해 주세요">
+        </div>
+
+        <br>
+
+        <!-- 이미지 업로드 영역 -->
+        <div class="mb-3">
+          <!-- <label for="formFile" class="form-label">Default file input example</label> -->
+          <input class="form-control" type="file" multiple="multiple" name="file" id="formFile" accept="image/*">
+          <div class="upload-box">파일 첨부</div>
+        </div>
+
+
+        <!-- 내용 입력 영역 -->
+        <div class="mb-3">
+          <!-- <label for="exampleFormControlTextarea1" class="form-label"></label> -->
+          <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="20"
+            placeholder="내용을 입력하세요"></textarea>
+        </div>
+
+        <!-- 게시물 쓰기 버튼 -->
         <div class="buttons">
           <button class="list-btn" type="button" onclick="window.location.href='/mypage/posting_cube'">목록</button>
           <button type="submit">글쓰기</button>
         </div>
+
+
+
       </form>
 
 
@@ -47,5 +79,13 @@
 
   </div>
 </body>
+
+<script>
+  const $box = document.querySelector('.upload-box');
+  const $input = document.getElementById('img-input');
+  $box.onclick = e => {
+    $input.click();
+  };
+</script>
 
 </html>

@@ -84,8 +84,11 @@
         input[type="number"]::-webkit-outer-spin-button,
         input[type="number"]::-webkit-inner-spin-button {
             -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
+            width: 300px;
+            height: 2em;
+            border-color: #7AA2E3;
+            border-width: 0 0 2px;
+            background-color: transparent;
         }
 
         button {
@@ -185,6 +188,7 @@
                         <p>출생년도를 입력해주세요&nbsp;<span id="birthChk"></span></p>
                         <input type="number" name="birthday" id="birthYear" class="input-btn" maxlength="4"
                             required="required">
+
                     </div>
                 </div>
                 <div class="main-btn">
@@ -196,6 +200,57 @@
     </div>
 
     <script>
+        // 이메일 인증버튼 클릭 이벤트
+
+        let code = ''; // 이메일 전송 인증번호 저장을 위한 변수수
+
+        document.getElementById('mail-check-btn').onclick = () => {
+            const email = document.getElementById('user_email').value.trim();
+            console.log('완성된 이메일: ', email);
+
+            fetch('/users/email', {
+                    method: 'post',
+                    headers: {
+                        'Content-type': 'text/plain'
+                    },
+                    body: email
+                })
+                .then(res => res.text())
+                .then(data => {
+                    console.log('인증번호: ', data);
+                    code = data;
+
+                    // 이메일 전송이 완료되면 이메일 입력창 readonly로 막기
+                    document.getElementById('user_email').readOnly = true;
+
+                    // 인증번호 입력창 활성화
+                    document.getElementById('mail-check-input').disabled = false;
+                    alert('인증번호가 전송되었습니다. 확인 후 입력란에 정확히 입력하세요.');
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert('이메일 전송에 실패했습니다. 존재하는 이메일인지 확인해주세요.');
+                })
+        };
+
+        // 인증번호 검증
+        // blur -> focus가 빠지는 경우 발생.
+        document.getElementById('mail-check-input').onblur = e => {
+            console.log('blur 이벤트 발생!');
+            const inputCode = e.target.value;
+            if (inputCode === code) {
+                document.getElementById('mailCheckMsg').textContent = '인증번호가 일치합니다!';
+                document.getElementById('mailCheckMsg').style.color = 'skyblue';
+                e.target.style.display = 'none';
+            } else {
+                document.getElementById('mailCheckMsg').textContent = '인증번호를 다시 확인하세요!';
+                document.getElementById('mailCheckMsg').style.color = 'red';
+                e.target.focus();
+            }
+        }
+
+
+        // 회언가입 입력값 검증 처리
         // 이메일 인증버튼 클릭 이벤트
 
         let code = ''; // 이메일 전송 인증번호 저장을 위한 변수수
@@ -369,7 +424,7 @@
         };
 
         // 닉네임 검사 정규표현식
-        const nickPattern = /^[가-힣]+$/;
+        const nickPattern = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
         // 닉네임 입력값 검증
         const $nickInput = document.getElementById('user_nickname');
         $nickInput.onkeyup = e => {
@@ -397,11 +452,14 @@
             const $genderValue = document.querySelector('input[type="radio"]:checked').value;
             console.log($genderValue);
             if ($genderValue === "Male" || $genderValue === "Female") {
+
                 checkResultList[5] = true;
             } else {
                 checkResultList[5] = false;
             }
+
         }
+
 
         // 이메일 검사 정규표현식
         const emailPattern =
@@ -503,6 +561,7 @@
         // 출생년도 유효값 검증
         const $birthInput = document.getElementById('birthYear');
         $birthInput.onkeyup = e => {
+
             const birthValue = $birthInput.value.trim();
             if (birthValue === '') {
                 document.getElementById('birthChk').innerHTML =

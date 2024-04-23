@@ -4,7 +4,6 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -17,7 +16,8 @@ import java.util.Random;
 public class MailSenderService {
 
     // EmailConfig에 등록한 빈 주입
-    /*private final JavaMailSender mailSender;
+    private final JavaMailSender mailSender;
+
 
     // 난수 발생
     private int makeRandomNumber() {
@@ -43,7 +43,8 @@ public class MailSenderService {
                 "<h3 style='color:#7AA2E3;'>회원가입 인증 코드입니다.</h3>" +
                 "<div style='font-size:130%'>" +
                 "CODE : <strong>" +
-        authNum + "</strong><div><br/> " + "</div>"; // 이메일에 삽입할 내용
+                authNum + "</strong><div><br/> " + "</div>"; // 이메일에 삽입할 내용
+
 
         mailSend(setFrom, toMail, title, content);
 
@@ -53,14 +54,13 @@ public class MailSenderService {
     // 이메일을 실제로 전송하는 메서드
     private void mailSend(String setFrom, String toMail, String title, String content) {
 
-
         try {
             MimeMessage message = mailSender.createMimeMessage();
-            *//*
+            /*
             기타 설정들을 담당할 MimeMessageHelper 객체를 생성
             생성자의 매개값으로 MimeMessage 객체, bool, 문자 인코딩 설정
             true 매개값을 전달하면 MultiPart 형식의 메세지 전달이 가능 (첨부 파일)
-             *//*
+             */
             MimeMessageHelper helper = new MimeMessageHelper(message, false, "utf-8");
 
             helper.setFrom(setFrom);
@@ -76,6 +76,6 @@ public class MailSenderService {
             e.printStackTrace();
         }
 
-    }*/
+    }
 
 }

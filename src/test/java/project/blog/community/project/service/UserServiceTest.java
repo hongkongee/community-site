@@ -4,14 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import project.blog.community.project.dto.request.LoginRequestDTO;
-import project.blog.community.project.dto.request.SignUpRequestDto;
-import project.blog.community.project.entity.Gender;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static project.blog.community.project.entity.Gender.FEMALE;
 import static project.blog.community.project.entity.Gender.MALE;
-import static project.blog.community.project.service.LoginResult.*;
 
 @SpringBootTest
 class UserServiceTest {

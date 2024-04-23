@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import project.blog.community.project.entity.Gender;
 import project.blog.community.project.entity.User;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,7 +26,7 @@ class UserMapperTest {
             .email("test99@gmail.com")
             .birthday(2000)
             .gender(FEMALE)
-            .nickname("테스트9")
+            .nickname("테스트")
             .build();
 
       userMapper.save(user);
@@ -35,13 +34,13 @@ class UserMapperTest {
 
 
    @Test
-   @DisplayName("아이디가 test123인 계정을 조회하면 그 회원의 이름은 테스트이어야 한다.")
+   @DisplayName("아이디가 test333인 계정을 조회하면 그 회원의 이름은 테스트이어야 한다.")
    void findUser() {
-      String id = "test123";
+      String id = "test333";
 
       User user = userMapper.findUser(id);
 
-      assertEquals(user.getNickname(), "테스트");
+      assertEquals(user.getName(), "테스트3");
 
    }
 

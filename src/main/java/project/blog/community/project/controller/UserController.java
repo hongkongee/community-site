@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.blog.community.project.dto.request.LoginRequestDTO;
 import project.blog.community.project.dto.request.SignUpRequestDto;
+import project.blog.community.project.entity.User;
 import project.blog.community.project.service.LoginResult;
 import project.blog.community.project.service.UserService;
 import project.blog.community.util.MailSenderService;
+import project.blog.community.util.upload.FileUtils;
 
 @Controller
 @RequestMapping("/users")
@@ -49,15 +51,22 @@ public class UserController {
       log.info("/users/sign-up: POST!");
       log.info("dto = {}", dto);
 
-      userService.join(dto);
+      // 사진 업로드, 나중에 수정해야함
+      String rootPath = null;
+
+      String savePath = FileUtils.uploadFile(dto.getProfilePicture(), rootPath);
+
+      // 일반 방식 (사이트) 회원가입
+      dto.setLoginMethod(User.LoginMethod.COMMON);
+
+      userService.join(dto, savePath);
       return "redirect:/home/main";
 
    }
 
-   // 로그인 양식 화면 요청 처리
+   // 로그인 페이지
    @GetMapping("/sign-in")
    public void signIn() {
-      log.info("/users/sign-in: GET!!");
    }
 
    //로그인 검증 요청
@@ -69,7 +78,8 @@ public class UserController {
       log.info("/users/sign-in: POST!!");
       log.info("dto = {}", dto);
 
-      LoginResult result = userService.authenticate(dto);
+
+      LoginResult result = userService.authenticate(dto, request.getSession(), response);
       log.info("result = {}", result);
 
       ra.addFlashAttribute("result", result);

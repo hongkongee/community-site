@@ -24,6 +24,7 @@ public class BoardDetailResponseDTO {
     private final String regDate;
     private final String writer;
     private final int viewCount;
+    private final int likeCount;
 
     private final String content;
 
@@ -35,6 +36,7 @@ public class BoardDetailResponseDTO {
         this.regDate = makeDateString(board.getRegDate());
         this.viewCount = board.getViewCount();
         this.content = board.getContent();
+        this.likeCount = board.getLikeCount();
     }
 
     private String makeDateString(LocalDateTime regDate) {

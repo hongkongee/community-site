@@ -12,13 +12,14 @@ public class LoginUserResponseDTO {
    public String accountNumber;
    public String name;
    private String email;
-   //private String auth;
+   private String auth;
    private String gender;
    private String nickname;
    private String profile;
-   //private String loginMethod;
+   private String loginMethod;
 
 }
+
 
 
 

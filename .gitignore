@@ -38,6 +38,5 @@ out/
 ### VS Code ###
 .vscode/
 
-
-# Log file ##로그 추가 안하기
+# Log file
 *.log

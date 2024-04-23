@@ -109,11 +109,13 @@ public class HomeController {
     @GetMapping("/detail/{bno}")
     public String detail(@PathVariable("bno") int bno,  HttpServletRequest request, Model model) {
         log.info("/home/detail/{}: GET", bno);
-        BoardDetailResponseDTO dto = boardService.getDetail(bno);
+        BoardDetailResponseDTO dtoDetail = boardService.getDetail(bno);
+
 
         model.addAttribute("b", dto);
         log.info("image path: " + dto.getPostImg());
         log.info("b.category: " + dto.getCategory());
+
 
 //        Cookie c = WebUtils.getCookie(request, "like" + bno);
         // 좋아요 이미 눌렀는지 확인하기

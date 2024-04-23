@@ -4,8 +4,6 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -65,7 +63,6 @@ public class MailSenderService {
             true 매개값을 전달하면 MultiPart 형식의 메세지 전달이 가능 (첨부 파일)
              */
 
-
          MimeMessageHelper helper = new MimeMessageHelper(message, false, "utf-8");
 
          helper.setFrom(setFrom);
@@ -73,7 +70,6 @@ public class MailSenderService {
          helper.setSubject(title);
          // true -> html 형식으로 전송, 값을 안주면 단순 텍스트로만 전달.
          helper.setText(content, true);
-
          // 메일 전송
          mailSender.send(message);
 
@@ -81,5 +77,6 @@ public class MailSenderService {
          e.printStackTrace();
       }
    }
+
 }
 

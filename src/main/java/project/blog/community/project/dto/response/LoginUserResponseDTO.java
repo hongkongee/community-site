@@ -16,7 +16,7 @@ public class LoginUserResponseDTO {
    private String gender;
    private String nickname;
    private String profile;
-   //private String loginMethod;
+   private String loginMethod;
 
 }
 

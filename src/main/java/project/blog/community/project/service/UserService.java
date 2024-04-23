@@ -13,7 +13,6 @@ import project.blog.community.project.dto.request.SignUpRequestDto;
 import project.blog.community.project.dto.response.LoginUserResponseDTO;
 import project.blog.community.project.entity.User;
 import project.blog.community.project.mapper.UserMapper;
-import project.blog.community.util.LoginUtils;
 
 import java.time.LocalDateTime;
 
@@ -29,9 +28,9 @@ public class UserService {
    private final PasswordEncoder encoder;
 
    // 회원 가입 서비스
-   public void join(SignUpRequestDto dto) {
+   public void join(SignUpRequestDto dto, String savePath) {
 
-      userMapper.save(dto.toEntity(encoder));
+      userMapper.save(dto.toEntity(encoder, savePath));
    }
 
    // 로그인 검증 처리
@@ -98,6 +97,7 @@ public class UserService {
             .nickname(foundMember.getNickname())
             .auth(foundMember.getAuth().getDescription())
             .profile(foundMember.getProfilePicture())
+            .loginMethod(foundMember.getLoginMethod().toString())
             .build();
 
       // 세션에 로그인한 회원 정보를 저장

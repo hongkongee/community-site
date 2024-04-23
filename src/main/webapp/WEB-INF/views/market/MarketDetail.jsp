@@ -337,7 +337,7 @@
         });
     }
 
-    window.onload = function() {
+    window.onload = function() { //다 되고 호출
       searchAddress();
     }
 

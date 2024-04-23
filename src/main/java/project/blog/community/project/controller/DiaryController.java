@@ -61,6 +61,7 @@ public class DiaryController {
 
 
 
+
     // 큐브 게시물 누르면 그 게시물로 이동
     @GetMapping("/posting_cube/{bno}")
     public String detail(@PathVariable("bno") int bno, @ModelAttribute("s") Search search, Model model) {
@@ -74,7 +75,7 @@ public class DiaryController {
     // 글 작성하기 누르면 새로운 글 작성하는 페이지로 이동
     @GetMapping("/newposting")
     public String newposting() {
-        log.info("/mypage/newposting: GET!!!");
+            log.info("/mypage/newposting: GET!!!");
 
         return "mypage/newposting";
     }

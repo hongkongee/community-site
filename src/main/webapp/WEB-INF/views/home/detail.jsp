@@ -218,6 +218,11 @@
 
 
                               <div class="profile-box">
+
+                                <c:if test="${login.profile == null}">
+                                  
+
+                                </c:if>
                                 
                                       <!-- <img src="" alt="프사"> -->
                                  

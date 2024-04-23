@@ -29,6 +29,7 @@ public class DiaryController {
         return "mypage/diary";
     }
 
+/*
     @GetMapping("/posting_cube")
     public String posting_cube(Model model, HttpServletRequest request) {
         log.info("/mypage/posting_cube: GET!!!");
@@ -42,6 +43,7 @@ public class DiaryController {
 
         return "mypage/posting_cube";
     }
+*/
 
     
 

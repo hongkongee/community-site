@@ -19,6 +19,7 @@
 </head>
 <body>
 
+
     <!-- 헤더 -->
     <%@ include file="../include/header.jsp" %>
 
@@ -30,7 +31,11 @@
     <div class="wrapper">
 
         <section class="all">
-          <h2> 전체 게시글</h2>
+          <h2> ${li} </h2>
+
+          <!-- <c:if test="${login != null}"> -->
+            <button class="add-btn"><a id="go-write-page" href="/home/write"> 글쓰기 </a></button>
+          <!-- </c:if> -->
     
           <div class="list-container">
     

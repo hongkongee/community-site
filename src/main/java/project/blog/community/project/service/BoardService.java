@@ -17,6 +17,7 @@ import project.blog.community.project.dto.response.BoardListResponseDTO;
 import project.blog.community.project.dto.response.BoardMyListResponseDTO;
 import project.blog.community.project.dto.response.LoginUserResponseDTO;
 import project.blog.community.project.entity.Board;
+import project.blog.community.project.entity.Category;
 import project.blog.community.project.entity.User;
 import project.blog.community.project.mapper.BoardMapper;
 import project.blog.community.project.mapper.UserMapper;
@@ -48,6 +49,22 @@ public class BoardService {
 
         return dtoList;
 
+    }
+
+    // 메인화면에서 목록을 조회
+    public List<BoardListResponseDTO> getHotList() {
+        List<BoardListResponseDTO> dtoList = new ArrayList<>();
+
+        // 전체 게시판과 달리 좋아요 순으로 6개 게시물만 정렬
+        List<Board> boardList = boardMapper.findAll();
+
+        for (Board board : boardList) {
+            String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
+            BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname);
+            dtoList.add(dto);
+        }
+
+        return dtoList;
     }
 
     // 카테고리에 따라 다른 게시판 목록을 보여주는 메서드
@@ -149,5 +166,36 @@ public class BoardService {
         }
         return myList;
     }
+
+
+    // 게시글 업로드
+    public void saveBoard(String category, String title, String content, String filePath, String writer) {
+
+
+        Board uploadedBoard = Board.builder()
+                .category(stringToCategory(category))
+                .title(title)
+                .content(content)
+                .writer(writer)
+                .postImg(filePath)
+                .build();
+
+
+        boardMapper.save(uploadedBoard);
+    }
+
+    // 문자열을 Category 타입으로 바꾸는 메서드
+    private Category stringToCategory(String str) {
+        String upperCategory = str.toUpperCase();
+        return Category.valueOf(upperCategory);
+
+    }
+
+    public String stringToCategoryDescription(String str) { // str = "movie"
+        String upperCategory = str.toUpperCase(); // upperCategory = "MOVIE"
+        Category category = Category.valueOf(upperCategory); // category = Category.MOVIE
+        return category.getDescription(); // return value = "영화글"
+    }
+
 
 }

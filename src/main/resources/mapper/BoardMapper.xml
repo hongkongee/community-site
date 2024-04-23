@@ -6,8 +6,8 @@
 
     <select id="save">
         INSERT INTO tbl_board
-        (title, content, writer, category)
-        VALUES (#{title}, #{content}, #{writer}, #{category})
+        (title, content, writer, category, post_img)
+        VALUES (#{title}, #{content}, #{writer}, #{category}, #{postImg})
     </select>
 
     <select id="findAll" resultType="board">

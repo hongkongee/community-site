@@ -5,10 +5,15 @@
   height: 100vh;
   background: #F8F6E3;
   margin: auto;
+  position: relative;
 }
 
 section.rps {
   border: yellowgreen solid 1px;
+  position: absolute;
+  width: 80%;
+  top: 180px;
+
 }
 
 section.rps h2 {

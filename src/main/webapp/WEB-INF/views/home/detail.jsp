@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detail Page</title>
+  <title>상세 페이지</title>
 
   <%@ include file="../include/static-head.jsp" %>
 
@@ -32,10 +32,10 @@
 
     <!-- ==================== 게시글 영역 ==================== -->
     <section class="board">
-      <div id="wrap" class="form-container"> 
+      <div id="wrap" class="form-container" data-category="${b.category}"> 
 
         <!-- 게시글 카테고리 (누르면 해당 메뉴로 이동) -->
-        <h1 id="bno"> <a href="/home/board/\${b.category}">${b.category}</a> </h1>
+        <h1 id="bno"> <a href="/home/board/${b.category}">${b.categoryDescription}</a> </h1>
         
 
         <!-- 제목 -->
@@ -83,7 +83,12 @@
     
         <hr>
     
-        
+        <div id="board-img">
+          <c:if test="${b.postImg != null}">
+            <img src="/display${b.postImg}" alt="업로드 이미지">
+          </c:if>
+
+        </div>
     
         <!-- <label for="content">내용</label> -->
         <div id="content">${b.content}</div>

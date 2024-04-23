@@ -23,6 +23,11 @@ public class BoardListResponseDTO {
     private final String writer;
     private final String regDate;
     private final int viewCount;
+    private final int likeCount;
+
+    private final String postImg;
+
+    private final String regDate2;
 
     // entity를 dto로 바꾸는 생성자
     public BoardListResponseDTO(Board board, String nickname) {
@@ -31,9 +36,16 @@ public class BoardListResponseDTO {
         this.title = makeShortTitle(board.getTitle());
         this.writer = nickname;
         this.regDate = makePrettierDateString(board.getRegDate());
+        this.regDate2 = makePrettierDateString2(board.getRegDate());
         this.viewCount = board.getViewCount();
+        this.postImg = board.getPostImg();
+        this.likeCount = board.getLikeCount();
     }
 
+    private String makePrettierDateString2(LocalDateTime regDate) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return dtf.format(regDate);
+    }
 
 
     // 날짜 포맷을 바꾸는 함수

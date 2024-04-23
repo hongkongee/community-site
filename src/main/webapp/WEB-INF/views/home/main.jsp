@@ -53,129 +53,46 @@
   
   
         <div class="card-container"> <!-- 게시물 전체 영역 -->
-          <!-- c:forEach -->
-          <div class="card-wrapper"> <!-- 게시물 하나 영역 (더미데이터) -->
-            <section class="card">
-              <div class="card-image">
-                <img src="/assets/img/test.jpg" alt="게시물 이미지">
-              </div>
-              <div class="card-title-wrapper">
-                <h2 class="card-title"><a href="#">게시물 제목</a></h2>
-                <div class="time-like-wrapper">
-                  <div class="time">
-  
-                    <i class="fa-regular fa-clock"> 2024-04-12 16:20</i>
-                    
-                  </div>
-  
-                  <div class="like">
-                    <i class="fa-solid fa-heart"> 286</i>
+          <c:forEach var="b" items="${bList}">
+
+            <div class="card-wrapper"> <!-- 게시물 하나 영역 -->
+              <section class="card" data-detail = "/home/detail/${b.bno}">
+                <div class="card-image">
+
+                 
+                    <c:if test="${b.postImg == null}">
+                      <img src="/assets/img/test.jpg" alt="기본 이미지">
+                    </c:if>
+                
+
+                    <c:if test="${b.postImg != null}">
+                      <img class="thumbnail" src="/display${b.postImg}" alt="업로드 이미지">
+                    </c:if>
+                  
+                  
+                </div>
+                <div class="card-title-wrapper">
+                  <h2 class="card-title"><a href="/home/detail/${b.bno}">${b.title}</a></h2>
+                  <div class="time-like-wrapper">
+                    <div class="time">
+    
+                      <i class="fa-regular fa-clock"> ${b.regDate2} </i>
+                      
+                    </div>
+    
+                    <div class="like">
+                      <i class="fa-solid fa-heart"> ${b.likeCount} </i>
+                    </div>
                   </div>
                 </div>
-              </div>
+    
+              </section>
+    
+            </div>
+          </c:forEach>
   
-            </section>
-  
-          </div>
-  
-          <div class="card-wrapper"> <!-- 게시물 하나 영역-->
-            <section class="card">
-              <div class="card-image">
-                <img src="/assets/img/test.jpg" alt="게시물 이미지">
-              </div>
-              <div class="card-title-wrapper">
-                <h2 class="card-title"><a href="#">게시물 제목</a></h2>
-                <div class="time-like-wrapper">
-                  <div class="time">
-  
-                    <i class="fa-regular fa-clock"> 2024-04-12 16:20</i>
-                    
-                  </div>
-  
-                  <div class="like">
-                    <i class="fa-solid fa-heart"> 192</i>
-                  </div>
-                </div>
-              </div>
-  
-            </section>
-  
-          </div>
-  
-          <div class="card-wrapper"> <!-- 게시물 하나 영역 (더미데이터) -->
-            <section class="card">
-              <div class="card-image">
-                <img src="/assets/img/test.jpg" alt="게시물 이미지">
-              </div>
-              <div class="card-title-wrapper">
-                <h2 class="card-title"><a href="#">게시물 제목</a></h2>
-                <div class="time-like-wrapper">
-                  <div class="time">
-  
-                    <i class="fa-regular fa-clock">2024-04-12 16:20</i>
-                    
-                  </div>
-  
-                  <div class="like">
-                    <i class="fa-solid fa-heart"> 114</i>
-                  </div>
-                </div>
-              </div>
-  
-            </section>
-  
-          </div>
-  
-          <div class="card-wrapper"> <!-- 게시물 하나 영역 (더미데이터) -->
-            <section class="card">
-              <div class="card-image">
-                <img src="/assets/img/test.jpg" alt="게시물 이미지">
-              </div>
-              <div class="card-title-wrapper">
-                <h2 class="card-title"><a href="#">게시물 제목</a></h2>
-                <div class="time-like-wrapper">
-                  <div class="time">
-  
-                    <i class="fa-regular fa-clock">2024-04-12 16:20</i>
-                    
-                  </div>
-  
-                  <div class="like">
-                    <i class="fa-solid fa-heart"> 423</i>
-                  </div>
-                </div>
-              </div>
-  
-            </section>
-  
-          </div>
-  
-          <div class="card-wrapper"> <!-- 게시물 하나 영역 (더미데이터) -->
-            <section class="card">
-              <div class="card-image">
-                <img src="/assets/img/test.jpg" alt="게시물 이미지">
-              </div>
-              <div class="card-title-wrapper">
-                <h2 class="card-title"><a href="#">게시물 제목</a></h2>
-                <div class="time-like-wrapper">
-                  <div class="time">
-  
-                    <i class="fa-regular fa-clock"> 2024-04-12 16:20 </i>
-                    
-                  </div>
-  
-                  <div class="like">
-                    <i class="fa-solid fa-heart"> 324 </i>
-                  </div>
-  
-                </div>
-              </div>
-  
-            </section>
-  
-          </div>
-  
-          <div class="card-wrapper"> <!-- 게시물 하나 영역 (더미데이터) -->
+          <!--
+          <div class="card-wrapper">  게시물 하나 영역 (더미데이터) 
             <section class="card">
               <div class="card-image">
                 <img src="/assets/img/test.jpg" alt="게시물 이미지">
@@ -193,10 +110,12 @@
                   </div>
                 </div>
               </div>
+            
   
             </section>
   
           </div>
+          -->
   
         </div>
   
@@ -343,6 +262,8 @@
       </section>
   
     </div>
+
+
 
 
   

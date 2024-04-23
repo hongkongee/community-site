@@ -97,6 +97,7 @@ public class UserService {
             .gender(String.valueOf(foundMember.getGender()))
             .nickname(foundMember.getNickname())
             .auth(foundMember.getAuth().getDescription())
+            .profile(foundMember.getProfilePicture())
             .build();
 
       // 세션에 로그인한 회원 정보를 저장

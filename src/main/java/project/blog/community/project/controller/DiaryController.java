@@ -73,6 +73,5 @@ public class DiaryController {
         return "mypage/newposting";
     }
 
-
 }
 

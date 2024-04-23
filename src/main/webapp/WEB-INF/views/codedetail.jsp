@@ -151,7 +151,7 @@ h2{
 
 
 <div id="wrap" class="form-container">
-    <h1>${b.codeNo}번 게시물 내용~ </h1>
+    
     <h2># 작성일자: ${b.regDate}</h2>
     <input type="text" id="programming" name="programming" value="${b.programming}" readonly>
     

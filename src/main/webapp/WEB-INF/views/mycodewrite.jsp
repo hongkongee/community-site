@@ -13,15 +13,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Single+Day&display=swap" rel="stylesheet">
 
-    <!-- reset -->
+ 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
 
-    <!-- fontawesome css: https://fontawesome.com -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
     <link rel="stylesheet" href="/assets/css/main.css">
 
-    <!-- ck editor -->
+ 
     <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
     <style>
 
@@ -30,7 +30,7 @@
             width: 500px;
             margin: auto;
             padding: 20px;
-           /* background-image: linear-gradient(135deg, #a1c4fd, #fbc2eb);*/
+        
             background-color: #000080;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border-radius: 4px;

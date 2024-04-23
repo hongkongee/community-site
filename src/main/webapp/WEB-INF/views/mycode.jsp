@@ -140,29 +140,7 @@
 
   </div>
 </div>
-<!-- 
-        <div class="Frame40">
-
-            <div class="Menu">
-
-                <a href=""></a><br>
-                <a href=""></a><br>
-                <a href=""></a><br>
-                <a href=""></a><br>
-                <a href=""></a><br>
-                <a href=""></a>
-            </div>
-
-        </div> -->
-
-     <!--  <div id="myModal" class="modal">
-          <div class="modal-detail">
-          <button class="close-btn"></button> <br>
-            <span class="close">&times;</span>
-            <p>모달 내용이 여기에 들어갑니다.</p>
-          </div>
-        </div>
---> 
+ 
 <div class="modal" id="modal">
     <div class="modal-content">
         <p>정말로 삭제할까요?</p>
@@ -280,7 +258,7 @@ $cardContainer.addEventListener('click', e => {
       $cardContainer.addEventListener('mouseout', removeDown);
       $cardContainer.addEventListener('mouseout', removeHover);
 
-      // write button event
+  
       const $addWriteBtn = document.querySelector('.add-photo');
       if ($addWriteBtn) {
         $addWriteBtn.onclick = e => {

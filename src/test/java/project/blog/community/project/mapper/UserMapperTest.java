@@ -4,7 +4,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import project.blog.community.project.entity.Follow;
+import project.blog.community.project.entity.Gender;
 import project.blog.community.project.entity.User;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static project.blog.community.project.entity.Gender.*;
@@ -54,6 +58,35 @@ class UserMapperTest {
       assertFalse(emailFlag);
 
    }
+
+   /*@Test
+   @DisplayName("팔로우 추가하기")
+   void addFollower() {
+      // given
+      String myAccount = "tjtkdvl";
+      String yourAccount = "jg1234";
+
+      // when
+      userMapper.addFollower(myAccount, yourAccount);
+
+      // then
+   }*/
+
+
+/*   @Test
+   @DisplayName("팔로우 확인하기")
+   void checkFollower() {
+       // given
+      String myAccount = "tjtkdvl";
+       
+       // when
+      List<String> followers = userMapper.findUserByFollower(myAccount);
+      for (String follower : followers) {
+         System.out.println("팔로워:" + follower);
+      }
+
+      // then
+   }*/
 }
 
 

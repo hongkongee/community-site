@@ -119,7 +119,6 @@ public class UserController {
 
    }
 
-
    // 이메일 인증
    @PostMapping("/email")
    @ResponseBody
@@ -133,6 +132,7 @@ public class UserController {
          return ResponseEntity.internalServerError().body("이메일 전송 과정에서 에러 발생!");
       }
    }
+
 
 
 

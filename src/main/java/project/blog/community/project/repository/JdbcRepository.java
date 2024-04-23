@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Optional;
 
 @Repository
 public class JdbcRepository {
@@ -29,9 +30,6 @@ public class JdbcRepository {
       // 데이터 전달해서 DB 접속을 전담하는 Connection을 받아오기
       return DriverManager.getConnection(url, username, password);
    }
-
-
-
 
 }
 

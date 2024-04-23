@@ -20,10 +20,10 @@
             <c:if test="${login != null && login.profile != null}">
                 <c:choose>
                     <c:when test="${login.loginMethod == COMMON}">
-                        <img src="/display${login.profile}" alt="프사">
+                        <img src="/display${login.profilePicture}" alt="프사">
                     </c:when>
                     <c:otherwise>
-                        <img src="${login.profile}" alt="프사">
+                        <img src="${login.profilePicture}" alt="프사">
                     </c:otherwise>
                 </c:choose>
             </c:if>
@@ -34,7 +34,7 @@
             Welcome ${sessionScope.login == null ? '' : login.name}
         </h2>
         <a href="#" class="menu-open">
-            <span class="menu-txt">MENU</span>
+            <span class="menu-txt">My Page</span>
             <span class="lnr lnr-menu"></span>
         </a>
     </div>
@@ -44,22 +44,27 @@
             <button type="button">X</button>
         </a>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/home/main">Posts</a></li>
-            <li><a href="/home/all">Diary</a></li>
-            <li><a href="#">Gallery</a></li>
+            <li><a href="/home/main">Home</a></li>
+            <c:if test="${sessionScope.login != null}">
+                <li><a href="/users/mypage">My Page</a></li>
+                <li><a href="/mypage/posting_cube">My Posts</a></li>
+                <li><a href="/mypage/diary">My Diary</a></li>
+                <li><a href="#">My Code</a></li>
+            </c:if>
             <li><a href="#">Chat</a></li>
             <li><a href="#">Market</a></li>
+
+            <c:if test="${sessionScope.login != null}">
+                <li><a href="/users/sign-out">Sign Out</a></li>
+            </c:if>
+
 
             <c:if test="${login == null}">
                 <li><a href="/users/sign-up">Sign Up</a></li>
                 <li><a href="/users/sign-in">Sign In</a></li>
             </c:if>
 
-            <c:if test="${sessionScope.login != null}">
-                <li><a href="/users/mypage">My Page</a></li>
-                <li><a href="/users/sign-out">Sign Out</a></li>
-            </c:if>
+
 
         </ul>
     </nav>

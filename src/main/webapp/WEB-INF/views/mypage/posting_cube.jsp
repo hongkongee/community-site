@@ -16,6 +16,13 @@
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- font awesome icons (html에서 넣기) -->
+    <script src="https://kit.fontawesome.com/482d3485ef.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -27,8 +34,22 @@
         <div class="Frame42">
 
             <div class="main-title-wrapper">
-                <h1 class="main-title">My Study</h1>
+                <h1 class="main-title">My Posts</h1>
+                <c:if test="${login != null}">
+                    <a href="/mypage/newposting">
+                        <button class="add-btn">글 작성하기</button>
+                    </a>
+                </c:if>
+                <div class="amount">
+                    <div><a href="/mypage/posting_cube?pageNo=1&amount=6&type=${s.type}&keyword=${s.keyword}">6</a>
+                    </div>
+                    <div><a href="/mypage/posting_cube?pageNo=1&amount=18&type=${s.type}&keyword=${s.keyword}">18</a>
+                    </div>
+                    <div><a href="/mypage/posting_cube?pageNo=1&amount=30&type=${s.type}&keyword=${s.keyword}">30</a>
+                    </div>
+                </div>
             </div>
+
             <!----------------------- posting_cube 헤더 끝 ------------------------------->
 
             <!-- ------------------------메인 게시판 시작------------------------------------- -->
@@ -37,9 +58,11 @@
                 <c:forEach var="b" items="${bList}">
                     <div class="post-wrapper">
                         <section class="post" data-bno="${b.bno}">
-                            <div class="post-photo">
-                                <img src="/assets/img/java_logo.png" alt="게시물 사진">
-                            </div>
+                            <a href="/home/detail/${b.bno}">
+                                <div class="post-photo">
+                                    <img src="/assets/img/java_logo.png" alt="게시물 사진">
+                                </div>
+                            </a>
                             <div class="post-content-wrapper">
                                 <div class="post-content">
                                     ${b.title}
@@ -48,13 +71,21 @@
                                     <div id="this-month">${b.regDate}</div>
                                 </div>
                                 <div class="post-reply">
-                                    <div class="post-like">
-                                        <button class="like">${b.likeCount}<br>좋아요</button>
+
+                                    <div class="like" data-bno="${b.bno}" data-like-cookie="${l}">
+                                        <!-- <i class="fa-solid fa-heart"></i> : check 됐을 때 -->
+                                        <i class="fa-regular fa-heart"></i>
+                                        <label class="like-label" for="flexCheckDefault"
+                                            data-like-count="${b.likeCount}">
+                                            좋아요 ${b.likeCount}
+                                        </label>
                                     </div>
+
                                     <input type="text" class="reply-rec"></input>
                                     <button class="reply">댓글 쓰기</button>
                                 </div>
                             </div>
+
                         </section>
                     </div>
                 </c:forEach>
@@ -110,19 +141,13 @@
 </body>
 
 <script>
-    // -------------------------------게시물 등록 날짜 시작-------------------------------------
-    /*
-    var currentDate = new Date();
-    var year = currentDate.getFullYear();
-    var month = currentDate.getMonth() + 1;
-    var day = currentDate.getDate();
-    var formattedDate = year + "년 " + month + "월 " + day + "일";
+   
 
-    var thisMonthElement = document.getElementById("this-month");
-    thisMonthElement.textContent = formattedDate;
-    */
-
-    // -------------------------------게시물 등록 날짜 끝-------------------------------------
 </script>
+
+<script src="/assets/js/mypage.js">
+</script>
+
+
 
 </html>

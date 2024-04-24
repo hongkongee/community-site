@@ -1,12 +1,14 @@
 package project.blog.community.project.service;
 
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.WebUtils;
 import project.blog.community.project.dto.request.AutoLoginDTO;
 import project.blog.community.project.dto.request.LoginRequestDTO;
 import project.blog.community.project.dto.request.SignUpRequestDto;
@@ -107,6 +109,27 @@ public class UserService {
    }
 
 
+   public void autoLoginClear(HttpServletRequest request, HttpServletResponse response) {
+
+      // 자동 로그인 쿠키를 가져온다.
+      Cookie c = WebUtils.getCookie(request, AUTO_LOGIN_COOKIE);
+
+      // 쿠키 삭제
+      if (c != null) {
+         c.setMaxAge(0);
+         c.setPath("/");
+         response.addCookie(c);
+      }
+
+      userMapper.saveAutoLogin(
+            AutoLoginDTO.builder()
+                  .sessionId("none")
+                  .limitTime(LocalDateTime.now())
+                  .account(getCurrentLoginMemberAccount(request.getSession()))
+                  .build()
+      );
+
+   }
 }
 
 

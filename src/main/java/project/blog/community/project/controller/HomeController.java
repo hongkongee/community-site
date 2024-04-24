@@ -13,11 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
+import project.blog.community.project.common.PageMaker;
+import project.blog.community.project.common.Search;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.request.ReportRequestDTO;
 import project.blog.community.project.dto.request.RpsRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
 import project.blog.community.project.dto.response.BoardListResponseDTO;
+import project.blog.community.project.dto.response.BoardMyListResponseDTO;
 import project.blog.community.project.service.BoardService;
 import project.blog.community.project.service.GameService;
 import project.blog.community.project.service.ManagementService;
@@ -72,15 +75,23 @@ public class HomeController {
 
    // 홈페이지 - 전체게시글 view
    @GetMapping("/all")
-   public String allBoardList(Model model) {
+   public String allBoardList(Model model, @ModelAttribute("s") Search page) {
       log.info("/home/all: GET");
-
+      log.info("search = " + page);
+      // page: type, keyword, pageNo(페이지 번호), amount(한 화면의 게시물 수)
+      page.setAmount(20);
 
       // 보여주고 싶은 게시물 리스트
-      List<BoardListResponseDTO> dtoList = boardService.getList();
+      List<BoardListResponseDTO> dtoList = boardService.getList(page);
+
+      // 페이징 버튼 알고리즘 적용 -> 사용자가 요청한 페이지 정보, 총 게시물 개수를 전달.
+      // 페이징 알고리즘 자동 호출.
+      PageMaker pageMaker = new PageMaker(page, boardService.getCount(page));
 
       model.addAttribute("bList", dtoList);
+      model.addAttribute("maker", pageMaker);
       model.addAttribute("li", "전체 게시판");
+      model.addAttribute("c", "all");
 
       // 로그인 정보 가져오기
 
@@ -89,17 +100,25 @@ public class HomeController {
       return "home/all";
    }
 
+
    // 카테고리에 따른 하위 게시판 목록 페이지 view
    @GetMapping("/board/{category}")
-   public String categoryBoardList(@PathVariable("category") String category, Model model) {
+   public String categoryBoardList(@PathVariable("category") String category, Model model, @ModelAttribute("s") Search page) {
       log.info("/home/{}: GET", category);
+      page.setAmount(20);
 
-      List<BoardListResponseDTO> categoryList = boardService.getCategoryList(category);
-//        log.info(categoryList.toString());
-      model.addAttribute("bList", categoryList);
+      List<BoardListResponseDTO> categoryList = boardService.getCategoryList(category, page);
 
+      PageMaker pageMaker = new PageMaker(page, boardService.getCountCategory(category, page));
+
+
+      // 카테고리에 따른 게시판 이름 작성
       String listName = boardService.stringToCategoryDescription(category);
+      
+      model.addAttribute("bList", categoryList);
+      model.addAttribute("maker", pageMaker);
       model.addAttribute("li", listName);
+      model.addAttribute("c", category);
 
       return "home/all";
 
@@ -199,6 +218,10 @@ public class HomeController {
 
       return "redirect:/home/all";
    }
+
+
+
+
 
 
 }

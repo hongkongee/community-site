@@ -29,7 +29,7 @@
 
       <h1>글쓰기</h1>
 
-      <form action="/home/write" method="post" enctype="multipart/form-data">
+      <form action="/home/write" id="myForm" method="post" enctype="multipart/form-data">
 
         <!-- 카테고리 선택 영역 -->
         <select class="form-select" name="category" aria-label="Default select example">
@@ -62,16 +62,18 @@
             <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="20" placeholder="내용을 입력하세요"></textarea>
           </div>
           
-          <!-- 게시물 쓰기 버튼 -->
-          <div class="buttons">
-              <button class="list-btn" type="button" onclick="window.location.href='/home/all'">목록</button>
-              <button type="submit">글쓰기</button>
-          </div>
+          
 
           <!-- 공개 설정, 태그 입력 등 기타 선택 영역 -->
 
 
       </form>
+
+      <!-- 게시물 쓰기 버튼 -->
+      <div class="buttons">
+        <button class="list-btn" type="button" onclick="window.location.href='/home/all'">목록</button>
+        <button id="submit-btn">글쓰기</button>
+      </div>
 
 
     </section>
@@ -87,6 +89,27 @@
       $box.onclick = e => {
         $input.click();
       };
+
+      document.getElementById('submit-btn').onclick = () => {
+        console.log('글쓰기 버튼 클릭!');
+        const $category = document.querySelector('select[name="category"]');
+        const $title = document.querySelector('input[name="title"]');
+        const $content = document.querySelector('textarea[name="content"]');
+        console.log($category.value);
+        
+
+        if ($category.value === "게시판을 선택해 주세요") {
+          // event.preventDefault();
+          alert("게시판 유형을 선택해주세요."); // Optionally, provide a message to the user
+        } else if ($title.value.trim() === "") {
+          alert("제목을 작성해주세요.")
+        } else if ($content.value.trim() === "") {
+          alert("글 내용을 작성해주세요.")
+        } else {
+          document.getElementById('myForm').submit();
+        }
+      }
+
 
 
     </script>

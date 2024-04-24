@@ -12,7 +12,6 @@
 section.all {
     font-size: 20px;
     margin: 0 auto;
-    border: #000 solid 1px;
   }
 
 .all>h2 {
@@ -28,7 +27,6 @@ section.all .add-btn { /* 글쓰기 버튼 */
 
 section.all .list-container { /* 게시판 테이블 */
     width: 90%;
-    border: #000 solid 1px;
     margin: auto;
     margin-bottom: 200px;
 }
@@ -90,7 +88,6 @@ section.all .list-container .head-wrapper {
 
 
 .bottom-section nav {
-    border: yellow solid 1px;
     width: 50%;
     height: 100px;
     margin: auto;
@@ -125,6 +122,43 @@ section.all .list-container .head-wrapper {
     left: 85%;
     transform: translateX(-50%);
     z-index: 1;
+}
+
+
+/* pagination style */
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+}
+
+.bottom-section {
+    display: flex;
+    width: fit-content;
+    /* height: 50px; */
+    margin: 0 auto;
+}
+
+.bottom-section nav {
+    flex: 1;
+    justify-content: center;
+}
+
+.bottom-section nav ul {
+    text-align: center;
+    display: inline-flex;
+}
+
+
+.pagination-custom a {
+    color: #444 !important;
+    font-size: 25px;
+}
+
+.pagination-custom li.active a,
+.pagination-custom li:hover a {
+    background: #333 !important;
+    color: #fff !important;
 }
 
 

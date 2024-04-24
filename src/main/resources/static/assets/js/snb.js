@@ -7,6 +7,7 @@
 /* 팔로우 리스트 */
 const URL = '/api/v1/follow'; // 팔로우에 관련된 요청 url
 const currentAccount = '${login.account}'; // 현재 로그인
+console.log(currentAccount);
 const number = 6; // 팔로우 목록에 뜨는 팔로워 수
 
 

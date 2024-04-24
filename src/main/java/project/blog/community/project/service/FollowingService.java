@@ -88,6 +88,9 @@ public class FollowingService {
 
     public int addFollower(String writerAccount, HttpServletRequest request) {
         String myAccount = getMyAccount(request);
+
+        log.info("my Account : " + myAccount);
+
         if (myAccount.equals(writerAccount)) {
             log.info("자기 자신은 팔로잉 불가능");
             return 2; // 자기 자신 following

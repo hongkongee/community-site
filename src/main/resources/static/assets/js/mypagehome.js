@@ -1,9 +1,9 @@
 
 
 // 서버에 팔로잉 추가(등록) POST 요청 보내기
-function insertFollow(userAccount) {
+function insertFollow(writerAccount) {
   var formData = {
-    userAccount: userAccount
+    writerAccount: writerAccount
   };
 
   fetch('/api/v1/follow/add', {
@@ -30,6 +30,8 @@ function insertFollow(userAccount) {
     } else if (data === 3) {
       alert('이미 팔로잉한 회원입니다.');
     }
+  });
+}
     
 
 // 서버에 팔로잉 취소(삭제) POST 요청 보내기
@@ -63,21 +65,23 @@ function deleteFollow(userAccount) {
 
 
 // 이벤트 핸들러
-const $followingList = document.querySelector('.following-list');
+const $followingList = document.querySelector('.ff');
 
 $followingList.addEventListener("click", e => {
 
-  if (e.target.matches('fa-user-minus')) {
+  if (e.target.matches('.fa-user-minus')) {
     const userId = e.target.parentNode.dataset.followingid;
     console.log('팔로잉 취소 ', userId);
     deleteFollow(userId);
 
 
-  } else if (e.target.matches('fa-user-plus')) {
+  } else if (e.target.matches('.fa-user-plus')) {
     const userId = e.target.parentNode.dataset.followingid;
     console.log('팔로잉 추가 ', userId);
     insertFollow(userId);
 
   }
 
-});
+})
+
+

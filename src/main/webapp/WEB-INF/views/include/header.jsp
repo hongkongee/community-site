@@ -44,6 +44,7 @@
             <button type="button">X</button>
         </a>
         <ul>
+
             <li><a href="/home/main">Home</a></li>
             <c:if test="${sessionScope.login != null}">
                 <li><a href="/users/mypage">My Page</a></li>

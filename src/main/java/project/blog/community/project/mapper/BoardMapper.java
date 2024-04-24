@@ -38,4 +38,7 @@ public interface BoardMapper {
 
     // 내 게시물만 보이는 findMine
     List<Board> findMine(@Param("page") Search page, @Param("account") String currentLoginMemberAccount);
+
+    // 게시물 삭제
+    void delete(int bno);
 }

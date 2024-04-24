@@ -228,4 +228,7 @@ public class BoardService {
    }
 
 
+    public void delete(int bno) {
+        boardMapper.delete(bno);
+    }
 }

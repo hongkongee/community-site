@@ -101,7 +101,7 @@ section.all .list-container .head-wrapper {
 
 .bottom-section nav ul.pagination li.page-item a.page-link {
     width: 40px;
-    height: 20px;
+    height: 35px;
     margin: 2%;
     font-size: 14px;
 
@@ -160,6 +160,7 @@ section.all .list-container .head-wrapper {
     background: #333 !important;
     color: #fff !important;
 }
+
 
 
 

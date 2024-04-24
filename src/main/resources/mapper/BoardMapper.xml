@@ -137,6 +137,11 @@
         LIMIT #{page.pageStart}, #{page.amount}
     </select>
 
+    <update id="modifyIntro">
+        UPDATE tbl_user
+        SET introduction = #{intro}
+        WHERE account_number = #{account}
+    </update>
 
 
 </mapper>

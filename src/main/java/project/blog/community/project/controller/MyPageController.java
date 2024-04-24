@@ -6,11 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import project.blog.community.project.common.Page;
-import project.blog.community.project.common.Search;
+import org.springframework.web.bind.annotation.*;
 import project.blog.community.project.dto.response.BoardMyListResponseDTO;
 import project.blog.community.project.dto.response.FollowerResponseDTO;
 import project.blog.community.project.dto.response.LoginUserResponseDTO;
@@ -97,7 +93,27 @@ public class MyPageController {
       model.addAttribute("posts", boardList);
 
 
+
+
       return "mypage/mypage";
+   }
+
+   @PostMapping("/intro")
+   public String introSubmit(@RequestParam("introduction") String introduction,
+                             HttpServletRequest request) {
+      log.info("/mypage/intro: POST!");
+      log.info("introduction : " + introduction);
+
+      HttpSession session = request.getSession();
+      session.getAttribute("login");
+      // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
+      String myAccount = getCurrentLoginMemberAccount(session);
+
+      // 자기소개 수정하기
+      boardService.modifyMyIntro(myAccount, introduction);
+
+
+      return "redirect:/mypage/home/" + myAccount;
    }
 
 

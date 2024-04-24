@@ -16,6 +16,7 @@
         WHERE account_number = #{accountNumber}
     </select>
 
+
     <select id="isDuplicate" resultType="boolean">
         SELECT COUNT(*)
         FROM tbl_user

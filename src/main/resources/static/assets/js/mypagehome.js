@@ -84,4 +84,27 @@ $followingList.addEventListener("click", e => {
 
 })
 
+const $pen = document.querySelector('.fa-pen');
+$pen.onclick = e => {
+  console.log('수정 발생!');
+  var $textarea = document.getElementById("self-intro");
+
+  if ($textarea.readOnly) { // 현재 읽기모드 -> 수정 모드로 전환
+    $textarea.readOnly = !$textarea.readOnly;
+    $textarea.focus();
+
+  } else { // 현재 수정모드 -> 읽기 모드로 전환
+    if (confirm("수정하시겠습니까?")) {
+      // document.getElementById('intro-form').submit();
+      document.getElementById('fake-btn').click();
+      location.reload();
+
+    } else {
+      location.reload();
+
+    }
+    
+  }
+  
+}
 

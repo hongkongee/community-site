@@ -245,5 +245,8 @@ public class BoardService {
    }
 
 
-
+   // 자기소개 삽입 or 수정
+   public void modifyMyIntro(String myAccount, String introduction) {
+      boardMapper.modifyIntro(myAccount, introduction);
+   }
 }

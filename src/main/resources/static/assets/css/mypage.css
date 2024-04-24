@@ -37,7 +37,7 @@ body {
 
 #wrapper {
   width: 90%;
-  margin: 0 auto;
+  margin: 100px auto;
   height: inherit;
   position: relative;
   border-radius: 60px;
@@ -272,4 +272,12 @@ body {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 5px;
+}
+
+.fa-pen {
+  cursor: pointer;
+}
+
+#fake-btn {
+  display: none;
 }

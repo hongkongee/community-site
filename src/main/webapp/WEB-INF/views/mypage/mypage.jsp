@@ -56,13 +56,24 @@
 
             <div class="user-info">
                 <div class="profile-name">
-                    ${user.nickname}<br /></div>
+                    ${user.nickname}<br />
+                </div>
                 <div class="email">
-                    ${user.email}</div>
+                    ${user.email}
+                </div>
                 <div class="bio">
-                    안녕하세요 저는 짱구입니다. <br>저는 맛집 가는걸 좋아해요!</div>
+                    <form action="/mypage/intro" id="intro-form" method="post" enctype="multipart/form-data">
+                        <textarea rows="4" id="self-intro" name="introduction" class="form-control"
+                                            value="${user.introduction}" readOnly></textarea>
+                        <button id="fake-btn" type="submit"></button>
+                    </form>
+                    
+                    <c:if test="${login.accountNumber eq user.accountNumber}">
+                        <i class="fa-solid fa-pen"></i>
+                    </c:if>
+                </div>
                 <div class="points">
-                    point : <span class="points-value">200</span></div>
+                    point : <span class="points-value">${user.point} P</span></div>
 
                     <c:if test="${login.accountNumber ne user.accountNumber}">
                         <button class="follow-btn" type="button">팔로우하기</button>
@@ -201,7 +212,7 @@
             <div class="my-market">
 
                 <div class="user-market">
-                    <div class="title-market">${user.nickname}님의 중고 장터</div>
+                    <div class="title-market">${user.nickname}님의 중고 장터 평점: ${user.rate}</div>
                     <div class="market-image">
                         <img src="#" class="user-market-photo">
                         <img src="#" class="user-market-photo">

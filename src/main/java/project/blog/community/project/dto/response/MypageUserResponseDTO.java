@@ -24,6 +24,12 @@ public class MypageUserResponseDTO {
 
     private String profilePicture;
 
+    private int rate;
+
+    private String introduction;
+
+    private int point;
+
     public MypageUserResponseDTO(User user) {
         this.accountNumber = user.getAccountNumber();
         this.email = user.getEmail();
@@ -31,6 +37,11 @@ public class MypageUserResponseDTO {
 //        this.gender = user.getGender();
         this.birthday = user.getBirthday();
         this.profilePicture = user.getProfilePicture();
+        this.rate = user.getRate();
+
+        this.introduction = user.getIntroduction();
+
+        this.point = user.getPoint();
     }
 
 }

@@ -48,5 +48,6 @@ public interface BoardMapper {
     // 인기 게시글 (메인 화면)
     List<Board> findHot(@Param("sort") String sort, @Param("amount") int amount);
 
-    
+
+    void modifyIntro(@Param("account") String myAccount, @Param("intro") String introduction);
 }

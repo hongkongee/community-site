@@ -22,6 +22,7 @@ public class BoardMyListResponseDTO {
     private final String writer;
     private int likeCount;
     private String postImg;
+    private int isHeart; // 하트 체크 여부
 
 
 

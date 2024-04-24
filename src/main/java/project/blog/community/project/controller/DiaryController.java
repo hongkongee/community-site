@@ -60,6 +60,10 @@ public class DiaryController {
 
         log.info(myList.toString());
 
+        // 좋아요 이미 눌렀는지 확인하기
+        int like = service.checkLike(request, bno);
+
+
         return "mypage/posting_cube";
     }
 
@@ -70,9 +74,15 @@ public class DiaryController {
       System.out.println("/board/detail: GET! " + bno);
       BoardDetailResponseDTO dto = service.getDetail(bno);
 
+
+
       model.addAttribute("b", dto);
       return "home/detail";
+
+
    }
+
+
 
    // 글 작성하기 누르면 새로운 글 작성하는 페이지로 이동
    @GetMapping("/newposting")

@@ -198,6 +198,14 @@ public class BoardService {
       List<Board> boardList = boardMapper.findMine(page, currentLoginMemberAccount);
       for (Board board : boardList) {
          BoardMyListResponseDTO dto = new BoardMyListResponseDTO(board);
+         
+         // 하트 체크 여부 불러오기
+         int i = checkLike(request, dto.getBno());
+         if (i > 0) {
+            dto.setIsHeart(1);
+         } else {
+            dto.setIsHeart(0);
+         }
          myList.add(dto);
       }
       return myList;

@@ -63,9 +63,15 @@
                                 </div>
                                 <div class="post-reply">
 
-                                    <div class="like" data-bno="${b.bno}" data-like-cookie="${l}">
-                                        <!-- <i class="fa-solid fa-heart"></i> : check 됐을 때 -->
-                                        <i class="fa-regular fa-heart"></i>
+                                    <div class="like" data-bno="${b.bno}" data-like="${b.isHeart}">
+                                        <c:if test="${b.isHeart == 1}">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </c:if>
+                                        <c:if test="${b.isHeart == 0}">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </c:if>
+
+                                       
                                         <label class="like-label" for="flexCheckDefault"
                                             data-like-count="${b.likeCount}">
                                             좋아요 ${b.likeCount}
@@ -150,80 +156,6 @@
 
 </body>
 
-<script>
-    // // 사용자가 현재 머물고 있는 페이지 버튼에 active 스타일 부여
-    // function appendPageActive() {
-
-    //     // 현재 서버에서 넘겨준 페이지 번호
-    //     const currPage = '${maker.page.pageNo}';
-
-    //     // li 태그들을 전부 확인해서
-    //     // 현재 페이지 번호와 일치하는 li를 찾은 후 active 클래스 이름 붙이기
-    //     const $ul = document.querySelector('.pagination');
-    //     const $liList = [...$ul.children];
-
-    //     $liList.forEach($li => {
-    //         if (currPage === $li.dataset.pageNum) {
-    //             $li.classList.add('active');
-    //         }
-    //     });
-    // }
-
-
-    // 카드 형태의 게시물들을 감싸고 있는 부모 요소 취득
-    const $postContainer = document.querySelector('.post-container');
-
-    // 삭제에 필요한 요소들을 먼저 얻겠습니다.
-    const $modal = document.getElementById('modal'); // 모달창 얻기
-    const $confirmDelete = document.getElementById('confirmDelete'); // 모달 삭제 확인버튼
-    const $cancelDelete = document.getElementById('cancelDelete'); // 모달 삭제 취소버튼
-
-
-    $postContainer.addEventListener('click', e => {
-        console.log('이벤트 타겟: ', e.target);
-        if (e.target.matches('.post-wrapper')) return;
-
-        // 삭제 버튼을 눌렀다면~
-        if (e.target.matches('.card-btn-group *')) {
-            console.log('삭제 버튼 클릭됨!');
-            $modal.style.display = 'flex'; // 숨겨진 모달창을 드러내기.
-
-
-            // 이벤트가 발생한 타겟에서 가장 가까운 .del-btn이 가지고 있는 data-href를 얻는다.
-            const deleteLocation = e.target.closest('.post-wrapper').dataset.href;
-            console.log('deleteLocation: ', deleteLocation);
-
-            // 확인 버튼 이벤트
-            $confirmDelete.onclick = e => {
-                // 삭제 요청을 서버에 보내야 한다.
-                console.log('onclick 수락!');
-                location.href = deleteLocation;
-
-                // 모달창을 닫아야 한다.
-                $modal.style.display = 'none';
-            }
-
-            // 삭제 취소 버튼 클릭시 이벤트
-            $cancelDelete.onclick = () => {
-                console.log('onclick 취소');
-                $modal.style.display = 'none';
-            }
-
-        } else { // 삭제 버튼을 제외한 부분은 글 상세조회
-
-            // section태그에 붙은 글 번호를 읽어오자
-            // 이벤트가 발생한 타겟에서 가장 가까운 section.card를 지목해서 data-bno를 얻어오기.
-            const bno = e.target.closest('section.post').dataset.bno;
-            console.log('bno: ' + bno);
-
-            // 서버에 요청 보내기
-            location.href = '/mypage/detail/' + bno;
-        }
-
-
-
-    });
-</script>
 
 <script src="/assets/js/mypage.js">
 </script>

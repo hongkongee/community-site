@@ -15,6 +15,7 @@ import project.blog.community.project.dto.request.SignUpRequestDto;
 import project.blog.community.project.entity.User;
 import project.blog.community.project.service.LoginResult;
 import project.blog.community.project.service.UserService;
+import project.blog.community.util.LoginUtils;
 import project.blog.community.util.MailSenderService;
 import project.blog.community.util.upload.FileUtils;
 
@@ -107,7 +108,12 @@ public class UserController {
 
    // 로그아웃 요청 처리
    @GetMapping("/sign-out")
-   public String signOut(HttpSession session) {
+   public String signOut(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+      log.info("/users/sign-out: GET!!");
+
+      if (LoginUtils.isAutoLogin(request)) {
+         userService.autoLoginClear(request, response);
+      }
 
       // 세션에서 로그인 정보 기록 삭제
       session.removeAttribute("login");

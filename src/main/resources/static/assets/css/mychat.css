@@ -1,0 +1,211 @@
+.orbit-regular {
+  font-family: "Orbit", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/*
+
+*/
+html{
+background-color: #7AA2E3;
+}
+body{
+
+  background-color: #7AA2E3;
+}
+.Rectangle1{
+   width: 1277px;
+  height: 903px; 
+left: 15%;
+margin: 22px;
+   position: absolute; background: #F8F6E3; border-radius: 60px;
+   
+}
+.Chat{
+  width: 146px; height: 64px; left: 25%; top: 80px; position: absolute; color: black; font-size: 48px; font-family: Inter; font-weight: 500; word-wrap: break-word;
+}
+.Line2{
+  width: 744px; height: 0px; left: 50%; top: 160px; position: absolute; transform: rotate(90deg); transform-origin: 0 0; border: 1px black solid;
+}
+.Frame22{
+  width: 449px; height: 728px; left: 22%; top: 160px; position: absolute; background: white; border-radius: 30px; overflow: hidden; border: 1px black solid;
+  overflow: auto;
+  overflow-x: hidden;
+  
+}
+
+.Frame22::-webkit-scrollbar{
+  background-color: #F8F6E3;
+  width: 20px; 
+ 
+
+}
+
+.Frame22::-webkit-scrollbar-thumb {
+  background-color: #D9D9D9; 
+  height: 10px;
+  
+}
+
+.Frame22::-webkit-scrollbar-track {
+  background: #F8F6E3;  
+ 
+}
+
+
+div.row.user-block{
+  position: relative;
+  left: 20px;
+display: flex;
+}
+.friendName{
+  position: relative;
+  left: 50px;
+bottom: 22px;
+}
+b{
+position: relative;
+  left: 50px;
+bottom: 22px;
+}
+.Rectangle7{
+  width: 123px; height: 40px; left: 26px; top: 316px; position: absolute; background: #97E7E1
+}
+.let1{
+  left: 38px; top: 326px; position: absolute; color: black; font-size: 16px; font-family: Inter; font-weight: 100; word-wrap: break-word
+}
+.let2{
+  left: 50px; top: 21px; position: absolute; color: black; font-size: 16px; font-family: Inter; font-weight: 100; word-wrap: break-word
+}
+.friends{
+  width: 380px; height: 234px; left: 26px; top: 62px; position: absolute; background: white; border-radius: 30px; border: 1px black solid
+}
+.friends h2{
+  position: relative;
+  left: 20px;
+}
+
+
+
+
+
+
+      .friends {
+        position: relative;
+      }
+      .friends img{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+
+     .friends .friends { /* 친구 목록 */
+        font-size: 26px;
+        
+        padding: 30px;
+        margin: 0 5%;
+        border-radius: 10%;
+
+        position: relative;
+     
+      }
+
+   .friends .friends ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+      }
+
+
+
+      .friends .friends>ul>li {
+        color: #797474;
+        margin-top: 30px;
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      #followCollapse {
+        margin-top: 15px;
+      }
+
+      #followContent {
+        margin-top: 10px;
+      }
+
+
+
+
+
+
+
+.Ellipse5{
+  width: 42px; height: 41px; left: 38px; top: 82px; position: absolute; background: white; border-radius: 9999px; border: 5px #C0E1F3 solid
+  ;font-size: 20px;
+}
+.Ellipse6{
+  width: 42px; height: 41px; left: 38px; top: 142px; position: absolute; background: white; border-radius: 9999px; border: 5px #C0E1F3 solid
+;font-size: 20px;
+}
+
+.Ellipse7{
+  width: 42px; height: 41px; left: 35px; top: 202px; position: absolute; background: white; border-radius: 9999px; border: 5px #C0E1F3 solid
+  ;font-size: 20px;
+}
+
+.Rectangle8{
+  width: 380px; height: 349px; left: 26px; top: 364px; position: absolute; background: white; border-radius: 30px; border: 1px black solid
+}
+.Ellipse8{
+  width: 42px; height: 41px; left: 40px; top: 407px; position: absolute; background: white; border-radius: 9999px; border: 5px #C0E1F3 solid
+  ;font-size: 20px;
+  overflow: auto;
+overflow-x: hidden;
+}
+.Rectangle8 h2{
+  position: relative;
+  left: 20px;
+}
+.Ellipse9{
+  width: 42px; height: 41px; left: 40px; top: 467px; position: absolute; background: white; border-radius: 9999px; border: 5px #C0E1F3 solid
+  ;font-size: 20px;
+}
+
+
+.Ellipse10{
+  width: 42px; height: 41px; left: 37px; top: 527px; position: absolute; background: white; border-radius: 9999px; border: 5px #C0E1F3 solid
+ ;font-size: 20px;
+}
+
+
+.Ellipse11{
+  width: 28px; height: 28px; left: 320px; top: 413px; position: absolute; background: #FF0000; border-radius: 9999px
+}
+
+.let15{
+  left: 327px; top: 415px; position: absolute; color: white; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word
+}
+
+.Rectangle52{
+  width: 17px; height: 213px; left: 422px; top: 62px; position: absolute; background: #D9D9D9
+}
+
+.Frame23{
+  width: 449px; height: 728px; left: 55%; top: 160px; position: absolute; background: white; border-radius: 30px; overflow: hidden; border: 1px black solid
+}
+
+.Rectangle57{
+  width: 448px; height: 322px; left: 1px; top: 406px; position: absolute; background: #97E7E1
+}
+.Api{
+  width: 128px; height: 119px; left: 159px; top: 189px; position: absolute; color: black; font-size: 36px; font-family: Inter; font-weight: 100; word-wrap: break-word
+}
+
+.HomePostingDiaryGalleryChatMarket{
+  width: 93px; height: 248px; color: black; font-size: 24px; font-family: Inter; font-weight: 500; word-wrap: break-word}
+  /* ----------------------사이드바 메뉴 시작---------------------- */
+
+
+  /* ----------------------사이드바 메뉴 끝---------------------- */

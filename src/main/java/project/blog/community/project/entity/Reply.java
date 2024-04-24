@@ -34,7 +34,7 @@ public class Reply {
    private String replyWriter;
    @Setter
    private String content;
-   private LocalDateTime replyDate;
+   private LocalDateTime regDate;
    private LocalDateTime updateDate;
    @Setter
    private String account;

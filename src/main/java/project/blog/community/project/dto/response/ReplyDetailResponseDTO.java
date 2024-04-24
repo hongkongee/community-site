@@ -32,7 +32,7 @@ public class ReplyDetailResponseDTO {
       this.rno = reply.getReplyNo();
       this.text = reply.getContent();
       this.writer = reply.getReplyWriter();
-      this.regDate = reply.getReplyDate();
+      this.regDate = reply.getRegDate();
       this.updateDate = reply.getUpdateDate();
       this.account = reply.getAccount();
       this.profile = reply.getProfileImage();

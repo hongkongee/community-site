@@ -290,8 +290,8 @@
 
           <!-- Modal footer -->
           <div class="modal-footer">
-            <button id="replyModBtn" type="button" class="btn btn-dark">수정</button>
-            <button id="modal-close" type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기
+            <button id="replyModBtn" type="button" class="btn btn-dark" style="font-size: 13px;">수정</button>
+            <button id="modal-close" type="button" class="btn btn-danger" data-bs-dismiss="modal" style="font-size: 13px;">닫기
             </button>
           </div>
         </div>
@@ -311,7 +311,7 @@
     // 댓글 기능 
     const replyURL = '/api/v1/replies';
     const loginAccount = '${login.accountNumber}'; // 로그인한 사람 계정
-    const boardNo = '${boardNo}'
+    const boardNo = '${b.bno}'
     const auth = '${login.auth}'; // 로그인한 사람 권한
 
     console.log(loginAccount);
@@ -379,7 +379,7 @@
                      <span class='col-md-8'>`;
 
           let profileTag = '';
-          if (profile) {
+          if (profilePicture) {
             if (loginMethod.trim() === 'COMMON') {
               profileTag = `<img class='reply-profile' src='/local\${accountNumber}' alt='profile image' >`;
             } else {
@@ -536,7 +536,7 @@
           fetch(`\${replyURL}/\${rno}`, {
               method: 'DELETE'
             })
-            .then(rest => {
+            .then(res => {
               if (res.status == 200) {
                 alert('댓글이 삭제되었습니다.');
                 fetchGetReplies();
@@ -547,7 +547,7 @@
             });
 
 
-        } else if (e.target.matche('#replyModBtn')) {
+        } else if (e.target.matches('#replyModBtn')) {
           // 기존에 작성한 댓글 내용을 가져오기
           const replyText = e.target.parentNode.previousElementSibling.textContent;
           // 읽어온 댓글 내용을 모달 바다에 집어넣기

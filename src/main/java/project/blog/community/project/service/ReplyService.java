@@ -2,6 +2,7 @@ package project.blog.community.project.service;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import project.blog.community.project.common.Page;
 import project.blog.community.project.common.PageMaker;
@@ -20,6 +21,7 @@ import static project.blog.community.util.LoginUtils.*;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ReplyService {
 
    private final ReplyMapper mapper;
@@ -39,6 +41,8 @@ public class ReplyService {
       for (Reply reply : replyList) {
          dtoList.add(new ReplyDetailResponseDTO(reply));
       }
+
+      log.info("replyList: {}", replyList);
 
       int count = mapper.count(boardNo);
 

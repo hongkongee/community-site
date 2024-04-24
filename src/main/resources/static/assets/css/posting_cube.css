@@ -225,8 +225,9 @@ body {
 
 /* ----------------------댓글 & 좋아요 끝----------------------- */
 
-* 페이지 스타일 */
+/* * 페이지 스타일 */
 /* pagination style */
+
 .pagination {
     display: flex;
     padding-left: 0;
@@ -236,7 +237,7 @@ body {
 .bottom-section {
     display: flex;
     width: fit-content;
-    /* height: 50px; */
+    height: 50px; 
     margin: 0 auto;
 }
 
@@ -248,6 +249,9 @@ body {
 .bottom-section nav ul {
     text-align: center;
     display: inline-flex;
+    width: 50%;
+    height: 50px;
+    border: none;
 }
 
 
@@ -256,11 +260,17 @@ body {
     font-size: 25px;
 }
 
+.page-item .page-link {
+    width: 40px;
+    height: 50px;
+}
+
 .pagination-custom li.active a,
 .pagination-custom li:hover a {
     background: #333 !important;
     color: #fff !important;
-}
+} 
+
 
 
 

@@ -23,6 +23,9 @@ public class ReplyDetailResponseDTO {
 
    @JsonFormat(pattern = "yyyy년 MM월 dd일 HH:mm (수정됨)")
    private LocalDateTime updateDate;
+   private String account;
+   private String profile;
+   private String loginMethod;
 
    // 엔터티 변환
    public ReplyDetailResponseDTO(Reply reply) {
@@ -31,6 +34,9 @@ public class ReplyDetailResponseDTO {
       this.writer = reply.getReplyWriter();
       this.regDate = reply.getReplyDate();
       this.updateDate = reply.getUpdateDate();
+      this.account = reply.getAccount();
+      this.profile = reply.getProfileImage();
+      this.loginMethod = reply.getLoginMethod();
    }
 
 }

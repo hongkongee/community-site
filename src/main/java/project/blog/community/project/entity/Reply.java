@@ -30,10 +30,16 @@ public class Reply {
 
    private int replyNo;
    private int boardNo;
+   @Setter
    private String replyWriter;
+   @Setter
    private String content;
    private LocalDateTime replyDate;
    private LocalDateTime updateDate;
+   @Setter
+   private String account;
+   private String profileImage;
+   private String loginMethod;
 
 
 }

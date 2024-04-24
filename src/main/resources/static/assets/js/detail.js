@@ -28,12 +28,14 @@ $copyUrl.onclick = () => {
   alert("페이지 URL이 복사되었습니다.: " + currentPageUrl);
 
 };
-
+/*
 // 댓글 기능 
 const replyURL = '/api/v1/replies';
-// const loginAccount = '${login.account}'; // 로그인한 사람 계정
+const loginAccount = '${login.account}'; // 로그인한 사람 계정
 const auth = '${login.auth}'; // 로그인한 사람 권한
 
+console.log(loginAccount);
+console.log(auth);
 
 // 댓글 삭제 + 수정모드 진입 이벤트 핸들러
 function makeReplyRemoveClickHandler() {
@@ -186,7 +188,7 @@ function renderReplies(replyList) {
           profileTag = `<img class='reply-profile' src='${profile}' alt='profile image' >`;
         }
       } else {
-        profileTag = `<img class='reply-profile' src='/assets/img/anonymous.jpg' alt='anonymous image' >`;
+        profileTag = `<img class='reply-profile' src='/assets/img/jjanggu.jpg' alt='default profile' style="width: 45px; height: 45px; border-radius: 50%; overflow: hidden; font-size: 12px; margin-right: 20px;" >`;
       }
       tag += profileTag;
 
@@ -195,17 +197,17 @@ function renderReplies(replyList) {
 
       tag += `<b>${writer}</b>
                      </span>
-                     <span class='col-md-4 text-right'><b>${updateDate ? updateDate : regDate}</b></span>
+                     <span class='col-md-4 text-right' style="width= 30%;"><b style="font-size:13px;">${updateDate ? updateDate : regDate}</b></span>
                      </div><br>
                      <div class='row'>
                      <div class='col-md-9'>${text}</div>
-                     <div class='col-md-3 text-right'>`;
+                     <div class='col-md-3 text-right' style="display: flex;">`;
 
-      if (auth === '관리자회원' || currentAccount === account) {
+      
         tag += `
-                     <a id='replyModBtn' class='btn btn-sm btn-outline-dark' data-bs-toggle='modal' data-bs-target='#replyModifyModal'>수정</a>&nbsp;
-                     <a id='replyDelBtn' class='btn btn-sm btn-outline-dark' href='#'>삭제</a>`;
-      }
+                     <a id='replyModBtn' class='fa-solid fa-user-pen' data-bs-toggle='modal' data-bs-target='#replyModifyModal' style="font-size:13px;">수정</a>&nbsp;
+                     <a id='replyDelBtn' class='fa-solid fa-delete-left' href='#' style="font-size:13px;">삭제</a>`;
+      
 
 
       tag += `   </div>
@@ -316,7 +318,7 @@ if ($replyAddBtn) {
 
   }
 }
-
+*/
 
 
 
@@ -561,18 +563,6 @@ $addFollowing.onclick = () => {
 
 // 즉시 실행 함수
 (() => {
-
-  // 댓글 서버에서 불러오기
-  fetchGetReplies();
-
-  // 페이지 번호 클릭 이벤트 핸들러
-  makePageButtonClickHandler();
-
-  // 댓글 삭제 & 수정 버튼 발생하는 이벤트 핸들러
-  makeReplyRemoveClickHandler();
-
-  // 댓글 수정 클릭 이벤트 핸들러
-  makeReplyModifyClickhHandler();
 
   alreadyLike();
 

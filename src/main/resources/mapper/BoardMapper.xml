@@ -98,6 +98,15 @@
         LIMIT #{page.pageStart}, #{page.amount}
     </select>
 
+<!--    <insert id="save">-->
+<!--        INSERT INTO image(origin_image_name, new_image_name, image_path)-->
+<!--        VALUES(#{originImageName}, #{newImageName}, #{imagePath})-->
+<!--    </insert>-->
+
+    <delete id="delete">
+        DELETE FROM tbl_board
+        WHERE board_no=#{bno}
+    </delete>
 
 
 </mapper>

@@ -85,7 +85,7 @@ body {
 /* ================================================================= */
 
 
-.post-container {
+.post-contain {
     display: flex;
     flex-wrap: wrap;
     padding: 10%;
@@ -93,7 +93,7 @@ body {
     justify-content: flex-start;
 }
 
-.post-container .post-wrapper {
+.post-contain .post-wrapper {
     position: relative;
     width: 30%;
     height: 350px;
@@ -103,7 +103,7 @@ body {
    
 }
 
-.post-container .post {
+.post-contain .post {
     /* height: 300px; */
     transition: 0.5s;
     border: 1px solid #7AA2E3;
@@ -111,34 +111,34 @@ body {
     background: white;
 }
 
-.post-container .post:last-child {
+.post-contain .post:last-child {
     margin-right: 0;
 }
 
-.post-container .post .post-photo {
+.post-contain .post .post-photo {
     width: 100%;
     height: 200px;
 }
 
-.post-container .post img {
+.post-contain .post img {
     width: 100%;
     height: 100%;
 }
 
 
 /* -----------------------게시글 제목 시작-------------------------- */
-.post-container .post-wrapper .post-content {
+.post-contain .post-wrapper .post-content {
     /* background-color: yellow; */
     padding: 15px;
     text-align: center;
 }
 
-.post-container .post .post-content-wrapper {
+.post-contain .post .post-content-wrapper {
     width: 100%;
     background: white;
 }
 
-.post-container .post .post-content-wrapper .time-view-wrapper {
+.post-contain .post .post-content-wrapper .time-view-wrapper {
     /* background-color: red; */
     display: flex;
     justify-content: space-between;
@@ -146,11 +146,17 @@ body {
     padding: 5px 10px;
 }
 
+.post-contain .post-wrapper .card-btn-group {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 /* -----------------------게시글 제목 시작-------------------------- */
 
 
 /* ----------------------댓글 & 좋아요 시작----------------------- */
-.post-container .post .post-reply {
+.post-contain .post .post-reply {
     width: 100%;
     display: inline-flex;
     justify-content: space-between;
@@ -158,7 +164,7 @@ body {
     border-top: #7AA2E3;
 }
 
-.post-container .post .post-reply .reply {
+.post-contain .post .post-reply .reply {
     justify-content: space-between;
     border: 1px solid #7AA2E3;
     background: #7AA2E3;
@@ -167,7 +173,7 @@ body {
     margin-left: 10px;
 }
 /* 
-.post-container .post .post-reply .post-like {
+.post-contain .post .post-reply .post-like {
     width: 90px;
 }
 .post-like .like {
@@ -179,7 +185,7 @@ body {
     background: #e797c3;
 } */
 
-.post-container .post .post-reply .reply-rec {
+.post-contain .post .post-reply .reply-rec {
     border: 1px solid #7AA2E3;
     width: 60%;
 }
@@ -191,6 +197,31 @@ body {
 .like label.like-label {
     font-size: 16px;
   }
+
+  .card-container .card-btn-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    z-index: 100;
+}
+
+.card-container .card-btn-group .del-btn {
+    outline: none;
+    /* border: 3px solid #000; */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f00;
+    opacity: 0;
+    color: #fff;
+    font-weight: 700;
+    font-size: 25px;
+
+    cursor: pointer;
+}
 
 /* ----------------------댓글 & 좋아요 끝----------------------- */
 
@@ -232,3 +263,50 @@ body {
 }
 
 
+
+/* 모달 스타일 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    width: 300px;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.modal-content p {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+
+.modal-buttons button {
+    padding: 5px 15px;
+    font-size: 20px;
+}
+
+.modal-buttons .confirm {
+    color: white;
+    background-color: #007bff;
+    border-radius: 4px;
+}
+
+.modal-buttons .cancel {
+    color: #f5f5f5;
+    background-color: #dd1111;
+    border-radius: 4px;
+}

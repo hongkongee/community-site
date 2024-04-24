@@ -74,9 +74,9 @@ public class HomeController {
    }
 
    // 홈페이지 - 전체게시글 view
-   @GetMapping("/all")
+   @GetMapping("/board/all")
    public String allBoardList(Model model, @ModelAttribute("s") Search page) {
-      log.info("/home/all: GET");
+      log.info("/home/board/all: GET");
       log.info("search = " + page);
       // page: type, keyword, pageNo(페이지 번호), amount(한 화면의 게시물 수)
       page.setAmount(20);
@@ -216,7 +216,7 @@ public class HomeController {
       // board table 에 게시글 저장하기: writer, title, content, file-image (파일 경로), category
       boardService.saveBoard(category, title, content, savePath, writer);
 
-      return "redirect:/home/all";
+      return "redirect:/home/board/" + category;
    }
 
 

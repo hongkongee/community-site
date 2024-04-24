@@ -106,7 +106,7 @@
         <!-- 화면 이동에 관련한 버튼 -->
         <div class="buttons">
             <button class="list-btn" type="button"
-                    onclick="location.href='/home/all'">
+                    onclick="location.href='/home/board/all'">
                 목록
             </button>
             <button id="modify">수정</button>

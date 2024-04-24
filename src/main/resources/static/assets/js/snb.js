@@ -56,7 +56,6 @@ function renderFollows(follows) {
       tagDetail += `<ul>
                         <li id="my-page"><i class="fa-solid fa-house"></i></li>
                         <li id="chatting"><i class="fa-solid fa-message"></i></li>
-                        <li id="follow"><i class="fa-solid fa-user-plus"></i></li>
                         <li id="ban"><i class="fa-solid fa-user-minus"></i></i></li>
                     </ul></div>`;
       
@@ -155,15 +154,19 @@ function clickMyFollower() {
 // x버튼을 누르면 창닫기
 function clickXbutton() {
   document.getElementById('follow-information').onclick = e => {
+    const userAccount = e.target.parentNode.parentNode.parentNode.dataset.useraccount;
+
     if (e.target.matches('.fa-x')) { // x버튼 클릭
       console.log('x버튼 클릭');
       e.target.parentNode.parentNode.style.display = 'none';
 
     } else if (e.target.matches('.fa-user-minus')) { // 팔로우 취소버튼 클릭
       console.log('팔로잉 취소!');
-      const userAccount = e.target.parentNode.parentNode.parentNode.dataset.useraccount;
       console.log(userAccount);
       deleteFollow(userAccount);
+    } else if (e.target.matches('.fa-house')) { // 집모양 아이콘 클릭
+
+      window.location.href='/mypage/home/' + userAccount;
     }
     
   }
@@ -183,11 +186,15 @@ function checkPresentPage() {
   if (presentPage.includes("/home/main")) { // 메인 페이지라면
     document.getElementById('home').firstChild.classList.add('highlight');
 
-  } else if (presentPage.includes("/home/all")) { // 또는 전체 게시판 페이지라면
+  } else if (presentPage.includes("/home/board/all")) { // 또는 전체 게시판 페이지라면
     document.getElementById('all').firstChild.classList.add('highlight');
 
   } else if (presentPage.includes("/game/rps")) { // 또는 가위바위보 페이지라면
     document.getElementById('rsp').lastChild.classList.add('highlight');
+
+  } else if (presentPage.includes("/home/board/normal")) { // 일반 게시판이라면
+    console.log('현재 페이지는 게임 게시판~');
+    document.getElementById('normal').lastChild.classList.add('highlight');
 
   } else if (presentPage.includes("/home/board/game")) { // 게임 게시판이라면
     console.log('현재 페이지는 게임 게시판~');
@@ -199,7 +206,10 @@ function checkPresentPage() {
   } else if (presentPage.includes("/home/board/trip")) { // 여행 게시판이라면
     document.getElementById('trip').lastChild.classList.add('highlight');
     
-  } else if (presentPage.includes("/market/main")) { // 당근 마켓이라면
+  } else if (presentPage.includes("/home/board/market")) { // 당근 게시판이라면
+    document.getElementById('market').lastChild.classList.add('highlight');
+    
+  } else if (presentPage.includes("/market/list")) { // 당근 마켓이라면
     document.querySelector('#second-hand>a').classList.add('highlight');
 
   } else {

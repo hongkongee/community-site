@@ -10,18 +10,24 @@
     <ul>
         <li id="home"><a href="/home/main">Home</a></li>
         <li id="second-hand"><a href="/market/list">중고 장터</a></li>
-        <li id="all"><a href="/home/all">
+        <li id="all"><a href="/home/board/all">
         전체 게시판
         <ul>
+            <li id="normal">
+                <i class="fa-solid fa-arrow-right"></i>&nbsp;
+                <a href="/home/board/normal">질문 게시판</a></li>
             <li id="game-board">
                 <i class="fa-solid fa-arrow-right"></i>&nbsp;
-                <a href="/home/board/game">게임 게시판</a></li>
+                <a href="/home/board/game">코드 공유 게시판</a></li>
             <li id="movie">
                 <i class="fa-solid fa-arrow-right"></i>&nbsp;
-                <a href="/home/board/movie">영화 게시판</a></li>
+                <a href="/home/board/movie">취업 게시판</a></li>
             <li id="trip">
                 <i class="fa-solid fa-arrow-right"></i>&nbsp;
-                <a href="/home/board/trip">여행 게시판</a></li>
+                <a href="/home/board/trip">IT 소식 게시판</a></li>
+            <li id="market">
+                <i class="fa-solid fa-arrow-right"></i>&nbsp;
+                <a href="/home/board/market">자유 게시판</a></li>
         </ul>
         <li id="game">
         게임

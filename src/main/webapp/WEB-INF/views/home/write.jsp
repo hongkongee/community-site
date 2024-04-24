@@ -34,10 +34,11 @@
         <!-- 카테고리 선택 영역 -->
         <select class="form-select" name="category" aria-label="Default select example">
           <option selected>게시판을 선택해 주세요</option>
-          <option value="game">게임 게시판</option>
-          <option value="market">중고 거래 게시판</option>
-          <option value="movie">영화 게시판</option>
-          <option value="trip">여행 게시판</option>
+          <option value="normal">질문 게시판</option>
+          <option value="game">코드 공유 게시판</option>
+          <option value="movie">취업 게시판</option>
+          <option value="trip">IT 소식 게시판</option>
+          <option value="market">자유 게시판</option>
         </select>
 
           <!-- 제목 입력 영역 -->
@@ -64,14 +65,13 @@
           
           
 
-          <!-- 공개 설정, 태그 입력 등 기타 선택 영역 -->
-
+        
 
       </form>
 
       <!-- 게시물 쓰기 버튼 -->
       <div class="buttons">
-        <button class="list-btn" type="button" onclick="window.location.href='/home/all'">목록</button>
+        <button class="list-btn" type="button" onclick="window.location.href='/home/board/all'">목록</button>
         <button id="submit-btn">글쓰기</button>
       </div>
 
@@ -107,6 +107,7 @@
           alert("글 내용을 작성해주세요.")
         } else {
           document.getElementById('myForm').submit();
+          
         }
       }
 

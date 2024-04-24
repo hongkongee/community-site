@@ -9,6 +9,9 @@
 <!-- common css -->
 <link rel="stylesheet" href="/assets/css/common.css">
 
+<!-- header css -->
+<link rel="stylesheet" href="/assets/css/header.css">
+
 <!-- mainpage css -->
 <link rel="stylesheet" href="/assets/css/allpage.css">
 

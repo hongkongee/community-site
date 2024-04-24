@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detail Page</title>
+  <title>상세 페이지</title>
 
   <%@ include file="../include/static-head.jsp" %>
 
@@ -32,17 +32,17 @@
 
     <!-- ==================== 게시글 영역 ==================== -->
     <section class="board">
-      <div id="wrap" class="form-container"> 
+      <div id="wrap" class="form-container" data-category="${b.category}"> 
 
         <!-- 게시글 카테고리 (누르면 해당 메뉴로 이동) -->
-        <h1 id="bno"> <a href="/home/board/\${b.category}">${b.category}</a> </h1>
+        <h1 id="bno"> <a href="/home/board/${b.category}">${b.categoryDescription}</a> </h1>
         
 
         <!-- 제목 -->
         <!-- <input type="text" id="title" name="title" value="${b.title}" readonly> -->
         <h1 id="title">${b.title}</h1>
 
-        <div class="board-info" data-bno="${b.bno}" data-writer="${b.writer}">
+        <div class="board-info" data-bno="${b.bno}" data-writer="${b.writer}" data-writeraccount="${b.writerAccount}">
 
           <div class="left-region">
             <!-- 작성자 -->
@@ -54,7 +54,7 @@
                 <li><a href="#">게시글 보기</a></li>
                 <li><a href="#">1:1 채팅</a></li>
                 <li><a id="report-writer" href="#">신고하기</a></li>
-                <li><a href="#">차단하기</a></li>
+                <li><a id="add-following" href="#" data-writeraccount="${b.writerAccount}">팔로잉</a></li>
               </ul>
             </div>
             
@@ -83,7 +83,12 @@
     
         <hr>
     
-        
+        <div id="board-img">
+          <c:if test="${b.postImg != null}">
+            <img src="/display${b.postImg}" alt="업로드 이미지">
+          </c:if>
+
+        </div>
     
         <!-- <label for="content">내용</label> -->
         <div id="content">${b.content}</div>
@@ -213,6 +218,11 @@
 
 
                               <div class="profile-box">
+
+                                <c:if test="${login.profile == null}">
+                                  
+
+                                </c:if>
                                 
                                       <!-- <img src="" alt="프사"> -->
                                  

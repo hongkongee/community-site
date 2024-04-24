@@ -23,12 +23,12 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
       registry
             .addInterceptor(boardInterceptor)
-            .addPathPatterns("/home/*")
-            .excludePathPatterns("/home/detail/{bno}", "/home/rps");
+            .addPathPatterns("/home/**")
+            .excludePathPatterns("/home/main");
 
       registry
             .addInterceptor(autoLoginInterceptor)
-            .addPathPatterns("/");
+            .addPathPatterns("/**");
    }
 
 

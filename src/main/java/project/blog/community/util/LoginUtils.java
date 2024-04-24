@@ -1,8 +1,10 @@
 package project.blog.community.util;
 
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.util.WebUtils;
 import project.blog.community.project.dto.response.LoginUserResponseDTO;
 
 // 회원 인증
@@ -38,6 +40,13 @@ public class LoginUtils {
       return loginUser.getAuth().equals("관리자");
 
    }
+
+   // 자동로그인 여부 확인
+   public static boolean isAutoLogin(HttpServletRequest request) {
+      return WebUtils.getCookie(request, AUTO_LOGIN_COOKIE) != null;
+   }
+
+
 
 
 }

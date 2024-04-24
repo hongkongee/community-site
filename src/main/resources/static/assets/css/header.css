@@ -1,4 +1,3 @@
-@import url('https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css');
 
 /* 폰트 */
 @import url('https://fonts.googleapis.com/css2?family=Orbit&display=swap');
@@ -17,6 +16,7 @@ header {
   border: 5px solid #7aa2e3;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
+  margin-bottom: 100px;
 
 }
 
@@ -102,11 +102,12 @@ header .inner-header .menu-open .lnr-menu {
 /* header gnb style */
 header .gnb {
   background: #7aa2e3;
-  color: #666;
+  color: black;
   height: 100vh;
   font-size: 40px;
-  padding: 70px 100px;
+  padding: 70px 75px;
   box-sizing: border-box;
+  text-align: left;
 
   position: fixed;
   z-index: 2000;
@@ -140,7 +141,9 @@ header .gnb button {
 
 
 header .gnb ul {
-  margin-right: 200px;
+  margin-top: 50px;
+  margin-right: 50px;
+  margin-left: 50px;
 }
 
 header .gnb ul li {

@@ -15,19 +15,31 @@ import project.blog.community.project.entity.Reply;
 
 public class MarketModifyRequestDTO {
 
+//유효성을 검증할 때 null 값이나 공백 문자열이 포함되어 있는지 확인
+    @NotNull(message = "게시판 번호는 필수입니다")
+    private int boardNo;
+
+    @NotBlank(message = "제목은 필수입니다")
+    private String title;
+
+    @NotBlank(message = "내용은 필수입니다")
+    private String text;
+
+    private String category;
 
     @NotNull
-    private int bno;
+    private int price;
 
-    @NotBlank
-    private String text;
 
     // 글번호
 
     public Market toEntity(){
         return Market.builder()
-                .boardNo(bno)
+                .boardNo(boardNo)
+                .textTitle(title)
                 .textContent(text)
+                .category(category)
+                .price(price)
                 .build();
     }
 

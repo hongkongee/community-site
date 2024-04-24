@@ -1,15 +1,11 @@
 package project.blog.community.project.service;
 
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.WebUtils;
 import project.blog.community.project.common.Search;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
@@ -22,7 +18,6 @@ import project.blog.community.project.entity.User;
 import project.blog.community.project.mapper.BoardMapper;
 import project.blog.community.project.mapper.LikeMapper;
 import project.blog.community.project.mapper.UserMapper;
-import project.blog.community.project.repository.JdbcRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -163,7 +158,7 @@ public class BoardService {
       return likeCount;
    }
 
-
+/*
    public List<BoardMyListResponseDTO> getMyList(HttpServletRequest request, Search page) {
       List<BoardMyListResponseDTO> myList = new ArrayList<>();
       List<Board> boardList = boardMapper.findAll(page);
@@ -176,10 +171,20 @@ public class BoardService {
       return myList;
 
    }
+   */
 
-   public int getCount(Search page) {
-      return boardMapper.getCount(page);
+   public int getCount(Search page, HttpServletRequest request) {
+      HttpSession session = request.getSession();
+      LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+      log.info("dto: {}", loginDto);
+
+      String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
+      int count = boardMapper.getCount(page, currentLoginMemberAccount);
+      log.info("count: "+ count);
+      return count;
    }
+
+
 
    public List<BoardMyListResponseDTO> getMyList(Search page, HttpServletRequest request) {
 
@@ -232,4 +237,6 @@ public class BoardService {
     public void delete(int bno) {
         boardMapper.delete(bno);
     }
+
+
 }

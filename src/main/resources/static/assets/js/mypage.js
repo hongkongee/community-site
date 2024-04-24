@@ -101,7 +101,7 @@ function clickHeartBtn(e) {
 };
 
 
-$postContain.onclick = (e) => {
+$postContainer.onclick = (e) => {
   if(!e.target.matches('i.fa-heart')) return;
   clickHeartBtn(e);
 }

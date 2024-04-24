@@ -15,9 +15,6 @@
 
     <link rel="stylesheet" href="/assets/css/posting_cube.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
 </head>
 
 <body>
@@ -48,7 +45,7 @@
 
             <!-- ------------------------메인 게시판 시작------------------------------------- -->
 
-            <div class="post-contain">
+            <div class="post-container">
                 <c:forEach var="b" items="${bList}">
                     <div class="post-wrapper" data-href="/mypage/delete?bno=${b.bno}">
                         <section class="post" data-bno="${b.bno}">
@@ -79,9 +76,9 @@
                                     <button class="reply">댓글 쓰기</button>
                                 </div>
                             </div>
-
                         </section>
-
+                        
+                        <!-- --------------------------삭제 버튼----------------------------- -->
                         <c:if test="${login.auth == '관리자' || login.accountNumber == b.writer}">
                             <div class="card-btn-group">
                                 <button class="del-btn">
@@ -103,7 +100,7 @@
                 <ul class="pagination pagination-lg pagination-custom">
                     <c:if test="${maker.page.pageNo != 1}">
                         <li class="page-item"><a class="page-link"
-                                href="/mypage/posting_cube?=1&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
+                                href="/mypage/posting_cube?pageNo=1&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
                         </li>
                     </c:if>
 
@@ -154,27 +151,27 @@
 </body>
 
 <script>
-    // 사용자가 현재 머물고 있는 페이지 버튼에 active 스타일 부여
-    function appendPageActive() {
+    // // 사용자가 현재 머물고 있는 페이지 버튼에 active 스타일 부여
+    // function appendPageActive() {
 
-        // 현재 서버에서 넘겨준 페이지 번호
-        const currPage = '${maker.page.pageNo}';
+    //     // 현재 서버에서 넘겨준 페이지 번호
+    //     const currPage = '${maker.page.pageNo}';
 
-        // li 태그들을 전부 확인해서
-        // 현재 페이지 번호와 일치하는 li를 찾은 후 active 클래스 이름 붙이기
-        const $ul = document.querySelector('.pagination');
-        const $liList = [...$ul.children];
+    //     // li 태그들을 전부 확인해서
+    //     // 현재 페이지 번호와 일치하는 li를 찾은 후 active 클래스 이름 붙이기
+    //     const $ul = document.querySelector('.pagination');
+    //     const $liList = [...$ul.children];
 
-        $liList.forEach($li => {
-            if (currPage === $li.dataset.pageNum) {
-                $li.classList.add('active');
-            }
-        });
-    }
+    //     $liList.forEach($li => {
+    //         if (currPage === $li.dataset.pageNum) {
+    //             $li.classList.add('active');
+    //         }
+    //     });
+    // }
 
 
     // 카드 형태의 게시물들을 감싸고 있는 부모 요소 취득
-    const $postContainer = document.querySelector('.post-contain');
+    const $postContainer = document.querySelector('.post-container');
 
     // 삭제에 필요한 요소들을 먼저 얻겠습니다.
     const $modal = document.getElementById('modal'); // 모달창 얻기
@@ -220,7 +217,7 @@
             console.log('bno: ' + bno);
 
             // 서버에 요청 보내기
-            location.href = '/mypage/detail/'+ bno;
+            location.href = '/mypage/detail/' + bno;
         }
 
 

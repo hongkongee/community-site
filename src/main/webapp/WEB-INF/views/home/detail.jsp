@@ -42,7 +42,7 @@
         <!-- <input type="text" id="title" name="title" value="${b.title}" readonly> -->
         <h1 id="title">${b.title}</h1>
 
-        <div class="board-info" data-bno="${b.bno}" data-writer="${b.writer}">
+        <div class="board-info" data-bno="${b.bno}" data-writer="${b.writer}" data-writeraccount="${b.writerAccount}">
 
           <div class="left-region">
             <!-- 작성자 -->
@@ -54,7 +54,7 @@
                 <li><a href="#">게시글 보기</a></li>
                 <li><a href="#">1:1 채팅</a></li>
                 <li><a id="report-writer" href="#">신고하기</a></li>
-                <li><a href="#">차단하기</a></li>
+                <li><a id="add-following" href="#" data-writeraccount="${b.writerAccount}">팔로잉</a></li>
               </ul>
             </div>
             
@@ -218,6 +218,11 @@
 
 
                               <div class="profile-box">
+
+                                <c:if test="${login.profile == null}">
+                                  
+
+                                </c:if>
                                 
                                       <!-- <img src="" alt="프사"> -->
                                  

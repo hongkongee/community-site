@@ -16,20 +16,25 @@
     <typeAliases>
         <!-- 엔터티 클래스 별칭 붙이기 -->
         <!-- <typeAlias type="com.spring.mvc.chap05.entity.Board" alias="board"/> -->
+        <typeAlias type="project.blog.community.project.entity.MyCode" alias="myCode"/>
         <typeAlias type="project.blog.community.project.entity.User" alias="user"/>
         <typeAlias type="project.blog.community.project.entity.Market" alias="market"/>
         <typeAlias type="project.blog.community.project.entity.Board" alias="board"/>
         <typeAlias type="project.blog.community.project.entity.Reply" alias="reply"/>
+        <typeAlias type="project.blog.community.project.entity.Favorite" alias="favorite"/>
         <typeAlias type="project.blog.community.project.entity.Follow" alias="follow"/>
+        <typeAlias type="project.blog.community.project.entity.Like" alias="like"/>
     </typeAliases>
 
     <!-- SQL을 적어놓은 XML 파일의 위치를 설정 -->
     <mappers>
         <!-- <mapper resource="mapper/BoardMapper.xml"/> -->
+        <mapper resource="mapper/MyCodeMapper.xml"/>
         <mapper resource="mapper/UserMapper.xml"/>
         <mapper resource="mapper/MarketMapper.xml"/>
         <mapper resource="mapper/BoardMapper.xml"/>
         <mapper resource="mapper/ReplyMapper.xml"/>
+        <mapper resource="mapper/LikeMapper.xml"/>
     </mappers>
 
 

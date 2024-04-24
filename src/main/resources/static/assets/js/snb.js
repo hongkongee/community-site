@@ -23,10 +23,10 @@ function renderFollows(follows) {
       console.log('nickname:', nickname);
       console.log('email:', email);
 
-      tag += `<div id='followContent' class='card-body' data-userId='${accountNumber}'>
+      tag += `<div id='followContent' class='card-body' data-userid='${accountNumber}'>
         <div class='row user-block'>
         <span class='col-md-8'>
-        <div class="profile-box">`;
+        <div class="profile-box" data-userid='${accountNumber}'>`;
 
       // 프로필 사진
       let profileTag = '';
@@ -40,13 +40,13 @@ function renderFollows(follows) {
 
       tag += profileTag;
 
-      tag += `</div><a class="friendName" data-userId='\${accountNumber}' href="#">${nickname}</a>
+      tag += `</div><a class="friendName" data-userId='${accountNumber}' href="#">${nickname}</a>
                 <b>(${email})</b>
               </span>
             </div>
           </div>`;
 
-      tagDetail += `<div id="follow-detail" data-userAccount="${accountNumber}">`;
+      tagDetail += `<div class="follow-detail" data-userAccount="${accountNumber}">`;
 
       tagDetail += `<p>    
                         ${nickname} 님<i class="fa-solid fa-x"></i>
@@ -72,14 +72,17 @@ function renderFollows(follows) {
   document.getElementById('followData').innerHTML = tag;
   document.getElementById('follow-information').innerHTML = tagDetail;
 
-  // 팔로워 이름 클릭하면 정보창 나오게 하기
-  clickMyFollower(follows);
+  // 팔로워 이름 또는 프로필 이미지를 클릭하면 정보창 나오게 하기
+  clickMyFollower();
+
+  // x버튼을 클릭하면 정보창 닫기
+  clickXbutton();
   
 
 };
 
 
-// 서버에 POST 요청 보내기
+// 서버에 팔로잉 리스트 조회 POST 요청 보내기
 function requestPost() {
   console.log('서버에 fetch!');
 
@@ -89,48 +92,80 @@ function requestPost() {
     console.log('Server response:', followList);
 
     renderFollows(followList);
-});
+  });
 }
 
-
-
-
-
-/* 친구 정보 */
-const $friends = document.querySelector('.friends');
-// const $userInformation = document.getElementById('user-information');
-const $xBtn = document.querySelector('.x-btn');
-
-function clickMyFollower(followList) {
-
-  $friends.onclick = e => {
-    if (!e.target.matches('.friendName')) return;
-    e.preventDefault();
-    console.log(e.target);
-
-    // 이벤트가 발생된 곳(수정, 삭제버튼)에서 가장 가까운 #followContent에 붙은 유저 계정
-    const userId = e.target.closest('#followContent').dataset.userId;
-    console.log('클릭한 유저 아이디: ', userId);
-
-    const $followDetail = document.querySelector(`#follow-detail[data-userAccount="${userId}"]`);
-    $followDetail.style.display = 'block';
-
-
-    
-    
-    // #user-information 의 p태그가 누른 대상의 닉네임이 되어야 한다.
-    // $userInformation.style.display = 'block';
-    // $userInformation.classList.add("animate");
-  
-    // 애니메이션이 끝나면 animate 클래스 제거하기
-    setTimeout(function() {
-        image.classList.remove("animate");
-    }, 500); // Adjust the duration to match the transition duration
-    
+// 서버에 팔로잉 취소(삭제) POST 요청 보내기
+function deleteFollow(userAccount) {
+  var formData = {
+    userAccount: userAccount
   };
 
+  fetch('/api/v1/follow/delete', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(response => response.text())
+  .then(data => {
+    console.log(data);
+    alert('정상적으로 팔로잉을 취소했습니다.')
+    location.reload(); // 새로고침
+  });
+    
+}
 
 
+
+
+
+/* 팔로워 정보 */
+
+// 팔로워 이름을 누르면 정보창 뜨기
+function clickMyFollower() {
+
+  document.getElementById('followCollapse').onclick = e => {
+    if (e.target.matches('.friendName')) {
+
+      e.preventDefault();
+      console.log('e.target: ', e.target);
+
+      const userId = e.target.dataset.userid;
+      console.log('클릭한 유저 아이디: ', userId);
+
+      console.log(document.querySelector(`.follow-detail[data-useraccount=${userId}]`));
+      document.querySelector(`.follow-detail[data-useraccount=${userId}]`).style.display = 'block';
+
+    } else if (e.target.matches('.profile-box>img')) {
+      console.log('e.target: ', e.target);
+      const userId = e.target.parentNode.dataset.userid;
+      console.log(document.querySelector(`.follow-detail[data-useraccount=${userId}]`));
+      document.querySelector(`.follow-detail[data-useraccount=${userId}]`).style.display = 'block';
+
+    }
+    
+
+  };
+
+}
+
+// x버튼을 누르면 창닫기
+function clickXbutton() {
+  document.getElementById('follow-information').onclick = e => {
+    if (e.target.matches('.fa-x')) { // x버튼 클릭
+      console.log('x버튼 클릭');
+      e.target.parentNode.parentNode.style.display = 'none';
+
+    } else if (e.target.matches('.fa-ban')) { // 팔로우 취소버튼 클릭
+      console.log('팔로잉 취소!');
+      const userAccount = e.target.parentNode.parentNode.parentNode.dataset.useraccount;
+      console.log(userAccount);
+      deleteFollow(userAccount);
+    }
+    
+  }
 }
 
 
@@ -138,13 +173,6 @@ function clickMyFollower(followList) {
 
 
 
-
-
-// x버튼을 누르면 창닫기
-// $xBtn.onclick = e => {
-//   console.log('x버튼 클릭');
-//   $userInformation.style.display = 'none';
-// }
 
 // 텍스트의 디자인을 바꾸는 함수.
 function checkPresentPage() {
@@ -157,21 +185,21 @@ function checkPresentPage() {
   } else if (presentPage.includes("/home/all")) { // 또는 전체 게시판 페이지라면
     document.getElementById('all').firstChild.classList.add('highlight');
 
-  } else if (presentPage.includes("/home/rps")) { // 또는 가위바위보 페이지라면
-    document.getElementById('game').firstChild.classList.add('highlight');
+  } else if (presentPage.includes("/game/rps")) { // 또는 가위바위보 페이지라면
+    document.getElementById('rsp').lastChild.classList.add('highlight');
 
   } else if (presentPage.includes("/home/board/game")) { // 게임 게시판이라면
     console.log('현재 페이지는 게임 게시판~');
-    document.getElementById('game-board').firstChild.classList.add('highlight');
+    document.getElementById('game-board').lastChild.classList.add('highlight');
 
   } else if (presentPage.includes("/home/board/movie")) { // 영화 게시판이라면
-    document.getElementById('movie').firstChild.classList.add('highlight');
+    document.getElementById('movie').lastChild.classList.add('highlight');
 
   } else if (presentPage.includes("/home/board/trip")) { // 여행 게시판이라면
-    document.getElementById('trip').firstChild.classList.add('highlight');
+    document.getElementById('trip').lastChild.classList.add('highlight');
     
   } else if (presentPage.includes("/market/main")) { // 당근 마켓이라면
-    document.getElementById('second-hand').firstChild.classList.add('highlight');
+    document.querySelector('#second-hand>a').classList.add('highlight');
 
   } else {
     console.log('아무것도 적용이 안됨');

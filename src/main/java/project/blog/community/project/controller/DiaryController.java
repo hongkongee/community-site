@@ -1,3 +1,4 @@
+
 package project.blog.community.project.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,7 +28,8 @@ import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccoun
 @Slf4j
 public class DiaryController {
 
-    private final BoardService service;
+   private final BoardService service;
+
 
     // rootPath = "//ICT4_28/img"
     @Value("${file.upload.root-path}")
@@ -37,9 +39,8 @@ public class DiaryController {
     @GetMapping("/diary")
     public String diary() {
         log.info("/mypage/diary: GET!!!");
-
-        return "mypage/diary";
-    }
+      return "mypage/diary";
+   }
 
     // 마이페이지->posting_cube로 이동
     @GetMapping("/posting_cube")
@@ -63,23 +64,23 @@ public class DiaryController {
     }
 
 
-    // 큐브 게시물 누르면 그 게시물로 이동
-    @GetMapping("/posting_cube/{bno}")
-    public String detail(@PathVariable("bno") int bno, @ModelAttribute("s") Search search, Model model) {
-        System.out.println("/board/detail: GET! " + bno);
-        BoardDetailResponseDTO dto = service.getDetail(bno);
+   // 큐브 게시물 누르면 그 게시물로 이동
+   @GetMapping("/posting_cube/{bno}")
+   public String detail(@PathVariable("bno") int bno, @ModelAttribute("s") Search search, Model model) {
+      System.out.println("/board/detail: GET! " + bno);
+      BoardDetailResponseDTO dto = service.getDetail(bno);
 
-        model.addAttribute("b", dto);
-        return "home/detail";
-    }
+      model.addAttribute("b", dto);
+      return "home/detail";
+   }
 
-    // 글 작성하기 누르면 새로운 글 작성하는 페이지로 이동
-    @GetMapping("/newposting")
-    public String newposting() {
-        log.info("/mypage/newposting: GET!!!");
+   // 글 작성하기 누르면 새로운 글 작성하는 페이지로 이동
+   @GetMapping("/newposting")
+   public String newposting() {
+      log.info("/mypage/newposting: GET!!!");
 
-        return "mypage/newposting";
-    }
+      return "mypage/newposting";
+   }
 
     // 글쓰기 제출 페이지 (DTO 안쓰고)
     @PostMapping("/newposting")
@@ -123,10 +124,6 @@ public class DiaryController {
 
 
 }
-
-
-
-
 
 
 

@@ -28,7 +28,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
       registry
             .addInterceptor(autoLoginInterceptor)
-            .addPathPatterns("/");
+            .addPathPatterns("/**");
    }
 
 

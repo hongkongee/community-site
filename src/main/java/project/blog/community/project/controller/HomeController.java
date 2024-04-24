@@ -109,13 +109,11 @@ public class HomeController {
     @GetMapping("/detail/{bno}")
     public String detail(@PathVariable("bno") int bno,  HttpServletRequest request, Model model) {
         log.info("/home/detail/{}: GET", bno);
-        BoardDetailResponseDTO dtoDetail = boardService.getDetail(bno);
-
+        BoardDetailResponseDTO dto = boardService.getDetail(bno);
 
         model.addAttribute("b", dto);
         log.info("image path: " + dto.getPostImg());
         log.info("b.category: " + dto.getCategory());
-
 
 //        Cookie c = WebUtils.getCookie(request, "like" + bno);
         // 좋아요 이미 눌렀는지 확인하기
@@ -173,7 +171,7 @@ public class HomeController {
         // /WEB-INF/views/~~~~~.jsp
         return "home/write";
     }
-    
+
     // 글쓰기 제출 페이지 (DTO 안쓰고)
     @PostMapping("/write")
     public String writeSubmit(@RequestParam("category") String category,

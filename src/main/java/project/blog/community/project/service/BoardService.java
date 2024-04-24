@@ -206,6 +206,57 @@ public class BoardService {
         return category.getDescription(); // return value = "영화글"
     }
 
+    // 좋아요를 이전에 눌렀는지 확인 (from tbl_like)
+    public int checkLike(HttpServletRequest request, int bno) {
+        HttpSession session = request.getSession();
+        session.getAttribute("login");
+        // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
+        String myAccount = getCurrentLoginMemberAccount(session);
+
+        int likeCount = likeMapper.checkLike(myAccount, bno);
+        return likeCount;
+    }
 
 
+    // 게시물의 좋아요 수 바꾸기
+    public int changeLike(LikeRequestDTO dto, HttpServletRequest request) {
+        int bno = dto.getBno();
+        int number = dto.getNumber();
+
+        // 게시물 테이블의 좋아요 수 업데이트
+        boardMapper.updateLikeCount(bno, number);
+
+        HttpSession session = request.getSession();
+        session.getAttribute("login");
+        // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
+        String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
+
+        // 좋아요를 눌렀다면 Like 테이블에 insert
+        if (number > 0) {
+
+            // 쿠키에 게시글 번호와 로그인 유저 ID 저장
+       /*     Cookie cookie = new Cookie("like" + bno, currentLoginMemberAccount); // ex) "like125", "tjtkdvl"
+            cookie.setMaxAge(60);
+            cookie.setPath("/");
+            response.addCookie(cookie); // 클라이언트에 전송*/
+
+            // Like 테이블에 로그인 유저 ID와 좋아요 누른 게시글 번호 저장
+            likeMapper.addLike(currentLoginMemberAccount, bno);
+
+
+
+            return 1;
+
+        } else { // 좋아요를 안 눌렀다면 Like 테이블로부터 delete
+
+            /*Cookie cookie = WebUtils.getCookie(request, "like" + bno);
+            cookie.setMaxAge(0);
+            cookie.setPath("/");
+            response.addCookie(cookie);*/
+
+            likeMapper.deleteLike(currentLoginMemberAccount, bno);
+
+            return 0;
+        }
+    }
 }

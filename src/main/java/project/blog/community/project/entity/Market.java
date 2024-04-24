@@ -53,8 +53,11 @@ public class Market{
     private int viewCount;
     private boolean addFav;
     private String category;
+    private String chooseReason;
+    private String message;
 
-    public Market(MarketWriteRequestDTO dto, String writer) { //dto -> Entity
+    public Market(MarketWriteRequestDTO dto, String writer) {
+        //dto -> Entity
         this.textTitle = dto.getTextTitle();
         this.textContent = dto.getTextContent();
         this.updateDate = dto.getUpdateDate();

@@ -36,6 +36,8 @@
 
   <%@ include file="../include/snb.jsp" %>
 
+  <%@ include file="../include/headcss.jsp"%>
+  <%@ include file="../include/header.jsp"%>
   <!-- 가운데 Content -->
   <div class="wrapper">
 

@@ -69,6 +69,9 @@ public class User {
    // 회원 가입 방법
    private LoginMethod loginMethod;
 
+   // 회원 평점 (중고 마켓에서 받은 누적 좋아요 수)
+   private int rate;
+
 
 
 }

@@ -108,12 +108,11 @@ aside .left-snb ul li>ul>li::before {
 
 /*center 추가 */
 .wrapper {
-  position: relative;
   text-align: center;
 
-  height: 100vh;
-  margin: auto;
   width: 60vw;
+  height: 300vh;
+  margin: auto;
   background: #7AA2E3;
 
 }
@@ -122,7 +121,7 @@ aside .left-snb ul li>ul>li::before {
 /*테두리 전체*/
 .content-box {
   width: 60vw;
-  height: 100vw;
+  height: 300vh;
   position: relative;
   border-radius: 60px;
   margin: auto;

@@ -37,7 +37,7 @@ body {
 
 #wrapper {
   width: 90%;
-  margin: 0 auto;
+  margin: 100px auto;
   height: inherit;
   position: relative;
   border-radius: 60px;
@@ -48,31 +48,46 @@ body {
 }
 
 .body-wrapper1 {
+  margin-top: 50px;
   padding-top: 70px;
   width: 100%;
   height: 100%;
   display: flex;
   /* gap: 15%; */
+  justify-content: space-evenly;
 }
 
 #wrapper .page-title {
+  width: 80%;
   margin-left: 20px;
   font-size: 40px;
   position: absolute;
   left: 95px;
   top: 15px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.body-wrapper1 .user-profile-pic {
-  width: 233px;
-  height: 233px;
-  border-radius: 9999px;
-  border: 1px black solid;
-  margin-left: 200px;
+.home-icon {
+  float: right;
+}
+
+.user-profile-box {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  font-size: 12px;
+  margin-right: 20px;
+
+}
+.body-wrapper1 .user-profile-box .user-profile-pic {
+  width: 100%;
+  height: 100%;
 }
 
 .body-wrapper1 .user-info {
-  margin-left: 140px;
+  margin-left: 20px;
   /* width: 500px; */
 }
 
@@ -117,21 +132,21 @@ body {
 
 
 .body-wrapper1 .user-friends {
-  margin-left: 290px;
+  margin-left: 100px;
   display: flex;
   flex-direction: column;
 }
 
-.body-wrapper1 .user-friends .friends-category {
+/* .body-wrapper1 .user-friends .friends-category {
   display: flex;
   justify-content: space-between;
   width: 230px;
   gap: 50px;
   font-size: 35px;
   padding-top: 10px;
-}
+} */
 
-.body-wrapper1 .user-friends .friends-category button {
+.body-wrapper1 .user-friends .follow-text button {
   border: 1px white solid;
   font-size: 20px;
   background-color: #000080;
@@ -139,7 +154,11 @@ body {
   border-radius: 9999px;
 }
 
-.body-wrapper1 .user-friends .friend-list {
+.ff {
+  display: flex;
+}
+
+.body-wrapper1 .user-friends .following-list {
   display: flex;
   gap: 10px;
   width: 200px;
@@ -154,11 +173,51 @@ body {
   }
 }
 
-.body-wrapper1 .user-friends .friend-profile {
+.body-wrapper1 .user-friends .following-list .user-wrapper {
   display: flex;
-  gap: 30px;
-  align-items: center;
+  justify-content: flex-start;
 }
+
+.body-wrapper1 .user-friends .follower-list {
+  display: flex;
+  gap: 10px;
+  width: 200px;
+  padding-top: 20px;
+  font-size: 25px;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 200px;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+}
+
+.body-wrapper1 .user-friends .follower-list .user-wrapper {
+  display: flex;
+}
+
+.profile-box { /* 프로필 사진 */
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  overflow: hidden;
+  font-size: 12px;
+  margin-right: 20px;
+}
+
+
+
+.profile-box img {
+  width: 100%;
+  cursor: pointer;
+}
+
+.icon-box {
+  cursor: pointer;
+}
+
+
 
 
 .body-wrapper2 {
@@ -183,4 +242,50 @@ body {
 .body-wrapper2 .weather-wrapper {
   font-size: 25px;
   margin-left: 250px;
+}
+
+
+/* 음악 기능 */
+.best-three {
+  font-weight: bold;
+}
+
+.popular-title-container {
+  font-size: 18px;
+}
+
+#audio-controls {
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+#audio-controls button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.fa-pen {
+  cursor: pointer;
+}
+
+#fake-btn {
+  display: none;
+}
+
+p#intro-text {
+  font-size: 22px;
+}
+
+button.btn-primary {
+  display: none;
 }

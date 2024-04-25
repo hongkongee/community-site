@@ -60,15 +60,15 @@
               <div class="card-image">
 
                 
-                  <c:if test="${b.postImg == null}">
-                    <img src="/assets/img/test.jpg" alt="기본 이미지">
+                  <c:if test="${b.postImg eq null}">
+                    <img src="/assets/img/jjang${b.random}.jpg" alt="기본 이미지">
                   </c:if>
               
 
-                  <c:if test="${b.postImg != null}">
+                  <c:if test="${b.postImg ne null}">
                     <img class="thumbnail" src="/display${b.postImg}" alt="업로드 이미지">
                   </c:if>
-                
+                  
                 
               </div>
               <div class="card-title-wrapper">

@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import project.blog.community.project.common.PageMaker;
 import project.blog.community.project.common.Search;
+import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
 import project.blog.community.project.dto.response.BoardMyListResponseDTO;
 import project.blog.community.project.service.BoardService;
@@ -60,11 +62,27 @@ public class DiaryController {
 
         log.info(myList.toString());
 
+        return "mypage/posting_cube";
+    }
+
+    @PostMapping("/posting_cube/like/{bno}") // URL에 {bno}를 포함시킴
+    @ResponseBody
+    public ResponseEntity<Integer> like(@PathVariable("bno") int bno, @RequestBody LikeRequestDTO dto,
+                                        HttpServletRequest request, Model model) {
+        log.info("/mypage/posting_cube/like: POST: {}, {}", dto.getBno(), dto.getNumber());
+
         // 좋아요 이미 눌렀는지 확인하기
         int like = service.checkLike(request, bno);
 
+        if (like > 0) { // 이미 좋아요를 눌렀다면
+            model.addAttribute("l", 1);
+        } else { // 좋아요를 누르지 않았다면
+            model.addAttribute("l", 0);
+        }
 
-        return "mypage/posting_cube";
+        // 좋아요 수 1 증가 또는 1 감소시키기
+        int isCookie = service.changeLike(dto, request);
+        return ResponseEntity.ok().body(isCookie);
     }
 
 

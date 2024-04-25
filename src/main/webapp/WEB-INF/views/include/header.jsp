@@ -7,7 +7,7 @@
     <div class="inner-header">
         <h1 class="logo">
             <a href="/home/main">
-                <img src="/assets/img/logo.png" alt="로고이미지">
+                <img src="/assets/img/logo2.png" alt="로고이미지">
             </a>
         </h1>
 

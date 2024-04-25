@@ -249,4 +249,9 @@ public class BoardService {
    public void modifyMyIntro(String myAccount, String introduction) {
       boardMapper.modifyIntro(myAccount, introduction);
    }
+
+    public void delete(int bno) {
+        boardMapper.delete(bno);
+    }
+
 }

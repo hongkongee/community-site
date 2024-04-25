@@ -42,6 +42,7 @@ public interface BoardMapper {
     // 내 게시물만 보이는 findMine
     List<Board> findMine(@Param("page") Search page, @Param("account") String currentLoginMemberAccount);
 
+
     // 나의 인기게시글
     List<Board> findMyHot(@Param("page") Search page, @Param("account") String account);
 
@@ -50,4 +51,8 @@ public interface BoardMapper {
 
 
     void modifyIntro(@Param("account") String myAccount, @Param("intro") String introduction);
+
+    // 게시물 삭제
+    void delete(int bno);
+
 }

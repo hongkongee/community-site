@@ -118,6 +118,7 @@
         LIMIT #{page.pageStart}, #{page.amount}
     </select>
 
+
     <select id="findHot" resultType="board">
         SELECT * FROM tbl_board
 
@@ -142,6 +143,13 @@
         SET introduction = #{intro}
         WHERE account_number = #{account}
     </update>
+
+<!--    <insert id="save">-->
+<!--        INSERT INTO image(origin_image_name, new_image_name, image_path)-->
+<!--        VALUES(#{originImageName}, #{newImageName}, #{imagePath})-->
+<!--    </insert>-->
+
+
 
 
 </mapper>

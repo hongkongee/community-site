@@ -44,22 +44,24 @@
             <button type="button">X</button>
         </a>
         <ul>
+
             <li><a href="/home/main">Home</a></li>
+
             <c:if test="${sessionScope.login != null}">
                 <li><a href="/mypage/home/${login.accountNumber}">My Page</a></li>
                 <li><a href="/mypage/posting_cube">My Posts</a></li>
                 <li><a href="/mypage/diary">My Diary</a></li>
                 <li><a href="#">My Code</a></li>
+                <li><a href="/wel/chat">Chat</a></li>
+                <li><a href="#">Market</a></li>
             </c:if>
-            <li><a href="#">Chat</a></li>
-            <li><a href="#">Market</a></li>
 
             <c:if test="${sessionScope.login != null}">
                 <li><a href="/users/sign-out">Sign Out</a></li>
             </c:if>
 
 
-            <c:if test="${login == null}">
+            <c:if test="${login == null}"> <!-- 로그인 안했으면 -->
                 <li><a href="/users/sign-up">Sign Up</a></li>
                 <li><a href="/users/sign-in">Sign In</a></li>
             </c:if>

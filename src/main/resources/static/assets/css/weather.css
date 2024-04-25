@@ -1,0 +1,15 @@
+dl{
+display: flex;
+justify-content: center;
+}
+.weather{
+  border: 1px solid black ;
+  width: 320px;
+  height: 200px;
+}
+.wea{
+  margin:0px 5px;
+}
+.icon{
+  margin-left: 100px;
+}

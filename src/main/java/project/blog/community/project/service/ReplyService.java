@@ -1,6 +1,8 @@
 package project.blog.community.project.service;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import project.blog.community.project.common.Page;
 import project.blog.community.project.common.PageMaker;
@@ -10,19 +12,24 @@ import project.blog.community.project.dto.response.ReplyDetailResponseDTO;
 import project.blog.community.project.dto.response.ReplyListResponseDTO;
 import project.blog.community.project.entity.Reply;
 import project.blog.community.project.mapper.ReplyMapper;
+import project.blog.community.util.LoginUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static project.blog.community.util.LoginUtils.*;
+
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ReplyService {
 
    private final ReplyMapper mapper;
 
-   public void register(ReplyPostRequestDTO dto) {
+   public void register(ReplyPostRequestDTO dto, HttpSession session) {
 
       Reply reply = dto.toEntity();
+      reply.setAccount(getCurrentLoginMemberAccount(session));
 
       mapper.save(reply);
    }
@@ -34,6 +41,8 @@ public class ReplyService {
       for (Reply reply : replyList) {
          dtoList.add(new ReplyDetailResponseDTO(reply));
       }
+
+      log.info("replyList: {}", replyList);
 
       int count = mapper.count(boardNo);
 

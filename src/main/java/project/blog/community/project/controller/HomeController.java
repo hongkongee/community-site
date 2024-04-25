@@ -18,12 +18,8 @@ import project.blog.community.project.common.Search;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.request.ReportRequestDTO;
 import project.blog.community.project.dto.request.RpsRequestDTO;
-import project.blog.community.project.dto.response.BoardDetailResponseDTO;
-import project.blog.community.project.dto.response.BoardListResponseDTO;
-import project.blog.community.project.dto.response.BoardMyListResponseDTO;
-import project.blog.community.project.service.BoardService;
-import project.blog.community.project.service.GameService;
-import project.blog.community.project.service.ManagementService;
+import project.blog.community.project.dto.response.*;
+import project.blog.community.project.service.*;
 import project.blog.community.util.FileUtils;
 
 import java.util.List;
@@ -40,6 +36,8 @@ public class HomeController {
 
    private final ManagementService managementService;
    private final BoardService boardService;
+   private final UserService userService;
+   private final MarketService marketService;
 
    // rootPath = "C:/MyWorkspace/pictures/"
    @Value("${file.upload.root-path}")
@@ -54,8 +52,11 @@ public class HomeController {
       List<BoardListResponseDTO> dtoList = boardService.getHotList("popular");
 
       model.addAttribute("bList", dtoList);
-      model.addAttribute("r", 0);
+      model.addAttribute("r", 0); // recent 여부
 
+      // 중고 거래 게시판 불러오기
+      List<MainMarketResponseDTO> marketList = marketService.getRecentList();
+      model.addAttribute("mList", marketList);
 
 
       // /WEB-INF/views/~~~~~.jsp
@@ -228,6 +229,23 @@ public class HomeController {
 
       return "redirect:/home/board/" + category;
    }
+
+   // 오른쪽 사이드바 포인트 렌더링
+/*   @GetMapping("/snb")
+   public ResponseEntity<?> myPoint(HttpServletRequest request) {
+      log.info("/home/snb: GET!!!");
+
+      // 로그인 유저 account 가져오기
+      HttpSession session = request.getSession();
+      session.getAttribute("login");
+      String myAccount = getCurrentLoginMemberAccount(session);
+
+      // 로그인 유저 정보 가져오기
+      MypageUserResponseDTO myInfo = userService.getUserInformation(myAccount);
+
+
+      return ResponseEntity.ok().body(myInfo);
+   }*/
 
 
 }

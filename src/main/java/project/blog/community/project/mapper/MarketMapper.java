@@ -16,6 +16,10 @@ public interface MarketMapper {
     void modify(Market market);
 
     List<Market> findAll();
+
+    List<Market> findFour();
+
+
     void updateViewCount(int boardNo);
 
     Market findOne(int boardNo);
@@ -44,6 +48,8 @@ public interface MarketMapper {
     Rate checkRateRelation(MarketRateRequestDTO dto);
 
     void addRate(MarketRateRequestDTO dto);
+
+    List<Rate> checkRateByUser(String textWriter);
 
 
 

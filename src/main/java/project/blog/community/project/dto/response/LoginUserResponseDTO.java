@@ -17,6 +17,7 @@ public class LoginUserResponseDTO {
    private String nickname;
    private String profile;
    private String loginMethod;
+   private int point;
 
 }
 

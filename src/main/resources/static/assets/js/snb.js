@@ -217,6 +217,23 @@ function checkPresentPage() {
   }
 }
 
+// 서버에 로그인 유저 정보 (포인트 등) 가져오기
+function loginUserInformation() {
+  console.log('login User\'s information~');
+
+  fetch('/home/snb')
+  .then(res => res.json())
+  .then(point => {
+
+    console.log(point);
+
+  });
+
+
+
+
+}
+
 
 
 // 즉시실행함수
@@ -227,6 +244,9 @@ function checkPresentPage() {
 
   // 서버에 팔로우 정보 요청보내기
   requestPost();
+
+  // 서버에 로그인 유저 정보 요청보내기
+  loginUserInformation();
     
   
 })();

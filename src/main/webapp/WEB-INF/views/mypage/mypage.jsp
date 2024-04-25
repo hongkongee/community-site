@@ -242,12 +242,13 @@
                 <div class="user-market">
                     <div class="title-market">${user.nickname}님의 중고 장터 평점: ${user.rate}</div>
                     <h2> <i class="fa-solid fa-store"></i> 평가 </h2>
-                    <div class="market-image">
-                        <c:forEach var="following" items="${followings}">
+                    <div class="market-rates">
+                        <c:forEach var="market" items="${markets}">
 
-                            <div class="">
-                                <span>제목 ${post.title}</span>
-                                <span class="popular-content">${post.regDate}</span>
+                            <div class="rate-evaluation">
+                                <span class="message">${market.message}</span>
+                                <span class="chooseReason">${market.chooseReason}</span>
+                                <span class="regDate">${market.regDate}</span>
                             </div>
 
                         </c:forEach>

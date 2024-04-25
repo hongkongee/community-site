@@ -146,10 +146,40 @@
 
       <div class="card-container"> <!-- 게시물 전체 영역 -->
 
-        <!-- c:forEach -->
+        <c:forEach var="m" items="${mList}">
 
 
+        
         <div class="card-wrapper"> <!-- 게시물 하나 영역 (더미데이터) -->
+          <section class="card">
+            <!-- <div class="card-image">
+              <img src="/assets/img/test.jpg" alt="게시물 이미지">
+            </div> -->
+            <div class="card-title-wrapper">
+
+              <a href="#">
+                <h2 class="card-title">${m.textTitle}</h2>
+                <p>${m.price}</p>
+
+              </a>
+              
+              
+              <div class="time-wrapper">
+                <div class="time">
+                  <i class="fa-regular fa-clock"> ${m.updateDate} </i>                 
+                </div>       
+              </div>
+
+            </div>
+
+          </section>
+
+        </div>
+
+      </c:forEach>
+
+        <!-- 게시물 하나 영역 (더미데이터) -->
+        <!-- <div class="card-wrapper"> 
           <section class="card">
             <div class="card-image">
               <img src="/assets/img/test.jpg" alt="게시물 이미지">
@@ -173,85 +203,9 @@
 
           </section>
 
-        </div>
+        </div> -->
 
-        <div class="card-wrapper"> <!-- 게시물 하나 영역 (더미데이터) -->
-          <section class="card">
-            <div class="card-image">
-              <img src="/assets/img/test.jpg" alt="게시물 이미지">
-            </div>
-            <div class="card-title-wrapper">
-
-              <a href="#">
-                <h2 class="card-title">게임기 팝니다~</h2>
-                <p>38,000원</p>
-
-              </a>
-              
-              
-              <div class="time-wrapper">
-                <div class="time">
-                  <i class="fa-regular fa-clock"> 2024-04-12 16:20</i>                 
-                </div>       
-              </div>
-
-            </div>
-
-          </section>
-
-        </div>
-
-        <div class="card-wrapper"> <!-- 게시물 하나 영역 (더미데이터) -->
-          <section class="card">
-            <div class="card-image">
-              <img src="/assets/img/test.jpg" alt="게시물 이미지">
-            </div>
-            <div class="card-title-wrapper">
-
-              <a href="#">
-                <h2 class="card-title">게임기 팝니다~</h2>
-                <p>38,000원</p>
-
-              </a>
-              
-              
-              <div class="time-wrapper">
-                <div class="time">
-                  <i class="fa-regular fa-clock"> 2024-04-12 16:20</i>                 
-                </div>
-              </div>
-
-            </div>
-
-          </section>
-
-        </div>
-
-        <div class="card-wrapper"> <!-- 게시물 하나 영역 (더미데이터) -->
-          <section class="card">
-            <div class="card-image">
-              <img src="/assets/img/test.jpg" alt="게시물 이미지">
-            </div>
-            <div class="card-title-wrapper">
-
-              <a href="#">
-                <h2 class="card-title">게임기 팝니다~</h2>
-                <p>38,000원</p>
-
-              </a>
-              
-              
-              <div class="time-wrapper">
-                <div class="time">
-                  <i class="fa-regular fa-clock"> 2024-04-12 16:20</i>                 
-                </div>       
-              </div>
-
-            </div>
-
-          </section>
-
-        </div>
+      </div>
 
     </section>
 

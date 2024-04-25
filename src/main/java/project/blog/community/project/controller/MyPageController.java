@@ -16,10 +16,8 @@ import project.blog.community.project.dto.response.BoardMyListResponseDTO;
 import project.blog.community.project.dto.response.FollowerResponseDTO;
 import project.blog.community.project.dto.response.LoginUserResponseDTO;
 import project.blog.community.project.dto.response.MypageUserResponseDTO;
-import project.blog.community.project.service.BoardService;
-import project.blog.community.project.service.FollowingService;
-import project.blog.community.project.service.GameService;
-import project.blog.community.project.service.UserService;
+import project.blog.community.project.entity.Rate;
+import project.blog.community.project.service.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +35,7 @@ public class MyPageController {
    private final FollowingService followingService;
    private final BoardService boardService;
    private final GameService gameService;
+   private final MarketService marketService;
 
    @GetMapping("/home/{account}")
    public String myHome(@PathVariable String account, HttpServletRequest request, Model model){
@@ -99,10 +98,12 @@ public class MyPageController {
       }
       model.addAttribute("posts", boardList);
 
-      // 나의 중고마켓 평가 가져오기
-      
+      // 유저의 중고마켓 평가 가져오기
+      String userAccount = userInformation.getAccountNumber();
+      log.info(" ======= 나의 정보 : {} =======", userAccount);
+      List<Rate> userRates = marketService.findUserRate(userAccount);
 
-
+      model.addAttribute("markets", userRates);
 
 
       return "mypage/mypage";

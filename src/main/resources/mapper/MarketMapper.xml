@@ -64,6 +64,28 @@
         WHERE account_number = #{accountNumber}
     </delete>
 
+    <update id="updateRateBoard">
+        UPDATE tbl_user
+        SET rate = rate + 1
+        WHERE account_number = #{textWriter}
+    </update>
+
+    <insert id="addRate">
+        INSERT INTO tbl_market_rate
+        VALUES (#{boardNo}, #{textWriter}, #{message}, #{chooseReason})
+    </insert>
+
+    <select id="checkRate" resultType="int">
+        SELECT rate FROM tbl_user
+        WHERE account_number = #{accountNumber}
+    </select>
+
+    <select id="checkRateRelation" resultType="rate">
+        SELECT * FROM tbl_market_rate
+        WHERE board_no = #{boardNo} AND text_writer = #{textWriter}
+    </select>
+
+
 
 
 </mapper>

@@ -36,6 +36,8 @@
   <!-- 사이드바 -->
   <%@ include file="../include/snb.jsp" %>
 
+  <%@ include file="../include/headcss.jsp"%>
+  <%@ include file="../include/header.jsp"%>
 
   <!-- center 영역 -->
   <div class="wrapper">
@@ -99,67 +101,69 @@
               </tr>
             </c:forEach>
 
-
             <!-- Add more rows as needed -->
           </tbody>
         </table>
+
+
+
       </div>
     </section>
+  </div>
+  <script>
+    const $post = document.querySelector('post');
 
-    <script>
-      const $post = document.querySelector('post');
-
-      $post.addEventListener('click', e => {
-        if (e.target === e.currentTarget) {
-          location.href='/market/detail/${s.boardNo}';
-          console.log("e.target === e.currentTarget");
-
-
-        }
-        console.log("클릭됨");
-        location.href='/market/detail/${s.boardNo}';
-
-      });
+    $post.addEventListener('click', e => {
+      if (e.target === e.currentTarget) {
+        location.href = '/market/detail/${s.boardNo}';
+        console.log("e.target === e.currentTarget");
 
 
+      }
+      console.log("클릭됨");
+      location.href = '/market/detail/${s.boardNo}';
 
-      // const $addFavButtons = document.querySelectorAll('#addFav');
+    });
 
-      // $addFavButtons.forEach(button => {
-      //   button.addEventListener('click', function () {
-      //     const boardNo = this.getAttribute('data-boardNo');
-      //     const isAddFav = this.getAttribute('data-favorite') === 'true';
 
-      //     if (isAddFav) {
-      //       this.innerHTML = '&#x2606;'; // 외곽 별로 변경
-      //     } else {
-      //       this.innerHTML = '&#x2665;'; // 하트로 변경
-      //     }
 
-      //     fetch(`/market/list/${boardNo}?addFav=${!isAddFav}`, {
-      //         method: 'POST',
-      //         headers: {
-      //           'Content-Type': 'application/json',
-      //         },
-      //         body: JSON.stringify({
-      //           isAddFav: !isAddFav
-      //         }),
-      //       })
-      //       .then(response => response.json())
-      //       .then(data => {
-      //         if (data.success) {
-      //           this.setAttribute('data-favorite', !isAddFav);
-      //         } else {
-      //           alert('즐겨찾기 상태를 업데이트하는데 실패했습니다.');
-      //         }
-      //       })
-      //       .catch(error => {
-      //         console.error('Error:', error);
-      //         alert('서버와의 통신에 문제가 발생했습니다.');
-      //       });
-      //   });
-      // });
-    </script>
+    // const $addFavButtons = document.querySelectorAll('#addFav');
+
+    // $addFavButtons.forEach(button => {
+    //   button.addEventListener('click', function () {
+    //     const boardNo = this.getAttribute('data-boardNo');
+    //     const isAddFav = this.getAttribute('data-favorite') === 'true';
+
+    //     if (isAddFav) {
+    //       this.innerHTML = '&#x2606;'; // 외곽 별로 변경
+    //     } else {
+    //       this.innerHTML = '&#x2665;'; // 하트로 변경
+    //     }
+
+    //     fetch(`/market/list/${boardNo}?addFav=${!isAddFav}`, {
+    //         method: 'POST',
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({
+    //           isAddFav: !isAddFav
+    //         }),
+    //       })
+    //       .then(response => response.json())
+    //       .then(data => {
+    //         if (data.success) {
+    //           this.setAttribute('data-favorite', !isAddFav);
+    //         } else {
+    //           alert('즐겨찾기 상태를 업데이트하는데 실패했습니다.');
+    //         }
+    //       })
+    //       .catch(error => {
+    //         console.error('Error:', error);
+    //         alert('서버와의 통신에 문제가 발생했습니다.');
+    //       });
+    //   });
+    // });
+  </script>
 
 </body>
 

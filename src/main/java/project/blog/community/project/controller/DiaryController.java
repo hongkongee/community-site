@@ -1,4 +1,3 @@
-
 package project.blog.community.project.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,6 +40,7 @@ public class DiaryController {
         log.info("/mypage/diary: GET!!!");
       return "mypage/diary";
    }
+
 
 
     // 마이페이지->posting_cube로 이동
@@ -113,6 +113,12 @@ public class DiaryController {
     }
 
 
+    // 글 작성하기 누르면 새로운 글 작성하는 페이지로 이동
+    @GetMapping("/newposting")
+    public String newposting() {
+            log.info("/mypage/newposting: GET!!!");
+
+
     // 글 삭제 요청 (/mypage/delete : GET)
     // 글번호 전달되면 삭제 진행
     @GetMapping("/delete")
@@ -124,7 +130,8 @@ public class DiaryController {
     }
 
 
+
+
+
 }
-
-
 

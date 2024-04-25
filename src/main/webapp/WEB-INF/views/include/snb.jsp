@@ -50,18 +50,18 @@
     <div class="weather">
         <img class="icon"/>
 
-        <dl>
+        <dl class="weather1">
             <dt class="tem">기온 :</dt>
             <dd class="wea temperature"></dd>
         </dl>
-        <dl>
+        <dl class="weather1">
             <dt class="pla">위치 :</dt>
             <dd class="wea place"></dd>
-        </dl><dl>
+        </dl><dl class="weather1">
             <dt class="des">설명 :</dt>
             <dd class="wea description"></dd>
         
-        </dl><dl>
+        </dl><dl class="weather1">
             <button class="button" type="button"><i class="fa-solid fa-rotate-right"></i></button>
         </dl>
     </div>

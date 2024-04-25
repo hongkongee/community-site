@@ -45,21 +45,6 @@ public class HomeController {
    @Value("${file.upload.root-path}")
    private String rootPath;
 
-   // 홈페이지 - 메인페이지 view
-   @GetMapping("/main")
-   public String mainPage(Model model) {
-      log.info("/home/main: GET");
-
-      List<BoardListResponseDTO> dtoList = boardService.getHotList("popular");
-
-      model.addAttribute("bList", dtoList);
-      model.addAttribute("r", 0);
-
-
-      // /WEB-INF/views/~~~~~.jsp
-      return "home/main";
-   }
-
    // 메인페이지 인기 게시글 정렬 선택
    @GetMapping("/main/recent")
    public String sortBoard(Model model) {
@@ -110,7 +95,6 @@ public class HomeController {
       page.setAmount(20);
 
       List<BoardListResponseDTO> categoryList = boardService.getCategoryList(category, page);
-
       PageMaker pageMaker = new PageMaker(page, boardService.getCountCategory(category, page));
 
 
@@ -195,7 +179,6 @@ public class HomeController {
       log.info("file-size: {}KB", uploadedImage.getSize() / 1024.0); // getSize()는 MB 단위
       log.info("file-type: {}", uploadedImage.getContentType());
 
-
       // 세션에서 자신의 account 가져오기
       HttpSession session = request.getSession();
       session.getAttribute("login");
@@ -217,6 +200,10 @@ public class HomeController {
 
       return "redirect:/home/board/" + category;
    }
+
+
+
+
 
 
 }

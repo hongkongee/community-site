@@ -171,14 +171,21 @@ public class BoardService {
 
    }*/
 
-   public int getCount(Search page) {
-      return boardMapper.getCount(page);
-   }
+    public int getCount(Search page, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+        log.info("dto: {}", loginDto);
+
+        String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
+        int count = boardMapper.getCount(page, currentLoginMemberAccount);
+        log.info("count: "+ count);
+        return count;
+    }
 
    public int getCountCategory(String category, Search page) {
       return boardMapper.getCountCategory(category, page);
    }
-
+  
    // 나의 게시글 불러오기
    public List<BoardMyListResponseDTO> getMyList(Search page, HttpServletRequest request) {
 
@@ -192,6 +199,14 @@ public class BoardService {
       List<Board> boardList = boardMapper.findMine(page, currentLoginMemberAccount);
       for (Board board : boardList) {
          BoardMyListResponseDTO dto = new BoardMyListResponseDTO(board);
+
+         // 하트 체크 여부 불러오기
+         int i = checkLike(request, dto.getBno());
+         if (i > 0) {
+            dto.setIsHeart(1);
+         } else {
+            dto.setIsHeart(0);
+         }
          myList.add(dto);
       }
       return myList;
@@ -242,14 +257,14 @@ public class BoardService {
       }
 
 
-      // 자기소개 삽입 or 수정
-      public void modifyMyIntro (String myAccount, String introduction){
-         boardMapper.modifyIntro(myAccount, introduction);
-      }
 
-      public void delete ( int bno){
-         boardMapper.delete(bno);
-      }
+   // 자기소개 삽입 or 수정
+   public void modifyMyIntro(String myAccount, String introduction) {
+      boardMapper.modifyIntro(myAccount, introduction);
+   }
 
+    public void delete(int bno) {
+        boardMapper.delete(bno);
+    }
 
 }

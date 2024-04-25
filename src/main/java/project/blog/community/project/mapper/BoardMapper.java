@@ -30,7 +30,10 @@ public interface BoardMapper {
     void updateLikeCount(@Param("bno") int bno, @Param("number") int number);
 
     // 총 게시물의 개수 리턴
-    int getCount(Search page);
+    int getCount(Search page, String currentLoginMemberAccount);
+
+    // 카테고리별 게시물 개수 리턴
+    int getCountCategory(String category, Search page);
 
     // 카테고리별 게시물 개수 리턴
     int getCountCategory(String category, Search page);

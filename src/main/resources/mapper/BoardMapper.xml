@@ -88,7 +88,27 @@
     <select id="getCount" resultType="int">
         SELECT COUNT(*)
         FROM tbl_board
-        <include refid="search" />
+        WHERE writer=#{accountNumber}
+    </select>
+
+    <select id="getCountCategory" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_board
+        <if test="category == 'normal'">
+            WHERE category = 'NORMAL'
+        </if>
+        <if test="category == 'game'">
+            WHERE category = 'GAME'
+        </if>
+        <if test="category == 'market'">
+            WHERE category = 'MARKET'
+        </if>
+        <if test="category == 'movie'">
+            WHERE category = 'MOVIE'
+        </if>
+        <if test="category == 'trip'">
+            WHERE category = 'TRIP'
+        </if>
     </select>
 
     <select id="getCountCategory" resultType="int">
@@ -148,6 +168,11 @@
 <!--        INSERT INTO image(origin_image_name, new_image_name, image_path)-->
 <!--        VALUES(#{originImageName}, #{newImageName}, #{imagePath})-->
 <!--    </insert>-->
+
+    <delete id="delete">
+        DELETE FROM tbl_board
+        WHERE bno=#{bno}
+    </delete>
 
 
 

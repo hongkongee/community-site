@@ -55,7 +55,6 @@
                 <li><a href="#">Market</a></li>
             </c:if>
 
-
             <c:if test="${sessionScope.login != null}">
                 <li><a href="/users/sign-out">Sign Out</a></li>
             </c:if>

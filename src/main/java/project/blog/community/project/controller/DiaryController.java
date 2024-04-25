@@ -4,14 +4,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import project.blog.community.project.common.PageMaker;
 import project.blog.community.project.common.Search;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
@@ -86,10 +85,11 @@ public class DiaryController {
 
     // 글쓰기 제출 페이지 (DTO 안쓰고)
     @PostMapping("/newposting")
-    public String writeSubmit(@RequestParam("category") String category,
-                              @RequestParam("title") String title,
+    public String writeSubmit(@RequestParam @Param("category") String category,
+                              @RequestParam ("title") String title,
                               @RequestParam("content") String content,
-                              @RequestParam("file") MultipartFile uploadedImage,
+                              @RequestParam("file")
+                              MultipartFile uploadedImage,
                               HttpServletRequest request) {
 
         log.info("/mypage/newposting: POST, {}, {}, {}", category, title, content);

@@ -88,7 +88,12 @@
     <select id="getCount" resultType="int">
         SELECT COUNT(*)
         FROM tbl_board
-        <include refid="search" />
+        WHERE writer = #{account}
+    </select>
+    
+    <select id="getCountAll" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_board
     </select>
 
     <select id="getCountCategory" resultType="int">
@@ -151,8 +156,9 @@
 
     <delete id="delete">
         DELETE FROM tbl_board
-        WHERE board_no=#{bno}
+        WHERE bno=#{bno}
     </delete>
+
 
 
 

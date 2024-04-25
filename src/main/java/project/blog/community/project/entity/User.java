@@ -71,19 +71,21 @@ public class User {
    //로그인 방법
    private LoginMethod loginMethod;
 
+   // 회원 평점 (중고 마켓에서 받은 누적 좋아요 수)
+   private int rate;
+
+
    public enum LoginMethod {
 
       COMMON, KAKAO, NAVER, GOOGLE
 
    }
 
-   private int rate;
 
    // 자기소개
    private String introduction;
 
    private int point;
-
 
 
 

@@ -2,7 +2,6 @@ package project.blog.community.project.service;
 
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -106,7 +105,6 @@ public class BoardService {
 
 
    // 게시물의 좋아요 수 바꾸기
-   // 게시물의 좋아요 수 바꾸기
    public int changeLike(LikeRequestDTO dto, HttpServletRequest request) {
       int bno = dto.getBno();
       int number = dto.getNumber();
@@ -147,6 +145,7 @@ public class BoardService {
       }
    }
 
+
    // 좋아요를 이전에 눌렀는지 확인 (from tbl_like)
    public int checkLike(HttpServletRequest request, int bno) {
       HttpSession session = request.getSession();
@@ -172,8 +171,20 @@ public class BoardService {
 
    }*/
 
-   public int getCount(Search page) {
-      return boardMapper.getCount(page);
+
+   public int getCountAll(Search page) {
+      return boardMapper.getCountAll(page);
+   }
+
+   public int getCount(Search page, HttpServletRequest request) {
+      HttpSession session = request.getSession();
+      LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+      log.info("dto: {}", loginDto);
+
+      String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
+      int count = boardMapper.getCount(page, currentLoginMemberAccount);
+      log.info("count: " + count);
+      return count;
    }
 
    public int getCountCategory(String category, Search page) {
@@ -193,6 +204,14 @@ public class BoardService {
       List<Board> boardList = boardMapper.findMine(page, currentLoginMemberAccount);
       for (Board board : boardList) {
          BoardMyListResponseDTO dto = new BoardMyListResponseDTO(board);
+
+         // 하트 체크 여부 불러오기
+         int i = checkLike(request, dto.getBno());
+         if (i > 0) {
+            dto.setIsHeart(1);
+         } else {
+            dto.setIsHeart(0);
+         }
          myList.add(dto);
       }
       return myList;
@@ -215,7 +234,6 @@ public class BoardService {
    }
 
 
-
    // 게시글 업로드
    public void saveBoard(String category, String title, String content, String filePath, String writer) {
 
@@ -231,6 +249,7 @@ public class BoardService {
 
       boardMapper.save(uploadedBoard);
    }
+
 
    // 문자열을 Category 타입으로 바꾸는 메서드
    private Category stringToCategory(String str) {
@@ -251,8 +270,8 @@ public class BoardService {
       boardMapper.modifyIntro(myAccount, introduction);
    }
 
-    public void delete(int bno) {
-        boardMapper.delete(bno);
-    }
+   public void delete(int bno) {
+      boardMapper.delete(bno);
+   }
 
 }

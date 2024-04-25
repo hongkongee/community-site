@@ -45,6 +45,7 @@ public class HomeController {
    @Value("${file.upload.root-path}")
    private String rootPath;
 
+   // 메인페이지
    // 홈페이지 - 메인페이지 view
    @GetMapping("/main")
    public String mainPage(Model model) {
@@ -60,6 +61,7 @@ public class HomeController {
       // /WEB-INF/views/~~~~~.jsp
       return "home/main";
    }
+
 
    // 메인페이지 인기 게시글 정렬 선택
    @GetMapping("/main/recent")
@@ -89,7 +91,7 @@ public class HomeController {
 
       // 페이징 버튼 알고리즘 적용 -> 사용자가 요청한 페이지 정보, 총 게시물 개수를 전달.
       // 페이징 알고리즘 자동 호출.
-      PageMaker pageMaker = new PageMaker(page, boardService.getCount(page));
+      PageMaker pageMaker = new PageMaker(page, boardService.getCountAll(page));
 
       model.addAttribute("bList", dtoList);
       model.addAttribute("maker", pageMaker);
@@ -111,13 +113,12 @@ public class HomeController {
       page.setAmount(20);
 
       List<BoardListResponseDTO> categoryList = boardService.getCategoryList(category, page);
-
       PageMaker pageMaker = new PageMaker(page, boardService.getCountCategory(category, page));
 
 
       // 카테고리에 따른 게시판 이름 작성
       String listName = boardService.stringToCategoryDescription(category);
-      
+
       model.addAttribute("bList", categoryList);
       model.addAttribute("maker", pageMaker);
       model.addAttribute("li", listName);
@@ -206,8 +207,6 @@ public class HomeController {
       log.info("file-size: {}KB", uploadedImage.getSize() / 1024.0); // getSize()는 MB 단위
       log.info("file-type: {}", uploadedImage.getContentType());
 
-
-
       // 세션에서 자신의 account 가져오기
       HttpSession session = request.getSession();
       session.getAttribute("login");
@@ -229,10 +228,6 @@ public class HomeController {
 
       return "redirect:/home/board/" + category;
    }
-
-
-
-
 
 
 }

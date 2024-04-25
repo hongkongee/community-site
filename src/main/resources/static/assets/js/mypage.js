@@ -150,4 +150,8 @@ $postContainer.addEventListener('click', e => {
 
 });
 
+$postContain.onclick = (e) => {
+  if(!e.target.matches('i.fa-heart')) return;
+  clickHeartBtn(e);
+}
 

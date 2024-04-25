@@ -36,7 +36,7 @@ public class BoardService {
    // 게시판 목록을 조회 (all page)
    public List<BoardListResponseDTO> getList(Search page) {
       List<BoardListResponseDTO> dtoList = new ArrayList<>();
-      List<Board> boardList = boardMapper.findAll(page);
+      List<Board> boardList = boardMapper.findAll("recent", page);
 
       for (Board board : boardList) {
          String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
@@ -105,7 +105,6 @@ public class BoardService {
 
 
    // 게시물의 좋아요 수 바꾸기
-   // 게시물의 좋아요 수 바꾸기
    public int changeLike(LikeRequestDTO dto, HttpServletRequest request) {
       int bno = dto.getBno();
       int number = dto.getNumber();
@@ -146,6 +145,7 @@ public class BoardService {
       }
    }
 
+
    // 좋아요를 이전에 눌렀는지 확인 (from tbl_like)
    public int checkLike(HttpServletRequest request, int bno) {
       HttpSession session = request.getSession();
@@ -158,7 +158,7 @@ public class BoardService {
    }
 
 
-   public List<BoardMyListResponseDTO> getMyList(HttpServletRequest request, Search page) {
+/*   public List<BoardMyListResponseDTO> getMyList(HttpServletRequest request, Search page) {
       List<BoardMyListResponseDTO> myList = new ArrayList<>();
       List<Board> boardList = boardMapper.findAll(page);
 
@@ -169,7 +169,7 @@ public class BoardService {
 
       return myList;
 
-   }
+   }*/
 
     public int getCount(Search page, HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -185,7 +185,7 @@ public class BoardService {
    public int getCountCategory(String category, Search page) {
       return boardMapper.getCountCategory(category, page);
    }
-
+  
    // 나의 게시글 불러오기
    public List<BoardMyListResponseDTO> getMyList(Search page, HttpServletRequest request) {
 
@@ -229,10 +229,8 @@ public class BoardService {
    }
 
 
-
    // 게시글 업로드
    public void saveBoard(String category, String title, String content, String filePath, String writer) {
-
 
       Board uploadedBoard = Board.builder()
             .category(stringToCategory(category))
@@ -241,23 +239,23 @@ public class BoardService {
             .writer(writer)
             .postImg(filePath)
             .build();
-
-
-      boardMapper.save(uploadedBoard);
    }
 
-   // 문자열을 Category 타입으로 바꾸는 메서드
-   private Category stringToCategory(String str) {
-      String upperCategory = str.toUpperCase();
-      return Category.valueOf(upperCategory);
 
-   }
 
-   public String stringToCategoryDescription(String str) { // str = "movie"
-      String upperCategory = str.toUpperCase(); // upperCategory = "MOVIE"
-      Category category = Category.valueOf(upperCategory); // category = Category.MOVIE
-      return category.getDescription(); // return value = "영화글"
-   }
+      // 문자열을 Category 타입으로 바꾸는 메서드
+      private Category stringToCategory (String str){
+         String upperCategory = str.toUpperCase();
+         return Category.valueOf(upperCategory);
+
+      }
+
+      public String stringToCategoryDescription (String str){ // str = "movie"
+         String upperCategory = str.toUpperCase(); // upperCategory = "MOVIE"
+         Category category = Category.valueOf(upperCategory); // category = Category.MOVIE
+         return category.getDescription(); // return value = "영화글"
+      }
+
 
 
    // 자기소개 삽입 or 수정

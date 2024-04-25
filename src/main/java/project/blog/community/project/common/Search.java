@@ -1,9 +1,6 @@
 package project.blog.community.project.common;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Setter @Getter @ToString
 //@EqualsAndHashCode

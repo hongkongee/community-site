@@ -18,24 +18,35 @@
   <link rel="stylesheet" href="/assets/css/market.css">
   <link rel="stylesheet" href="/assets/css/snb.css">
 
+  <!-- Bootstrap CSS 라이브러리를 포함 -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- jQuery 라이브러리를 포함 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- Popper.js 라이브러리를 포함 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+  <!-- Bootstrap JavaScript 라이브러리를 포함 -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
   <style>
     #map-container {
-        text-align: center;
+      text-align: center;
     }
 
     #address-container {
-        margin-top: 20px;
+      margin-top: 20px;
     }
 
     #googleMap {
-        display: inline-block;
-        /* inline-block으로 변경 */
-        width: 500px;
-        height: 500px;
+      display: inline-block;
+      /* inline-block으로 변경 */
+      width: 500px;
+      height: 500px;
     }
-</style>
-
-
+  </style>
 
 
 </head>
@@ -44,6 +55,8 @@
 
   <%@ include file="../include/snb.jsp" %>
 
+  <%@ include file="../include/headcss.jsp"%>
+  <%@ include file="../include/header.jsp"%>
 
   <!-- 가운데 Content -->
   <div class="wrapper">
@@ -52,7 +65,7 @@
     <div class="content-box">
 
 
-      <%@ include file="../market/subMarketUserHeader.jsp" %>
+
       <!-- Head 내용 -->
 
 
@@ -61,17 +74,15 @@
 
 
       <div class="title">
-
-
         <div class="titleContentBox">
-          <span>#작성자 : </span><span id="textWriter">${b.textWriter}</span>
-          <span>#글번호 : </span><span id="boardNo">${b.boardNo}</span>
-          <span>#신용도 : </span><span id="rate">5.0</span>
-          <span>#작성시간 : </span><span id="updateDate">${b.updateDate}</span><br>
-          <span>#제목 : </span><span id="textTitle">${b.textTitle}</span>
-          <span>#가격 : </span><span id="price">${b.price}</span><span>원</span>
-          <span>#판매자 선호 거래지역 : </span><span id="address">${b.address}</span>
-          <span>#판매상태 : </span><span id="selectedCategory">${b.category}</span>
+          <span>#작성자 : </span><span id="textWriter" name="textWriter">${b.textWriter}</span>
+          <span>#글번호 : </span><span id="boardNo" name="boardNo">${b.boardNo}</span>
+          <span>#판매자의 좋아요 받은 수 : </span><span id="rate" name="rate">${rate}</span>
+          <span>#작성시간 : </span><span id="updateDate" name="updateDate">${b.updateDate}</span><br>
+          <span>#제목 : </span><span id="textTitle" name="textTitle">${b.textTitle}</span>
+          <span>#가격 : </span><span id="price" name="price">${b.price}</span><span>원</span>
+          <span>#판매자 선호 거래지역 : </span><span id="address" name="address">${b.address}</span>
+          <span>#판매상태 : </span><span id="selectedCategory" name="category">${b.category}</span>
         </div>
       </div>
 
@@ -81,16 +92,15 @@
       <!-- Content 내용 -->
       <div class="content-group">
         <div class="Content1">
-
           <button class="content-list"><a href="/market/list">목록</a></button></button>
           <button class="content-Write"><a href="/market/write">글쓰기</a></button>
           <button id="content-Del">삭제</button>
           <button id="modifyBtn" class="content-Rev" type="button" data-bs-toggle="modal"
-            data-bs-target="#editModal">간단수정</button>
-
-
-
-
+            data-bs-target="#editModal">수정</button>
+          <!-- 좋아요 버튼 -->
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            좋아요
+          </button>
         </div>
         <br>
         <div class="ContentBox">
@@ -100,11 +110,15 @@
         <!-- 지도 -->
         <div id="map-container">
           <div id="googleMap"></div>
-      </div>
+        </div>
 
         <!-- 광고 영역 -->
         <%@ include file="../market/subMarketAD.jsp" %>
       </div>
+
+
+
+
 
 
       <!-- 수정 내용 입력 모달 -->
@@ -124,18 +138,22 @@
                   <label for="editedTitle">수정할 제목</label>
                   <input type="text" class="form-control" id="editedTitle" style="width: 100%;"
                     placeholder="수정할 제목 입력하세요">
+
                   <label for="editedContent">수정할 내용</label>
-                  <textarea class="form-control-lg" id="editedContent" rows="20" cols="50"
+                  <textarea class="form-control-lg" id="editedContent" rows="50" cols="100"
                     style="width: 100%;"></textarea>
-                  <select name="category" id="editedCategory">
+
+                  <select id="editedCategory">
                     <option value="sale">판매중</option>
                     <option value="sold">판매완료</option>
                   </select>
 
                   <br>
-                  <label for="categorySelect">수정할 가격</label>
-                  <input type="int" class="form-control" id="categorySelect" style="width: 100%;">
+                  <label for="editedPrice">수정할 가격</label>
+                  <input type="int" class="form-control" id="editedPrice" style="width: 100%;">
 
+                  <label for="address">거래장소</label>
+                  <input type="text" class="form-control" id="address" style="width: 100%;">
 
                 </div>
               </form>
@@ -144,7 +162,7 @@
 
             <div class="modal-footer">
               <!-- 닫기 버튼 -->
-              <button type="button" class="btn btn-secondary" id="closeBtn" data-dismiss="modal">닫기</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
               <!-- 수정 완료 버튼 -->
               <button type="button" class="btn btn-primary" id="saveEdit">수정 완료</button>
             </div>
@@ -154,241 +172,116 @@
 
 
 
-    </div>
 
+
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">좋은 이유를 눌러주세요♡</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+
+              <select class="form-select" id="why" aria-label="Default select example" name="chooseReason">
+                <option selected>이유를 선택해주세요</option>
+                <option value="1 ">판매자가 친절해서</option>
+                <option value="2">저렴한 가격</option>
+                <option value="3">가까운 거래장소</option>
+              </select>
+
+              <label for="report-reason">기타 사유가 있으면 말씀해주세요</label>
+              <textarea rows="3" id="reportText" name="message" class="form-control"
+                placeholder="좋아요 이유를 입력해주세요"></textarea>
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+              <button type="button" class="btn-primary" id="confirmBtn">확인</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
   </div>
 
 
 
 
-
   <script>
-    const URL = '/market/detail/${b.boardNo}';
-    const bno = '${b.boardNo}';
-    console.log('bno: ', bno);
-
-    // 수정 버튼 이벤트 발생
-    const $modifyBtn = document.getElementById('modifyBtn');
-    const $saveBtn = document.getElementById('saveEdit');
-
-    //수정요소
-    const $boardNo = document.getElementById('boardNo'); //class . 찍기
-    const $editedTitle = document.getElementById('editedTitle');
-    const $editedContent = document.getElementById('editedContent');
-
-    //수정 카테고리
-    const $categorySelect = document.getElementById('categorySelect');
-    const $selectedCategory = document.getElementById('selectedCategory');
-
-    //가격
-    const $editedPrice = document.getElementById('editedPrice');
-
-    //닫기 버튼
-    const $closeBtn = document.getElementById('closeBtn');
-    const $modal = document.getElementById('editModal');
-
-    //삭제 버튼
-    const $deleteBtn = document.getElementById('content-Del');
-
-
-
-    $modifyBtn.onclick = e => {
-      console.log('수정 버튼 이벤트 발생!');
-      $editedTitle.value = document.getElementById('textTitle').textContent;
-      $editedContent.value = document.getElementById('textContent').textContent;
-      $editedPrice.value = document.getElementById('price').textContent;
-      $editedCategory.value = document.getElementById('editedCategory').textContent;
-
-      console.log($editedTitle.value);
-      console.log($editedContent.value);
-      makeModifyClickHandler();
-      makeCloseClickHandler();
-    }
-
-
-    if ($categorySelect) {
-      $categorySelect.addEventListener('change', function () {
-        $selectedCategory.textContent = $categorySelect.value === 'sale' ? '판매중' : '판매완료';
-      });
-    }
-
-
-
-
-    function makeCloseClickHandler() {
-      $closeBtn.onclick = e => {
-        console.log('닫기 버튼 클릭!');
-        $modal.style.display = "none"; // 모달을 숨김
-        location.reload(); // 화면 새로고침
-      };
-    }
-
-    function makeModifyClickHandler() {
-      if ($saveBtn) {
-        $saveBtn.onclick = e => {
-          if ($editedTitle.value === '' && $editedContent.value === '') {
-            alert('내용은 필수입니다.');
-            return;
-          }
-
-
-          const payload = {
-            boardNo: bno,
-            title: $editedTitle.value,
-            content: $editedContent.value,
-            category: category.value,
-            price: $editedPrice.value
-
-          };
-
-          const requestInfo = {
-            method: 'PUT',
-            headers: {
-              'content-type': 'application/json; charset=utf-8'
-            },
-            body: JSON.stringify(payload)
-          };
-
-          fetch(URL, requestInfo)
-
-            .then(res => {
-              console.log(res.status);
-              if (res.status === 200) {
-                alert('내용 정상 변경');
-                return res.text();
-              } else {
-                alert('입력값에 문제가 있습니다.');
-                return res.text();
-              }
-            })
-
-            .then(data => {
-              console.log('응답 성공!', data);
-              $editedTitle.value = '';
-              $editedContent.value = '';
-              $category.value = '';
-              $price.value = '';
-            });
-
-        };
-      }
-    }
-
-    // 삭제버튼
-    $deleteBtn.onclick = e => {
-      console.log('삭제 버튼 클릭!');
-
-      if (confirm('정말로 삭제하시겠습니까?')) {
-        deleteBoard();
-        alert('삭제 되었습니다');
-        window.location.href = '/market/list';
-      }
-    };
-
-    function deleteBoard() {
-      const requestInfo = {
-
-        method: 'DELETE',
-        headers: {
-          'content-type': 'application/json; charset=utf-8'
-        },
-      };
-
-      fetch(URL, requestInfo)
-        .then(res => {
-          console.log(res.status);
-          if (res.status === 200) {
-            alert('게시물이 성공적으로 삭제되었습니다.');
-            // 삭제 후 목록 페이지로 이동하거나, 홈 페이지로 리다이렉트할 수 있습니다.
-            window.location.href = '/market/list'; // 목록 페이지로 이동
-          } else {
-            alert('게시물 삭제에 실패했습니다.');
-          }
-        });
-    }
-
     let map;
     let center;
+    const loginData = '${login}';
+    console.log('loginData: ', loginData);
 
 
     function myMap() { //Google Maps 초기화
-        var mapOptions = { //지도 초기화 정보
-            center: new google.maps.LatLng(37.552550, 126.937703),
-            zoom: 18
-        };
+      var mapOptions = { //지도 초기화 정보
+        center: new google.maps.LatLng(37.552550, 126.937703),
+        zoom: 18
+      };
 
-        map = new google.maps.Map(document.getElementById("googleMap"), mapOptions); //mapOptions 사용자 설정 위치 
+      map = new google.maps.Map(document.getElementById("googleMap"), mapOptions); //mapOptions 사용자 설정 위치 
     }
 
     function searchAddress() { //입력한 주소를 받아 해당 주소의 위도와 경도를 검색
-        var geocoder = new google.maps.Geocoder();//주소 위도/경도 변환
-        var address = '${b.address}';
+      var geocoder = new google.maps.Geocoder(); //주소 위도/경도 변환
+      var address = '${b.address}';
 
-        geocoder.geocode({ 'address': address }, function(results, status) { //변환할 주소, 콜백함수
-            if (status === 'OK') {
-                map.setCenter(results[0].geometry.location);
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
-            } else {
-                alert('주소를 찾을 수 없습니다. 다른 주소를 입력해주세요.');
-            }
-        });
+      geocoder.geocode({
+        'address': address
+      }, function (results, status) { //변환할 주소, 콜백함수
+        if (status === 'OK') {
+          map.setCenter(results[0].geometry.location);
+          var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+          });
+        } else {
+          alert('주소를 찾을 수 없습니다. 다른 주소를 입력해주세요.');
+        }
+      });
     }
 
-    window.onload = function() {
+    window.onload = function () { //다 되고 호출
       searchAddress();
     }
 
 
+    document.getElementById('confirmBtn').onclick = e => {
+      if (!loginData) {
+        alert('로그인이 필요합니다.');
+        return;
+      }
 
-
-
-
-
-
-
-    /* 친구 정보 
-    const $friends = document.querySelector('.friends');
-    const $userInformation = document.getElementById('user-information');
-    const $xBtn = document.getElementById('x-btn');
-
-    $friends.onclick = e => {
-      if (!e.target.matches('.friend')) return;
-      e.preventDefault();
-
-      // #user-information 의 p태그가 누른 대상의 닉네임이 되어야 한다.
-      $userInformation.style.display = 'block';
-
-    };
-
-    $xBtn.onclick = e => {
-      console.log('x버튼 클릭');
-      $userInformation.style.display = 'none';
+      likeBtnClickHandler(e);
     }
-
-
-    const $del = document.querySelector('.content-Del');
-    $del.onclick = e => {
-      if (!e.target.matches('.del')) return;
-      e.preventDefault();
-
-      $userInformation.style.display = 'block';
-    };
-
-    $xBtn.onclick = e => {
-      console.log('x버튼 클릭');
-      $userInformation.style.display = 'none';
-
-    }
-
-    */
   </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOCNKI6eODqFYglsYcSTmd0GDwNWUz8FU&callback=myMap">
-</script>
-  
+
+  <!-- 구글맵 API 호출 -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOCNKI6eODqFYglsYcSTmd0GDwNWUz8FU&callback=myMap">
+  </script>
+
+  <!-- 좋아요 호출 -->
+  <script src="/assets/js/MarketRate.js"></script>
+
+  <!-- 수정하기 호출 -->
+  <script src="/assets/js/MarketModify.js"></script>
+
+
+
 
 
 </body>

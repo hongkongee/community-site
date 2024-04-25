@@ -14,7 +14,7 @@ public interface BoardMapper {
     void save(Board board);
 
     // 목록 조회 (sort: 인기순, 최신순)
-    List<Board> findAll(@Param("page") Search page);
+    List<Board> findAll(@Param("sort") String sort, @Param("page") Search page);
 
     // 특정 카테고리의 게시글 조회
     List<Board> findCategory(@Param("category") String category, @Param("page") Search page);
@@ -31,6 +31,9 @@ public interface BoardMapper {
 
     // 총 게시물의 개수 리턴
     int getCount(Search page, String currentLoginMemberAccount);
+
+    // 카테고리별 게시물 개수 리턴
+    int getCountCategory(String category, Search page);
 
     // 카테고리별 게시물 개수 리턴
     int getCountCategory(String category, Search page);
@@ -54,6 +57,5 @@ public interface BoardMapper {
 
     // 게시물 삭제
     void delete(int bno);
-
 
 }

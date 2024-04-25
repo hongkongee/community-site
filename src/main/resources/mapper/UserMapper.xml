@@ -16,6 +16,7 @@
         WHERE account_number = #{accountNumber}
     </select>
 
+
     <select id="isDuplicate" resultType="boolean">
         SELECT COUNT(*)
         FROM tbl_user
@@ -51,6 +52,12 @@
         FROM tbl_follow
         WHERE following = #{account}
         LIMIT 0, #{number}
+    </select>
+
+    <select id="findUserByFollowing" resultType="java.lang.String">
+        SELECT following
+        FROM tbl_follow
+        WHERE follower = #{account}
     </select>
 
     <insert id="addFollower">

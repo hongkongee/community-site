@@ -164,7 +164,7 @@
                         <a id="kakao-login" href="/kakao/login">
                             <img src="/assets/img/kakaoLogin.png" alt="카카오로그인이미지">
                         </a>
-                        <a id="naver-login" href="#">
+                        <a id="naver-login" href="/naver/login">
                             <img src="/assets/img/naverLogin.png" alt="네이버로그인이미지">
                         </a>
                         <a id="google-login" href="#">

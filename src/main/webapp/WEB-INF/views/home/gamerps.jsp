@@ -73,7 +73,7 @@
         <div id="win">이겼습니다! 원금의 2배 획득</div>
         <div id="draw">무승부입니다.</div>
         <div id="lose">패배입니다...</div>
-        <a class="btn btn-primary" href="/home/rps" role="button">다시 하기</a>
+        <a class="btn btn-primary" href="/game/rps" role="button">다시 하기</a>
       </div>
 
       

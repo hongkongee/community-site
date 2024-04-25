@@ -45,75 +45,17 @@ a {
 
 
 
-/* 왼쪽 사이드바 */
-
-body {
-  font-weight: 100;
-  font-size: 36px;
-  background: #7AA2E3;
-  font-family: "Dongle", sans-serif;
-  /* 폰트 통일 */
-}
-
-aside .left-snb {
-  width: 20vw;
-  background: #7AA2E3;
-  color: #666;
-
-  padding: 30px 30px;
-  height: 200vh;
-  /* 상하방향으로 화면 가득히 */
-
-  position: fixed;
-  top: 0;
-
-
-}
-
-aside .left-snb ul>li {
-  margin-top: 15px;
-  color: #000;
-  line-height: 160%;
-}
-
-aside .left-snb ul li a:hover {
-  color: #97E7E1;
-  font-weight: 600;
-}
-
-aside .left-snb ul li.active {
-  /* 현재 페이지가 뭐냐에 따라 active class 부여*/
-  font-weight: 600;
-}
-
-aside .left-snb ul li>ul {
-  color: #000;
-  font-size: 28px;
-  line-height: 160%;
-}
-
-aside .left-snb ul li>ul>li::before {
-  content: '\f061';
-  color: #000;
-  font-family: "Font Awesome 5 Free";
-  /*폰트어썸 fas, far 글꼴 연결*/
-  font-weight: 600;
-  /*폰트어썸 굵기 Solid Style(fas) 600필수*/
-  margin-right: 15px;
-}
-
 
 
 
 
 /*center 추가 */
 .wrapper {
-  position: relative;
   text-align: center;
 
-  height: 100vh;
-  margin: auto;
   width: 60vw;
+  height: 300vh;
+  margin: auto;
   background: #7AA2E3;
 
 }
@@ -122,12 +64,11 @@ aside .left-snb ul li>ul>li::before {
 /*테두리 전체*/
 .content-box {
   width: 60vw;
-  height: 100vw;
+  height: 100%;
   position: relative;
   border-radius: 60px;
   margin: auto;
   background: #F8F6E3;
-  border: 3px solid #000;
 
 
 }
@@ -401,140 +342,3 @@ overflow: scroll;
 
 
 
-
-
-
-
-
-/* 오른쪽 사이드바 */
-
-aside .right-snb {
-  width: 20vw;
-  background: #7AA2E3;
-  float: right;
-  height: 220vh;
-  box-sizing: border-box;
-
-
-}
-
-aside .right-snb .point {
-  margin: 20px 20px;
-}
-
-aside .right-snb .point p::before {
-  content: '\f51e';
-  font-family: "Font Awesome 5 Free";
-  /*폰트어썸 fas, far 글꼴 연결*/
-  font-weight: 600;
-  /*폰트어썸 굵기 Solid Style(fas) 600필수*/
-  margin-right: 15px;
-}
-
-
-
-
-
-
-
-aside .right-snb .weather {
-  background: #F8F6E3;
-  width: 90%;
-  height: 300px;
-  margin: 30px 5%;
-  border-radius: 10%;
-  padding: 20px;
-
-}
-
-aside .right-snb .friends {
-  position: relative;
-}
-
-aside .right-snb .friends .friends {
-  /* 친구 목록 */
-  font-size: 26px;
-  background: #F8F6E3;
-  padding: 30px;
-  margin: 0 5%;
-  border-radius: 10%;
-
-  position: relative;
-}
-
-
-
-aside .right-snb .friends .friends>ul>li {
-  color: #797474;
-  margin-top: 20px;
-}
-
-aside .right-snb .friends .friends>ul>li:hover {
-  display: block;
-}
-
-aside .right-snb .friends #user-information {
-  /* 친구 유저 정보 */
-  width: 50%;
-  height: 200px;
-  background: #cce37a;
-  border-radius: 20%;
-  margin: auto 5%;
-  position: absolute;
-  top: 50%;
-  right: 30%;
-  display: none;
-}
-
-aside .right-snb .friends #user-information p {
-  margin-top: 10%;
-  margin-left: 10%;
-}
-
-aside .right-snb .friends #user-information p>span#x-btn::after {
-  /* x자 아이콘 */
-  content: '\58';
-  font-family: "Font Awesome 5 Free";
-  /*폰트어썸 fas, far 글꼴 연결*/
-  font-weight: 600;
-  /*폰트어썸 굵기 Solid Style(fas) 600필수*/
-  margin-right: 15px;
-  margin-left: 15px;
-  float: right;
-  cursor: pointer;
-}
-
-aside .right-snb .friends #user-information>ul {
-  margin-top: 30%;
-  display: flex;
-  flex-flow: row wrap;
-  align-content: flex-end;
-}
-
-
-aside .right-snb .friends #user-information>ul>li#my-page::before {
-  content: '\f015';
-  font-family: "Font Awesome 5 Free";
-  font-weight: 600;
-  margin-right: 15px;
-  margin-left: 15px;
-  cursor: pointer;
-}
-
-aside .right-snb .friends #user-information>ul>li#chatting::before {
-  content: '\f075';
-  font-family: "Font Awesome 5 Free";
-  font-weight: 600;
-  margin-right: 15px;
-  margin-left: 15px;
-  cursor: pointer;
-}
-
-aside .right-snb .friends #user-information>ul>li#ban::before {
-  content: '\f05e';
-  font-family: "Font Awesome 5 Free";
-  font-weight: 600;
-  margin-right: 15px;
-  margin-left: 15px;
-  cursor: pointer;
-}

@@ -43,6 +43,8 @@ public class DiaryController {
       return "mypage/diary";
    }
 
+
+
     // 마이페이지->posting_cube로 이동
     @GetMapping("/posting_cube")
     public String posting_cube(Model model, @ModelAttribute("s") Search page, HttpServletRequest request) {
@@ -151,7 +153,8 @@ public class DiaryController {
     }
 
 
+
+
+
 }
-
-
 

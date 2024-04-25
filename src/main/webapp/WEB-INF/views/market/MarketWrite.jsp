@@ -19,7 +19,11 @@
 
   <%@ include file="../include/static-head.jsp" %>
   <link rel="stylesheet" href="/assets/css/market.css">
+  <link rel="stylesheet" href="/assets/css/allpage.css">
   <link rel="stylesheet" href="/assets/css/snb.css">
+
+
+
 
   <!-- 부트스트랩 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -36,6 +40,8 @@
 
   <%@ include file="../include/snb.jsp" %>
 
+  <%@ include file="../include/headcss.jsp"%>
+  <%@ include file="../include/header.jsp"%>
   <!-- 가운데 Content -->
   <div class="wrapper">
 
@@ -48,36 +54,48 @@
 
 
 
-      <div id="wrap" class="form-container">
-        <h1>게시판 글쓰기</h1>
-        <form action="/market/write" method="post">
+      <br>
+      <br>
+      <br>
+      <main id="wrap" class="form-container">
+        <div class=content-box>
+          <h1>게시판 글쓰기</h1>
+          <form action="/market/write" method="post">
 
-          <label for="textTitle">제목</label>
-          <input type="text" id="textTitle" name="textTitle" required>
+            <label for="textTitle">제목</label>
+            <input type="text" id="textTitle" name="textTitle" required>
 
-          
-          <select name="category" id="categorySelect" style="display:none;">
-            <option value="sale">판매중</option>
-          </select>
 
-          <label for="price">가격</label>
-          <input type="text" id="price" name="price" required>
+            <select name="category" id="categorySelect" style="display:none;">
+              <option value="sale">판매중</option>
+            </select>
 
-          <br>
-          <label for="textContent">내용</label>
-          <textarea id="textContent" name="textContent" maxlength="200" required></textarea>
+            <label for="price">가격</label>
+            <input type="text" id="price" name="price" required>
 
-          <%@ include file="../market/subMap.jsp" %>
+            <br>
+            <label for="textContent">내용</label>
+            <textarea id="textContent" name="textContent" maxlength="200" required></textarea>
 
-          <div class="buttons">
-            <button class="list-btn" type="button" onclick="window.location.href='/market/list'">목록</button>
-            <button type="submit">글쓰기</button>
-          </div>
-        </form>
+            <div class="buttons">
+              <button class="list-btn" type="button" onclick="window.location.href='/market/list'">목록</button>
+              <button type="submit">글쓰기</button>
+              <br>
+            </div>
 
-        <!-- 광고 영역 -->
-        <%@ include file="../market/subMarketAD.jsp" %>
-      </div>
+            <%@ include file="../market/subMap.jsp" %>
+
+
+
+
+            <!-- 광고 영역 -->
+            <%@ include file="../market/subMarketAD.jsp" %>
+
+
+          </form>
+        </div>
+
+      </main>
 
     </div>
   </div>

@@ -24,6 +24,7 @@
         <typeAlias type="project.blog.community.project.entity.Favorite" alias="favorite"/>
         <typeAlias type="project.blog.community.project.entity.Follow" alias="follow"/>
         <typeAlias type="project.blog.community.project.entity.Like" alias="like"/>
+        <typeAlias type="project.blog.community.project.entity.Rate" alias="rate"/>
     </typeAliases>
 
     <!-- SQL을 적어놓은 XML 파일의 위치를 설정 -->

@@ -5,11 +5,13 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import project.blog.community.project.dto.request.MarketModifyRequestDTO;
+import project.blog.community.project.dto.request.MarketRateRequestDTO;
 import project.blog.community.project.dto.request.MarketWriteRequestDTO;
 import project.blog.community.project.dto.response.MarketDetailResponse;
 import project.blog.community.project.dto.response.MarketListResponseDTO;
 import project.blog.community.project.entity.Favorite;
 import project.blog.community.project.entity.Market;
+import project.blog.community.project.entity.Rate;
 import project.blog.community.project.mapper.MarketMapper;
 
 
@@ -90,6 +92,31 @@ public class MarketService {
         } else {
             mapper.removeFav(favorite);
         }
+
+    }
+
+    public void addRate(MarketRateRequestDTO dto) {
+        int boardNo = dto.getBoardNo();
+        String textWriter = dto.getTextWriter();
+        String message = dto.getMessage();
+        String chooseReason = dto.getChooseReason();
+
+        // User 테이블 rate 컬럼 1 추가
+        mapper.updateRateBoard(textWriter);
+
+        // Market Rate 테이블(중복 검사를 위한 테이블) row 추가
+        mapper.addRate(dto);
+
+    }
+
+    public int getRate(String textWriter) {
+        return mapper.checkRate(textWriter);
+    }
+
+    public boolean isDuplication(MarketRateRequestDTO dto) {
+        Rate rate = mapper.checkRateRelation(dto);
+        if (rate == null) return false; //중복X
+        else return true; //중복됨
 
     }
 }

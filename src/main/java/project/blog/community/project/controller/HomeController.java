@@ -45,6 +45,24 @@ public class HomeController {
    @Value("${file.upload.root-path}")
    private String rootPath;
 
+   // 메인페이지
+   // 홈페이지 - 메인페이지 view
+   @GetMapping("/main")
+   public String mainPage(Model model) {
+      log.info("/home/main: GET");
+
+      List<BoardListResponseDTO> dtoList = boardService.getHotList("popular");
+
+      model.addAttribute("bList", dtoList);
+      model.addAttribute("r", 0);
+
+
+
+      // /WEB-INF/views/~~~~~.jsp
+      return "home/main";
+   }
+
+
    // 메인페이지 인기 게시글 정렬 선택
    @GetMapping("/main/recent")
    public String sortBoard(Model model) {
@@ -73,7 +91,7 @@ public class HomeController {
 
       // 페이징 버튼 알고리즘 적용 -> 사용자가 요청한 페이지 정보, 총 게시물 개수를 전달.
       // 페이징 알고리즘 자동 호출.
-      PageMaker pageMaker = new PageMaker(page, boardService.getCount(page));
+      PageMaker pageMaker = new PageMaker(page, boardService.getCountAll(page));
 
       model.addAttribute("bList", dtoList);
       model.addAttribute("maker", pageMaker);
@@ -166,6 +184,16 @@ public class HomeController {
 
    }
 
+   // 글쓰기 페이지 view
+   @GetMapping("/write")
+   public String writeBoard(Model model) {
+      log.info("/home/write: GET");
+
+
+      // /WEB-INF/views/~~~~~.jsp
+      return "home/write";
+   }
+
    // 글쓰기 제출 페이지 (DTO 안쓰고)
    @PostMapping("/write")
    public String writeSubmit(@RequestParam("category") String category,
@@ -200,10 +228,6 @@ public class HomeController {
 
       return "redirect:/home/board/" + category;
    }
-
-
-
-
 
 
 }

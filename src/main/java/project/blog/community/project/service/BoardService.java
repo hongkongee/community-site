@@ -171,21 +171,26 @@ public class BoardService {
 
    }*/
 
-    public int getCount(Search page, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
-        log.info("dto: {}", loginDto);
 
-        String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
-        int count = boardMapper.getCount(page, currentLoginMemberAccount);
-        log.info("count: "+ count);
-        return count;
-    }
+   public int getCountAll(Search page) {
+      return boardMapper.getCountAll(page);
+   }
+
+   public int getCount(Search page, HttpServletRequest request) {
+      HttpSession session = request.getSession();
+      LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+      log.info("dto: {}", loginDto);
+
+      String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
+      int count = boardMapper.getCount(page, currentLoginMemberAccount);
+      log.info("count: " + count);
+      return count;
+   }
 
    public int getCountCategory(String category, Search page) {
       return boardMapper.getCountCategory(category, page);
    }
-  
+
    // 나의 게시글 불러오기
    public List<BoardMyListResponseDTO> getMyList(Search page, HttpServletRequest request) {
 
@@ -232,6 +237,7 @@ public class BoardService {
    // 게시글 업로드
    public void saveBoard(String category, String title, String content, String filePath, String writer) {
 
+
       Board uploadedBoard = Board.builder()
             .category(stringToCategory(category))
             .title(title)
@@ -239,23 +245,24 @@ public class BoardService {
             .writer(writer)
             .postImg(filePath)
             .build();
+
+
+      boardMapper.save(uploadedBoard);
    }
 
 
+   // 문자열을 Category 타입으로 바꾸는 메서드
+   private Category stringToCategory(String str) {
+      String upperCategory = str.toUpperCase();
+      return Category.valueOf(upperCategory);
 
-      // 문자열을 Category 타입으로 바꾸는 메서드
-      private Category stringToCategory (String str){
-         String upperCategory = str.toUpperCase();
-         return Category.valueOf(upperCategory);
+   }
 
-      }
-
-      public String stringToCategoryDescription (String str){ // str = "movie"
-         String upperCategory = str.toUpperCase(); // upperCategory = "MOVIE"
-         Category category = Category.valueOf(upperCategory); // category = Category.MOVIE
-         return category.getDescription(); // return value = "영화글"
-      }
-
+   public String stringToCategoryDescription(String str) { // str = "movie"
+      String upperCategory = str.toUpperCase(); // upperCategory = "MOVIE"
+      Category category = Category.valueOf(upperCategory); // category = Category.MOVIE
+      return category.getDescription(); // return value = "영화글"
+   }
 
 
    // 자기소개 삽입 or 수정
@@ -263,8 +270,8 @@ public class BoardService {
       boardMapper.modifyIntro(myAccount, introduction);
    }
 
-    public void delete(int bno) {
-        boardMapper.delete(bno);
-    }
+   public void delete(int bno) {
+      boardMapper.delete(bno);
+   }
 
 }

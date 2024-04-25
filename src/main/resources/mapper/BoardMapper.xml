@@ -88,27 +88,12 @@
     <select id="getCount" resultType="int">
         SELECT COUNT(*)
         FROM tbl_board
-        WHERE writer=#{accountNumber}
+        WHERE writer = #{account}
     </select>
-
-    <select id="getCountCategory" resultType="int">
+    
+    <select id="getCountAll" resultType="int">
         SELECT COUNT(*)
         FROM tbl_board
-        <if test="category == 'normal'">
-            WHERE category = 'NORMAL'
-        </if>
-        <if test="category == 'game'">
-            WHERE category = 'GAME'
-        </if>
-        <if test="category == 'market'">
-            WHERE category = 'MARKET'
-        </if>
-        <if test="category == 'movie'">
-            WHERE category = 'MOVIE'
-        </if>
-        <if test="category == 'trip'">
-            WHERE category = 'TRIP'
-        </if>
     </select>
 
     <select id="getCountCategory" resultType="int">

@@ -1,15 +1,20 @@
 dl{
 display: flex;
-justify-content: center;
+margin-bottom: 20px;
+margin-left: 20px;
 }
-.weather{
-  border: 1px solid black ;
-  width: 320px;
-  height: 200px;
+.icon{
+  margin-left: 40px;
 }
 .wea{
   margin:0px 5px;
+
+  
 }
-.icon{
-  margin-left: 100px;
+
+.button{
+  background: none;
+  border: 0; background-color: transparent; 
+  width: 100%;
 }
+

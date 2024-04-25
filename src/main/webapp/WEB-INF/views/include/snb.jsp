@@ -48,7 +48,22 @@
 
     <!-- 날씨 정보 : aside>nav.right-snb>.weather-->
     <div class="weather">
-        <h2>weather area</h2>
+        <img class="icon"/>
+
+        <dl>
+            <dt class="tem">기온 :</dt>
+            <dd class="wea temperature"></dd>
+        </dl>
+        <dl>
+            <dt class="pla">위치 :</dt>
+            <dd class="wea place"></dd>
+        </dl><dl>
+            <dt class="des">설명 :</dt>
+            <dd class="wea description"></dd>
+        
+        </dl><dl>
+            <button class="button" type="button"><i class="fa-solid fa-rotate-right"></i></button>
+        </dl>
     </div>
 
 
@@ -85,4 +100,4 @@
 
 <!-- 사이드바 자바스크립트 -->
 <script src="/assets/js/snb.js"></script>
-
+<script src="/assets/js/weather.js"></script>

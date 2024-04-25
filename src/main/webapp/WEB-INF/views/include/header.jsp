@@ -46,8 +46,9 @@
         <ul>
 
             <li><a href="/home/main">Home</a></li>
-            <c:if test="${sessionScope.login != null}"> <!-- 로그인 했으면 -->
-                <li><a href="/users/mypage">My Page</a></li>
+
+            <c:if test="${sessionScope.login != null}">
+                <li><a href="/mypage/home/${login.accountNumber}">My Page</a></li>
                 <li><a href="/mypage/posting_cube">My Posts</a></li>
                 <li><a href="/mypage/diary">My Diary</a></li>
                 <li><a href="#">My Code</a></li>

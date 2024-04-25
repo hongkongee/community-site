@@ -50,7 +50,7 @@
             <!-- 누르면 작성자가 쓴 글 목록, 작성자의 페이지, 1:1채팅, 신고하기, 차단하기 등 -->
             <h2 id="writer"><a href="#" id="writer-a">${b.writer}</a></h2>
 
-            <div class="writer-info">
+            <div class="writer-info" data-writeraccount="${b.writerAccount}">
               <ul>
                 <li><a href="#">게시글 보기</a></li>
                 <li><a href="#">1:1 채팅</a></li>
@@ -106,11 +106,14 @@
 
         <!-- 화면 이동에 관련한 버튼 -->
         <div class="buttons">
-          <button class="list-btn" type="button" onclick="location.href='/home/all'">
-            목록
-          </button>
-          <button id="modify">수정</button>
-          <button id="delete">삭제</button>
+
+            <button class="list-btn" type="button"
+                    onclick="location.href='/home/board/all'">
+                목록
+            </button>
+            <button id="modify">수정</button>
+            <button id="delete">삭제</button>
+
         </div>
 
       </div>

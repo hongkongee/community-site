@@ -56,7 +56,6 @@ public class HomeController {
       model.addAttribute("r", 0);
 
 
-
       // /WEB-INF/views/~~~~~.jsp
       return "home/main";
    }
@@ -112,23 +111,17 @@ public class HomeController {
 
       List<BoardListResponseDTO> categoryList = boardService.getCategoryList(category, page);
 
-    // 홈페이지 - 게시글 상세 페이지 view
-    @GetMapping("/detail/{bno}")
-    public String detail(@PathVariable("bno") int bno,  HttpServletRequest request, Model model) {
-        log.info("/home/detail/{}: GET", bno);
-        BoardDetailResponseDTO dto = boardService.getDetail(bno);
       PageMaker pageMaker = new PageMaker(page, boardService.getCountCategory(category, page));
-
 
 
       // 카테고리에 따른 게시판 이름 작성
       String listName = boardService.stringToCategoryDescription(category);
-      
+
       model.addAttribute("bList", categoryList);
       model.addAttribute("maker", pageMaker);
       model.addAttribute("li", listName);
       model.addAttribute("c", category);
-      
+
       return "home/all";
 
    }
@@ -189,16 +182,6 @@ public class HomeController {
 
    }
 
-   // 글쓰기 페이지 view
-   @GetMapping("/write")
-   public String writeBoard(Model model) {
-      log.info("/home/write: GET");
-
-
-      // /WEB-INF/views/~~~~~.jsp
-      return "home/write";
-   }
-
    // 글쓰기 제출 페이지 (DTO 안쓰고)
    @PostMapping("/write")
    public String writeSubmit(@RequestParam("category") String category,
@@ -213,7 +196,6 @@ public class HomeController {
       log.info("file-type: {}", uploadedImage.getContentType());
 
 
-
       // 세션에서 자신의 account 가져오기
       HttpSession session = request.getSession();
       session.getAttribute("login");
@@ -222,18 +204,6 @@ public class HomeController {
       // 서버에 파일 업로드 지시
       String savePath = null;
 
-
-        // /WEB-INF/views/~~~~~.jsp
-        return "home/write";
-    }
-
-    // 글쓰기 제출 페이지 (DTO 안쓰고)
-    @PostMapping("/write")
-    public String writeSubmit(@RequestParam("category") String category,
-                              @RequestParam("title") String title,
-                              @RequestParam("content") String content,
-                              @RequestParam("file") MultipartFile uploadedImage,
-                              HttpServletRequest request) {
       if (uploadedImage.getSize() == 0) {
          savePath = null;
       } else {
@@ -242,16 +212,11 @@ public class HomeController {
       log.info("save-path: {}", savePath);
 
 
-
       // board table 에 게시글 저장하기: writer, title, content, file-image (파일 경로), category
       boardService.saveBoard(category, title, content, savePath, writer);
 
       return "redirect:/home/board/" + category;
    }
-
-
-
-
 
 
 }

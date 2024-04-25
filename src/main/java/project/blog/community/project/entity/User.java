@@ -81,7 +81,6 @@ public class User {
 
    }
 
-   private int rate;
 
    // 자기소개
    private String introduction;

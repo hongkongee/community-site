@@ -113,12 +113,6 @@ public class DiaryController {
     }
 
 
-    // 글 작성하기 누르면 새로운 글 작성하는 페이지로 이동
-    @GetMapping("/newposting")
-    public String newposting() {
-            log.info("/mypage/newposting: GET!!!");
-
-
     // 글 삭제 요청 (/mypage/delete : GET)
     // 글번호 전달되면 삭제 진행
     @GetMapping("/delete")

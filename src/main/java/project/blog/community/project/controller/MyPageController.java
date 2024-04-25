@@ -101,8 +101,7 @@ public class MyPageController {
    @PostMapping("/intro")
    public String introSubmit(@RequestParam("introduction") String introduction,
                              HttpServletRequest request) {
-      log.info("/mypage/intro: POST!");
-      log.info("introduction : " + introduction);
+      log.info("/mypage/intro: POST! " + introduction);
 
       HttpSession session = request.getSession();
       session.getAttribute("login");

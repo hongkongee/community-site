@@ -27,6 +27,7 @@ import project.blog.community.project.service.ManagementService;
 import project.blog.community.util.FileUtils;
 
 import java.util.List;
+import java.util.Random;
 
 import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccount;
 
@@ -53,6 +54,8 @@ public class HomeController {
 
       model.addAttribute("bList", dtoList);
       model.addAttribute("r", 0);
+
+
 
       // /WEB-INF/views/~~~~~.jsp
       return "home/main";
@@ -203,13 +206,21 @@ public class HomeController {
       log.info("file-size: {}KB", uploadedImage.getSize() / 1024.0); // getSize()는 MB 단위
       log.info("file-type: {}", uploadedImage.getContentType());
 
+
+
       // 세션에서 자신의 account 가져오기
       HttpSession session = request.getSession();
       session.getAttribute("login");
       String writer = getCurrentLoginMemberAccount(session);
 
       // 서버에 파일 업로드 지시
-      String savePath = FileUtils.uploadFile(uploadedImage, rootPath);
+      String savePath = null;
+
+      if (uploadedImage.getSize() == 0) {
+         savePath = null;
+      } else {
+         savePath = FileUtils.uploadFile(uploadedImage, rootPath);
+      }
       log.info("save-path: {}", savePath);
 
 

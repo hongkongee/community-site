@@ -62,11 +62,7 @@
                     ${user.email}
                 </div>
                 <div class="bio">
-                    <form action="/mypage/intro" id="intro-form" method="post" enctype="multipart/form-data">
-                        <textarea rows="4" id="self-intro" name="introduction" class="form-control"
-                                            value="${user.introduction}" readOnly></textarea>
-                        <button id="fake-btn" type="submit"></button>
-                    </form>
+                    <p id="intro-text">${user.introduction}</p>
                     
                     <c:if test="${login.accountNumber eq user.accountNumber}">
                         <i class="fa-solid fa-pen"></i>
@@ -80,8 +76,40 @@
                     </c:if>
             </div>
 
+            <!-- 모달 버튼 -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Launch demo modal
+            </button>
+            
+            <!-- 수정 영역 모달 -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">자기소개 수정</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/mypage/intro" id="form-intro" method="post">
+                            <textarea name="introduction" id="textarea-intro" cols="30" rows="10">
+                                ${user.introduction}
+                            </textarea>
+                        </form>
+                    </div>
 
 
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                        <button type="button" class="btn btn-primary">수정</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- 팔로우, 팔로워 영역 -->
             <div class="user-friends">
         
 

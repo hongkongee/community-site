@@ -281,3 +281,11 @@ body {
 #fake-btn {
   display: none;
 }
+
+p#intro-text {
+  font-size: 22px;
+}
+
+button.btn-primary {
+  display: none;
+}

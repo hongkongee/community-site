@@ -1,0 +1,56 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.blog.community.project.mapper.DiaryMapper">
+
+    <insert id="todoSave">
+        INSERT INTO tbl_diary
+        (todo, reg_date)
+        VALUES (#{toDo}, #{regDate})
+    </insert>
+
+    <insert id="whatdoSave">
+        INSERT INTO tbl_diary
+        (whatdo, reg_date)
+        VALUES (#{whatDo}, #{regDate})
+    </insert>
+
+    <select id="findAll" resultType="diary">
+        SELECT * FROM tbl_diary
+    </select>
+
+    <select id="findOne" resultType="diary">
+        SELECT * FROM tbl_diary
+        WHERE diary_no = #{diaryNo}
+    </select>
+
+    <update id="modifyTodo">
+        UPDATE tbl_diary
+        SET todo = #{toDo}
+        WHERE writer = #{writer}
+    </update>
+
+    <update id="modifyWhatdo">
+        UPDATE tbl_diary
+        SET whatdo = #{whatDo}
+        WHERE writer = #{writer}
+    </update>
+
+    <delete id="todoDelete">
+        DELETE FROM tbl_diary
+        WHERE diary_no = #{diaryNo}
+    </delete>
+
+    <delete id="whatdoDelete">
+        DELETE FROM tbl_diary
+        WHERE diary_no = #{diaryNo}
+    </delete>
+
+
+
+
+
+
+
+</mapper>

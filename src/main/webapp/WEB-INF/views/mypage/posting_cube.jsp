@@ -51,7 +51,12 @@
                         <section class="post" data-bno="${b.bno}">
                             <a href="/mypage/posting_cube/${b.bno}">
                                 <div class="post-photo">
-                                    <img src="/display${b.postImg}" alt="게시물 사진">
+                                    <c:if test="${not empty b.postImg}">
+                                        <img src="/display${b.postImg}" alt="게시물 사진">
+                                    </c:if>
+                                    <c:if test="${b.postImg eq null}">
+                                        <img src="/assets/img/test_photo.png" alt="기본 이미지">
+                                    </c:if>
                                 </div>
                             </a>
                             <div class="post-content-wrapper">
@@ -71,7 +76,7 @@
                                             <i class="fa-regular fa-heart"></i>
                                         </c:if>
 
-                                       
+
                                         <label class="like-label" for="flexCheckDefault"
                                             data-like-count="${b.likeCount}">
                                             좋아요 ${b.likeCount}
@@ -83,7 +88,7 @@
                                 </div>
                             </div>
                         </section>
-                        
+
                         <!-- --------------------------삭제 버튼----------------------------- -->
                         <c:if test="${login.auth == '관리자' || login.accountNumber == b.writer}">
                             <div class="card-btn-group">

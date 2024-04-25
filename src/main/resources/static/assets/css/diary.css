@@ -9,7 +9,7 @@ body {
     display: flex;
     overflow-y: auto;
     margin: 0;
-    
+
 }
 
 .MydiaryJsp {
@@ -17,7 +17,7 @@ body {
     height: 100%;
     background: #7AA2E3;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     min-height: 100%;
     box-sizing: border-box;
@@ -68,6 +68,7 @@ body {
     width: 14%;
     box-sizing: border-box;
 }
+
 .Frame45 table td {
     background: white;
 }
@@ -97,12 +98,12 @@ body {
 
 .Frame45 .Frame57 {
     width: 70%;
-    height: auto; 
+    height: auto;
     background: white;
     border-radius: 60px;
     overflow: hidden;
     border: 1px solid #7AA2E3;
-    margin: 5% auto; 
+    margin: 5% auto;
     position: relative;
     display: flex;
     justify-content: space-evenly;
@@ -112,22 +113,23 @@ body {
 .Frame45 .todo {
     display: inline-flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
     margin-left: 50px;
     position: relative;
     width: 30%;
     padding: 10px;
 }
+
 .Frame45 .whatdo {
     width: 50%;
     display: inline-flex;
     flex-direction: column;
-    align-items: center; 
-    margin: 30px; 
+    align-items: center;
+    margin: 30px;
     position: relative;
     padding: 10px;
     left: 20px;
-   
+
 }
 
 .Frame45 .schedule-input {
@@ -136,7 +138,7 @@ body {
     color: black;
     font-size: 20px;
     font-weight: bold;
-    margin-top: 20px; 
+    margin-top: 20px;
     position: relative;
     background: white;
     border-radius: 60px;
@@ -153,7 +155,7 @@ body {
     font-family: inherit;
     overflow-y: auto;
     border: 1px solid black;
-    
+
 }
 
 .Frame45 .story {
@@ -162,7 +164,7 @@ body {
     color: black;
     font-size: 20px;
     font-weight: bold;
-    margin-top: 20px; 
+    margin-top: 20px;
     margin-right: 10px;
     position: relative;
     background: white;
@@ -192,9 +194,16 @@ body {
     font-size: 20px;
     font-family: inherit;
     position: absolute;
-    bottom: 20px;
-    right: 10px;
-    
+}
+
+.Frame45 .Frame57 .rightbtn {
+    bottom: -15px;
+    right: 5px;
+}
+
+.Frame45 .Frame57 .leftbtn {
+    right: -30px;
+    bottom: -15px;
 }
 
 /* --------------------일정, 일기 작성란 끝---------------------- */
@@ -202,12 +211,12 @@ body {
 /* ---------------------일정, 일기 저장 시작--------------------------- */
 .Frame45 .saved {
     width: 70%;
-    height: auto; 
+    height: auto;
     background: white;
     border-radius: 60px;
     overflow: hidden;
     border: 1px solid #7AA2E3;
-    margin: 5% auto; 
+    margin: 5% auto;
     position: relative;
     display: flex;
     justify-content: space-evenly;
@@ -221,6 +230,7 @@ body {
     border-radius: 60px;
 
 }
+
 .Frame45 .saved .whatdo-saved {
     width: 40%;
     height: 300px;

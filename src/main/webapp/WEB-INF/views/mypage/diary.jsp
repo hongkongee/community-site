@@ -65,16 +65,18 @@
                         <h2>일정</h2>
                         <div class="schedule-input">
                             <textarea id="schedule-content" placeholder="일정을 작성해주세요"></textarea>
+                            <button id="save-diary" class="leftbtn" type="submit">저장</button>
                         </div>
                     </div>
+
 
                     <div class="whatdo">
                         <h2>일기 쓰기</h2>
                         <div class="story">
                             <textarea type="text" class="story-write" placeholder="일기를 작성해주세요"></textarea>
+                            <button id="save-diary" class="rightbtn" type="submit">저장</button>
                         </div>
                     </div>
-                    <button id="save-diary" type="submit">저장</button>
                 </form>
             </div>
 
@@ -82,9 +84,11 @@
                 <div class="todo-saved">
                     <form action="/home/write" method="post" enctype="multipart/form-data">
 
+                        <ul class="saved-ul">
+                            <li id="saved-li">
 
-
-
+                            </li>
+                        </ul>
 
                     </form>
                 </div>

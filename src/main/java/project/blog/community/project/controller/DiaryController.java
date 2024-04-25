@@ -68,6 +68,8 @@ public class DiaryController {
         return "mypage/posting_cube";
     }
 
+
+    // 좋아요 버튼
     @PostMapping("/posting_cube/like/{bno}") // URL에 {bno}를 포함시킴
     @ResponseBody
     public ResponseEntity<Integer> like(@PathVariable("bno") int bno, @RequestBody LikeRequestDTO dto,
@@ -95,11 +97,8 @@ public class DiaryController {
       System.out.println("/board/detail: GET! " + bno);
       BoardDetailResponseDTO dto = service.getDetail(bno);
 
-
-
       model.addAttribute("b", dto);
       return "home/detail";
-
 
    }
 
@@ -109,9 +108,10 @@ public class DiaryController {
    @GetMapping("/newposting")
    public String newposting() {
       log.info("/mypage/newposting: GET!!!");
-
       return "mypage/newposting";
    }
+
+
 
     // 글쓰기 제출 페이지 (DTO 안쓰고)
     @PostMapping("/newposting")
@@ -133,7 +133,13 @@ public class DiaryController {
         String writer = getCurrentLoginMemberAccount(session);
 
         // 서버에 파일 업로드 지시
-        String savePath = FileUtils.uploadFile(uploadedImage, rootPath);
+        String savePath = null;
+
+        if (uploadedImage.getSize() == 0) {
+            savePath = null;
+        } else {
+            savePath = FileUtils.uploadFile(uploadedImage, rootPath);
+        }
         log.info("save-path: {}", savePath);
 
 
@@ -155,7 +161,24 @@ public class DiaryController {
     }
 
 
-
+//    // 글쓰기 제출 페이지 (DTO 안쓰고)
+//    @PostMapping("/newposting")
+//    public String writeSubmit(@RequestParam("content") String content,
+//                             HttpServletRequest request) {
+//
+//
+//
+//        // 세션에서 자신의 account 가져오기
+//        HttpSession session = request.getSession();
+//        session.getAttribute("login");
+//        String writer = getCurrentLoginMemberAccount(session);
+//
+//
+//        // board table 에 게시글 저장하기: writer, title, content, file-image (파일 경로), category
+//        service.saveBoard(category, title, content, savePath, writer);
+//
+//        return "redirect:/mypage/posting_cube";
+//    }
 
 
 }

@@ -55,6 +55,9 @@ public class MarketController {
     @GetMapping("/list")
     public String list(Model model, HttpServletRequest request) {
 
+
+
+
         log.info("/market/list: GET");
 
         List<MarketListResponseDTO> dtoList = marketService.getList(request);

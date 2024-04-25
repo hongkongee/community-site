@@ -218,16 +218,6 @@
 
 
 
-  <!-- 구글맵 API 호출 -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOCNKI6eODqFYglsYcSTmd0GDwNWUz8FU&callback=myMap">
-  </script>
-
-  <!-- 좋아요 호출 -->
-  <script src="/assets/js/MarketRate.js"></script>
-
-  <!-- 수정하기 호출 -->
-  <script src="/assets/js/MarketModify.js"></script>
-
 
   <script>
     let map;
@@ -279,6 +269,16 @@
     }
   </script>
 
+
+  <!-- 구글맵 API 호출 -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOCNKI6eODqFYglsYcSTmd0GDwNWUz8FU&callback=myMap">
+  </script>
+
+  <!-- 좋아요 호출 -->
+  <script src="/assets/js/MarketRate.js"></script>
+
+  <!-- 수정하기 호출 -->
+  <script src="/assets/js/MarketModify.js"></script>
 
 
 

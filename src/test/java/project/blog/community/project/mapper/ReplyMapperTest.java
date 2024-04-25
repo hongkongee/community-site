@@ -79,8 +79,8 @@ class ReplyMapperTest {
    @Test
    @DisplayName("63번 댓글의 댓글 내용을 수정하면 다시 조회했을 때 수정된 내용이 조회되어야 한다.")
    void modifyTest() {
-      int replyNo = 98;
-      String newReplyText = "내용을 수정함";
+      int replyNo = 102;
+      String newReplyText = "수정 updatedate 확인용";
       Reply reply = Reply.builder()
             .content(newReplyText)
             .replyNo(replyNo)

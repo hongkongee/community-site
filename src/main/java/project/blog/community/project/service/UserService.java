@@ -13,6 +13,7 @@ import project.blog.community.project.dto.request.AutoLoginDTO;
 import project.blog.community.project.dto.request.LoginRequestDTO;
 import project.blog.community.project.dto.request.SignUpRequestDto;
 import project.blog.community.project.dto.response.LoginUserResponseDTO;
+import project.blog.community.project.dto.response.MypageUserResponseDTO;
 import project.blog.community.project.entity.User;
 import project.blog.community.project.mapper.UserMapper;
 
@@ -109,6 +110,16 @@ public class UserService {
    }
 
 
+
+    public MypageUserResponseDTO getUserInformation(String account) {
+       User user = userMapper.findUser(account);
+       log.info("In UserService process, user = " + user.toString());
+
+       MypageUserResponseDTO dto = new MypageUserResponseDTO(user);
+       return dto;
+    }
+
+
    public void autoLoginClear(HttpServletRequest request, HttpServletResponse response) {
 
       // 자동 로그인 쿠키를 가져온다.
@@ -130,6 +141,8 @@ public class UserService {
       );
 
    }
+
+
 }
 
 

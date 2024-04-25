@@ -8,6 +8,7 @@ import project.blog.community.project.mapper.UserMapper;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 
 @Getter @ToString
 @EqualsAndHashCode
@@ -28,6 +29,9 @@ public class BoardListResponseDTO {
     private final String postImg;
 
     private final String regDate2;
+    private final String writerAccount;
+
+    private final int random;
 
     // entity를 dto로 바꾸는 생성자
     public BoardListResponseDTO(Board board, String nickname) {
@@ -40,6 +44,13 @@ public class BoardListResponseDTO {
         this.viewCount = board.getViewCount();
         this.postImg = board.getPostImg();
         this.likeCount = board.getLikeCount();
+        this.writerAccount = board.getWriter();
+
+        // 기본 이미지를 위한 난수 생성
+        Random random = new Random();
+        this.random = random.nextInt(3) + 1;
+
+
     }
 
     private String makePrettierDateString2(LocalDateTime regDate) {
@@ -64,5 +75,7 @@ public class BoardListResponseDTO {
                 ? targetString.substring(0, wishLength) + "..."
                 : targetString;
     }
+
+
 
 }

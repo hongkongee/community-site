@@ -20,7 +20,7 @@ body{
 left: 15%;
 margin: 22px;
    position: absolute; background: #F8F6E3; border-radius: 60px;
-   
+   margin-top: 50px;
 }
 .Chat{
   width: 146px; height: 64px; left: 25%; top: 80px; position: absolute; color: black; font-size: 48px; font-family: Inter; font-weight: 500; word-wrap: break-word;
@@ -29,7 +29,15 @@ margin: 22px;
   width: 744px; height: 0px; left: 50%; top: 160px; position: absolute; transform: rotate(90deg); transform-origin: 0 0; border: 1px black solid;
 }
 .Frame22{
-  width: 449px; height: 728px; left: 22%; top: 160px; position: absolute; background: white; border-radius: 30px; overflow: hidden; border: 1px black solid;
+  width: 449px;
+  height: 728px;
+  left: 380px;
+  top: 250px;
+  position: absolute;
+  background: white;
+  border-radius: 30px;
+  overflow: hidden;
+  border: 1px black solid;
   overflow: auto;
   overflow-x: hidden;
   

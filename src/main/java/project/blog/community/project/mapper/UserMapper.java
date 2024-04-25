@@ -28,13 +28,17 @@ public interface UserMapper {
    // 쿠키값(세션아이디)으로 회원정보를 조회
    User findMemberByCookie(String sessionId);
 
-   // 내가 팔로우한 유저 찾기
+   // 팔로우한 유저 찾기
    List<String> findUserByFollower(@Param("number") int number, @Param("account") String currentLoginMemberAccount);
 
    // 팔로우 추가하기
    void addFollower(@Param("me") String currentLoginMemberAccount, @Param("you") String followerAccount);
 
    void removeFollower(@Param("me") String myAccount, @Param("you") String userAccount);
+
+   // 팔로우하는 유저 찾기
+   List<String> findUserByFollowing(String account);
+
 }
 
 

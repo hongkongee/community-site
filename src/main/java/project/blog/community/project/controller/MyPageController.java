@@ -1,6 +1,8 @@
 package project.blog.community.project.controller;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.WebUtils;
 import project.blog.community.project.dto.response.BoardMyListResponseDTO;
 import project.blog.community.project.dto.response.FollowerResponseDTO;
 import project.blog.community.project.dto.response.LoginUserResponseDTO;
@@ -136,7 +139,12 @@ public class MyPageController {
    // 포인트 일일 지급
    @PostMapping("/dailypoint")
    @ResponseBody
-   public ResponseEntity<?> getDailyPoint(HttpServletRequest request, BindingResult result) {
+   public ResponseEntity<?> getDailyPoint(@RequestBody Map<String, String> requestBody,
+                                          HttpServletRequest request,
+                                          BindingResult result,
+                                          HttpServletResponse response) {
+
+      log.info("/mypage/dailypoing: POST!");
 
       if (result.hasErrors()) {
          return ResponseEntity
@@ -144,15 +152,45 @@ public class MyPageController {
                  .body(result.toString());
       }
 
+
+
+      // 로그인 정보
       HttpSession session = request.getSession();
       LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
       String myAccount = loginDto.getAccountNumber();
+
+      // 쿠키 존재 확인하기
+
+      try {
+         Cookie c = WebUtils.getCookie(request, "pp");
+         String cookieValue = c.getValue();
+         log.info("cookie's name is " + cookieValue);
+         if (cookieValue.equals(myAccount)) {
+            return ResponseEntity.ok().body(-1); // 오늘 이미 쿠키를 받았습니다...
+
+         } else {
+            // 포인트 증가시키기 (쿠키가 있긴 있는데 다른사람거라서 포인트 주기)
+            int todayPoint = gameService.todayRandomPoint(myAccount, response);
+            return ResponseEntity.ok().body(todayPoint);
+
+         }
+      } catch (NullPointerException e) {
+         // 포인트 증가시키기
+         int todayPoint = gameService.todayRandomPoint(myAccount, response);
+         return ResponseEntity.ok().body(todayPoint);
+      }
+
+
+
+
+
+
+
+
+
+
       
-      // 포인트 증가시키기
-      int todayPoint = gameService.todayRandomPoint(myAccount);
 
-
-      return ResponseEntity.ok().body(todayPoint);
 
    }
 

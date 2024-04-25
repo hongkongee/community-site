@@ -230,18 +230,22 @@ body {
 
 .body-wrapper2 .my-market {
   font-size: 25px;
-  margin-left: 200px;
+  margin-left: 180px;
 }
 
 .body-wrapper2 .popular-wrapper {
   font-size: 25px;
-  margin-left: 200px;
+  margin-left: 180px;
 }
 
 
 .body-wrapper2 .weather-wrapper {
   font-size: 25px;
-  margin-left: 250px;
+  margin-left: 180px;
+}
+
+.point-msg {
+  margin-bottom: 20px;
 }
 
 
@@ -319,4 +323,10 @@ p#intro-text {
   box-shadow: 0 0 0 1px #6191C2 inset,
         0 0 0 2px rgba(255,255,255,0.15) inset,
         0 0 0 1px rgba(0,0,0,0.4);
+}
+
+
+.all-games>.point-msg {
+  display: none;
+  font-size: 20px;
 }

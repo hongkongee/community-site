@@ -287,12 +287,22 @@
             <!-- weather wrapper -->
             <div class="weather-wrapper">
                 <!-- weather api -->
-                <div class="weatherapi-wrapper">
-                    <div class="title-market">일일 포인트 지급</div>
-                    <div class="all-games">
-                        <a href="#" id="today-point" class="btn-3d blue">포인트 받기</a>
+                <c:if test="${login.accountNumber eq user.accountNumber}">
+                    <div class="weatherapi-wrapper">
+                        
+                        <div class="title-market">일일 포인트 지급</div>
+
+                        <div class="all-games">
+                            <a href="#" id="today-point" class="btn-3d blue">포인트 받기</a>
+                        </div>
+                        
+                        <div class="all-games">
+                            <div class="point-msg" id="positive-point"><span>오늘 받은 포인트는</span> <span id="point-value"></span>P 입니다.</div>                     
+                            <div class="point-msg" id="zero-point">오늘 받은 포인트는 0P입니다.ㅠㅠ 다음 기회에~~</div>
+                            <div class="point-msg" id="already-point">오늘 이미 포인트를 받지 않으셨나요??ㅡㅡ</div>
+                        </div>
                     </div>
-                </div>
+                </c:if>
 
                 <!-- music wrapper -->
                 <div class="music-wrapper">

@@ -16,6 +16,8 @@ CREATE TABLE tbl_user (
    report int DEFAULT 0,
    session_id VARCHAR(100),
    limit_time DATETIME,
+   profile_picture VARCHAR(200),
+   login_method VARCHAR(45) DEFAULT 'COMMON'
 
    CONSTRAINT pk_member PRIMARY KEY (account_number)
 );
@@ -48,7 +50,7 @@ public class User {
    // 회원 가입 일자
    private LocalDateTime regDate;
 
-   private Gender gender;
+   private String gender;
 
    private String nickname;
 
@@ -66,11 +68,24 @@ public class User {
    // 회원 프사
    private String profilePicture;
 
-   // 회원 가입 방법
+   //로그인 방법
    private LoginMethod loginMethod;
 
    // 회원 평점 (중고 마켓에서 받은 누적 좋아요 수)
    private int rate;
+
+
+   public enum LoginMethod {
+
+      COMMON, KAKAO, NAVER, GOOGLE
+
+   }
+
+
+   // 자기소개
+   private String introduction;
+
+   private int point;
 
 
 

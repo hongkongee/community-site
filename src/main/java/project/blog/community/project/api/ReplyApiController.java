@@ -1,6 +1,7 @@
 package project.blog.community.project.api;
 
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.tags.shaded.org.apache.regexp.RE;
@@ -42,7 +43,8 @@ public class ReplyApiController {
 
    @PostMapping
    @ResponseBody
-   public ResponseEntity<?> create(@Validated @RequestBody ReplyPostRequestDTO dto, BindingResult result) {
+   public ResponseEntity<?> create(@Validated @RequestBody ReplyPostRequestDTO dto, BindingResult result,
+                                   HttpSession session) {
 
       if (result.hasErrors()) {
          return ResponseEntity
@@ -53,7 +55,7 @@ public class ReplyApiController {
       log.info("/api/v1/replies: POST!!");
       log.info("dto: {}", dto);
 
-      replyService.register(dto);
+      replyService.register(dto, session);
 
       return ResponseEntity.ok().body("success");
 

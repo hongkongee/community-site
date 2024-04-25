@@ -8,11 +8,11 @@ import lombok.ToString;
 @Getter
 @ToString
 public enum Category {
-    NORMAL("일반글", 1),
-    MARKET("당근글", 2),
-    GAME("게임글", 3),
-    MOVIE("영화글", 4),
-    TRIP("여행글", 5);
+    NORMAL("질문 게시판", 1),
+    MARKET("자유 게시판", 2),
+    GAME("코드 공유 게시판", 3),
+    MOVIE("취업 게시판", 4),
+    TRIP("IT 소식 게시판", 5);
 
     private String description;
     private int authNumber;

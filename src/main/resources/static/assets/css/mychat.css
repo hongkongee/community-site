@@ -7,6 +7,9 @@
 /*
 
 */
+html{
+background-color: #7AA2E3;
+}
 body{
 
   background-color: #7AA2E3;
@@ -14,19 +17,29 @@ body{
 .Rectangle1{
    width: 1277px;
   height: 903px; 
-left: 15%;
-margin: 30px;
+  top: 100px;
+  left: 270px;
+margin: 22px;
    position: absolute; background: #F8F6E3; border-radius: 60px;
-   
+   margin-top: 50px;
 }
 .Chat{
-  width: 146px; height: 64px; left: 25%; top: 80px; position: absolute; color: black; font-size: 48px; font-family: Inter; font-weight: 500; word-wrap: break-word;
+  width: 146px; height: 64px; left: 370px; top: 170px; position: absolute; color: black; font-size: 48px; font-family: Inter; font-weight: 500; word-wrap: break-word;
 }
 .Line2{
-  width: 744px; height: 0px; left: 50%; top: 160px; position: absolute; transform: rotate(90deg); transform-origin: 0 0; border: 1px black solid;
+  width: 744px; height: 0px; left: 950px;
+  top: 245px; position: absolute; transform: rotate(90deg); transform-origin: 0 0; border: 1px black solid;
 }
 .Frame22{
-  width: 449px; height: 728px; left: 22%; top: 160px; position: absolute; background: white; border-radius: 30px; overflow: hidden; border: 1px black solid;
+  width: 449px;
+  height: 728px;
+  left: 380px;
+  top: 250px;
+  position: absolute;
+  background: white;
+  border-radius: 30px;
+  overflow: hidden;
+  border: 1px black solid;
   overflow: auto;
   overflow-x: hidden;
   
@@ -51,9 +64,20 @@ margin: 30px;
 }
 
 
-
-.Rectangle6{
-  width: 123px; height: 40px; left: 26px; top: 10px; position: absolute; background: #97E7E1
+div.row.user-block{
+  position: relative;
+  left: 20px;
+display: flex;
+}
+.friendName{
+  position: relative;
+  left: 50px;
+bottom: 22px;
+}
+b{
+position: relative;
+  left: 50px;
+bottom: 22px;
 }
 .Rectangle7{
   width: 123px; height: 40px; left: 26px; top: 316px; position: absolute; background: #97E7E1
@@ -64,9 +88,94 @@ margin: 30px;
 .let2{
   left: 50px; top: 21px; position: absolute; color: black; font-size: 16px; font-family: Inter; font-weight: 100; word-wrap: break-word
 }
-.Rectangle6{
+.friends{
   width: 380px; height: 234px; left: 26px; top: 62px; position: absolute; background: white; border-radius: 30px; border: 1px black solid
 }
+.friends h2{
+  position: relative;
+  left: 20px;
+}
+
+
+
+
+
+
+      .friends {
+        position: relative;
+        overflow-y: auto;
+        overflow-x: hidden;
+        
+      }
+     
+      .friends::-webkit-scrollbar {
+        width: 10px;
+        
+    }
+    
+    .friends::-webkit-scrollbar-thumb { 
+        background-color: #D9D9D9;
+        border-radius: 10px;
+        height: 50%;
+    }
+    .friends::-webkit-scrollbar-button {
+        display: none;
+    }
+
+
+
+
+
+
+
+
+      .friends img{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+
+     .friends .friends { /* 친구 목록 */
+        font-size: 26px;
+        
+        padding: 30px;
+        margin: 0 5%;
+        border-radius: 10%;
+
+        position: relative;
+     
+      }
+
+   .friends .friends ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+      }
+
+
+
+      .friends .friends>ul>li {
+        color: #797474;
+        margin-top: 30px;
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      #followCollapse {
+        margin-top: 15px;
+      }
+
+      #followContent {
+        margin-top: 10px;
+      }
+
+
+
+
+
+
+
 .Ellipse5{
   width: 42px; height: 41px; left: 38px; top: 82px; position: absolute; background: white; border-radius: 9999px; border: 5px #C0E1F3 solid
   ;font-size: 20px;
@@ -75,67 +184,37 @@ margin: 30px;
   width: 42px; height: 41px; left: 38px; top: 142px; position: absolute; background: white; border-radius: 9999px; border: 5px #C0E1F3 solid
 ;font-size: 20px;
 }
-.let3{
-  left: 40px; top: 151px; position: absolute; color: black;  font-family: Inter; font-weight: 100; word-wrap: break-word
-}
+
 .Ellipse7{
   width: 42px; height: 41px; left: 35px; top: 202px; position: absolute; background: white; border-radius: 9999px; border: 5px #C0E1F3 solid
   ;font-size: 20px;
 }
-.let4{
-  left: 37px; top: 211px; position: absolute; color: black; font-size: 20px; font-family: Inter; font-weight: 100; word-wrap: break-word
-}
-.let5{
-  left: 43px; top: 91px; position: absolute; color: black; font-size: 20px; font-family: Inter; font-weight: 100; word-wrap: break-word
-}
-.let6{
-  left: 109px; top: 91px; position: absolute; color: black; font-size: 20px; font-family: Inter; font-weight: 100; word-wrap: break-word
-}
-.let7{
-  left: 109px; top: 211px; position: absolute; color: black; font-size: 20px; font-family: Inter; font-weight: 100; word-wrap: break-word
-}
-.let8{
-  left: 109px; top: 151px; position: absolute; color: black; font-size: 20px; font-family: Inter; font-weight: 100; word-wrap: break-word
-}
+
 .Rectangle8{
   width: 380px; height: 349px; left: 26px; top: 364px; position: absolute; background: white; border-radius: 30px; border: 1px black solid
 }
 .Ellipse8{
   width: 42px; height: 41px; left: 40px; top: 407px; position: absolute; background: white; border-radius: 9999px; border: 5px #C0E1F3 solid
   ;font-size: 20px;
+  overflow: auto;
+overflow-x: hidden;
+}
+.Rectangle8 h2{
+  position: relative;
+  left: 20px;
 }
 .Ellipse9{
   width: 42px; height: 41px; left: 40px; top: 467px; position: absolute; background: white; border-radius: 9999px; border: 5px #C0E1F3 solid
   ;font-size: 20px;
 }
 
-.let9{
-  left: 42px; top: 476px; position: absolute; color: black; font-size: 20px; font-family: Inter; font-weight: 100; word-wrap: break-word
-}
+
 .Ellipse10{
   width: 42px; height: 41px; left: 37px; top: 527px; position: absolute; background: white; border-radius: 9999px; border: 5px #C0E1F3 solid
  ;font-size: 20px;
 }
 
-.let10{
-  left: 39px; top: 536px; position: absolute; color: black; font-size: 20px; font-family: Inter; font-weight: 100; word-wrap: break-word
-}
 
-.let11{
-  left: 45px; top: 416px; position: absolute; color: black; font-size: 20px; font-family: Inter; font-weight: 100; word-wrap: break-word
-}
-
-.let12{
-  left: 111px; top: 416px; position: absolute; color: black; font-size: 20px; font-family: Inter; font-weight: 100; word-wrap: break-word
-}
-
-.let13{
-  left: 111px; top: 536px; position: absolute; color: black; font-size: 20px; font-family: Inter; font-weight: 100; word-wrap: break-word
-}
-
-.let14{
-  left: 111px; top: 476px; position: absolute; color: black; font-size: 20px; font-family: Inter; font-weight: 100; word-wrap: break-word
-}
 .Ellipse11{
   width: 28px; height: 28px; left: 320px; top: 413px; position: absolute; background: #FF0000; border-radius: 9999px
 }
@@ -149,7 +228,8 @@ margin: 30px;
 }
 
 .Frame23{
-  width: 449px; height: 728px; left: 55%; top: 160px; position: absolute; background: white; border-radius: 30px; overflow: hidden; border: 1px black solid
+  width: 449px; height: 728px; left: 1050px;
+  top: 250px; position: absolute; background: white; border-radius: 30px; overflow: hidden; border: 1px black solid
 }
 
 .Rectangle57{
@@ -158,9 +238,7 @@ margin: 30px;
 .Api{
   width: 128px; height: 119px; left: 159px; top: 189px; position: absolute; color: black; font-size: 36px; font-family: Inter; font-weight: 100; word-wrap: break-word
 }
-.Frame40{
-  width: 359px; height: 1024px; padding-bottom: 11px; padding-left: 12px; padding-right: 12px; left: 0px; top: 0px; position: absolute; background: white; border: 3px #7AA2E3 solid; flex-direction: column; justify-content: center; align-items: center; gap: 10px; display: inline-flex
-}
+
 .HomePostingDiaryGalleryChatMarket{
   width: 93px; height: 248px; color: black; font-size: 24px; font-family: Inter; font-weight: 500; word-wrap: break-word}
   /* ----------------------사이드바 메뉴 시작---------------------- */

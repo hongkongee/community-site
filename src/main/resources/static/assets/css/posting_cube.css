@@ -99,16 +99,17 @@ body {
     height: 350px;
     cursor: pointer;
     transition: 0.5s;
-    margin: 10px;
+    margin: 20px 10px;
    
 }
 
 .post-container .post {
-    /* height: 300px; */
     transition: 0.5s;
-    border: 1px solid #7AA2E3;
+    border: 2px solid #00196b;
+    border-radius: 10px;
     position: absolute;
     background: white;
+    overflow: hidden;
 }
 
 .post-container .post:last-child {
@@ -146,10 +147,44 @@ body {
     padding: 5px 10px;
 }
 
-/* -----------------------게시글 제목 시작-------------------------- */
+.post-container .post-wrapper .card-btn-group {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 
+.post-container .post-wrapper .post-photo img {
+    object-fit: cover;
+}
 
-/* ----------------------댓글 & 좋아요 시작----------------------- */
+/* ---------------------------------삭제 버튼 시작---------------------------------- */
+.card-container .card-btn-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    z-index: 100;
+}
+
+.card-btn-group .del-btn {
+   border: none;
+   border-radius: 50%;
+   background: #00196b;
+   color: white;
+}
+
+.card-btn-group .del-btn:hover {
+    background: white;
+    border: 1px solid #00196b;
+    color: black;
+
+}
+
+/* ---------------------------------삭제 버튼 끝---------------------------------- */
+
+/* -------------------------------댓글 & 좋아요 시작------------------------------- */
 .post-container .post .post-reply {
     width: 100%;
     display: inline-flex;
@@ -166,18 +201,6 @@ body {
     font-size: 15px;
     margin-left: 10px;
 }
-/* 
-.post-container .post .post-reply .post-like {
-    width: 90px;
-}
-.post-like .like {
-    background: #7AA2E3;
-    border: 1px solid #7AA2E3;
-}
-
-.post-like .like:hover {
-    background: #e797c3;
-} */
 
 .post-container .post .post-reply .reply-rec {
     border: 1px solid #7AA2E3;
@@ -192,10 +215,11 @@ body {
     font-size: 16px;
   }
 
-/* ----------------------댓글 & 좋아요 끝----------------------- */
+ 
+/* -------------------------------댓글 & 좋아요 시작------------------------------- */
 
-* 페이지 스타일 */
-/* pagination style */
+
+/* -------------------------------pagination 시작--------------------------------- */
 .pagination {
     display: flex;
     padding-left: 0;
@@ -205,7 +229,7 @@ body {
 .bottom-section {
     display: flex;
     width: fit-content;
-    /* height: 50px; */
+    height: 50px; 
     margin: 0 auto;
 }
 
@@ -217,6 +241,9 @@ body {
 .bottom-section nav ul {
     text-align: center;
     display: inline-flex;
+    width: 50%;
+    height: 50px;
+    border: none;
 }
 
 
@@ -225,10 +252,64 @@ body {
     font-size: 25px;
 }
 
+.page-item .page-link {
+    width: 40px;
+    height: 50px;
+}
+
 .pagination-custom li.active a,
 .pagination-custom li:hover a {
     background: #333 !important;
     color: #fff !important;
+} 
+
+
+
+
+/* --------------------------------모달창: 정말 삭제? 시작------------------------- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    width: 300px;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.modal-content p {
+    font-size: 24px;
+    margin-bottom: 15px;
 }
 
 
+.modal-buttons button {
+    padding: 5px 15px;
+    font-size: 20px;
+}
+
+.modal-buttons .confirm {
+    color: white;
+    background-color: #007bff;
+    border-radius: 4px;
+}
+
+.modal-buttons .cancel {
+    color: #f5f5f5;
+    background-color: #dd1111;
+    border-radius: 4px;
+}
+/* --------------------------------모달창: 정말 삭제? 끝------------------------- */

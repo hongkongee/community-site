@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import project.blog.community.interceptor.AfterLoginInterceptor;
 import project.blog.community.interceptor.AutoLoginInterceptor;
 import project.blog.community.interceptor.BoardInterceptor;
+import project.blog.community.interceptor.MyPageInterceptor;
 
 @Configuration
 @RequiredArgsConstructor
@@ -15,6 +16,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
    private final AfterLoginInterceptor afterLoginInterceptor;
    private final BoardInterceptor boardInterceptor;
    private final AutoLoginInterceptor autoLoginInterceptor;
+   private final MyPageInterceptor myPageInterceptor;
 
    @Override
    public void addInterceptors(InterceptorRegistry registry) {
@@ -28,7 +30,11 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
       registry
             .addInterceptor(autoLoginInterceptor)
-            .addPathPatterns("/");
+            .addPathPatterns("/**");
+
+      registry
+              .addInterceptor(myPageInterceptor)
+              .addPathPatterns("/mypage/home/**");
    }
 
 

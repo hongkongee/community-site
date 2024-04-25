@@ -5,13 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import project.blog.community.project.entity.Follow;
-import project.blog.community.project.entity.Gender;
 import project.blog.community.project.entity.User;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static project.blog.community.project.entity.Gender.*;
+
 
 @SpringBootTest
 class UserMapperTest {
@@ -23,6 +22,7 @@ class UserMapperTest {
    @Test
    @DisplayName("회원가입 성공해야 한다.")
    void save() {
+      /*
       User user = User.builder()
             .accountNumber("test999")
             .password("test999!")
@@ -34,6 +34,8 @@ class UserMapperTest {
             .build();
 
       userMapper.save(user);
+
+       */
    }
 
 

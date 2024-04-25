@@ -51,7 +51,6 @@
                 <li><a href="/mypage/diary">My Diary</a></li>
                 <li><a href="#">My Code</a></li>
             </c:if>
-            <li><a href="/wel/chat">Chat</a></li>
             <li><a href="#">Market</a></li>
 
             <c:if test="${sessionScope.login != null}">

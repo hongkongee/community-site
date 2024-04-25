@@ -1,0 +1,103 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.blog.community.project.mapper.BoardMapper">
+
+    <insert id="save">
+        INSERT INTO tbl_board
+        (title, content, writer, category, post_img)
+        VALUES (#{title}, #{content}, #{writer}, #{category}, #{postImg})
+    </insert>
+
+    <select id="findAll" resultType="board">
+        SELECT * FROM tbl_board
+
+        <if test="type == 'popular'">
+            ORDER BY like_count DESC
+        </if>
+        <if test="type == 'recent'">
+            ORDER BY bno DESC
+        </if>
+        LIMIT 0, #{amount}
+    </select>
+
+    <select id="findOne" resultType="board">
+        SELECT * FROM tbl_board
+        WHERE bno = #{bno}
+    </select>
+
+    <select id="findCategory" resultType="board">
+        SELECT * FROM tbl_board
+        <if test="category == 'normal'">
+            WHERE category = 'NORMAL'
+        </if>
+        <if test="category == 'game'">
+            WHERE category = 'GAME'
+        </if>
+        <if test="category == 'market'">
+            WHERE category = 'MARKET'
+        </if>
+        <if test="category == 'movie'">
+            WHERE category = 'MOVIE'
+        </if>
+        <if test="category == 'trip'">
+            WHERE category = 'TRIP'
+        </if>
+        ORDER BY bno DESC
+        LIMIT 0, #{amount}
+    </select>
+
+    <sql id="search">
+        <if test="type == 'title'">
+            WHERE title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'content'">
+            WHERE content LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'writer'">
+            WHERE writer LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'tc'">
+            WHERE title LIKE CONCAT('%', #{keyword}, '%')
+            OR content LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+    </sql>
+
+
+
+    <update id="updateViewCount">
+        UPDATE tbl_board
+        SET view_count = view_count + 1
+        WHERE bno = #{bno}
+    </update>
+
+    <update id="updateReportCount">
+        UPDATE tbl_board
+        SET report_count = report_count + 1
+        WHERE bno = #{bno}
+    </update>
+
+
+    <update id="updateLikeCount">
+        UPDATE tbl_board
+        SET like_count = like_count + #{number}
+        WHERE bno = #{bno}
+    </update>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_board
+        <include refid="search" />
+    </select>
+
+    <select id="findMine" resultType="board">
+        SELECT * FROM tbl_board
+        WHERE writer = #{account}
+        ORDER BY bno DESC
+        LIMIT #{page.pageStart}, #{page.amount}
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,248 @@
+body {
+    font-family: "Orbit", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    width: 100%;
+    height: 100%;
+    background: #7AA2E3;
+    position: relative;
+    display: flex;
+    overflow-y: auto;
+    margin: 0;
+    
+}
+
+.MydiaryJsp {
+    width: 100%;
+    height: 100%;
+    background: #7AA2E3;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    min-height: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+
+}
+
+.MydiaryJsp .Frame45 {
+    width: 1277px;
+    height: inherit;
+    top: 200px;
+    position: relative;
+    background: #F8F6E3;
+    border-radius: 60px;
+}
+
+.Frame45 .Frame46 {
+    width: 100%;
+    left: 190px;
+    top: 25px;
+    position: absolute;
+}
+
+.Frame45 .Frame46 .Diary {
+    width: 100%;
+    height: 100%;
+    color: black;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+
+/* ---------------------캘린더 시작--------------------- */
+
+.Frame45 .table-wrapper {
+    font-family: "Orbit", sans-serif;
+    margin: 10% auto 5% auto;
+    width: 70%;
+    height: 560px;
+    border: 1px solid #7aa2e3;
+    border-radius: 60px;
+    padding: 30px;
+    background: white;
+    overflow: hidden;
+}
+
+.Frame45 table th {
+    width: 14%;
+    box-sizing: border-box;
+}
+.Frame45 table td {
+    background: white;
+}
+
+/* .Frame45 table tbody {
+    
+} */
+
+.Frame45 table #this-month {
+    font-size: 30px;
+}
+
+/* table td {
+    background-color: white;
+    text-align: left;
+} */
+
+.Frame45 .Sun {
+    color: red;
+}
+
+.Frame45 .Sat {
+    color: blue;
+}
+
+/* ---------------------캘린더 끝--------------------- */
+
+.Frame45 .Frame57 {
+    width: 70%;
+    height: auto; 
+    background: white;
+    border-radius: 60px;
+    overflow: hidden;
+    border: 1px solid #7AA2E3;
+    margin: 5% auto; 
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.Frame45 .todo {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center; 
+    margin: 20px; 
+    position: relative;
+    width: 40%;
+    padding: 10px;
+}
+.Frame45 .whatdo {
+    width: 60%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center; 
+    margin: 30px; 
+    position: relative;
+    padding: 10px;
+    left: 20px;
+   
+}
+
+.Frame45 .schedule-input {
+    width: 100%;
+    height: 200px;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px; 
+    position: relative;
+    background: white;
+    border-radius: 60px;
+    padding: 20px;
+}
+
+.Frame45 .todo textarea {
+    width: 50%;
+    height: 150px;
+    border: none;
+    border-radius: 60px;
+    padding: 20px;
+    font-size: 20px;
+    font-family: inherit;
+    overflow-y: auto;
+    border: 1px solid black;
+    
+}
+/* 
+.Frame45 .todo button {
+    width: 100px;
+    height: 50px;
+    border-radius: 60px;
+    border: none;
+    background: #6ad4dd;
+    font-size: 20px;
+    font-family: inherit;
+    position: absolute;
+    top: 40%;
+    right: 10px;
+} */
+
+.Frame45 .story {
+    width: 100%;
+    height: 200px;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px; 
+    margin-right: 10px;
+    position: relative;
+    background: white;
+    border-radius: 60px;
+    padding: 20px;
+}
+
+.Frame45 .whatdo textarea {
+    
+    width: 70%;
+    height: 150px;
+    border: none;
+    border-radius: 60px;
+    padding: 20px;
+    font-size: 20px;
+    font-family: inherit;
+    overflow-y: auto;
+    border: 1px solid black;
+}
+
+.Frame45 .Frame57 button {
+    width: 100px;
+    height: 50px;
+    border-radius: 60px;
+    border: none;
+    background: #6ad4dd;
+    font-size: 20px;
+    font-family: inherit;
+    position: absolute;
+    top: 40%;
+    right: 10px;
+    
+}
+
+/* --------------------일정, 일기 작성란 끝---------------------- */
+
+/* ---------------------일정, 일기 저장 시작--------------------------- */
+.Frame45 .saved {
+    width: 70%;
+    height: auto; 
+    background: white;
+    border-radius: 60px;
+    overflow: hidden;
+    border: 1px solid #7AA2E3;
+    margin: 5% auto; 
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.Frame45 .saved .todo-saved {
+    width: 40%;
+    height: 300px;
+    border: 1px solid black;
+    border-radius: 60px;
+
+}
+.Frame45 .saved .whatdo-saved {
+    width: 40%;
+    height: 300px;
+    border: 1px solid black;
+    border-radius: 60px;
+}
+
+
+
+
+
+/* ---------------------일정, 일기 저장 끝--------------------------- */

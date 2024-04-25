@@ -1,0 +1,540 @@
+/* reset css */
+@import url('https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css');
+
+
+/* padding 적용해도 box 사이즈 고정 */
+* {
+  box-sizing: border-box;
+}
+
+/* a태그 기능 죽이기 */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 버튼 디자인 통일 (추후 수정) */
+.btn {
+  background: #fff;
+  color: #333;
+  font: inherit;
+  font-weight: 700;
+  border-radius: 7px;
+  border: 2px solid #ededed;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #666;
+  color: #fff;
+}
+
+.btn-red {
+  background: #ff2e2e;
+  color: #fff;
+  border: 2px solid #d40707;
+}
+
+.btn-red:hover {
+  background: #fff;
+  color: #ff2e2e;
+}
+
+
+
+
+
+/* 왼쪽 사이드바 */
+
+body {
+  font-weight: 100;
+  font-size: 36px;
+  background: #7AA2E3;
+  font-family: "Dongle", sans-serif;
+  /* 폰트 통일 */
+}
+
+aside .left-snb {
+  width: 20vw;
+  background: #7AA2E3;
+  color: #666;
+
+  padding: 30px 30px;
+  height: 200vh;
+  /* 상하방향으로 화면 가득히 */
+
+  position: fixed;
+  top: 0;
+
+
+}
+
+aside .left-snb ul>li {
+  margin-top: 15px;
+  color: #000;
+  line-height: 160%;
+}
+
+aside .left-snb ul li a:hover {
+  color: #97E7E1;
+  font-weight: 600;
+}
+
+aside .left-snb ul li.active {
+  /* 현재 페이지가 뭐냐에 따라 active class 부여*/
+  font-weight: 600;
+}
+
+aside .left-snb ul li>ul {
+  color: #000;
+  font-size: 28px;
+  line-height: 160%;
+}
+
+aside .left-snb ul li>ul>li::before {
+  content: '\f061';
+  color: #000;
+  font-family: "Font Awesome 5 Free";
+  /*폰트어썸 fas, far 글꼴 연결*/
+  font-weight: 600;
+  /*폰트어썸 굵기 Solid Style(fas) 600필수*/
+  margin-right: 15px;
+}
+
+
+
+
+
+/*center 추가 */
+.wrapper {
+  position: relative;
+  text-align: center;
+
+  height: 100vh;
+  margin: auto;
+  width: 60vw;
+  background: #7AA2E3;
+
+}
+
+
+/*테두리 전체*/
+.content-box {
+  width: 60vw;
+  height: 100vw;
+  position: relative;
+  border-radius: 60px;
+  margin: auto;
+  background: #F8F6E3;
+  border: 3px solid #000;
+
+
+}
+
+.head {
+  width: 100%;
+  height: 5vw;
+  position: absolute;
+  background: silver;
+  top: 5%;
+  left: 50%;
+  /* 수평 가운데 정렬을 위해 왼쪽을 50%로 설정 */
+  transform: translateX(-50%);
+  /* left 값의 절반만큼 왼쪽으로 이동하여 정확히 가운데 정렬 */
+  text-align: right;
+  margin-right: 2px;
+  border: 3px solid #000;
+
+}
+
+.pointUserName{
+  color: gold;
+}
+
+
+.title {
+  width: 100%;
+  height: 8vw;
+  margin-top: 15vw;
+  background: white;
+  border: 3px solid #000;
+
+}
+
+/*title*/
+.titleContent {
+  font-size: 30px;
+  font-weight: 40px;
+  text-align: left;
+  margin: 1% 0 0 2%;
+
+}
+
+
+
+/*컨텐츠 전체영역*/
+.content-group {
+  margin-top: 10vw;
+  width: 100%;
+  /* height: 60vw; */
+  position: absolute;
+  top: 20%;
+  background: silver;
+  border: 3px solid #000;
+
+
+}
+
+.contentHead {
+  width: auto;
+  color: black;
+  font-size: 30px;
+  float: right;
+
+
+}
+
+.contentHead>div {
+  display: inline-block;
+  margin-right: 10px;
+  /* 각 div 사이의 간격을 조절합니다. */
+
+}
+
+
+
+.contentHead div:hover {
+  color: #ff8342;
+}
+
+.Content1 {
+  margin-top: 30px;
+  
+}
+
+.ContentBox {
+  display: flex;
+  margin-top: 3vw;
+}
+
+.ContentImg {
+  flex: 1 0 auto;
+  max-width: 300px;
+  max-height: 300px; /* 최대 높이 300px로 제한 */
+  
+  border-radius: 10px;
+  margin-left: 1vw;
+  border: 3px solid #000;
+  overflow: hidden;
+
+  
+
+}
+
+
+.ContentImg:hover{
+  transform: scale(1.1);
+  transition: all 1.0s;
+
+}
+
+#normal {
+  width: 50% !important;
+  height: 500px;
+}
+
+.ContentContent {
+  flex: 3 0 auto;
+  text-align: left;
+  padding-left: 20px;
+  /* position: absolute; 불필요 */
+  color: black;
+  font-size: 30px;
+  font-weight: 400;
+  width: auto;
+  overflow:scroll;
+  border: 3px solid red;
+
+
+
+}
+
+
+.pointBox {
+  font-size: 10vh;
+  margin-top: 10vh;
+}
+
+.pointCharge {
+  text-decoration: underline;
+  text-decoration-thickness: 4px;
+  color: red;
+  
+}
+
+
+.pointBox .pointGroup button {
+  border-radius: 10px;
+  margin: 1vw;
+
+}
+
+.pointBox .pointGroup button:hover {
+  background-color:#002ead;
+  transition: 0.7s;
+
+
+}
+
+
+
+/* reply 댓글영역 */
+.reply {
+  width: 100%;
+  height: 150px;
+  
+  left: 0;
+  
+
+  background: yellowgreen;
+  color: black;
+  text-align: left;
+  border: 3px solid #000;
+overflow: scroll;
+}
+
+
+
+.reply .replyTitle {
+  margin-left: 2%;
+}
+
+.reply .replyBox {
+  margin-left: 2%;
+}
+
+
+
+.ad .ad-box {
+  width: 60vw;
+
+  margin-top: 5vw;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+
+
+
+.ad .ad-box .adtitle {
+  text-align: left;
+  margin: 5% 0 0 2%;
+  font-size: 30px;
+
+}
+
+
+.ad .ad-box li img{
+  border: 3px solid #000;
+
+}
+
+
+.ad .ad-box .add-group li {
+  float: left;
+  width: 25%;
+  box-sizing: border-box;
+  padding: 10px; /* 패딩 추가 */
+}
+
+.ad .ad-box .add-group li img {
+  transition: opacity 0.3s; /* transition 속성 수정 */
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+}
+
+.ad .ad-box .add-group li img:hover {
+  opacity: 0.7; /* 이미지에 마우스 호버 시 투명도 조절 */
+}
+
+.ad .ad-box .add-group li img::before {
+  position: absolute;
+  top: 0;
+  left: -75%;
+  z-index: 2;
+  display: block;
+  content: '';
+  background: -webkit-linear-gradient(left, rgba(212, 31, 31, 0) 0%, rgba(255,255,255,.3) 100%);
+  background: linear-gradient(to right, rgba(233, 33, 33, 0) 0%, rgba(255,255,255,.3) 100%);
+  transform: skewX(-25deg);
+  opacity: 0;
+}
+ 
+.ad .ad-box .add-group li img:hover::before {
+  animation: shine .75s;
+}
+
+@keyframes shine {
+  0% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    left: 125%;
+    opacity: 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 오른쪽 사이드바 */
+
+aside .right-snb {
+  width: 20vw;
+  background: #7AA2E3;
+  float: right;
+  height: 220vh;
+  box-sizing: border-box;
+
+
+}
+
+aside .right-snb .point {
+  margin: 20px 20px;
+}
+
+aside .right-snb .point p::before {
+  content: '\f51e';
+  font-family: "Font Awesome 5 Free";
+  /*폰트어썸 fas, far 글꼴 연결*/
+  font-weight: 600;
+  /*폰트어썸 굵기 Solid Style(fas) 600필수*/
+  margin-right: 15px;
+}
+
+
+
+
+
+
+
+aside .right-snb .weather {
+  background: #F8F6E3;
+  width: 90%;
+  height: 300px;
+  margin: 30px 5%;
+  border-radius: 10%;
+  padding: 20px;
+
+}
+
+aside .right-snb .friends {
+  position: relative;
+}
+
+aside .right-snb .friends .friends {
+  /* 친구 목록 */
+  font-size: 26px;
+  background: #F8F6E3;
+  padding: 30px;
+  margin: 0 5%;
+  border-radius: 10%;
+
+  position: relative;
+}
+
+
+
+aside .right-snb .friends .friends>ul>li {
+  color: #797474;
+  margin-top: 20px;
+}
+
+aside .right-snb .friends .friends>ul>li:hover {
+  display: block;
+}
+
+aside .right-snb .friends #user-information {
+  /* 친구 유저 정보 */
+  width: 50%;
+  height: 200px;
+  background: #cce37a;
+  border-radius: 20%;
+  margin: auto 5%;
+  position: absolute;
+  top: 50%;
+  right: 30%;
+  display: none;
+}
+
+aside .right-snb .friends #user-information p {
+  margin-top: 10%;
+  margin-left: 10%;
+}
+
+aside .right-snb .friends #user-information p>span#x-btn::after {
+  /* x자 아이콘 */
+  content: '\58';
+  font-family: "Font Awesome 5 Free";
+  /*폰트어썸 fas, far 글꼴 연결*/
+  font-weight: 600;
+  /*폰트어썸 굵기 Solid Style(fas) 600필수*/
+  margin-right: 15px;
+  margin-left: 15px;
+  float: right;
+  cursor: pointer;
+}
+
+aside .right-snb .friends #user-information>ul {
+  margin-top: 30%;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-end;
+}
+
+
+aside .right-snb .friends #user-information>ul>li#my-page::before {
+  content: '\f015';
+  font-family: "Font Awesome 5 Free";
+  font-weight: 600;
+  margin-right: 15px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+aside .right-snb .friends #user-information>ul>li#chatting::before {
+  content: '\f075';
+  font-family: "Font Awesome 5 Free";
+  font-weight: 600;
+  margin-right: 15px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+aside .right-snb .friends #user-information>ul>li#ban::before {
+  content: '\f05e';
+  font-family: "Font Awesome 5 Free";
+  font-weight: 600;
+  margin-right: 15px;
+  margin-left: 15px;
+  cursor: pointer;
+}

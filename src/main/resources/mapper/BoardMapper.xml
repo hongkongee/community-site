@@ -13,13 +13,13 @@
     <select id="findAll" resultType="board">
         SELECT * FROM tbl_board
 
-        <if test="type == 'popular'">
+        <if test="sort == 'popular'">
             ORDER BY like_count DESC
         </if>
-        <if test="type == 'recent'">
+        <if test="sort == 'recent'">
             ORDER BY bno DESC
         </if>
-        LIMIT 0, #{amount}
+        LIMIT #{page.pageStart}, #{page.amount}
     </select>
 
     <select id="findOne" resultType="board">
@@ -45,7 +45,7 @@
             WHERE category = 'TRIP'
         </if>
         ORDER BY bno DESC
-        LIMIT 0, #{amount}
+        LIMIT #{page.pageStart}, #{page.amount}
     </select>
 
     <sql id="search">
@@ -91,12 +91,58 @@
         WHERE writer=#{accountNumber}
     </select>
 
+    <select id="getCountCategory" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_board
+        <if test="category == 'normal'">
+            WHERE category = 'NORMAL'
+        </if>
+        <if test="category == 'game'">
+            WHERE category = 'GAME'
+        </if>
+        <if test="category == 'market'">
+            WHERE category = 'MARKET'
+        </if>
+        <if test="category == 'movie'">
+            WHERE category = 'MOVIE'
+        </if>
+        <if test="category == 'trip'">
+            WHERE category = 'TRIP'
+        </if>
+    </select>
+
     <select id="findMine" resultType="board">
         SELECT * FROM tbl_board
         WHERE writer = #{account}
         ORDER BY bno DESC
         LIMIT #{page.pageStart}, #{page.amount}
     </select>
+
+
+    <select id="findHot" resultType="board">
+        SELECT * FROM tbl_board
+
+        <if test="sort == 'popular'">
+            ORDER BY like_count DESC
+        </if>
+        <if test="sort == 'recent'">
+            ORDER BY bno DESC
+        </if>
+        LIMIT 0, #{amount}
+    </select>
+
+    <select id="findMyHot" resultType="board">
+        SELECT * FROM tbl_board
+        WHERE writer = #{account}
+        ORDER BY like_count DESC
+        LIMIT #{page.pageStart}, #{page.amount}
+    </select>
+
+    <update id="modifyIntro">
+        UPDATE tbl_user
+        SET introduction = #{intro}
+        WHERE account_number = #{account}
+    </update>
 
 <!--    <insert id="save">-->
 <!--        INSERT INTO image(origin_image_name, new_image_name, image_path)-->

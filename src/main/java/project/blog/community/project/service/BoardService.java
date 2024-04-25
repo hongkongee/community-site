@@ -33,10 +33,10 @@ public class BoardService {
    private final UserMapper userMapper;
    private final LikeMapper likeMapper;
 
-   // 게시판 목록을 조회
-   public List<BoardListResponseDTO> getList() {
+   // 게시판 목록을 조회 (all page)
+   public List<BoardListResponseDTO> getList(Search page) {
       List<BoardListResponseDTO> dtoList = new ArrayList<>();
-      List<Board> boardList = boardMapper.findAll("recent", 20);
+      List<Board> boardList = boardMapper.findAll(page);
 
       for (Board board : boardList) {
          String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
@@ -48,14 +48,13 @@ public class BoardService {
 
    }
 
-   // 메인화면에서 목록을 조회
-   public List<BoardListResponseDTO> getHotList(String option) {
+   // 메인화면에서 목록을 조회 (main page)
+   public List<BoardListResponseDTO> getHotList(String sort) {
       List<BoardListResponseDTO> dtoList = new ArrayList<>();
 
       // 전체 게시판과 달리 좋아요 순으로 6개 게시물만 정렬
-      String type = option;
       int amount = 6;
-      List<Board> boardList = boardMapper.findAll(type, amount);
+      List<Board> boardList = boardMapper.findHot(sort, amount);
 
       for (Board board : boardList) {
          String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
@@ -67,11 +66,11 @@ public class BoardService {
    }
 
    // 카테고리에 따라 다른 게시판 목록을 보여주는 메서드
-   public List<BoardListResponseDTO> getCategoryList(String category) {
-      int amount = 20;
+   public List<BoardListResponseDTO> getCategoryList(String category, Search page) {
 
       List<BoardListResponseDTO> dtoList = new ArrayList<>();
-      List<Board> boardList = boardMapper.findCategory(category, amount);
+      List<Board> boardList = boardMapper.findCategory(category, page);
+
       for (Board board : boardList) {
          String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
          BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname);
@@ -158,7 +157,7 @@ public class BoardService {
       return likeCount;
    }
 
-/*
+
    public List<BoardMyListResponseDTO> getMyList(HttpServletRequest request, Search page) {
       List<BoardMyListResponseDTO> myList = new ArrayList<>();
       List<Board> boardList = boardMapper.findAll(page);
@@ -171,21 +170,23 @@ public class BoardService {
       return myList;
 
    }
-   */
 
-   public int getCount(Search page, HttpServletRequest request) {
-      HttpSession session = request.getSession();
-      LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
-      log.info("dto: {}", loginDto);
+    public int getCount(Search page, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+        log.info("dto: {}", loginDto);
 
-      String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
-      int count = boardMapper.getCount(page, currentLoginMemberAccount);
-      log.info("count: "+ count);
-      return count;
+        String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
+        int count = boardMapper.getCount(page, currentLoginMemberAccount);
+        log.info("count: "+ count);
+        return count;
+    }
+
+   public int getCountCategory(String category, Search page) {
+      return boardMapper.getCountCategory(category, page);
    }
 
-
-
+   // 나의 게시글 불러오기
    public List<BoardMyListResponseDTO> getMyList(Search page, HttpServletRequest request) {
 
       HttpSession session = request.getSession();
@@ -198,7 +199,7 @@ public class BoardService {
       List<Board> boardList = boardMapper.findMine(page, currentLoginMemberAccount);
       for (Board board : boardList) {
          BoardMyListResponseDTO dto = new BoardMyListResponseDTO(board);
-         
+
          // 하트 체크 여부 불러오기
          int i = checkLike(request, dto.getBno());
          if (i > 0) {
@@ -210,6 +211,23 @@ public class BoardService {
       }
       return myList;
    }
+
+   // 특정 인물의 게시글 가져오기
+   public List<BoardMyListResponseDTO> getUserList(String account) {
+
+      Search page = new Search();
+
+      List<BoardMyListResponseDTO> hisList = new ArrayList<>();
+      List<Board> boardList = boardMapper.findMyHot(page, account);
+
+      for (Board board : boardList) {
+         BoardMyListResponseDTO dto = new BoardMyListResponseDTO(board);
+         hisList.add(dto);
+      }
+      return hisList;
+
+   }
+
 
 
    // 게시글 업로드
@@ -242,9 +260,13 @@ public class BoardService {
    }
 
 
+   // 자기소개 삽입 or 수정
+   public void modifyMyIntro(String myAccount, String introduction) {
+      boardMapper.modifyIntro(myAccount, introduction);
+   }
+
     public void delete(int bno) {
         boardMapper.delete(bno);
     }
-
 
 }

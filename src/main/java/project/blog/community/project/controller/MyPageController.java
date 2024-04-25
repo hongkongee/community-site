@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import project.blog.community.project.dto.response.BoardMyListResponseDTO;
 import project.blog.community.project.dto.response.FollowerResponseDTO;
 import project.blog.community.project.dto.response.LoginUserResponseDTO;
@@ -15,6 +16,11 @@ import project.blog.community.project.service.BoardService;
 import project.blog.community.project.service.FollowingService;
 import project.blog.community.project.service.UserService;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +37,7 @@ public class MyPageController {
    private final BoardService boardService;
 
    @GetMapping("/home/{account}")
-   public String myHome(@PathVariable String account, HttpServletRequest request, Model model){
+   public String myHome(@PathVariable String account,String profilePicture ,HttpServletRequest request, Model model){
       log.info("/mypage/home/{}: GET!", account);
       
       // 홈페이지 유저 정보 가져오기
@@ -40,7 +46,8 @@ public class MyPageController {
 
 //      log.info("user: " + userInformation.toString());
 
-
+      MypageUserResponseDTO userprofile = userService.saveProfile(profilePicture);
+model.addAttribute("user",userprofile);
       // 로그인한 유저의 정보가져오기
       HttpSession session = request.getSession();
       LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
@@ -97,6 +104,9 @@ public class MyPageController {
 
       return "mypage/mypage";
    }
+
+
+
 
    @PostMapping("/intro")
    public String introSubmit(@RequestParam("introduction") String introduction,

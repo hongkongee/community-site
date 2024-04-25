@@ -84,6 +84,7 @@ body {
 .body-wrapper1 .user-profile-box .user-profile-pic {
   width: 100%;
   height: 100%;
+  
 }
 
 .body-wrapper1 .user-info {
@@ -217,7 +218,11 @@ body {
   cursor: pointer;
 }
 
-
+.profile-save{
+  height: 50px;
+  align-self: flex-end;
+  display: none;
+}
 
 
 .body-wrapper2 {

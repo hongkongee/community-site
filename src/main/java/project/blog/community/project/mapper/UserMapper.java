@@ -39,6 +39,8 @@ public interface UserMapper {
    // 팔로우하는 유저 찾기
    List<String> findUserByFollowing(String account);
 
+   //프로필 바꾸기
+  User updateProfile(String profilePicture);
 }
 
 

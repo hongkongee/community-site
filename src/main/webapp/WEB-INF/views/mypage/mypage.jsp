@@ -51,8 +51,11 @@
 
                 <c:if test="${not empty user.profilePicture}">
                     <img class="user-profile-pic" src="/display\${following.profilePicture}" alt="프사">
-                </c:if>
+                </c:if>     
+                <input type="file"id="profile-img"style="display: none;"name="profileImage" >  
             </div>
+            <button type="submit" class="profile-save">프로필 저장</button>
+        
 
             <div class="user-info">
                 <div class="profile-name">

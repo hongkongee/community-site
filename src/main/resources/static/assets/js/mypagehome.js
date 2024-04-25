@@ -1,3 +1,27 @@
+//프로필 업로드 
+const $profilePic = document.querySelector('.user-profile-pic');
+const $fileInput = document.getElementById('profile-img');
+const $profileSaveBtn = document.querySelector('.profile-save');
+
+$profilePic.onclick = e => {
+    $fileInput.click();
+}
+
+$fileInput.onchange = e => {
+    const fileData = $fileInput.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(fileData);
+
+    reader.onloadend = e => {
+        const $img = document.querySelector('.user-profile-pic');
+        $img.setAttribute('src', reader.result);
+        $profileSaveBtn.style.display = 'inline-block'; // 버튼 보이기
+    }
+}
+
+$profileSaveBtn.onclick = e => {
+    $profileSaveBtn.style.display = 'none'; // 버튼 숨기기
+}
 
 
 // 서버에 팔로잉 추가(등록) POST 요청 보내기
@@ -97,4 +121,10 @@ document.getElementById('modify-btn').onclick = () => {
   document.getElementById('form-intro').submit();
   console.log('수정 완료~');
 }
+
+
+
+
+
+
 

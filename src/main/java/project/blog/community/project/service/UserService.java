@@ -109,6 +109,13 @@ public class UserService {
       session.setMaxInactiveInterval(60 * 60);
    }
 
+public MypageUserResponseDTO saveProfile(String profilePicture){
+    User user  = userMapper.updateProfile(profilePicture);
+   log.info("In UserService process, user Profile= " + user.toString());
+   MypageUserResponseDTO dto = new MypageUserResponseDTO(user);
+   return dto;
+}
+
 
 
     public MypageUserResponseDTO getUserInformation(String account) {

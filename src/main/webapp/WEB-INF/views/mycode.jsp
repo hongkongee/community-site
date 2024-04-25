@@ -7,24 +7,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="/assets/css/mycode.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="/assets/css/header.css">
 </head>
 <body>
-
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
   <div class="MygalleryJsp" >
   <div class="mar">
     <div class="background">
     <div class="Rectangle1" >
-      <button class="add-photo"><div>+ 코드 추가</div></button>
+      <button class="add-photo"><div>글쓰기</div></button>
 
 
     <div class="let2">
-      <span class="new" id="recent"><a href="/wel/myCode">최신순</a></span>
+    <span class="abc" id="past"> <a href="/wel/endMyCode">오름차순</a></span>
       /
-      <span class="abc" id="past"> <a href="/wel/endMyCode">과거순</a></span>
+       <span class="new" id="recent"><a href="/wel/myCode">내림차순</a></span>
     </div>
 <div class="top-section">
         <!-- 검색창 영역 -->

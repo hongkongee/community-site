@@ -213,4 +213,24 @@
       p.myAccountNumber {
         display: none;
       }
+ /* 날씨 */
+  .weather1{
+  display: flex;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  }
+  .icon{
+  margin-left: 40px;
+  }
+  .wea{
+  margin:0px 5px;
+
+
+  } 
+
+  .button{
+  background: none;
+  border: 0; background-color: transparent;
+  width: 100%;
+  }
 

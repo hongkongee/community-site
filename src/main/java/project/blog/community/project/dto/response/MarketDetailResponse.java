@@ -25,6 +25,8 @@ public class MarketDetailResponse {
     private final String chooseReason;
     private final String message;
     private final int rate;
+    private final String postImg;
+
 
     public MarketDetailResponse(Market market) {
         //entity -> DTO
@@ -40,6 +42,7 @@ public class MarketDetailResponse {
         this.chooseReason = market.getChooseReason();
         this.message = market.getMessage();
         this.rate = market.getRate();
+        this.postImg = market.getPostImg();
     }
 
 }

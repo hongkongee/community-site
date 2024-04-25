@@ -1,7 +1,7 @@
 /////수정하기 
 
-const URL = `/market/detail/${b.boardNo}`; //백틱
-const bno = `${b.boardNo}`;
+const bno = document.getElementById('boardNo').textContent;
+const modifyURL = `/market/detail/${bno}`; //백틱
 
 
 // 수정 버튼 이벤트 발생
@@ -29,7 +29,7 @@ const $editedPrice = document.getElementById('editedPrice');
 let editedPrice = document.getElementById('editedPrice').value;
 
 //거래장소
-const $address = document.getElementById('address');
+const $editAddress = document.getElementById('editAddress');
 let address = document.getElementById('address').value;
 
 
@@ -41,20 +41,20 @@ const $deleteBtn = document.getElementById('content-Del');
 
 
 
-$modifyBtn.onclick = e => {
+$modifyBtn.addEventListener('click', e => {
   console.log('수정 버튼 이벤트 발생!');
-  editedTitle = document.getElementById('textTitle').value;
-  editedContent = document.getElementById('textContent').value;
-  editedCategory = document.getElementById('editedCategory').value;
-  editedPrice = document.getElementById('price').value;
-  address = document.getElementById('address').value;
+  //수정창에
+  $editedTitle.value = document.getElementById('textTitle').textContent;
+  $editedContent.value = document.getElementById('textContent').textContent;
+  $editedCategory.value = document.getElementById('selectedCategory').textContent;
+  $editedPrice.value = document.getElementById('price').textContent;
+  $editAddress.value = document.getElementById('address').textContent;
 
 
   console.log($editedTitle.value);
   console.log($editedContent.value);
   makeModifyClickHandler();
-  makeCloseClickHandler();
-}
+})
 
 
 
@@ -77,24 +77,18 @@ function makeModifyClickHandler() {
     $saveBtn.onclick = function() {
       if ($editedTitle.value === '' && $editedContent.value === '') {
         alert('내용은 필수입니다.');
-
-        if ($editedCategory) {
-          $editedCategory.addEventListener('change', function () {
-            $editedCategory.textContent = $editedCategory.value === 'sale' ? '판매중' : '판매완료';
-          });
-        }
-
         return;
       }
 
 
       const payload = {
         boardNo: bno,
-        title: editedTitle.value,
-        content: editedContent.value,
-        category: category.value,
-        price: editedPrice.value
-
+        title: $editedTitle.value,
+        text: $editedContent.value,
+        category: $editedCategory.value,
+        price: $editedPrice.value,
+        address : $editAddress.value
+    
       };
 
       const requestInfo = {
@@ -105,7 +99,7 @@ function makeModifyClickHandler() {
         body: JSON.stringify(payload)
       };
 
-      fetch(URL, requestInfo)
+      fetch(modifyURL, requestInfo)
 
         .then(res => {
           console.log(res.status);
@@ -120,10 +114,7 @@ function makeModifyClickHandler() {
 
         .then(data => {
           console.log('응답 성공!', data);
-          editedTitle.value = '';
-          editedContent.value = '';
-          category.value = '';
-          price.value = '';
+          location.href='/market/detail/' + bno;
         });
 
     };
@@ -131,16 +122,15 @@ function makeModifyClickHandler() {
 }
 
 // 삭제기능
-$deleteBtn.onclick = e => {
+$deleteBtn.addEventListener('click', e => {
   console.log('삭제 버튼 클릭!');
-  e.preventDefault(); // 기본 동작 방지
 
   if (confirm('정말로 삭제하시겠습니까?')) {
     deleteBoard();
     alert('삭제 되었습니다');
     window.location.href = '/market/list';
   }
-};
+});
 
 function deleteBoard() {
   console.log('삭제 함수 내부');
@@ -152,7 +142,7 @@ function deleteBoard() {
     },
   };
 
-  fetch(URL, requestInfo)
+  fetch(modifyURL, requestInfo)
     .then(res => {
       console.log(res.status);
       if (res.status === 200) {

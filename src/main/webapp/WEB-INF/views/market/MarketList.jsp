@@ -8,8 +8,8 @@
   <meta charset="UTF-8">
   <title>All page</title>
 
+  
   <%@ include file="../include/static-head.jsp" %>
-
   <link rel="stylesheet" href="/assets/css/allpage.css">
   <link rel="stylesheet" href="/assets/css/snb.css">
 
@@ -17,7 +17,6 @@
 
 
   <style>
-    .all {}
 
     .btn-primary {
       padding: auto;

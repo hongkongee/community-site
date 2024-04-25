@@ -36,6 +36,7 @@ import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccoun
 
 @Controller
 @RequestMapping("/market")
+
 @RequiredArgsConstructor
 @Slf4j
 public class MarketController {
@@ -54,8 +55,6 @@ public class MarketController {
 
     @GetMapping("/list")
     public String list(Model model, HttpServletRequest request) {
-
-
 
 
         log.info("/market/list: GET");
@@ -137,7 +136,7 @@ public class MarketController {
 
     // boardNo 게시물에 즐겨찾기를 눌렀을 때 발생
     @PostMapping("/list/{boardNo}")
-    @ResponseBody //메서드의 반환 값이 HTTP 응답 본문으로 사용
+    //@ResponseBody //메서드의 반환 값이 HTTP 응답 본문으로 사용
     public ResponseEntity<?> addFavList(Model model,
                                         @PathVariable("boardNo") int boardNo,
                                         @RequestBody Map<String, Object> isAddFav,
@@ -163,7 +162,7 @@ public class MarketController {
 
 
     @PostMapping("/detail/{boardNo}")
-    @ResponseBody
+    //@ResponseBody
     public ResponseEntity<?> rate(@RequestBody MarketRateRequestDTO dto, HttpSession session) {
         log.info("/market/detail/{boardNo}: post {}", dto.toString());
         //글번호

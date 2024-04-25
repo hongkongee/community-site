@@ -1,6 +1,7 @@
 package project.blog.community.project.service;
 
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -108,7 +109,7 @@ public class BoardService {
     }
 
 
-    // 게시물의 좋아요 수 바꾸기
+     //게시물의 좋아요 수 바꾸기
 //    public int changeLike(LikeRequestDTO dto, HttpServletRequest request) {
 //        int bno = dto.getBno();
 //        int number = dto.getNumber();

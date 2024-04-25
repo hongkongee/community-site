@@ -55,6 +55,7 @@ public class Market{
     private String category;
     private String chooseReason;
     private String message;
+    private String postImg;
 
     public Market(MarketWriteRequestDTO dto, String writer) {
         //dto -> Entity
@@ -65,6 +66,7 @@ public class Market{
         this.category = dto.getCategory();
         this.price = dto.getPrice();
         this.address = dto.getAddress();
+        this.postImg = dto.getPostImg();
 
         this.textWriter = writer;
     }

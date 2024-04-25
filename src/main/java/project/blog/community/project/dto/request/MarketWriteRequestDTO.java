@@ -16,6 +16,7 @@ public class MarketWriteRequestDTO {
     private String category;
     private int price;
     private String address;
+    private String postImg;
 
 
 }

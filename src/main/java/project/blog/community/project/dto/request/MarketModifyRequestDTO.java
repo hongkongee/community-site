@@ -30,6 +30,8 @@ public class MarketModifyRequestDTO {
     @NotNull
     private int price;
 
+    private String address;
+
 
     // 글번호
 
@@ -40,6 +42,7 @@ public class MarketModifyRequestDTO {
                 .textContent(text)
                 .category(category)
                 .price(price)
+                .address(address)
                 .build();
     }
 

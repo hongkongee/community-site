@@ -159,6 +159,12 @@ a {
   margin-top: 3vw;
 }
 
+.textContent {
+  width: 60vw; /* 70 문자 너비 */
+  
+}
+
+
 .ContentImg {
   flex: 1 0 auto;
   max-width: 300px;

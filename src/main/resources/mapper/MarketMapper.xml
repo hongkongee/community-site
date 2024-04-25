@@ -7,9 +7,9 @@
 
     <insert id="save">
         INSERT INTO tbl_market
-        (text_title, text_content, text_writer, category, price, address)
+        (text_title, text_content, text_writer, category, price, address, post_img)
         VALUES
-        (#{textTitle}, #{textContent}, #{textWriter}, #{category}, #{price}, #{address})
+        (#{textTitle}, #{textContent}, #{textWriter}, #{category}, #{price}, #{address}, #{postImg});
         <!--VALUES는 SQL 문법에서 데이터 삽입(INSERT) 작업을 할 때,
         특정 테이블의 컬럼에 삽입될 값들을 지정하는 데 사용되는 키워드입니다.-->
     </insert>
@@ -32,7 +32,11 @@
 
     <update id="modify">
         UPDATE tbl_market
-        SET text_title = #{textTitle}, text_content = #{textContent}, category = #{category}, price = #{price}
+        SET text_title = #{textTitle},
+        text_content = #{textContent},
+        category = #{category},
+        price = #{price},
+        address = #{address}
         WHERE board_no = #{boardNo}
     </update>
 
@@ -70,6 +74,7 @@
         WHERE account_number = #{textWriter}
     </update>
 
+    <!-- 즐겨찾기 -->
     <insert id="addRate">
         INSERT INTO tbl_market_rate
         VALUES (#{boardNo}, #{textWriter}, #{message}, #{chooseReason})

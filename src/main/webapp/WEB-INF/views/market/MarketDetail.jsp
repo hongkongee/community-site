@@ -103,10 +103,17 @@
           </button>
         </div>
         <br>
-        <div class="ContentBox">
 
-          <div class="normal" id="textContent">${b.textContent}</div>
-        </div>
+        <div id="market-img">
+          <c:if test="${b.postImg != null}">
+            <img src="/display${b.postImg}" alt="업로드 이미지">
+          </c:if>
+
+
+        <div class="textContent" id="textContent" name="textContent">${b.textContent}</div>
+
+        <!-- <div class="normal" id="textContent">${b.textContent}</div> -->
+
         <!-- 지도 -->
         <div id="map-container">
           <div id="googleMap"></div>
@@ -143,7 +150,7 @@
                   <textarea class="form-control-lg" id="editedContent" rows="50" cols="100"
                     style="width: 100%;"></textarea>
 
-                  <select id="editedCategory">
+                  <select id="editedCategory" name="category">
                     <option value="sale">판매중</option>
                     <option value="sold">판매완료</option>
                   </select>
@@ -152,8 +159,8 @@
                   <label for="editedPrice">수정할 가격</label>
                   <input type="int" class="form-control" id="editedPrice" style="width: 100%;">
 
-                  <label for="address">거래장소</label>
-                  <input type="text" class="form-control" id="address" style="width: 100%;">
+                  <label for="editAddress">수정할 거래장소</label>
+                  <input type="text" class="form-control" id="editAddress" style="width: 100%;">
 
                 </div>
               </form>
@@ -235,23 +242,29 @@
       map = new google.maps.Map(document.getElementById("googleMap"), mapOptions); //mapOptions 사용자 설정 위치 
     }
 
-    function searchAddress() { //입력한 주소를 받아 해당 주소의 위도와 경도를 검색
+    //구글맵 검색api
+    function searchAddress(e) { //입력한 주소를 받아 해당 주소의 위도와 경도를 검색
       var geocoder = new google.maps.Geocoder(); //주소 위도/경도 변환
       var address = '${b.address}';
 
-      geocoder.geocode({
-        'address': address
-      }, function (results, status) { //변환할 주소, 콜백함수
-        if (status === 'OK') {
-          map.setCenter(results[0].geometry.location);
-          var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location
-          });
-        } else {
-          alert('주소를 찾을 수 없습니다. 다른 주소를 입력해주세요.');
-        }
-      });
+
+      if (address === null) {
+        return null;
+      } else if (address) {
+        geocoder.geocode({
+          'address': address
+        }, function (results, status) { //변환할 주소, 콜백함수
+          if (status === 'OK') {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('주소를 찾을 수 없습니다. 다른 주소를 입력해주세요.');
+          }
+        });
+      }
     }
 
     window.onload = function () { //다 되고 호출
@@ -259,6 +272,7 @@
     }
 
 
+    // 좋아요 버튼 실행 조건
     document.getElementById('confirmBtn').onclick = e => {
       if (!loginData) {
         alert('로그인이 필요합니다.');

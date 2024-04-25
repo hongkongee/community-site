@@ -6,9 +6,9 @@
 
     <insert id="save">
         INSERT INTO tbl_reply
-            (board_no, reply_writer, content)
+            (board_no, reply_writer, content, account)
         VALUES
-            (#{boardNo}, #{replyWriter}, #{content})
+            (#{boardNo}, #{replyWriter}, #{content}, #{account})
     </insert>
 
     <update id="modify">
@@ -29,7 +29,10 @@
     </select>
 
     <select id="findAll" resultType="reply">
-        SELECT * FROM tbl_reply
+        SELECT A.*, B.profile_picture, B.login_method
+        FROM tbl_reply A
+        LEFT OUTER JOIN tbl_user B
+        ON A.account = B.account_number
         WHERE board_no = #{bn}
         ORDER BY reply_no
         LIMIT #{p.pageStart}, #{p.amount}

@@ -4,7 +4,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.connector.Request;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import project.blog.community.project.dto.response.FollowerResponseDTO;
@@ -43,9 +42,39 @@ public class FollowingService {
         }
 
         return dtoList;
-
-
     }
+
+    // 유저의 팔로잉 정보 가져오기
+    public List<FollowerResponseDTO> findUserFollowing(String account) {
+        List<String> followers = userMapper.findUserByFollower(100, account);
+        List<FollowerResponseDTO> dtoList = new ArrayList<>();
+
+        for (String follower : followers) {
+            User user = userMapper.findUser(follower);
+            FollowerResponseDTO dto = new FollowerResponseDTO(user);
+            dtoList.add(dto);
+        }
+
+        return dtoList;
+    }
+    
+    // 유저의 팔로워 정보 가져오기
+    public List<FollowerResponseDTO> findUserFollower(String account) {
+        List<String> followings = userMapper.findUserByFollowing(account);
+
+        List<FollowerResponseDTO> dtoList = new ArrayList<>();
+
+        for (String following : followings) {
+            User user = userMapper.findUser(following);
+            FollowerResponseDTO dto = new FollowerResponseDTO(user);
+            dtoList.add(dto);
+        }
+
+        return dtoList;
+    }
+
+
+
 
     // 팔로우 추가하기
     public void addFollowerUser(HttpServletRequest request, String followerAccount) {
@@ -59,6 +88,9 @@ public class FollowingService {
 
     public int addFollower(String writerAccount, HttpServletRequest request) {
         String myAccount = getMyAccount(request);
+
+        log.info("my Account : " + myAccount);
+
         if (myAccount.equals(writerAccount)) {
             log.info("자기 자신은 팔로잉 불가능");
             return 2; // 자기 자신 following
@@ -97,5 +129,5 @@ public class FollowingService {
     }
 
 
-
+    
 }

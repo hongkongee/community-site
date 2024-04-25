@@ -1,6 +1,6 @@
 let likeFlag = 0; // 쿠키 존재 여부 (1 이면 좋아요 이미 부여)
 // 모든 post를 감싸고 있는 부모 요소
-const $postContainer = document.querySelector('.post-container');
+const $postContain = document.querySelector('.post-contain');
 
 // 좋아요 누르면 게시물 좋아요 수 1 증가시키고 취소하면 1 감소시키기
 function likeCountUpDown(n, event) {
@@ -101,7 +101,10 @@ function clickHeartBtn(e) {
 };
 
 
-$postContainer.onclick = (e) => {
+$postContain.onclick = (e) => {
   if(!e.target.matches('i.fa-heart')) return;
   clickHeartBtn(e);
 }
+
+
+

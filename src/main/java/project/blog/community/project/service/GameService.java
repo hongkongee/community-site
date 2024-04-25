@@ -1,19 +1,25 @@
 package project.blog.community.project.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import project.blog.community.project.dto.request.RpsRequestDTO;
+import project.blog.community.project.mapper.UserMapper;
 
 import java.util.Random;
 
 import static project.blog.community.project.service.GameResult.*;
 
 @Service
+@RequiredArgsConstructor
 public class GameService {
 
-    public String rpsPointCalc(RpsRequestDTO dto) {
+    private UserMapper userMapper;
+
+    public String rpsPointCalc(RpsRequestDTO dto, String myAccount) {
         // 1. 내 포인트에서 베팅 금액 차감
         // DB에서 로그인한 대상 (session) 의 포인트 차감
         int bettingPoint = dto.getBetPoint();
+        userMapper.addPoint(myAccount, -bettingPoint);
         
         // 2. 가위바위보 진행 (컴퓨터 랜덤 가위바위보 생성 후 비교)
         GameResult gameResult = rpsWithComputer(dto.getChoice());
@@ -21,6 +27,7 @@ public class GameService {
         // 3. 가위바위보 결과에 따라 포인트 지급 or 차감
         int resultPoint = calcPoint(bettingPoint, gameResult);
         // DB에서 로그인한 대상 (session) 의 포인트 지급 or 차감
+        userMapper.addPoint(myAccount, resultPoint);
 
         // 4. 결과를 화면단에 전달, 결과에 따라 화면을 다르게 구성
         String gameResultString = gameResult.name();
@@ -74,4 +81,14 @@ public class GameService {
     }
 
 
+    // 랜덤으로 오늘 포인트 증가시키기
+    public int todayRandomPoint(String myAccount) {
+        Random random = new Random();
+        int randomInt = random.nextInt(10);
+        int todayPoint = randomInt * 50;
+
+        userMapper.addPoint(myAccount, todayPoint);
+        return todayPoint;
+
+    }
 }

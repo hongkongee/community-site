@@ -93,8 +93,62 @@ $pen.onclick = () => {
 
 }
 
-document.getElementById('modify-btn').onclick = () => {
-  document.getElementById('form-intro').submit();
-  console.log('수정 완료~');
+
+
+// 자기소개 수정 버튼 클릭 시 발생
+function makeBioModifyClickhHandler() {
+
+  const $modBtn = document.getElementById('bioModBtn');
+
+  $modBtn.addEventListener('click', e => {
+    const introduction = document.getElementById('textarea-intro').value;
+
+    const payload = {
+      introduction: introduction
+    };
+
+    console.log('payload: ', payload);
+
+    const requestInfo = {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    };
+
+    fetch('/mypage/intro', requestInfo)
+      .then(res => {
+        if (res.status == 200) {
+          alert('댓글이 수정되었습니다.');
+          // document.getElementById('modal-close').click();
+          location.reload();
+          return res.text();
+        } else {
+          alert('수정값에 문제가 있습니다. 내용을 확인하세요!');
+          // document.getElementById('modalReplyText').value = '';
+          location.reload();
+          return;
+        }
+      })
+      .then(data => {
+        console.log(data);
+      });
+  });
+
 }
 
+(() => {
+  makeBioModifyClickhHandler();
+
+})();
+
+$('a').click(function(event){
+  event.preventDefault(); 
+});
+
+
+// 일일 보상 클릭 시
+document.getElementById('today-point').onclick = () => {
+  
+}

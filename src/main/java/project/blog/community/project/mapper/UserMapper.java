@@ -39,6 +39,10 @@ public interface UserMapper {
    // 팔로우하는 유저 찾기
    List<String> findUserByFollowing(String account);
 
+   // 포인트 증가시키기
+   void addPoint(@Param("me") String myAccount, @Param("point") int todayPoint);
+
+
 }
 
 

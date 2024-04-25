@@ -77,7 +77,7 @@
             </div>
 
             <!-- 모달 버튼 -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" id="modal-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Launch demo modal
             </button>
             
@@ -100,7 +100,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                        <button type="button" class="btn btn-primary">수정</button>
+                        <button type="button" class="btn btn-primary" id="bioModBtn">수정</button>
                     </div>
                 </div>
                 </div>
@@ -241,18 +241,20 @@
 
                 <div class="user-market">
                     <div class="title-market">${user.nickname}님의 중고 장터 평점: ${user.rate}</div>
+                    <h2> <i class="fa-solid fa-store"></i> 평가 </h2>
                     <div class="market-image">
-                        <img src="#" class="user-market-photo">
-                        <img src="#" class="user-market-photo">
+                        <c:forEach var="following" items="${followings}">
+
+                            <div class="">
+                                <span>제목 ${post.title}</span>
+                                <span class="popular-content">${post.regDate}</span>
+                            </div>
+
+                        </c:forEach>
                     </div>
                 </div>
                 <div class="user-game">
-                    <div class="title-market">${user.nickname}님에게 게임신청</div>
-                    <div class="all-games">
-                        <div class="game-name">게임 1 <button class="register-to-game">신청걸기</button></div>
-                        <div class="game-name">게임 2 <button class="register-to-game">신청걸기</button></div>
-                        <div class="game-name">게임 3 <button class="register-to-game">신청걸기</button></div>
-                    </div>
+                    
                 </div>
             </div>
 
@@ -286,8 +288,10 @@
             <div class="weather-wrapper">
                 <!-- weather api -->
                 <div class="weatherapi-wrapper">
-                    <img class="weather-api" src="#">
-                    <div class="api"> 날씨 API</div>
+                    <div class="title-market">일일 포인트 지급</div>
+                    <div class="all-games">
+                        <a href="#" id="today-point" class="btn-3d blue">포인트 받기</a>
+                    </div>
                 </div>
 
                 <!-- music wrapper -->

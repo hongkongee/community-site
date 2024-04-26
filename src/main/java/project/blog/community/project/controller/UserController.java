@@ -15,6 +15,7 @@ import project.blog.community.project.dto.request.SignUpRequestDto;
 import project.blog.community.project.entity.User;
 import project.blog.community.project.service.LoginResult;
 import project.blog.community.project.service.UserService;
+import project.blog.community.util.LoginUtils;
 import project.blog.community.util.MailSenderService;
 import project.blog.community.util.upload.FileUtils;
 
@@ -50,7 +51,7 @@ public class UserController {
    public String signUp(SignUpRequestDto dto) {
       log.info("/users/sign-up: POST!");
       log.info("dto = {}", dto);
-      
+
       // 사진 업로드, 나중에 수정해야함
       String rootPath = null;
 
@@ -107,7 +108,12 @@ public class UserController {
 
    // 로그아웃 요청 처리
    @GetMapping("/sign-out")
-   public String signOut(HttpSession session) {
+   public String signOut(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+      log.info("/users/sign-out: GET!!");
+
+      if (LoginUtils.isAutoLogin(request)) {
+         userService.autoLoginClear(request, response);
+      }
 
       // 세션에서 로그인 정보 기록 삭제
       session.removeAttribute("login");
@@ -118,7 +124,6 @@ public class UserController {
       return "redirect:/home/main";
 
    }
-
 
    // 이메일 인증
    @PostMapping("/email")
@@ -133,6 +138,7 @@ public class UserController {
          return ResponseEntity.internalServerError().body("이메일 전송 과정에서 에러 발생!");
       }
    }
+
 
 
 

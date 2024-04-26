@@ -17,10 +17,13 @@ import java.time.format.DateTimeFormatter;
 public class BoardMyListResponseDTO {
 
     private final int bno;
-    private final String title;
-    private final String regDate; // 날짜패턴 yyyy-MM-dd HH:mm
+    private final String title; //5글자 이상이면 잘라내기
+    private final String regDate;// 날짜패턴 yyyy-MM-dd HH:mm
+    private final String writer;
     private int likeCount;
     private String postImg;
+    private int isHeart; // 하트 체크 여부
+
 
 
     public BoardMyListResponseDTO(Board board) {
@@ -29,6 +32,7 @@ public class BoardMyListResponseDTO {
         this.regDate = makePrettierDateString(board.getRegDate());
         this.likeCount = board.getLikeCount();
         this.postImg = board.getPostImg();
+        this.writer = board.getWriter();
     }
 
     private String makeShortTitle(String title) {
@@ -40,9 +44,9 @@ public class BoardMyListResponseDTO {
         return dtf.format(regDate);
     }
 
-    private String makeShortContent(String content) {
-        return sliceString(content, 30);
-    }
+//    private String makeShortContent(String content) {
+//        return sliceString(content, 10);
+//    }
 
     private static String sliceString(String targetString, int wishLength) {
         return (targetString.length() > wishLength)

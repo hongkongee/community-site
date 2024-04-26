@@ -181,7 +181,6 @@
                         <button type="button" id="mail-check-btn">이메일 인증</button>
                         <input style="width: 200px; display: none;" type="text" id="mail-check-input" class="input-btn"
                             placeholder="인증번호 6자리를 입력하세요." maxlength="6">
-
                         <br>
                         <span id="mailCheckMsg"></span>
                     </div>
@@ -252,6 +251,58 @@
 
 
         // 회언가입 입력값 검증 처리
+        // 이메일 인증버튼 클릭 이벤트
+
+        let code = ''; // 이메일 전송 인증번호 저장을 위한 변수수
+
+        document.getElementById('mail-check-btn').onclick = () => {
+            const email = document.getElementById('user_email').value.trim();
+            console.log('완성된 이메일: ', email);
+
+            fetch('/users/email', {
+                    method: 'post',
+                    headers: {
+                        'Content-type': 'text/plain'
+                    },
+                    body: email
+                })
+                .then(res => res.text())
+                .then(data => {
+                    console.log('인증번호: ', data);
+                    code = data;
+
+                    // 이메일 전송이 완료되면 이메일 입력창 readonly로 막기
+                    document.getElementById('user_email').readOnly = true;
+
+                    // 인증번호 입력창 활성화
+                    document.getElementById('mail-check-input').disabled = false;
+                    alert('인증번호가 전송되었습니다. 확인 후 입력란에 정확히 입력하세요.');
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert('이메일 전송에 실패했습니다. 존재하는 이메일인지 확인해주세요.');
+                })
+        };
+
+        // 인증번호 검증
+        // blur -> focus가 빠지는 경우 발생.
+        document.getElementById('mail-check-input').onblur = e => {
+            console.log('blur 이벤트 발생!');
+            const inputCode = e.target.value;
+            if (inputCode === code) {
+                document.getElementById('mailCheckMsg').textContent = '인증번호가 일치합니다!';
+                document.getElementById('mailCheckMsg').style.color = 'skyblue';
+                e.target.style.display = 'none';
+            } else {
+                document.getElementById('mailCheckMsg').textContent = '인증번호를 다시 확인하세요!';
+                document.getElementById('mailCheckMsg').style.color = 'red';
+                e.target.focus();
+            }
+        }
+
+
+        // 회언가입 입력값 검증 처리
+
         // 입력값 검증 통과 여부 배열
         const checkResultList = [false, false, false, false, false, false, false, false];
 

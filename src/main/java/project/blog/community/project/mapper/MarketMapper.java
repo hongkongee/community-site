@@ -1,10 +1,12 @@
 package project.blog.community.project.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import project.blog.community.project.common.marketSearch;
+import org.apache.ibatis.annotations.Param;
+import project.blog.community.project.dto.request.MarketRateRequestDTO;
 import project.blog.community.project.entity.Board;
+import project.blog.community.project.entity.Favorite;
 import project.blog.community.project.entity.Market;
-import project.blog.community.project.entity.Reply;
+import project.blog.community.project.entity.Rate;
 
 import java.util.List;
 
@@ -15,4 +17,35 @@ public interface MarketMapper {
 
     List<Market> findAll();
     void updateViewCount(int boardNo);
+
+    Market findOne(int boardNo);
+
+    void delete(int boardNo);
+
+//    List<Board> getAddFavList(int boardNo, boolean addFav);
+
+    // 즐겨찾기 추가
+    void addFav(Favorite favorite);
+
+    // 유저가 즐겨찾기한 boardNo를 찾기
+    List<Integer> checkFav(String accountNumber);
+
+    // 기존 즐겨찾기 삭제
+    void removeFav(Favorite favorite);
+
+    void updateRateBoard(String textWriter);
+
+    void updateRateWriter(String textWriter);
+
+//    List<Board> addFavList(int boardNo, boolean addFav);
+
+    int checkRate(String accountNumber);
+
+    Rate checkRateRelation(MarketRateRequestDTO dto);
+
+    void addRate(MarketRateRequestDTO dto);
+
+
+
+
 }

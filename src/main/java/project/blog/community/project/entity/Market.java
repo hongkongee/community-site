@@ -17,54 +17,60 @@ CREATE TABLE tbl_market (
     location VARCHAR(255),
     content_img VARCHAR(255),
     login_method VARCHAR(50),
-    view_count INT DEFAULT 0
+    view_count INT DEFAULT 0,
+    favorite BOOLEAN DEFAULT FALSE
 );
 */
 
-@Getter
+@Setter @Getter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
-
 public class Market{
 
-    @Setter
     private int boardNo;
 
-    @Setter
     private String textWriter;
 
-    @Setter
     private LocalDateTime updateDate;
 
-    @Setter
     private String textTitle;
 
     private int rate;
 
-    @Setter //원하는 필드에만 Setter 생성
+    //@Setter //원하는 필드에만 Setter 생성
     private String textContent;
 
     private int price;
 
     private String location;
+    private String address;
 
     private String ContentImg; //XML profile_image 스네이크 케이스 자동 인식
     private String loginMethod; //sql tbl 타입과 일치 시켜야 함
     private int viewCount;
+    private boolean addFav;
+    private String category;
+    private String chooseReason;
+    private String message;
 
-
-
-    public Market(MarketWriteRequestDTO dto) { //entity -> DTO
+    public Market(MarketWriteRequestDTO dto, String writer) {
+        //dto -> Entity
         this.textTitle = dto.getTextTitle();
         this.textContent = dto.getTextContent();
-        this.textWriter = dto.getTextWriter();
         this.updateDate = dto.getUpdateDate();
         this.viewCount = dto.getViewCount();
+        this.category = dto.getCategory();
+        this.price = dto.getPrice();
+        this.address = dto.getAddress();
+
+        this.textWriter = writer;
     }
+
+
+
 }
 
 

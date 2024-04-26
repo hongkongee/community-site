@@ -1,0 +1,568 @@
+.orbit-regular {
+  font-family: "Orbit", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body{
+background-color: #7AA2E3;
+
+}
+.background{
+  
+    width: 1277px;
+    height: 903px;
+    left: 300px;
+    top: 100px;
+    margin: 30px;
+    position: absolute;
+    background: #F8F6E3;
+    border-radius: 60px;
+}
+
+.Rectangle1{
+  padding-left: 40px;
+  width: 1077px;
+   height: 903px; 
+ 
+ margin: 0 -10px;
+    position: absolute; 
+    background: #F8F6E3;
+     border-radius: 60px;
+
+overflow: auto;
+overflow-x: hidden;
+
+}
+.Rectangle1::-webkit-scrollbar{
+  background-color: #F8F6E3;
+  width: 20px; 
+ 
+
+}
+
+a{
+    text-decoration:none;
+}
+a:hover{
+    cursor: pointer;
+    color: blue;
+}
+
+.Rectangle1::-webkit-scrollbar-thumb {
+  background-color: #D9D9D9; 
+  height: 10px;
+  
+}
+
+.Rectangle1::-webkit-scrollbar-track {
+  background: #F8F6E3;  
+ 
+}
+
+.add-photo{
+  
+  width: 123px; 
+  height: 39px; 
+  left: 370px;
+   top: 70px; 
+   position: absolute;
+   
+    font-size: 20px;
+
+}
+.add-photo :hover{
+  cursor: pointer;
+}
+
+.let1{
+  width: 120px; height: 27px; left: 746px; top: 129px; position: absolute; color: black; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word
+}
+
+.Rectangle70{
+
+  width: 114px; height: 148px;   left: 16.8%; top: 509px;  background: white;
+ position: fixed;
+}
+.e20232022{
+ left: 20px; top: 20px; position: absolute
+}
+.let3{
+  color: black; font-size: 24px; font-family: Inter; font-weight: 500;  word-wrap: break-word
+}
+.let4{
+  color: black; font-size: 24px; font-family: Inter; font-weight: 500; word-wrap: break-word
+}
+.let5{
+  color: black; font-size: 24px; font-family: Inter; font-weight: 500; word-wrap: break-word
+}
+.e20232022 :hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+.let2{
+    width: 190px;
+    height: 32px;
+    left: 903px; top: 195px; position: absolute; color: black; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word
+}
+.new:hover{
+  cursor: pointer;
+  color: blue;
+}
+.abc:hover{
+  cursor: pointer;
+  color: blue;
+}
+.Ellipse12{
+  width: 48px; height: 51px; left: 843px; top: 125px; position: absolute; background: #D9D9D9; border-radius: 9999px
+}
+
+.Ellipse13{
+  width: 47px; height: 51px; left: 913px; top: 125px; position: absolute; background: #D9D9D9; border-radius: 9999px
+}
+
+.Ellipse14{
+  width: 48px; height: 51px; left: 982px; top: 125px; position: absolute; background: #D9D9D9; border-radius: 9999px
+}
+
+.Rectangle51{
+
+  width: 17px; height: 213px; left: 1201px; top: 176px; position: absolute; background: #D9D9D9
+}
+.Frame20{
+ left: 150px; top: 50px; position: absolute; background: #F8F6E3; justify-content: center; align-items: center; display: inline-flex
+
+}
+.Gallery{
+  width: 200px; height: 62px; color: black; font-size: 48px; font-family: Inter; font-weight: 500; word-wrap: break-word
+}
+
+
+
+  .card-container {
+      display: flex;
+      flex-wrap: wrap;
+width: 800px;
+margin-left: 20%;
+margin-top: 25%;
+
+  }
+.form-control{
+    border: none;
+}
+
+  .card-title-wrapper.HTML{
+    background-color: #fe992edc;
+  }
+  .card-title-wrapper.CSS  {
+    background-color: #4169e1c9;
+}
+
+/* JAVA에 대한 색상 지정 */
+.card-title-wrapper.JAVA  {
+    background-color: #4bb68dc9;
+}
+
+/* C에 대한 색상 지정 */
+.card-title-wrapper.C {
+    background-color: #60b2ff;
+}
+
+/* C++에 대한 색상 지정 */
+.card-title-wrapper.JavaScript  {
+    background-color: #e8f34f;
+}
+
+/* Python에 대한 색상 지정 */
+.card-title-wrapper.Python  {
+    background-color: #4163d3;
+    
+}
+.card-title-wrapper.Other-than {
+    background-color: #000000;
+    
+}
+
+
+  .card-title-wrapper.HTML .card-title {
+    background-color: #fe992edc;
+}
+
+
+/* CSS에 대한 색상 지정 */
+.card-title-wrapper.CSS .card-title {
+    background-color: #4169e1c9;
+}
+
+/* JAVA에 대한 색상 지정 */
+.card-title-wrapper.JAVA .card-title {
+    background-color: #4bb68dc9;
+}
+
+/* C에 대한 색상 지정 */
+.card-title-wrapper.C .card-title {
+    background-color: #60b2ff;
+}
+
+/* C++에 대한 색상 지정 */
+.card-title-wrapper.JavaScript .card-title {
+    background-color: #e8f34f;
+}
+
+/* Python에 대한 색상 지정 */
+.card-title-wrapper.Python .card-title {
+    background-color: #4163d3;
+    color: white;
+}
+.card-title-wrapper.Other-than .card-title{
+    background-color: #000000;
+    color: white;
+}
+
+.card-title-wrapper.HTML .time-view-wrapper {
+    background-color: #fe992edc;
+}
+/* CSS에 대한 색상 지정 */
+.card-title-wrapper.CSS .time-view-wrapper {
+    background-color: #4169e1c9;
+}
+
+/* JAVA에 대한 색상 지정 */
+.card-title-wrapper.JAVA .time-view-wrapper {
+    background-color: #4bb68dc9;
+}
+
+/* C에 대한 색상 지정 */
+.card-title-wrapper.C .time-view-wrapper {
+    background-color: #60b2ff;
+}
+
+/* C++에 대한 색상 지정 */
+.card-title-wrapper.JavaScript .time-view-wrapper {
+    background-color: #e8f34f;
+}
+
+/* Python에 대한 색상 지정 */
+.card-title-wrapper.Python .time-view-wrapper {
+    background-color: rgb(251, 255, 0);
+}
+.card-title-wrapper.Other-than .time-view-wrapper{
+    background-color: #000000;
+}
+
+
+
+  .card-container .card-wrapper .card-title-wrapper .card-title {
+      /* width: 50%; */
+      font-size: 28px;
+      font-weight: 700;
+      padding: 15px;
+      text-align: center;
+      margin: 0 auto;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+  }
+
+  
+  .card-container {
+       display: flex;
+       flex-wrap: wrap;
+
+   }
+ 
+
+   .card-container .card-wrapper {
+       position: relative;
+       width: 45.3%;
+       margin-right: 3%;
+       height: 400px;
+       margin-bottom: 100px;
+       cursor: pointer;
+       transition: 0.5s;
+   }
+
+   .card-container .card {
+       height: 370px;
+       
+       
+       overflow: hidden;
+       transition: 0.5s;
+       border: 2px solid transparent;
+   }
+
+   .card-container .card:last-child {
+       margin-right: 0;
+   }
+
+   .card-container .card .card-title-wrapper {
+       color: #333;
+   }
+
+   
+
+   .card-container .card .card-title-wrapper .time-view-wrapper {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       padding: 10px 10px;
+       position:relative;
+       top: 250px;
+   }
+
+   .card-container .card .card-title-wrapper .time-view-wrapper>div {
+       width: fit-content;
+       border-radius: 10px;
+       background: #fff;
+       padding: 3px 5px;
+       margin-bottom: 10px;
+       
+   }
+
+
+   .card-container .card .card-title-wrapper .time-view-wrapper i {
+       margin-right: 4px;
+   }
+
+   .card-container .card .card-content {
+       background-color: #fff;
+       height: 100%;
+       text-align: justify;
+       font-size: 18px;
+       line-height: 1.4;
+       padding: 40px 25px;
+   }
+
+
+   #card-down.card-wrapper {
+       transform: translateY(15px);
+   }
+   #card-down .card {
+       box-shadow: none;
+   }
+
+   .card-container .card-hover.card {
+       border: 2px solid;
+   }
+
+   .card-container .card-btn-group {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       position: absolute;
+       right: 0px;
+       top: 0px;
+       z-index: 100;
+   }
+
+   .card-container .card-btn-group .del-btn {
+       outline: none;
+       /* border: 3px solid #000; */
+       width: 40px;
+       height: 40px;
+       
+       background: #fff;
+       opacity: 0;
+       color: #000000;
+       font-weight: 700;
+       font-size: 25px;
+
+       cursor: pointer;
+   }
+
+
+   /* 모달 스타일 */
+   .modal {
+       display: none;
+       position: fixed;
+       z-index: 9999;
+       left: 0;
+       top: 0;
+       width: 100%;
+       height: 100%;
+       background-color: rgba(0, 0, 0, 0.5);
+       align-items: center;
+       justify-content: center;
+       padding: 50px;
+   }
+
+   .modal-content {
+       position: relative;
+       background-color: #fff;
+       width: 300px;
+       padding: 20px;
+       border-radius: 8px;
+       text-align: center;
+   }
+
+   .modal-content p {
+       font-size: 24px;
+       margin-bottom: 15px;
+   }
+
+
+   .modal-buttons button {
+       padding: 5px 15px;
+       font-size: 20px;
+   }
+
+   .modal-buttons .confirm {
+       
+      
+       border-radius: 4px;
+   }
+
+   .modal-buttons .cancel {
+    
+       border-radius: 4px;
+   }
+ 
+   .modal-buttons .confirm:hover {
+       background-color: rgb(157, 188, 253);
+   
+}
+
+.modal-buttons .cancel:hover {
+    background-color: rgb(157, 188, 253);
+    
+}
+
+   
+   ul.pagination.pagination-lg.pagination-custom{
+    display: flex;
+    list-style: none;
+    text-decoration:none;
+    padding-left: 50px;
+   }
+.page-link{
+    padding-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+  .top-section .amount {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+  }
+  .top-section .amount div {
+      margin-left: 15px;
+      padding: 12px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: darkorange;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  .top-section .amount div:hover {
+      border-radius: 0;
+      background: coral;
+  }
+  .top-section .amount div:last-child {
+      margin-right: 10%;
+  }
+  .top-section .amount div a {
+      display: block;
+      color: #fff;
+      font-size: 1.4em;
+      text-decoration: none;
+  }
+  .bottom-section {
+    display: flex;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.bottom-section nav {
+    flex: 1;
+    justify-content: center;
+}
+
+
+
+.modal-detail{
+
+    position: relative;
+    background-color: #fff;
+    width: 500px;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+ justify-content: center;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+}
+.modal-detail p {
+      font-size: 24px;
+      margin-bottom: 15px;
+  }
+
+.detail{
+    position: fixed;
+  
+    
+      background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+
+}
+.close{
+    font-size: 50px;
+}
+.top-section {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+position: relative; /* 상대 위치 설정 */
+    top: 230px;
+
+
+
+
+}
+.form-select{
+font-size: 18px;
+                   width: 100%;
+                   padding: 8px;
+                   box-sizing: border-box;
+                   border: 2px solid #ffffff;
+                   border-radius: 8px;
+
+                   background-color: rgba(255, 255, 255, 0.8);
+
+}
+.top-section .search {
+    flex: 1.5;
+
+}
+
+.top-section .search form {
+    display: flex;
+
+}
+.top-section .search form #search-type {
+    flex: 1;
+    margin-right: 10px;
+}
+.top-section .search form input[name=keyword] {
+    flex: 3;
+}
+
+
+
+
+
+
+
+

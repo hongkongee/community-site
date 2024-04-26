@@ -8,38 +8,52 @@
     <meta charset="UTF-8">
     <title>posting_cube</title>
 
-    <link rel="stylesheet" href="/assets/css/posting_cube.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet">
+    <%@ include file="../include/static-head.jsp" %>
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <link rel="stylesheet" href="/assets/css/posting_cube.css">
+
 </head>
 
 <body>
 
-    <%@ include file="../include/headcss.jsp"%>
     <%@ include file="../include/header.jsp"%>
 
     <div class="MypostcubeJsp">
         <div class="Frame42">
 
             <div class="main-title-wrapper">
-                <h1 class="main-title">My Study</h1>
+                <h1 class="main-title">My Posts</h1>
+                <c:if test="${login != null}">
+                    <a href="/mypage/newposting">
+                        <button class="add-btn">글 작성하기</button>
+                    </a>
+                </c:if>
+                <div class="amount">
+                    <div><a href="/mypage/posting_cube?pageNo=1&amount=6&type=${s.type}&keyword=${s.keyword}">6</a>
+                    </div>
+                    <div><a href="/mypage/posting_cube?pageNo=1&amount=18&type=${s.type}&keyword=${s.keyword}">18</a>
+                    </div>
+                    <div><a href="/mypage/posting_cube?pageNo=1&amount=30&type=${s.type}&keyword=${s.keyword}">30</a>
+                    </div>
+                </div>
             </div>
+
             <!----------------------- posting_cube 헤더 끝 ------------------------------->
 
             <!-- ------------------------메인 게시판 시작------------------------------------- -->
 
             <div class="post-container">
                 <c:forEach var="b" items="${bList}">
-                    <div class="post-wrapper">
+                    <div class="post-wrapper" data-href="/mypage/delete?bno=${b.bno}">
                         <section class="post" data-bno="${b.bno}">
-                            <div class="post-photo">
-                                <img src="/assets/img/java_logo.png" alt="게시물 사진">
-                            </div>
+                            <a href="/mypage/posting_cube/${b.bno}">
+                                <div class="post-photo">
+                                    <img src="/display${b.postImg}" alt="게시물 사진">
+                                </div>
+                            </a>
                             <div class="post-content-wrapper">
                                 <div class="post-content">
                                     ${b.title}
@@ -48,14 +62,37 @@
                                     <div id="this-month">${b.regDate}</div>
                                 </div>
                                 <div class="post-reply">
-                                    <div class="post-like">
-                                        <button class="like">${b.likeCount}<br>좋아요</button>
+
+                                    <div class="like" data-bno="${b.bno}" data-like="${b.isHeart}">
+                                        <c:if test="${b.isHeart == 1}">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </c:if>
+                                        <c:if test="${b.isHeart == 0}">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </c:if>
+
+                                       
+                                        <label class="like-label" for="flexCheckDefault"
+                                            data-like-count="${b.likeCount}">
+                                            좋아요 ${b.likeCount}
+                                        </label>
                                     </div>
+
                                     <input type="text" class="reply-rec"></input>
                                     <button class="reply">댓글 쓰기</button>
                                 </div>
                             </div>
                         </section>
+                        
+                        <!-- --------------------------삭제 버튼----------------------------- -->
+                        <c:if test="${login.auth == '관리자' || login.accountNumber == b.writer}">
+                            <div class="card-btn-group">
+                                <button class="del-btn">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </c:if>
+
                     </div>
                 </c:forEach>
             </div>
@@ -69,7 +106,7 @@
                 <ul class="pagination pagination-lg pagination-custom">
                     <c:if test="${maker.page.pageNo != 1}">
                         <li class="page-item"><a class="page-link"
-                                href="/mypage/posting_cube?=1&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
+                                href="/mypage/posting_cube?pageNo=1&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
                         </li>
                     </c:if>
 
@@ -104,25 +141,25 @@
 
         </div>
     </div>
+    <!-- ----------------------모달창-------------------------- -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <p>정말로 삭제할까요?</p>
+            <div class="modal-buttons">
+                <button class="confirm" id="confirmDelete"><i class="fas fa-check"></i> 예</button>
+                <button class="cancel" id="cancelDelete"><i class="fas fa-times"></i> 아니오</button>
+            </div>
+        </div>
+    </div>
 
 
 
 </body>
 
-<script>
-    // -------------------------------게시물 등록 날짜 시작-------------------------------------
-    /*
-    var currentDate = new Date();
-    var year = currentDate.getFullYear();
-    var month = currentDate.getMonth() + 1;
-    var day = currentDate.getDate();
-    var formattedDate = year + "년 " + month + "월 " + day + "일";
 
-    var thisMonthElement = document.getElementById("this-month");
-    thisMonthElement.textContent = formattedDate;
-    */
-
-    // -------------------------------게시물 등록 날짜 끝-------------------------------------
+<script src="/assets/js/mypage.js">
 </script>
+
+
 
 </html>

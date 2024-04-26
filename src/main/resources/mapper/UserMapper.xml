@@ -16,6 +16,7 @@
         WHERE account_number = #{accountNumber}
     </select>
 
+
     <select id="isDuplicate" resultType="boolean">
         SELECT COUNT(*)
         FROM tbl_user
@@ -36,7 +37,7 @@
     <update id="saveAutoLogin">
         UPDATE tbl_user
         SET session_id = #{sessionId}, limit_time = #{limitTime}
-        WHERE account_number = #{accountNumber}
+        WHERE account_number = #{account}
     </update>
     
     <select id="findMemberByCookie" resultType="user">
@@ -45,5 +46,29 @@
         FROM tbl_user
         WHERE session_id = #{sessionId}
     </select>
+
+    <select id="findUserByFollower" resultType="java.lang.String">
+        SELECT follower
+        FROM tbl_follow
+        WHERE following = #{account}
+        LIMIT 0, #{number}
+    </select>
+
+    <select id="findUserByFollowing" resultType="java.lang.String">
+        SELECT following
+        FROM tbl_follow
+        WHERE follower = #{account}
+    </select>
+
+    <insert id="addFollower">
+        INSERT INTO tbl_follow
+        VALUES (#{me}, #{you})
+    </insert>
+
+    <delete id="removeFollower">
+        DELETE FROM tbl_follow
+        WHERE following = #{me}
+        AND follower = #{you}
+    </delete>
 
 </mapper>

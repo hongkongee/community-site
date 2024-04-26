@@ -83,10 +83,23 @@ class BoardMapperTest {
             boardMapper.save(board);*/
    }
 
+   @Test
+   @DisplayName("게시물 삭제")
+   void delete() {
+      // given 주는 값
+      int bno = 41;
+
+      // when
+      boardMapper.delete(bno);
+      Board board = boardMapper.findOne(bno);
+
+      // then 결과
+      assertNull(board);
+
+   }
 
 
-   // when
 
 
-   // then
+
 }

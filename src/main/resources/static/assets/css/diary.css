@@ -28,7 +28,7 @@ body {
 .MydiaryJsp .Frame45 {
     width: 1277px;
     height: inherit;
-    top: 60px;
+    top: 200px;
     position: relative;
     background: #F8F6E3;
     border-radius: 60px;
@@ -37,7 +37,7 @@ body {
 .Frame45 .Frame46 {
     width: 100%;
     left: 190px;
-    top: 13px;
+    top: 25px;
     position: absolute;
 }
 
@@ -52,30 +52,31 @@ body {
 
 /* ---------------------캘린더 시작--------------------- */
 
-table {
+.Frame45 .table-wrapper {
+    font-family: "Orbit", sans-serif;
+    margin: 10% auto 5% auto;
     width: 70%;
     height: 560px;
-    border-radius: 60px;
     border: 1px solid #7aa2e3;
+    border-radius: 60px;
     padding: 30px;
     background: white;
-    margin-left: 15%;
-    margin-top: 10%;
+    overflow: hidden;
 }
 
-table th {
+.Frame45 table th {
     width: 14%;
     box-sizing: border-box;
 }
-table td {
+.Frame45 table td {
     background: white;
 }
 
-table tbody {
-    background-color: #F8F6E3;
-}
+/* .Frame45 table tbody {
+    
+} */
 
-table #this-month {
+.Frame45 table #this-month {
     font-size: 30px;
 }
 
@@ -84,54 +85,17 @@ table #this-month {
     text-align: left;
 } */
 
-.Sun {
+.Frame45 .Sun {
     color: red;
 }
 
-.Sat {
+.Frame45 .Sat {
     color: blue;
 }
 
 /* ---------------------캘린더 끝--------------------- */
 
-/* ----------------------년도 시작----------------------- */
-/* 
-.Frame58 {
-    padding: 20px;
-    background: white;
-
-    align-items: center;
-    font-size: 20px;
-    width: 7%;
-
-    display: inline-flex;
-    flex-direction: column;
-}
-
-
-.Frame58 .year4:hover {
-    color: #7AA2E3;
-    text-decoration: underline;
-}
-
-.Frame58 .year3:hover {
-    color: #7AA2E3;
-    text-decoration: underline;
-}
-
-.Frame58 .year2:hover {
-    color: #7AA2E3;
-    text-decoration: underline;
-}
-
-.Frame58 .year1:hover {
-    color: #7AA2E3;
-    text-decoration: underline;
-} */
-
-/* ----------------------년도 끝----------------------- */
-
-.Frame57 {
+.Frame45 .Frame57 {
     width: 70%;
     height: auto; 
     background: white;
@@ -145,17 +109,17 @@ table #this-month {
     padding: 10px;
 }
 
-.todo {
+.Frame45 .todo {
     display: inline-flex;
     flex-direction: column;
     align-items: center; 
-    margin: 20px; 
+    margin-left: 50px;
     position: relative;
-    width: 40%;
+    width: 30%;
     padding: 10px;
 }
-.whatdo {
-    width: 60%;
+.Frame45 .whatdo {
+    width: 50%;
     display: inline-flex;
     flex-direction: column;
     align-items: center; 
@@ -166,7 +130,7 @@ table #this-month {
    
 }
 
-.schedule-input {
+.Frame45 .schedule-input {
     width: 100%;
     height: 200px;
     color: black;
@@ -179,8 +143,8 @@ table #this-month {
     padding: 20px;
 }
 
-.todo textarea {
-    width: 50%;
+.Frame45 .todo textarea {
+    width: 80%;
     height: 150px;
     border: none;
     border-radius: 60px;
@@ -192,20 +156,7 @@ table #this-month {
     
 }
 
-.todo button {
-    width: 100px;
-    height: 50px;
-    border-radius: 60px;
-    border: none;
-    background: #6ad4dd;
-    font-size: 20px;
-    font-family: inherit;
-    position: absolute;
-    top: 40%;
-    right: 10px;
-}
-
-.story {
+.Frame45 .story {
     width: 100%;
     height: 200px;
     color: black;
@@ -217,10 +168,10 @@ table #this-month {
     background: white;
     border-radius: 60px;
     padding: 20px;
+    text-align: center;
 }
 
-.whatdo textarea {
-    
+.Frame45 .whatdo textarea {
     width: 70%;
     height: 150px;
     border: none;
@@ -232,7 +183,7 @@ table #this-month {
     border: 1px solid black;
 }
 
-.story button {
+.Frame45 .Frame57 button {
     width: 100px;
     height: 50px;
     border-radius: 60px;
@@ -241,9 +192,44 @@ table #this-month {
     font-size: 20px;
     font-family: inherit;
     position: absolute;
-    top: 40%;
+    bottom: 20px;
     right: 10px;
     
 }
 
-/* ----------------------사이드바 메뉴 끝---------------------- */
+/* --------------------일정, 일기 작성란 끝---------------------- */
+
+/* ---------------------일정, 일기 저장 시작--------------------------- */
+.Frame45 .saved {
+    width: 70%;
+    height: auto; 
+    background: white;
+    border-radius: 60px;
+    overflow: hidden;
+    border: 1px solid #7AA2E3;
+    margin: 5% auto; 
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.Frame45 .saved .todo-saved {
+    width: 40%;
+    height: 300px;
+    border: 1px solid black;
+    border-radius: 60px;
+
+}
+.Frame45 .saved .whatdo-saved {
+    width: 40%;
+    height: 300px;
+    border: 1px solid black;
+    border-radius: 60px;
+}
+
+
+
+
+
+/* ---------------------일정, 일기 저장 끝--------------------------- */

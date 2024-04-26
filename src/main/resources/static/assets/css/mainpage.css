@@ -15,10 +15,9 @@
   section.hot {
     margin: auto;
     border: #000 solid 2px;
-    width: 100%;
-    height: 700px;
-    
+    width: 100%;    
     position: relative;
+    top: 90px;
 
   }
 
@@ -53,6 +52,7 @@
     margin-bottom: 25px;
     font-size: 24px;
     color: blue;
+    width: 30%;
   }
 
   section.hot>.card-container .card-wrapper>section.card {
@@ -64,11 +64,15 @@
     justify-content: center;
     align-items: center; */
 
-    width: 160px;
-    height: 0;
+    width: 90%;
+    height: 90%;
     padding-bottom: 100%;
     position: relative;
-    background-color: red;
+    object-fit: contain;
+    margin: auto;
+    overflow: hidden;
+    cursor: pointer;
+ 
   }
 
   .card-image>img {

@@ -1,12 +1,20 @@
 package project.blog.community.project.controller;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import project.blog.community.project.dto.request.SignUpRequestDto;
+import org.springframework.web.util.WebUtils;
 import project.blog.community.project.dto.response.BoardMyListResponseDTO;
 import project.blog.community.project.dto.response.FollowerResponseDTO;
 import project.blog.community.project.dto.response.LoginUserResponseDTO;
@@ -14,9 +22,19 @@ import project.blog.community.project.dto.response.MypageUserResponseDTO;
 import project.blog.community.project.service.BoardService;
 import project.blog.community.project.service.FollowingService;
 import project.blog.community.project.service.UserService;
+import project.blog.community.util.upload.FileUtils;
+import project.blog.community.project.entity.Rate;
+import project.blog.community.project.service.*;
 
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccount;
 
@@ -25,13 +43,16 @@ import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccoun
 @RequestMapping("/mypage")
 @Slf4j
 public class MyPageController {
-
+    @Value("${file.upload.root-path}")
+    private String rootPath;
    private final UserService userService;
    private final FollowingService followingService;
    private final BoardService boardService;
+   private final GameService gameService;
+   private final MarketService marketService;
 
    @GetMapping("/home/{account}")
-   public String myHome(@PathVariable String account, HttpServletRequest request, Model model){
+   public String myHome(@PathVariable String account,String profilePicture ,HttpServletRequest request, Model model){
       log.info("/mypage/home/{}: GET!", account);
       
       // 홈페이지 유저 정보 가져오기
@@ -84,7 +105,6 @@ public class MyPageController {
       model.addAttribute("followers", userFollower);
       
       // 유저의 인기 게시물 가져오기
-
       List<BoardMyListResponseDTO> boardList = boardService.getUserList(userInformation.getAccountNumber());
       log.info("user Hot List : " );
       for (BoardMyListResponseDTO post : boardList) {
@@ -92,18 +112,35 @@ public class MyPageController {
       }
       model.addAttribute("posts", boardList);
 
+      // 유저의 중고마켓 평가 가져오기
+      String userAccount = userInformation.getAccountNumber();
+      log.info(" ======= 나의 정보 : {} =======", userAccount);
+      List<Rate> userRates = marketService.findUserRate(userAccount);
 
+      model.addAttribute("markets", userRates);
 
 
       return "mypage/mypage";
    }
 
-   @PostMapping("/intro")
-   public String introSubmit(@RequestParam("introduction") String introduction,
-                             HttpServletRequest request) {
-      log.info("/mypage/intro: POST! " + introduction);
+
+   // 자기소개 수정하기
+   @PutMapping("/intro")
+   @ResponseBody
+   public ResponseEntity<String> introSubmit(@RequestBody Map<String, String> requestBody,
+                                             HttpServletRequest request,
+                                             BindingResult result) {
+      String introduction = requestBody.get("introduction");
+      log.info("/mypage/intro: PUT! " + introduction);
+
+      if (result.hasErrors()) {
+         return ResponseEntity
+                 .badRequest()
+                 .body(result.toString());
+      }
 
       HttpSession session = request.getSession();
+
       session.getAttribute("login");
       // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
       String myAccount = getCurrentLoginMemberAccount(session);
@@ -112,8 +149,71 @@ public class MyPageController {
       boardService.modifyMyIntro(myAccount, introduction);
 
 
-      return "redirect:/mypage/home/" + myAccount;
+      return ResponseEntity.ok().body("modSuccess");
    }
+
+   // 포인트 일일 지급
+   @PostMapping("/dailypoint")
+   @ResponseBody
+   public ResponseEntity<?> getDailyPoint(@RequestBody Map<String, String> requestBody,
+                                          HttpServletRequest request,
+                                          BindingResult result,
+                                          HttpServletResponse response) {
+
+      log.info("/mypage/dailypoing: POST!");
+
+      if (result.hasErrors()) {
+         return ResponseEntity
+                 .badRequest()
+                 .body(result.toString());
+      }
+
+
+
+      // 로그인 정보
+      HttpSession session = request.getSession();
+      LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+      String myAccount = loginDto.getAccountNumber();
+
+      // 쿠키 존재 확인하기
+
+      try {
+         Cookie c = WebUtils.getCookie(request, "pp");
+         String cookieValue = c.getValue();
+         log.info("cookie's name is " + cookieValue);
+         if (cookieValue.equals(myAccount)) {
+            return ResponseEntity.ok().body(-1); // 오늘 이미 쿠키를 받았습니다...
+
+         } else {
+            // 포인트 증가시키기 (쿠키가 있긴 있는데 다른사람거라서 포인트 주기)
+            int todayPoint = gameService.todayRandomPoint(myAccount, response);
+            return ResponseEntity.ok().body(todayPoint);
+
+         }
+      } catch (NullPointerException e) {
+         // 포인트 증가시키기
+         int todayPoint = gameService.todayRandomPoint(myAccount, response);
+         return ResponseEntity.ok().body(todayPoint);
+      }
+
+   }
+
+   // 프로필 이미지 업로드
+   @PostMapping("/upload/{account}")
+    public String fileUpload(@PathVariable String account, MultipartFile profilePicture){
+      log.info("upload/ dto: {}", profilePicture);
+      log.info("file name {}", profilePicture.getOriginalFilename());
+
+      String savePath = FileUtils.uploadFile(profilePicture, rootPath);
+      log.info("save path{}",savePath);
+
+      userService.saveProfile(savePath, account);
+      return "redirect:/mypage/home/" + account;
+   }
+
+
+
+
 
 
 }

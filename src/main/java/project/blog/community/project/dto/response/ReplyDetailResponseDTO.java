@@ -24,7 +24,8 @@ public class ReplyDetailResponseDTO {
    @JsonFormat(pattern = "yyyy년 MM월 dd일 HH:mm (수정됨)")
    private LocalDateTime updateDate;
    private String account;
-   private String profile;
+   // prfile수정
+   private String profilePicture;
    private String loginMethod;
 
    // 엔터티 변환
@@ -35,7 +36,8 @@ public class ReplyDetailResponseDTO {
       this.regDate = reply.getRegDate();
       this.updateDate = reply.getUpdateDate();
       this.account = reply.getAccount();
-      this.profile = reply.getProfileImage();
+      // prfile수정
+      this.profilePicture = reply.getProfileImage();
       this.loginMethod = reply.getLoginMethod();
    }
 

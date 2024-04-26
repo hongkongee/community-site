@@ -59,4 +59,8 @@ public interface BoardMapper {
     // 게시물 삭제
     void delete(int bno);
 
+    // 게시물 검색
+    List<Board> findSearch(@Param("page") Search page, @Param("account") String account);
+    
+    int findSearchCount(@Param("page") Search page, @Param("account") String account);
 }

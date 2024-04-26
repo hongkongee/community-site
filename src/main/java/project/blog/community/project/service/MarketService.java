@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import project.blog.community.project.dto.request.MarketModifyRequestDTO;
 import project.blog.community.project.dto.request.MarketRateRequestDTO;
 import project.blog.community.project.dto.request.MarketWriteRequestDTO;
+import project.blog.community.project.dto.response.MainMarketResponseDTO;
 import project.blog.community.project.dto.response.MarketDetailResponse;
 import project.blog.community.project.dto.response.MarketListResponseDTO;
 import project.blog.community.project.entity.Favorite;
@@ -45,6 +46,18 @@ public class MarketService {
         }
         return dtoList;
 
+    }
+
+    // 즐겨찾기 고려 안하고 최신순으로 4개의 중고 거래 게시글 불러오기
+    public List<MainMarketResponseDTO> getRecentList() {
+        List<Market> fourList = mapper.findFour();
+        List<MainMarketResponseDTO> dtoList = new ArrayList<>();
+
+        for (Market market : fourList){
+            MainMarketResponseDTO dto = new MainMarketResponseDTO(market);
+            dtoList.add(dto);
+        }
+        return dtoList;
     }
 
 
@@ -119,4 +132,10 @@ public class MarketService {
         else return true; //중복됨
 
     }
+
+    public List<Rate> findUserRate(String userAccount) {
+        return mapper.checkRateByUser(userAccount);
+    }
+
+
 }

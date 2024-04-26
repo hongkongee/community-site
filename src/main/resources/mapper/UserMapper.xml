@@ -71,4 +71,10 @@
         AND follower = #{you}
     </delete>
 
+    <update id="addPoint">
+        UPDATE tbl_user
+        SET point = point + #{point}
+        WHERE account_number = #{me}
+    </update>
+
 </mapper>

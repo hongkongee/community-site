@@ -20,10 +20,10 @@
             <c:if test="${login != null && login.profile != null}">
                 <c:choose>
                     <c:when test="${login.loginMethod == COMMON}">
-                        <img src="/display${login.profilePicture}" alt="프사">
+                        <img src="/display${login.profile}" alt="프사">
                     </c:when>
                     <c:otherwise>
-                        <img src="${login.profilePicture}" alt="프사">
+                        <img src="${login.profile}" alt="프사">
                     </c:otherwise>
                 </c:choose>
             </c:if>

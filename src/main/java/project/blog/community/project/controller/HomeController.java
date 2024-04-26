@@ -13,17 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
+import project.blog.community.project.common.Page;
 import project.blog.community.project.common.PageMaker;
 import project.blog.community.project.common.Search;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.request.ReportRequestDTO;
 import project.blog.community.project.dto.request.RpsRequestDTO;
-import project.blog.community.project.dto.response.BoardDetailResponseDTO;
-import project.blog.community.project.dto.response.BoardListResponseDTO;
-import project.blog.community.project.dto.response.BoardMyListResponseDTO;
-import project.blog.community.project.service.BoardService;
-import project.blog.community.project.service.GameService;
-import project.blog.community.project.service.ManagementService;
+import project.blog.community.project.dto.response.*;
+import project.blog.community.project.service.*;
 import project.blog.community.util.FileUtils;
 
 import java.util.List;
@@ -40,13 +37,15 @@ public class HomeController {
 
    private final ManagementService managementService;
    private final BoardService boardService;
+   private final UserService userService;
+   private final MarketService marketService;
 
    // rootPath = "C:/MyWorkspace/pictures/"
    @Value("${file.upload.root-path}")
    private String rootPath;
 
    // 메인페이지
-   // 홈페이지 - 메인페이지 view
+   // 홈페이지 - 메인페이지 view (인기순)
    @GetMapping("/main")
    public String mainPage(Model model) {
       log.info("/home/main: GET");
@@ -54,8 +53,11 @@ public class HomeController {
       List<BoardListResponseDTO> dtoList = boardService.getHotList("popular");
 
       model.addAttribute("bList", dtoList);
-      model.addAttribute("r", 0);
+      model.addAttribute("r", 0); // recent 여부
 
+      // 중고 거래 게시판 불러오기
+      List<MainMarketResponseDTO> marketList = marketService.getRecentList();
+      model.addAttribute("mList", marketList);
 
 
       // /WEB-INF/views/~~~~~.jsp
@@ -63,7 +65,7 @@ public class HomeController {
    }
 
 
-   // 메인페이지 인기 게시글 정렬 선택
+   // 메인페이지 인기 게시글 정렬 선택 (최신순)
    @GetMapping("/main/recent")
    public String sortBoard(Model model) {
       log.info("/home/main/sort: GET ");
@@ -73,6 +75,10 @@ public class HomeController {
 
       model.addAttribute("bList", dtoList);
       model.addAttribute("r", 1);
+
+      // 중고 거래 게시판 불러오기
+      List<MainMarketResponseDTO> marketList = marketService.getRecentList();
+      model.addAttribute("mList", marketList);
 
 
       return "home/main";
@@ -97,6 +103,38 @@ public class HomeController {
       model.addAttribute("maker", pageMaker);
       model.addAttribute("li", "전체 게시판");
       model.addAttribute("c", "all");
+
+      // 로그인 정보 가져오기
+
+
+      // /WEB-INF/views/~~~~~.jsp
+      return "home/all";
+   }
+
+   // 검색하기 (유저의 아이디, 검색어)
+   @GetMapping("/board/all/{account}")
+   public String userSearchTitleList(@PathVariable String account, Model model, String keyword) {
+      log.info("/home/board/all/{}: GET", account);
+      Search page = new Search();
+      page.setKeyword(keyword);
+
+
+
+      log.info("search = " + page);
+      // page: type, keyword, pageNo(페이지 번호), amount(한 화면의 게시물 수)
+      page.setAmount(20);
+
+      // 보여주고 싶은 게시물 리스트
+      List<BoardListResponseDTO> dtoList = boardService.getListUserSearch(page, account);
+
+      // 페이징 버튼 알고리즘 적용 -> 사용자가 요청한 페이지 정보, 총 게시물 개수를 전달.
+      // 페이징 알고리즘 자동 호출.
+      PageMaker pageMaker = new PageMaker(page, boardService.getCountSearch(page, account));
+
+      model.addAttribute("bList", dtoList);
+      model.addAttribute("maker", pageMaker);
+      model.addAttribute("li", "전체 게시판");
+      model.addAttribute("c", "all"); // 페이징을 위한 url 정보
 
       // 로그인 정보 가져오기
 
@@ -228,6 +266,23 @@ public class HomeController {
 
       return "redirect:/home/board/" + category;
    }
+
+   // 오른쪽 사이드바 포인트 렌더링
+/*   @GetMapping("/snb")
+   public ResponseEntity<?> myPoint(HttpServletRequest request) {
+      log.info("/home/snb: GET!!!");
+
+      // 로그인 유저 account 가져오기
+      HttpSession session = request.getSession();
+      session.getAttribute("login");
+      String myAccount = getCurrentLoginMemberAccount(session);
+
+      // 로그인 유저 정보 가져오기
+      MypageUserResponseDTO myInfo = userService.getUserInformation(myAccount);
+
+
+      return ResponseEntity.ok().body(myInfo);
+   }*/
 
 
 }

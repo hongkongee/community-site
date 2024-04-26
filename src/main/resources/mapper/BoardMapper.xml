@@ -109,6 +109,13 @@
         FROM tbl_board
     </select>
 
+    <select id="calcNumberOfReply" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_reply
+        WHERE board_no = #{bno}
+    </select>
+
+
     <select id="getCountCategory" resultType="int">
         SELECT COUNT(*)
         FROM tbl_board

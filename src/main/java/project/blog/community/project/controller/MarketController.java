@@ -161,7 +161,7 @@ public class MarketController {
         return ResponseEntity.ok().body("success");
     }
 
-
+    // 좋아요, 평가 기능
     @PostMapping("/detail/{boardNo}")
     @ResponseBody
     public ResponseEntity<?> rate(@RequestBody MarketRateRequestDTO dto, HttpSession session) {

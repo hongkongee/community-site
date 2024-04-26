@@ -41,6 +41,12 @@ public interface UserMapper {
 
    //프로필 바꾸기
   void updateProfile(@Param("profilePicture") String profilePicture, @Param("accountNumber") String accountNumber);
+
+   // 포인트 증가시키기
+   void addPoint(@Param("me") String myAccount, @Param("point") int todayPoint);
+
+
+
 }
 
 

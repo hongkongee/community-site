@@ -82,7 +82,7 @@
             </div>
 
             <!-- 모달 버튼 -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" id="modal-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Launch demo modal
             </button>
             
@@ -105,7 +105,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                        <button type="button" class="btn btn-primary">수정</button>
+                        <button type="button" class="btn btn-primary" id="bioModBtn">수정</button>
                     </div>
                 </div>
                 </div>
@@ -246,18 +246,21 @@
 
                 <div class="user-market">
                     <div class="title-market">${user.nickname}님의 중고 장터 평점: ${user.rate}</div>
-                    <div class="market-image">
-                        <img src="#" class="user-market-photo">
-                        <img src="#" class="user-market-photo">
+                    <h2> <i class="fa-solid fa-store"></i> 평가 </h2>
+                    <div class="market-rates">
+                        <c:forEach var="market" items="${markets}">
+
+                            <div class="rate-evaluation">
+                                <span class="message">${market.message}</span>
+                                <span class="chooseReason">${market.chooseReason}</span>
+                                <span class="regDate">${market.regDate}</span>
+                            </div>
+
+                        </c:forEach>
                     </div>
                 </div>
                 <div class="user-game">
-                    <div class="title-market">${user.nickname}님에게 게임신청</div>
-                    <div class="all-games">
-                        <div class="game-name">게임 1 <button class="register-to-game">신청걸기</button></div>
-                        <div class="game-name">게임 2 <button class="register-to-game">신청걸기</button></div>
-                        <div class="game-name">게임 3 <button class="register-to-game">신청걸기</button></div>
-                    </div>
+                    
                 </div>
             </div>
 
@@ -266,8 +269,10 @@
 
                 <!-- searchbar -->
                 <div class="search-wrapper">
-                    <input type="text" id="search-bar" placeholder="게시물 검색">
-                    <button class="search-submit" type="submit">검색</button>
+                    <form action="/home/board/all/${user.accountNumber}" method="get">
+                        <input type="text" id="search-bar" placeholder="게시물 검색" name="keyword">
+                        <button class="search-submit" type="submit">검색</button>
+                    </form>
                 </div>
 
                 <div class="popular-post">
@@ -290,10 +295,22 @@
             <!-- weather wrapper -->
             <div class="weather-wrapper">
                 <!-- weather api -->
-                <div class="weatherapi-wrapper">
-                    <img class="weather-api" src="#">
-                    <div class="api"> 날씨 API</div>
-                </div>
+                <c:if test="${login.accountNumber eq user.accountNumber}">
+                    <div class="weatherapi-wrapper">
+                        
+                        <div class="title-market">일일 포인트 지급</div>
+
+                        <div class="all-games">
+                            <a href="#" id="today-point" class="btn-3d blue">포인트 받기</a>
+                        </div>
+                        
+                        <div class="all-games">
+                            <div class="point-msg" id="positive-point"><span>오늘 받은 포인트는</span> <span id="point-value"></span>P 입니다.</div>                     
+                            <div class="point-msg" id="zero-point">오늘 받은 포인트는 0P입니다.ㅠㅠ 다음 기회에~~</div>
+                            <div class="point-msg" id="already-point">오늘 이미 포인트를 받지 않으셨나요??ㅡㅡ</div>
+                        </div>
+                    </div>
+                </c:if>
 
                 <!-- music wrapper -->
                 <div class="music-wrapper">

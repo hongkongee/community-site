@@ -16,4 +16,5 @@ public class Rate {
     private String message;
 
     private String chooseReason;
+    private String regDate;
 }

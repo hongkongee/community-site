@@ -274,4 +274,21 @@ public class BoardService {
       boardMapper.delete(bno);
    }
 
+   public List<BoardListResponseDTO> getListUserSearch(Search page, String account) {
+
+      List<BoardListResponseDTO> dtoList = new ArrayList<>();
+      List<Board> boardList = boardMapper.findSearch(page, account);
+
+      for (Board board : boardList) {
+         String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
+         BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname);
+         dtoList.add(dto);
+      }
+
+      return dtoList;
+   }
+
+   public int getCountSearch(Search page, String account) {
+      return boardMapper.findSearchCount(page, account);
+   }
 }

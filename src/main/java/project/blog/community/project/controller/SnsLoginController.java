@@ -1,9 +1,14 @@
+/*
 package project.blog.community.project.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import project.blog.community.project.service.SnsLoginService;
@@ -103,5 +108,4 @@ public class SnsLoginController {
         return "redirect:/home/main";
 
     }
-
 }

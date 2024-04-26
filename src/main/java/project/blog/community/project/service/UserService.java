@@ -4,6 +4,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -99,7 +101,7 @@ public class UserService {
             .gender(String.valueOf(foundMember.getGender()))
             .nickname(foundMember.getNickname())
             .auth(foundMember.getAuth().getDescription())
-            .profile(foundMember.getProfilePicture())
+            .profilePicture(foundMember.getProfilePicture())
             .loginMethod(foundMember.getLoginMethod().toString())
             .build();
 
@@ -109,11 +111,8 @@ public class UserService {
       session.setMaxInactiveInterval(60 * 60);
    }
 
-public MypageUserResponseDTO saveProfile(String profilePicture){
-    User user  = userMapper.updateProfile(profilePicture);
-   log.info("In UserService process, user Profile= " + user.toString());
-   MypageUserResponseDTO dto = new MypageUserResponseDTO(user);
-   return dto;
+public void saveProfile(String savePath, String accountNumber){
+      userMapper.updateProfile(savePath, accountNumber);
 }
 
 

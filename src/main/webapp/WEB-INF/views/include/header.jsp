@@ -11,13 +11,14 @@
             </a>
         </h1>
 
-        <!-- 프로필 사진 -->
+        <!-- 프로필 사진 
         <div class="profile-box">
-            <c:if test="${login == null || login.profile == null}">
+               profilePicture로수정 
+            <c:if test="${login == null || login.profilePicture == null}">
                 <img src="/assets/img/jjanggu.jpg" alt="프사">
             </c:if>
-
-            <c:if test="${login != null && login.profile != null}">
+   profilePicture로수정 -
+            <c:if test="${login != null && login.profilePicture != null}">
                 <c:choose>
                     <c:when test="${login.loginMethod == COMMON}">
                         <img src="/display${login.profilePicture}" alt="프사">
@@ -28,7 +29,24 @@
                 </c:choose>
             </c:if>
         </div>
-
+    -->
+    <div class="profile-box">
+        <!-- profilePicture로수정 -->
+        <c:if test="${login == null || login.profilePicture == null}">
+            <img src="/assets/img/jjanggu.jpg" alt="프사">
+        </c:if>
+        <!-- profilePicture로수정 -->
+        <c:if test="${login != null && login.profilePicture != null}">
+            <c:choose>
+                <c:when test="${login.loginMethod == 'COMMON'}">
+                    <img src="/display${login.profilePicture}" alt="프사">
+                </c:when>
+                <c:otherwise>
+                    <img src="${login.profilePicture}" alt="프사">
+                </c:otherwise>
+            </c:choose>
+        </c:if>
+    </div>
 
         <h2 class="intro-text">
             Welcome ${sessionScope.login == null ? '' : login.name}
@@ -76,9 +94,10 @@
 
 <script>
     const $profileBox = document.querySelector('.profile-box');
-
+//profile을 profilePicture로수정
+   
     $profileBox.onclick = e => {
-        location.href = '/display/download${login.profile}';
+        location.href = '/display/download${login.profilePicture}';
     };
 
     //버튼의 요소 노드 취득

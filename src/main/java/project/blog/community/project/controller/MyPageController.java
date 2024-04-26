@@ -4,10 +4,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import project.blog.community.project.dto.request.SignUpRequestDto;
 import project.blog.community.project.dto.response.BoardMyListResponseDTO;
 import project.blog.community.project.dto.response.FollowerResponseDTO;
 import project.blog.community.project.dto.response.LoginUserResponseDTO;
@@ -15,6 +17,7 @@ import project.blog.community.project.dto.response.MypageUserResponseDTO;
 import project.blog.community.project.service.BoardService;
 import project.blog.community.project.service.FollowingService;
 import project.blog.community.project.service.UserService;
+import project.blog.community.util.upload.FileUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -31,7 +34,8 @@ import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccoun
 @RequestMapping("/mypage")
 @Slf4j
 public class MyPageController {
-
+    @Value("${file.upload.root-path}")
+    private String rootPath;
    private final UserService userService;
    private final FollowingService followingService;
    private final BoardService boardService;
@@ -46,8 +50,7 @@ public class MyPageController {
 
 //      log.info("user: " + userInformation.toString());
 
-      MypageUserResponseDTO userprofile = userService.saveProfile(profilePicture);
-model.addAttribute("user",userprofile);
+
       // 로그인한 유저의 정보가져오기
       HttpSession session = request.getSession();
       LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
@@ -108,6 +111,8 @@ model.addAttribute("user",userprofile);
 
 
 
+
+
    @PostMapping("/intro")
    public String introSubmit(@RequestParam("introduction") String introduction,
                              HttpServletRequest request) {
@@ -124,6 +129,20 @@ model.addAttribute("user",userprofile);
 
       return "redirect:/mypage/home/" + myAccount;
    }
+
+   // 프로필 이미지 업로드
+   @PostMapping("/upload/{account}")
+    public String fileUpload(@PathVariable String account, MultipartFile profilePicture){
+      log.info("upload/ dto: {}", profilePicture);
+      log.info("file name {}", profilePicture.getOriginalFilename());
+
+      String savePath = FileUtils.uploadFile(profilePicture, rootPath);
+      log.info("save path{}",savePath);
+
+      userService.saveProfile(savePath, account);
+      return "redirect:/mypage/home/" + account;
+   }
+
 
 
 }

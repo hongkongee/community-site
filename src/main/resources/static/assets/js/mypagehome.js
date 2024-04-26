@@ -3,8 +3,17 @@ const $profilePic = document.querySelector('.user-profile-pic');
 const $fileInput = document.getElementById('profile-img');
 const $profileSaveBtn = document.querySelector('.profile-save');
 
+// 홈페이지 주인의 아이디
+const userAccount = document.querySelector('.user-info').dataset.useraccount;
+
+// 로그인 유저의 아이디
+const loginAccount = document.getElementById('loginuser').dataset.loginaccount;
+
+
 $profilePic.onclick = e => {
+  if (userAccount === loginAccount) {
     $fileInput.click();
+  } else {return;}
 }
 
 $fileInput.onchange = e => {
@@ -20,7 +29,8 @@ $fileInput.onchange = e => {
 }
 
 $profileSaveBtn.onclick = e => {
-    $profileSaveBtn.style.display = 'none'; // 버튼 숨기기
+  document.getElementById('profile-form').submit();
+  $profileSaveBtn.style.display = 'none'; // 버튼 숨기기
 }
 
 
@@ -122,6 +132,10 @@ document.getElementById('modify-btn').onclick = () => {
   console.log('수정 완료~');
 }
 
+(function () {
+  const imgPath = document.querySelector('.user-profile-pic').src;
+  console.log('image path is ', imgPath);
+})()
 
 
 

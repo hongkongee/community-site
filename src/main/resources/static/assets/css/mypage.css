@@ -294,3 +294,7 @@ p#intro-text {
 button.btn-primary {
   display: none;
 }
+
+#loginuser {
+  display: none;
+}

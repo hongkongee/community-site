@@ -44,20 +44,22 @@
         <div class="body-wrapper1">
 
             <!-- profile information -->
-            <div class="user-profile-box">
-                <c:if test="${empty user.profilePicture}">
-                    <img class="user-profile-pic" src="/assets/img/jjanggu.jpg" alt="기본 프사">
-                </c:if>
+            <form action="/mypage/upload/${user.accountNumber}" id="profile-form" method="post" enctype="multipart/form-data">
+                <div class="user-profile-box">
+                    <c:if test="${empty user.profilePicture}">
+                        <img class="user-profile-pic" src="/assets/img/jjanggu.jpg" alt="기본 프사">
+                    </c:if>
+                    <c:if test="${not empty user.profilePicture}">
+                        <img class="user-profile-pic" src="/display${user.profilePicture}" alt="프사">
+                    </c:if>
+                    <input type="file" id="profile-img" style="display: none;" name="profilePicture">
+                </div>
+                <button class="profile-save">프로필 저장</button>
+            </form>
 
-                <c:if test="${not empty user.profilePicture}">
-                    <img class="user-profile-pic" src="/display\${following.profilePicture}" alt="프사">
-                </c:if>     
-                <input type="file"id="profile-img"style="display: none;"name="profileImage" >  
-            </div>
-            <button type="submit" class="profile-save">프로필 저장</button>
-        
+            <div id="loginuser" data-loginaccount="${login.accountNumber}"></div>
 
-            <div class="user-info">
+            <div class="user-info" data-useraccount="${user.accountNumber}">
                 <div class="profile-name">
                     ${user.nickname}<br />
                 </div>
@@ -135,7 +137,7 @@
                                     </c:if>
 
                                     <c:if test="${not empty following.profilePicture}">
-                                        <img src="/display\${following.profilePicture}" alt="프사">
+                                        <img src="/display${following.profilePicture}" alt="프사">
                                     </c:if>
                                 </div>
                                 
@@ -191,7 +193,7 @@
                                     </c:if>
 
                                     <c:if test="${not empty follower.profilePicture}">
-                                        <img src="/display\${follower.profilePicture}" alt="프사">
+                                        <img src="/display${follower.profilePicture}" alt="프사">
                                     </c:if>
                                 </div>
                                 

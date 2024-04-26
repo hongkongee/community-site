@@ -40,7 +40,7 @@ public interface UserMapper {
    List<String> findUserByFollowing(String account);
 
    //프로필 바꾸기
-  User updateProfile(String profilePicture);
+  void updateProfile(@Param("profilePicture") String profilePicture, @Param("accountNumber") String accountNumber);
 }
 
 

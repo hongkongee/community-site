@@ -3,7 +3,7 @@
   padding: 5%;
   width: 60vw;
   height: 100vh;
-  background: #F8F6E3;
+  background: #fff;
   margin: auto;
 }
 
@@ -11,6 +11,8 @@ section.form-container {
   font-size: 20px;
   margin: 0 auto;
   border: #000 solid 1px;
+  width: 96%;
+  border-radius: 60px;
 }
 
 section.form-container h1 {

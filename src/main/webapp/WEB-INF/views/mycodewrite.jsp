@@ -21,7 +21,7 @@
 
     <link rel="stylesheet" href="/assets/css/main.css">
 
- 
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
     <style>
 

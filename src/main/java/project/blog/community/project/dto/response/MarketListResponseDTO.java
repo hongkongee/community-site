@@ -5,10 +5,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 import project.blog.community.project.entity.Favorite;
 import project.blog.community.project.entity.Market;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Getter @ToString
@@ -19,16 +21,17 @@ MarketListResponseDTO {
 
     private final int boardNo;
     private final String textWriter;
-    private final LocalDateTime updateDate;
+    private final String updateDate;
 //    private LocalDateTime updateDate;
     private final String textTitle;
-//    private int rate;
+    private final int rate;
     private final int viewCount;
     private final String category;
 
     private int isFavorite;
     private final int price;
     private final String address;
+    private final MultipartFile file;
 
 //    private int price;
 //    private String location;
@@ -39,13 +42,14 @@ MarketListResponseDTO {
     public MarketListResponseDTO(Market market, List<Integer> boards) {
         this.boardNo = market.getBoardNo();
         this.textWriter = market.getTextWriter();
-        this.updateDate = market.getUpdateDate();
+        this.updateDate = makePrettierDateString(market.getUpdateDate());
         this.textTitle = market.getTextTitle();
+        this.rate = market.getRate();
         this.viewCount = market.getViewCount();
         this.category = market.getCategory();
         this.price = market.getPrice();
         this.address = market.getAddress();
-
+        this.file = market.getFile();
         this.isFavorite = 0;
 
         // favorite
@@ -55,10 +59,15 @@ MarketListResponseDTO {
             this.isFavorite = 0;
         }
 
+    }
+
+    public static String makePrettierDateString(LocalDateTime updateDate) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return dtf.format(updateDate);//재가공
+    }
 //        this.price = market.getPrice();
 //        this.location = market.getLocation();
 //        this.ContentImg = market.getContentImg();
 //        this.loginMethod = market.getLoginMethod();
 
-    }
 }

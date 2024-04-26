@@ -72,8 +72,8 @@
         <div class="ad-content">#게임셔츠<br />#80000원</div>
       </div>
       <div class="ad">
-        <img src="https://img.mbn.co.kr/filewww/news/2023/04/25/16824160556447a1b7287b7.png" />
-        <div class="ad-content">#1010101010<br />#1,000원</div>
+        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fm.wooilsin.co.kr%2Fproduct%2Fdetail.html%3Fproduct_no%3D295&psig=AOvVaw3_8mRbMsgcWkL82rJi26yF&ust=1714183790171000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMDsy7Pm3oUDFQAAAAAdAAAAABAJ" />
+        <div class="ad-content">#고급 청바지<br />#70000원</div>
       </div>
     </div>
 

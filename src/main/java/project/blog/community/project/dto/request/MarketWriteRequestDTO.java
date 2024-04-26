@@ -1,6 +1,7 @@
 package project.blog.community.project.dto.request;
 
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -16,8 +17,7 @@ public class MarketWriteRequestDTO {
     private String category;
     private int price;
     private String address;
-    private String postImg;
-
+    private MultipartFile file;
 
 }
 

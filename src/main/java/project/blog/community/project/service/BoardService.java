@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.WebUtils;
 import project.blog.community.project.common.Search;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
@@ -105,7 +106,6 @@ public class BoardService {
    }
 
 
-<<<<<<< HEAD
      //게시물의 좋아요 수 바꾸기
 //    public int changeLike(LikeRequestDTO dto, HttpServletRequest request) {
 //        int bno = dto.getBno();
@@ -139,12 +139,11 @@ public class BoardService {
 //            return 0;
 //        }
 //    }
-=======
+//
    // 게시물의 좋아요 수 바꾸기
    public int changeLike(LikeRequestDTO dto, HttpServletRequest request) {
       int bno = dto.getBno();
       int number = dto.getNumber();
->>>>>>> 2783b54cb2a88615454cbe11778270136588a4aa
 
       // 게시물 테이블의 좋아요 수 업데이트
       boardMapper.updateLikeCount(bno, number);

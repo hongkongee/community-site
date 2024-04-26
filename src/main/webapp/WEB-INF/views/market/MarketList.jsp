@@ -8,16 +8,15 @@
   <meta charset="UTF-8">
   <title>All page</title>
 
-  
+
   <%@ include file="../include/static-head.jsp" %>
   <link rel="stylesheet" href="/assets/css/allpage.css">
   <link rel="stylesheet" href="/assets/css/snb.css">
 
-  <script src="/assets/js/MarketList.js" defer></script>
+  <script src="/assets/js/MarketAddFav.js" defer></script>
 
 
   <style>
-
     .btn-primary {
       padding: auto;
     }
@@ -54,7 +53,7 @@
 
           <thead class="head-wrapper">
             <!-- 게시판 헤드 -->
-            <tr>
+            <tr class="boardList">
               <th>글번호</th>
               <th>제목</th>
               <th>작성자</th>
@@ -64,6 +63,7 @@
               <th>판태상태</th>
               <th>가격</th>
               <th>거래장소</th>
+              <th>좋아요</th>
             </tr>
           </thead>
 
@@ -75,11 +75,11 @@
             <c:forEach var="s" items="${bList}">
               <tr class="post">
                 <!-- 게시글 하나 -->
-                <td id="bno">${s.boardNo}</td>
+                <td id="bno" class="bno">${s.boardNo}</td>
                 <td id="textTitle" name="textTitle"> <a href="/market/detail/${s.boardNo}"> ${s.textTitle} </a></td>
                 <td id="textWriter" name="textWriter">${s.textWriter}</td>
                 <td id="updateDate" name="updateDate">${s.updateDate}</td>
-                <td id="viewCount" name="viewCount"> ${s.viewCount}</td>
+                <td id="viewCount" name="viewCount" data-view-count="${s.viewCount}"> ${s.viewCount}</td>
 
                 <td class="favorite" name="favorite" data-bno="${s.boardNo}">
                   <c:if test="${s.isFavorite == 1}">
@@ -95,6 +95,7 @@
                 <td id="category" name="category">${s.category}</td>
                 <td id="price" name="price">${s.price}</td>
                 <td id="address" name="address">${s.address}</td>
+                <td id="rate" name="rate"> ${s.rate}</td>
 
 
               </tr>
@@ -109,20 +110,56 @@
       </div>
     </section>
   </div>
+
+
+
   <script>
-    const $post = document.querySelector('post');
+    document.addEventListener('DOMContentLoaded', function () {
+      const $posts = document.querySelectorAll('.post');
 
-    $post.addEventListener('click', e => {
-      if (e.target === e.currentTarget) {
-        location.href = '/market/detail/${s.boardNo}';
-        console.log("e.target === e.currentTarget");
+      $posts.forEach(post => {
+        post.addEventListener('click', function (e) {
+          // 클릭된 요소가 a 태그인 경우 (제목을 클릭한 경우)
+          if (e.target.tagName === 'A') {
+            return; // detail 페이지로 이동하는 기본 동작 수행
+          }
 
-
-      }
-      console.log("클릭됨");
-      location.href = '/market/detail/${s.boardNo}';
-
+          // 클릭된 요소가 tr 태그이고, 클릭된 요소가 즐겨찾기 아이콘이 아닌 경우
+          if (this.contains(e.target) && !e.target.classList.contains('favorite')) {
+            const boardNo = document.querySelector('.bno').textContent;
+            location.href = `/market/detail/${boardNo}`;
+          }
+        });
+      });
     });
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // viewCount id를 가진 요소를 취득
+      const viewCountElement = document.getElementById('viewCount');
+
+      // viewCount id를 가진 요소가 존재하는 경우에만 작업 수행
+      if (viewCountElement) {
+        // viewCount id를 가진 요소 내의 모든 <option> 요소 취득
+        const options = viewCountElement.querySelectorAll('option');
+
+        // 각 <option> 요소에 스타일 적용
+        options.forEach(option => {
+        //배열 메서드인 forEach()를 사용하여 배열 또는 유사 배열 객체의 각 요소에 대해 반복
+
+          const viewCount = parseInt(option.getAttribute('data-view-count'));
+          //parseInt(...): 이 함수는 문자열을 정수로 변환
+          if (viewCount > 10) {
+            option.style.color = 'red';
+            option.style.fontWeight = 'bold';
+            
+          }
+        });
+      }
+    });
+
+
 
 
 

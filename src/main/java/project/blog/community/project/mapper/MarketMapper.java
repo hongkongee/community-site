@@ -1,9 +1,7 @@
 package project.blog.community.project.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import project.blog.community.project.dto.request.MarketRateRequestDTO;
-import project.blog.community.project.entity.Board;
 import project.blog.community.project.entity.Favorite;
 import project.blog.community.project.entity.Market;
 import project.blog.community.project.entity.Rate;
@@ -13,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface MarketMapper {
     void save(Market market);
-    void modify(Market market);
+    void modify(Market market, String currentLoginMemberAccount);
 
     List<Market> findAll();
     void updateViewCount(int boardNo);

@@ -39,6 +39,10 @@ const $modal = document.getElementById('editModal');
 //삭제 버튼
 const $deleteBtn = document.getElementById('content-Del');
 
+//수정권한 부여
+const currentAccount = '${login.account}';
+const auth = '${login.auth}';
+
 
 
 $modifyBtn.addEventListener('click', e => {

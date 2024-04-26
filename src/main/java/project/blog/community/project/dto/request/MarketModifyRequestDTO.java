@@ -38,7 +38,7 @@ public class MarketModifyRequestDTO {
     public Market toEntity(){
         return Market.builder()
                 .boardNo(boardNo)
-                .textTitle(title)
+                .textTitle(title) // 수정된 부분
                 .textContent(text)
                 .category(category)
                 .price(price)

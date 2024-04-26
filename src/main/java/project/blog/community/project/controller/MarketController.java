@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import project.blog.community.project.common.marketSearch;
 import project.blog.community.project.common.rate;
 import project.blog.community.project.dto.request.MarketModifyRequestDTO;
@@ -27,6 +28,7 @@ import project.blog.community.project.dto.response.MarketModifyResponse;
 import project.blog.community.project.entity.Board;
 import project.blog.community.project.entity.Reply;
 import project.blog.community.project.service.MarketService;
+import project.blog.community.util.upload.FileUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,9 +44,13 @@ import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccoun
 public class MarketController {
     private final MarketService marketService;
 
-    //    @Value("${googleMap.app-key}")
+    @Value("${googleMap.app-key}")
     private String googleMapKey;
 
+    @Value("${file.upload.root-path}")
+    private String rootPath;
+
+    //메인 : 폐기함
     @GetMapping("/main")
     public String mainPage() {
         log.info("/market/main: GET");
@@ -53,6 +59,7 @@ public class MarketController {
         return "market/MarketMain";
     }
 
+    //리스트 뷰
     @GetMapping("/list")
     public String list(Model model, HttpServletRequest request) {
 
@@ -70,15 +77,21 @@ public class MarketController {
         return "market/MarketList";
     }
 
+
+    //글쓰기 화면
     @GetMapping("/write")
     public String write() {
-        log.info("/market/write: GET");
+        log.info("/market/write: GET 글쓰기");
         return "market/MarketWrite";
     }
 
+
+    //글쓰고 리다이렉트
     @PostMapping("/write")
-    public String write(MarketWriteRequestDTO dto, HttpServletRequest request) {
-        log.info("/board/write : POST, dto: {}", dto);
+    public String write(MarketWriteRequestDTO dto, @RequestParam("formFile") MultipartFile file, HttpServletRequest request) {
+        log.info("/market/write : POST, dto: {}", dto);
+        log.info("Uploaded file name: {}", file.getOriginalFilename());
+        log.info("File size: {}", file.getSize());
 
         //현재 로그인한 유저 ID
         HttpSession session = request.getSession();
@@ -87,12 +100,15 @@ public class MarketController {
         // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
         String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
 
-        marketService.register(dto, currentLoginMemberAccount);
-        return "redirect:/market/list";
+        String filePath = FileUtils.uploadFile(file, rootPath);
 
+        marketService.register(dto, filePath, currentLoginMemberAccount);
+        return "redirect:/market/list";
 
     }
 
+
+    //디테일 뷰
     @GetMapping("/detail/{boardNo}")
     public String detail(@PathVariable("boardNo") int boardNo, Model model) {
         log.info("/market/detail/{}: GET", boardNo);
@@ -106,11 +122,21 @@ public class MarketController {
         return "market/MarketDetail";
     }
 
+//    @PostMapping("/detail/{boardNo}")
 
+
+
+    //수정하기
     @PutMapping("/detail/{boardNo}")
     @ResponseBody //response 할 때 추가함
     public ResponseEntity<String> update(@Validated @RequestBody MarketModifyRequestDTO dto,
-                                         BindingResult result) {
+                                         BindingResult result, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        session.getAttribute("login");
+        // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
+        String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
+
         //에러 없을시 건너뜀 : 400에러
         if (result.hasErrors()) {
             return ResponseEntity
@@ -121,11 +147,12 @@ public class MarketController {
         log.info("/detail: PUT, dto: {}", dto);
 
         //성공시 200
-        marketService.modify(dto);
+        marketService.modify(dto,currentLoginMemberAccount);
         return ResponseEntity.ok().body("modSuccess"); //담음
     }
 
 
+    //삭제
     @DeleteMapping("/detail/{boardNo}")
     public String delete(@PathVariable("boardNo") int boardNo) {
         log.info("/delete/{}: GET, boardNo:", boardNo);
@@ -134,7 +161,7 @@ public class MarketController {
         return "redirect:/market/list";
     }
 
-    // boardNo 게시물에 즐겨찾기를 눌렀을 때 발생
+    // 즐겨찾기 boardNo 게시물에 즐겨찾기를 눌렀을 때 발생
     @PostMapping("/list/{boardNo}")
     //@ResponseBody //메서드의 반환 값이 HTTP 응답 본문으로 사용
     public ResponseEntity<?> addFavList(Model model,
@@ -161,6 +188,7 @@ public class MarketController {
     }
 
 
+    //좋아요
     @PostMapping("/detail/{boardNo}")
     //@ResponseBody
     public ResponseEntity<?> rate(@RequestBody MarketRateRequestDTO dto, HttpSession session) {
@@ -178,9 +206,6 @@ public class MarketController {
             return ResponseEntity.ok().body("로그인이 필요합니다."); // MockHttpSession을 사용하여 HttpSession 생성
         }
 
-        // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
-
-
         boolean flag = marketService.isDuplication(dto);
 
         log.info("rate get flag{} ", flag);
@@ -195,10 +220,4 @@ public class MarketController {
 
     }
 
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentUserName = authentication.getName();
-//
-//        if (currentUserName.equals(dto.getTextWriter())) {
-//            return ResponseEntity.badRequest().body("자기 자신을 평가할 수 없습니다.");
-//        }
 }

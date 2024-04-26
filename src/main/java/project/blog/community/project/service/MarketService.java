@@ -48,16 +48,17 @@ public class MarketService {
     }
 
 
-    public void modify(MarketModifyRequestDTO dto) {
+    public void modify(MarketModifyRequestDTO dto, String currentLoginMemberAccount) {
         Market marketContent = dto.toEntity();
-        mapper.modify(marketContent);
+
+        mapper.modify(marketContent, currentLoginMemberAccount);
     }
 
-    public void register(MarketWriteRequestDTO dto, String currentLoginMemberAccount) {
-        Market market = new Market(dto, currentLoginMemberAccount);//DTO -> Entity
+    public void register(MarketWriteRequestDTO dto, String filePath, String currentLoginMemberAccount) {
+        Market market = new Market(dto, filePath, currentLoginMemberAccount);//DTO -> Entity
 //        market.setTextWriter(MarketUtils.getCurrentLoginMemberAccount(session));
+        market.setFile(filePath);
         mapper.save(market);
-
     }
 
     public MarketDetailResponse getDetail(int boardNo) {
@@ -96,17 +97,13 @@ public class MarketService {
     }
 
     public void addRate(MarketRateRequestDTO dto) {
-        int boardNo = dto.getBoardNo();
-        String textWriter = dto.getTextWriter();
-        String message = dto.getMessage();
-        String chooseReason = dto.getChooseReason();
+        String textWriter = dto.getTextWriter(); //재가공
 
         // User 테이블 rate 컬럼 1 추가
         mapper.updateRateBoard(textWriter);
 
         // Market Rate 테이블(중복 검사를 위한 테이블) row 추가
         mapper.addRate(dto);
-
     }
 
     public int getRate(String textWriter) {

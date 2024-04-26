@@ -152,7 +152,7 @@
 
         
         <div class="card-wrapper"> <!-- 게시물 하나 영역 (더미데이터) -->
-          <section class="card">
+          <section class="card" data-mno="${m.boardNo}">
             <!-- <div class="card-image">
               <img src="/assets/img/test.jpg" alt="게시물 이미지">
             </div> -->
@@ -160,7 +160,7 @@
 
               <a href="#">
                 <h2 class="card-title">${m.textTitle}</h2>
-                <p>${m.price}</p>
+                <p>&#8361;${m.price}</p>
 
               </a>
               

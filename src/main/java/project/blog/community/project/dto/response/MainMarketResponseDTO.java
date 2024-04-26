@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 @EqualsAndHashCode
 public class MainMarketResponseDTO {
 
+    private final int boardNo;
     private final String textWriter;
     private final String updateDate;
     private final String textTitle;
@@ -27,6 +28,7 @@ public class MainMarketResponseDTO {
         this.viewCount = market.getViewCount();
         this.price = market.getPrice();
         this.address = market.getAddress();
+        this.boardNo = market.getBoardNo();
     }
 
     // 날짜 포맷을 바꾸는 함수

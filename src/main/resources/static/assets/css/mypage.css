@@ -236,22 +236,28 @@ body {
   /* gap: 20%; */
   /* justify-content: space-evenly; */
   padding-bottom: 25px;
+  width: 90%;
+  margin: 50px auto;
+
 }
 
 .body-wrapper2 .my-market {
   font-size: 25px;
-  margin-left: 180px;
+  /* margin-left: 180px; */
+  width: 32%;
 }
 
 .body-wrapper2 .popular-wrapper {
   font-size: 25px;
   margin-left: 180px;
+  width: 32%;
 }
 
 
 .body-wrapper2 .weather-wrapper {
   font-size: 25px;
   margin-left: 180px;
+  width: 26%;
 }
 
 .point-msg {

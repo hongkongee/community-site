@@ -111,19 +111,18 @@ public class UserService {
       session.setMaxInactiveInterval(60 * 60);
    }
 
-public void saveProfile(String savePath, String accountNumber){
+   public void saveProfile(String savePath, String accountNumber) {
       userMapper.updateProfile(savePath, accountNumber);
-}
+   }
 
 
+   public MypageUserResponseDTO getUserInformation(String account) {
+      User user = userMapper.findUser(account);
+      log.info("In UserService process, user = " + user.toString());
 
-    public MypageUserResponseDTO getUserInformation(String account) {
-       User user = userMapper.findUser(account);
-       log.info("In UserService process, user = " + user.toString());
-
-       MypageUserResponseDTO dto = new MypageUserResponseDTO(user);
-       return dto;
-    }
+      MypageUserResponseDTO dto = new MypageUserResponseDTO(user);
+      return dto;
+   }
 
 
    public void autoLoginClear(HttpServletRequest request, HttpServletResponse response) {

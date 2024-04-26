@@ -21,32 +21,32 @@
             <c:if test="${login != null && login.profilePicture != null}">
                 <c:choose>
                     <c:when test="${login.loginMethod == COMMON}">
-                        <img src="/display${login.profile}" alt="프사">
+                        <img src="/display${login.profilePicture}" alt="프사">
                     </c:when>
                     <c:otherwise>
-                        <img src="${login.profile}" alt="프사">
+                        <img src="${login.profilePicture}" alt="프사">
                     </c:otherwise>
                 </c:choose>
             </c:if>
         </div>
     -->
-    <div class="profile-box">
-        <!-- profilePicture로수정 -->
-        <c:if test="${login == null || login.profilePicture == null}">
-            <img src="/assets/img/jjanggu.jpg" alt="프사">
-        </c:if>
-        <!-- profilePicture로수정 -->
-        <c:if test="${login != null && login.profilePicture != null}">
-            <c:choose>
-                <c:when test="${login.loginMethod == 'COMMON'}">
-                    <img src="/display${login.profilePicture}" alt="프사">
-                </c:when>
-                <c:otherwise>
-                    <img src="${login.profilePicture}" alt="프사">
-                </c:otherwise>
-            </c:choose>
-        </c:if>
-    </div>
+        <div class="profile-box">
+            <!-- profilePicture로수정 -->
+            <c:if test="${login == null || login.profilePicture == null}">
+                <img src="/assets/img/jjanggu.jpg" alt="프사">
+            </c:if>
+            <!-- profilePicture로수정 -->
+            <c:if test="${login != null && login.profilePicture != null}">
+                <c:choose>
+                    <c:when test="${login.loginMethod == 'COMMON'}">
+                        <img src="/display${login.profilePicture}" alt="프사">
+                    </c:when>
+                    <c:otherwise>
+                        <img src="${login.profilePicture}" alt="프사">
+                    </c:otherwise>
+                </c:choose>
+            </c:if>
+        </div>
 
         <h2 class="intro-text">
             Welcome ${sessionScope.login == null ? '' : login.name}
@@ -79,7 +79,8 @@
             </c:if>
 
 
-            <c:if test="${login == null}"> <!-- 로그인 안했으면 -->
+            <c:if test="${login == null}">
+                <!-- 로그인 안했으면 -->
                 <li><a href="/users/sign-up">Sign Up</a></li>
                 <li><a href="/users/sign-in">Sign In</a></li>
             </c:if>
@@ -94,8 +95,8 @@
 
 <script>
     const $profileBox = document.querySelector('.profile-box');
-//profile을 profilePicture로수정
-   
+    //profile을 profilePicture로수정
+
     $profileBox.onclick = e => {
         location.href = '/display/download${login.profilePicture}';
     };

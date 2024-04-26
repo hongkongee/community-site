@@ -268,9 +268,10 @@ public class HomeController {
    }
 
    // 오른쪽 사이드바 포인트 렌더링
-/*   @GetMapping("/snb")
+   @PostMapping("/snb")
+   @ResponseBody
    public ResponseEntity<?> myPoint(HttpServletRequest request) {
-      log.info("/home/snb: GET!!!");
+      log.info("/home/snb: POST!!!");
 
       // 로그인 유저 account 가져오기
       HttpSession session = request.getSession();
@@ -279,10 +280,12 @@ public class HomeController {
 
       // 로그인 유저 정보 가져오기
       MypageUserResponseDTO myInfo = userService.getUserInformation(myAccount);
+      int point = myInfo.getPoint();
+      log.info("my point is " + point);
 
 
-      return ResponseEntity.ok().body(myInfo);
-   }*/
+      return ResponseEntity.ok().body(point);
+   }
 
 
 }

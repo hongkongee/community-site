@@ -79,7 +79,7 @@
     </update>
 
     <insert id="addRate">
-        INSERT INTO tbl_market_rate
+        INSERT INTO tbl_market_rate (board_no, text_writer, message, choose_reason)
         VALUES (#{boardNo}, #{textWriter}, #{message}, #{chooseReason})
     </insert>
 

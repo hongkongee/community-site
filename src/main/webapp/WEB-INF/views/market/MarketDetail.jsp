@@ -190,9 +190,9 @@
 
               <select class="form-select" id="why" aria-label="Default select example" name="chooseReason">
                 <option selected>이유를 선택해주세요</option>
-                <option value="1 ">판매자가 친절해서</option>
-                <option value="2">저렴한 가격</option>
-                <option value="3">가까운 거래장소</option>
+                <option value="판매자가 친절해서">판매자가 친절해서</option>
+                <option value="저렴한 가격">저렴한 가격</option>
+                <option value="가까운 거래장소">가까운 거래장소</option>
               </select>
 
               <label for="report-reason">기타 사유가 있으면 말씀해주세요</label>

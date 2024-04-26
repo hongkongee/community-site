@@ -272,8 +272,8 @@
                         <c:forEach var="market" items="${markets}">
 
                             <div class="rate-evaluation">
-                                <span class="message">${market.message}</span>
                                 <span class="chooseReason">${market.chooseReason}</span>
+                                <span class="message">${market.message}</span>
                                 <span class="regDate">${market.regDate}</span>
                             </div>
 

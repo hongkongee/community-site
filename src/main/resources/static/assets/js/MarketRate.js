@@ -5,9 +5,9 @@ const $selectElement = document.querySelector('.form-select');
 const $selectedValue = $selectElement.value;
 const $selectedText = $selectElement.options[$selectElement.selectedIndex].text;
 
-const boardNo = document.getElementById('boardNo').textContent;
-const textWriter = document.getElementById('textWriter').textContent;
-const rate = document.getElementById('rate').textContent;
+const boardNo = document.getElementById('boardNo').textContent; // 게시글 번호
+const textWriter = document.getElementById('textWriter').textContent; // 작성자
+const rate = document.getElementById('rate').textContent; // 작성자의 평점
 
 
 let selectedValue = $selectElement.value;
@@ -21,12 +21,30 @@ let textareaValue = document.getElementById('reportText').value; //1번에 호�
 // const $textareaValue = $textareaElement.value;
 
 
+
+
+
 console.log('로그확인됨', $confirmButton);
 
-const likeBtnClickHandler = e => {
+document.getElementById('confirmBtn').onclick = () => {
+  const $chooseReason = document.getElementById('why'); // 선택지
+  const $textareaValue = document.getElementById('reportText'); // 서술형
+
+  console.log('좋아요 평가 제출~');
+  const chooseReason = $chooseReason.value;
+  const textareaValue = $textareaValue.value;
+  if (chooseReason === '이유를 선택해주세요') {
+    alert('이유를 선택해주세요!');
+    return;
+  }
+
+  console.log('boardNo: ', boardNo);
+  console.log('textWriter: ', textWriter);
+  console.log('chooseReason: ', chooseReason);
+  console.log('textareaValue: ', textareaValue);
   
 
-  fetch(`/market/detail/${boardNo}`, {
+  fetch('/market/detail', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,9 +53,7 @@ const likeBtnClickHandler = e => {
         boardNo: boardNo,
         textWriter: textWriter,
         message: textareaValue,
-        chooseReason: selectedText,
-        rate: rate
-
+        chooseReason: chooseReason,
       })
     })
     .then(response => response.text())//response.json() : Controller 데이터 받음

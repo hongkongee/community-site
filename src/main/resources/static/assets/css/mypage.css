@@ -358,3 +358,13 @@ p#intro-text {
 .rate-evaluation {
   font-size: 18px;
 }
+
+/* 중고 장터 평점, 평가 */
+.rate-evaluation .chooseReason {
+  font-weight: bold;
+}
+
+.rate-evaluation .regDate {
+  color: gray;
+  font-size: 15px;
+}

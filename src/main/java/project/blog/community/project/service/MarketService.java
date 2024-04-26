@@ -109,10 +109,7 @@ public class MarketService {
     }
 
     public void addRate(MarketRateRequestDTO dto) {
-        int boardNo = dto.getBoardNo();
         String textWriter = dto.getTextWriter();
-        String message = dto.getMessage();
-        String chooseReason = dto.getChooseReason();
 
         // User 테이블 rate 컬럼 1 추가
         mapper.updateRateBoard(textWriter);

@@ -247,6 +247,8 @@ function loginUserInformation() {
 
   // 서버에 로그인 유저 정보 요청보내기
   loginUserInformation();
+
+  console.log(document.querySelector('.point>span').textContent);
     
   
 })();

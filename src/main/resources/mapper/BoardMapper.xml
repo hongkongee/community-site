@@ -12,7 +12,6 @@
 
     <select id="findAll" resultType="board">
         SELECT * FROM tbl_board
-
         <if test="sort == 'popular'">
             ORDER BY like_count DESC
         </if>
@@ -20,6 +19,20 @@
             ORDER BY bno DESC
         </if>
         LIMIT #{page.pageStart}, #{page.amount}
+    </select>
+
+    <select id="findSearch" resultType="board">
+        SELECT * FROM tbl_board
+        WHERE writer = #{account}
+        AND title LIKE CONCAT('%', #{page.keyword}, '%')
+        ORDER BY bno DESC
+        LIMIT #{page.pageStart}, #{page.amount}
+    </select>
+
+    <select id="findSearchCount" resultType="int">
+        SELECT COUNT(*) FROM tbl_board
+        WHERE writer = #{account}
+        AND title LIKE CONCAT('%', #{page.keyword}, '%')
     </select>
 
     <select id="findOne" resultType="board">

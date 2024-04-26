@@ -264,8 +264,10 @@
 
                 <!-- searchbar -->
                 <div class="search-wrapper">
-                    <input type="text" id="search-bar" placeholder="게시물 검색">
-                    <button class="search-submit" type="submit">검색</button>
+                    <form action="/home/board/all/${user.accountNumber}" method="get">
+                        <input type="text" id="search-bar" placeholder="게시물 검색" name="keyword">
+                        <button class="search-submit" type="submit">검색</button>
+                    </form>
                 </div>
 
                 <div class="popular-post">

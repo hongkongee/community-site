@@ -181,19 +181,10 @@ public class MyPageController {
          return ResponseEntity.ok().body(todayPoint);
       }
 
-
-
-
-
-
-
-
-
-
-      
-
-
    }
+
+
+
 
 
 }

@@ -28,7 +28,7 @@ public class GameService {
         int bettingPoint = dto.getBetPoint();
         userMapper.addPoint(myAccount, -bettingPoint);
         
-        // 2. 가위바위보 진행 (컴퓨터 랜덤 가위바위보 생성 후 비교)
+        // 2. 가위바위보 진행 (컴퓨터 랜덤 가위바위보 생성 후 비교) -> GameResult enum 타입의 결과
         GameResult gameResult = rpsWithComputer(dto.getChoice());
 
         // 3. 가위바위보 결과에 따라 포인트 지급 or 차감
@@ -36,7 +36,7 @@ public class GameService {
         // DB에서 로그인한 대상 (session) 의 포인트 지급 or 차감
         userMapper.addPoint(myAccount, resultPoint);
 
-        // 4. 결과를 화면단에 전달, 결과에 따라 화면을 다르게 구성
+        // 4. 결과를 화면단에 전달, 결과에 따라 화면을 다르게 구성 -> "ROCK", "SCISSOR", "PAPER" String
         String gameResultString = gameResult.name();
         return gameResultString;
     }

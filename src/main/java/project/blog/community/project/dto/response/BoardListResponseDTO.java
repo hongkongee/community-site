@@ -33,7 +33,30 @@ public class BoardListResponseDTO {
 
     private final int random;
 
+    private final int numberOfReply;
+
     // entity를 dto로 바꾸는 생성자
+    public BoardListResponseDTO(Board board, String nickname, int numberOfReply) {
+        this.bno = board.getBno();
+        this.category = board.getCategory().getDescription();
+        this.title = makeShortTitle(board.getTitle());
+        this.writer = nickname;
+        this.regDate = makePrettierDateString(board.getRegDate());
+        this.regDate2 = makePrettierDateString2(board.getRegDate());
+        this.viewCount = board.getViewCount();
+        this.postImg = board.getPostImg();
+        this.likeCount = board.getLikeCount();
+        this.writerAccount = board.getWriter();
+
+        this.numberOfReply = numberOfReply;
+
+        // 기본 이미지를 위한 난수 생성
+        Random random = new Random();
+        this.random = random.nextInt(3) + 1;
+
+
+    }
+
     public BoardListResponseDTO(Board board, String nickname) {
         this.bno = board.getBno();
         this.category = board.getCategory().getDescription();
@@ -45,6 +68,8 @@ public class BoardListResponseDTO {
         this.postImg = board.getPostImg();
         this.likeCount = board.getLikeCount();
         this.writerAccount = board.getWriter();
+
+        this.numberOfReply = 0;
 
         // 기본 이미지를 위한 난수 생성
         Random random = new Random();

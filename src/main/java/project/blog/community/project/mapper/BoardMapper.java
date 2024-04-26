@@ -64,4 +64,6 @@ public interface BoardMapper {
     List<Board> findSearch(@Param("page") Search page, @Param("account") String account);
     
     int findSearchCount(@Param("page") Search page, @Param("account") String account);
+
+    int calcNumberOfReply(int bno);
 }

@@ -24,7 +24,7 @@
                         <img src="/display${login.profilePicture}" alt="프사">
                     </c:when>
                     <c:otherwise>
-                        <img src="${login.profilePicture}" alt="프사">
+                        <img src="${login.profile}" alt="프사">
                     </c:otherwise>
                 </c:choose>
             </c:if>

@@ -51,8 +51,8 @@
                 <li><a href="/mypage/home/${login.accountNumber}">My Page</a></li>
                 <li><a href="/mypage/posting_cube">My Posts</a></li>
                 <li><a href="/mypage/diary">My Diary</a></li>
-                <li><a href="#">My Code</a></li>
-                <li><a href="/wel/chat">Chat</a></li>
+                <li><a href="/wel/myCode">My Code</a></li>
+                <li><a href="/chat/chat">Chat</a></li>
                 <li><a href="#">Market</a></li>
             </c:if>
 

@@ -1,3 +1,37 @@
+//프로필 업로드 
+const $profilePic = document.querySelector('.user-profile-pic');
+const $fileInput = document.getElementById('profile-img');
+const $profileSaveBtn = document.querySelector('.profile-save');
+
+// 홈페이지 주인의 아이디
+const userAccount = document.querySelector('.user-info').dataset.useraccount;
+
+// 로그인 유저의 아이디
+const loginAccount = document.getElementById('loginuser').dataset.loginaccount;
+
+
+$profilePic.onclick = e => {
+  if (userAccount === loginAccount) {
+    $fileInput.click();
+  } else {return;}
+}
+
+$fileInput.onchange = e => {
+    const fileData = $fileInput.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(fileData);
+
+    reader.onloadend = e => {
+        const $img = document.querySelector('.user-profile-pic');
+        $img.setAttribute('src', reader.result);
+        $profileSaveBtn.style.display = 'inline-block'; // 버튼 보이기
+    }
+}
+
+$profileSaveBtn.onclick = e => {
+  document.getElementById('profile-form').submit();
+  $profileSaveBtn.style.display = 'none'; // 버튼 숨기기
+}
 
 
 // 서버에 팔로잉 추가(등록) POST 요청 보내기
@@ -96,52 +130,50 @@ $pen.onclick = () => {
 
 
 // 자기소개 수정 버튼 클릭 시 발생
-function makeBioModifyClickhHandler() {
 
-  const $modBtn = document.getElementById('bioModBtn');
 
-  $modBtn.addEventListener('click', e => {
-    const introduction = document.getElementById('textarea-intro').value;
+const $modBtn = document.getElementById('bioModBtn');
 
-    const payload = {
-      introduction: introduction
-    };
+$modBtn.addEventListener('click', e => {
+  console.log('수정 끝');
+  const introduction = document.getElementById('textarea-intro').value.trim();
 
-    console.log('payload: ', payload);
+  const payload = {
+    introduction: introduction
+  };
 
-    const requestInfo = {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    };
+  console.log('payload: ', payload);
 
-    fetch('/mypage/intro', requestInfo)
-      .then(res => {
-        if (res.status == 200) {
-          alert('댓글이 수정되었습니다.');
-          // document.getElementById('modal-close').click();
-          location.reload();
-          return res.text();
-        } else {
-          alert('수정값에 문제가 있습니다. 내용을 확인하세요!');
-          // document.getElementById('modalReplyText').value = '';
-          location.reload();
-          return;
-        }
-      })
-      .then(data => {
-        console.log(data);
-      });
-  });
+  const requestInfo = {
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  };
 
-}
+  fetch('/mypage/intro', requestInfo)
+    .then(res => {
+      if (res.status == 200) {
+        alert('댓글이 수정되었습니다.');
+        // document.getElementById('modal-close').click();
+        location.reload();
+        return res.text();
+      } else {
+        alert('수정값에 문제가 있습니다. 내용을 확인하세요!');
+        // document.getElementById('modalReplyText').value = '';
+        location.reload();
+        return;
+      }
+    })
+    .then(data => {
+      console.log(data);
+    });
+});
 
-(() => {
-  makeBioModifyClickhHandler();
 
-})();
+
+
 
 // $('a').click(function(event){
 //   event.preventDefault(); 
@@ -198,5 +230,16 @@ document.getElementById('today-point').onclick = () => {
 
     });
 
+(() => {
+
+
+  const imgPath = document.querySelector('.user-profile-pic').src;
+  console.log('image path is ', imgPath);
+
+
+
+})();
+
 
 }
+

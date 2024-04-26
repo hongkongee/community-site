@@ -13,6 +13,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/main/resources/static/assets/css/common.css">
+    <link rel="stylesheet" href="/assets/css/header.css">
+    <link rel="stylesheet" href="/assets/css/snb.css">
 
     <style>
         .container .wrap {
@@ -109,6 +111,9 @@
 </head>
 
 <body>
+
+    <%@ include file="/WEB-INF/views/include/header.jsp" %>
+    <%@ include file="../include/snb.jsp" %>
 
     <div class="container">
         <div class="wrap">

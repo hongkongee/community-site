@@ -48,7 +48,7 @@
             <li><a href="/home/main">Posts</a></li>
             <li><a href="/home/all">Diary</a></li>
             <li><a href="#">Gallery</a></li>
-            <li><a href="/chat/chatTest">Chat</a></li>
+            <li><a href="/chat/chat">Chat</a></li>
             <li><a href="#">Market</a></li>
 
             <c:if test="${login == null}">

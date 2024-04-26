@@ -168,6 +168,7 @@ body {
   flex-direction: column;
   overflow-y: scroll;
   height: 200px;
+  margin-right: 50px;
 
   &::-webkit-scrollbar {
     width: 10px;
@@ -177,6 +178,10 @@ body {
 .body-wrapper1 .user-friends .following-list .user-wrapper {
   display: flex;
   justify-content: flex-start;
+}
+
+.body-wrapper1 .user-friends .name-box a {
+  font-size: 18px
 }
 
 .body-wrapper1 .user-friends .follower-list {
@@ -199,8 +204,8 @@ body {
 }
 
 .profile-box { /* 프로필 사진 */
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   overflow: hidden;
   font-size: 12px;
@@ -262,6 +267,16 @@ body {
 .popular-title-container {
   font-size: 18px;
 }
+
+.popular-title-container>a {
+  color: orange;
+}
+
+.popular-content {
+  font-size: 15px;
+  color: gray;
+}
+
 
 #audio-controls {
   background-color: #f2f2f2;

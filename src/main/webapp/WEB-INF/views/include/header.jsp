@@ -11,25 +11,7 @@
             </a>
         </h1>
 
-        <!-- 프로필 사진 
-        <div class="profile-box">
-               profilePicture로수정 
-            <c:if test="${login == null || login.profilePicture == null}">
-                <img src="/assets/img/jjanggu.jpg" alt="프사">
-            </c:if>
-   profilePicture로수정 -
-            <c:if test="${login != null && login.profilePicture != null}">
-                <c:choose>
-                    <c:when test="${login.loginMethod == COMMON}">
-                        <img src="/display${login.profilePicture}" alt="프사">
-                    </c:when>
-                    <c:otherwise>
-                        <img src="${login.profile}" alt="프사">
-                    </c:otherwise>
-                </c:choose>
-            </c:if>
-        </div>
-    -->
+
         <div class="profile-box">
             <!-- profilePicture로수정 -->
             <c:if test="${login == null || login.profilePicture == null}">

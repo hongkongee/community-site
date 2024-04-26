@@ -34,6 +34,12 @@
         WHERE account_number = #{accountNumber}
     </update>
 
+    <update id="updateProfile">
+        UPDATE tbl_user
+        SET profile_picture = #{profilePicture}
+        WHERE account_number = #{accountNumber}
+    </update>
+
     <update id="saveAutoLogin">
         UPDATE tbl_user
         SET session_id = #{sessionId}, limit_time = #{limitTime}

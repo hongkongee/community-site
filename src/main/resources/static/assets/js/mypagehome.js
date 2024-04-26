@@ -1,3 +1,37 @@
+//프로필 업로드 
+const $profilePic = document.querySelector('.user-profile-pic');
+const $fileInput = document.getElementById('profile-img');
+const $profileSaveBtn = document.querySelector('.profile-save');
+
+// 홈페이지 주인의 아이디
+const userAccount = document.querySelector('.user-info').dataset.useraccount;
+
+// 로그인 유저의 아이디
+const loginAccount = document.getElementById('loginuser').dataset.loginaccount;
+
+
+$profilePic.onclick = e => {
+  if (userAccount === loginAccount) {
+    $fileInput.click();
+  } else {return;}
+}
+
+$fileInput.onchange = e => {
+    const fileData = $fileInput.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(fileData);
+
+    reader.onloadend = e => {
+        const $img = document.querySelector('.user-profile-pic');
+        $img.setAttribute('src', reader.result);
+        $profileSaveBtn.style.display = 'inline-block'; // 버튼 보이기
+    }
+}
+
+$profileSaveBtn.onclick = e => {
+  document.getElementById('profile-form').submit();
+  $profileSaveBtn.style.display = 'none'; // 버튼 숨기기
+}
 
 
 // 서버에 팔로잉 추가(등록) POST 요청 보내기
@@ -138,6 +172,12 @@ function makeBioModifyClickhHandler() {
 
 }
 
+
+(function () {
+  const imgPath = document.querySelector('.user-profile-pic').src;
+  console.log('image path is ', imgPath);
+})()
+
 (() => {
   makeBioModifyClickhHandler();
 
@@ -200,3 +240,4 @@ document.getElementById('today-point').onclick = () => {
 
 
 }
+

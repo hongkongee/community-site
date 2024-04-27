@@ -109,16 +109,18 @@ public class MarketService {
     }
 
     public void addRate(MarketRateRequestDTO dto) {
-        int boardNo = dto.getBoardNo();
         String textWriter = dto.getTextWriter();
-        String message = dto.getMessage();
-        String chooseReason = dto.getChooseReason();
 
-        // User 테이블 rate 컬럼 1 추가
-        mapper.updateRateBoard(textWriter);
-
-        // Market Rate 테이블(중복 검사를 위한 테이블) row 추가
+        // Market Rate 테이블(중복 검사를 위한 테이블) row 추가 -> 선택한 1~5를 저장 (insert)
         mapper.addRate(dto);
+
+        // Market Rate 테이블에서 해당 유저의 모든 평점을 평균을 내서 값을 가져오고 (select)
+        float rateAvg = mapper.rateAverage(dto.getTextWriter());
+
+        // 평균 낸 값을 유저 테이블에 저장 (update)
+        mapper.updateRateBoard(textWriter, rateAvg);
+
+
 
     }
 

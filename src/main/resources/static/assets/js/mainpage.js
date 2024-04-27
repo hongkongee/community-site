@@ -47,11 +47,32 @@ $recent.onclick = () => {
   window.location.href = '/home/main/recent';
 }
 
-document.querySelector('.card-container').onclick = e => {
+document.querySelector('section.hot .card-container').onclick = e => {
+  
   if (!e.target.matches('img')) return;
   const bno = e.target.parentNode.parentNode.dataset.bno;
   // console.log(bno);
   window.location.href = '/home/detail/' + bno;
+}
+
+
+// card 영역 내에 아무거나 클릭해도 이벤트 발생, 마켓 게시글로 이동
+document.querySelector('section.market .card-container').onclick = e => {
+  console.log(e.target);
+  e.preventDefault();
+
+  const $card = e.target.closest('.card');
+  console.log('$card = ', $card);
+
+  if ($card) {
+    const mno = $card.dataset.mno;
+    console.log('mno = ', mno);
+    window.location.href = '/market/detail/' + mno;
+  }
+
+
+    
+  
 }
 
 // 즉시실행함수

@@ -179,6 +179,12 @@
         WHERE bno=#{bno}
     </delete>
 
+    <select id="checkReportCount" resultType="int">
+        SELECT report_count
+        FROM tbl_board
+        WHERE bno = #{bno}
+    </select>
+
 
 
 

@@ -193,16 +193,40 @@ public class HomeController {
    // 게시글 작성자 신고 (비동기)
    @PostMapping("/detail/report")
    @ResponseBody
-   public ResponseEntity<String> report(@RequestBody ReportRequestDTO dto) {
+   public ResponseEntity<?> report(@RequestBody ReportRequestDTO dto, HttpServletRequest request, HttpServletResponse response) {
       log.info("/home/detail/report: POST: {}", dto.toString());
 
-      // 신고 체크박스, 신고 내용에 관련한 DB에 저장 (mapper)
-      managementService.report(dto);
+      // 로그인 정보
+      HttpSession session = request.getSession();
+      LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+      String myAccount = loginDto.getAccountNumber();
 
-      // 만약 신고 횟수가 특정 횟수 이상일 경우 해당 user 계정 정지 or 추방
+      // 쿠키 존재 확인하기
 
+      try {
+         Cookie c = WebUtils.getCookie(request, "report");
+         String cookieValue = c.getValue();
+         log.info("cookie's name is " + cookieValue);
+         if (cookieValue.equals(myAccount)) {
+            return ResponseEntity.ok().body(-1); // 오늘 신고 이미 눌렀는데?
 
-      return ResponseEntity.ok().body("신고 완료");
+         } else {
+            // 쿠키가 있긴 있는데 다른 유저의 것
+            // 신고 체크박스, 신고 내용에 관련한 DB에 저장 (mapper)
+            managementService.report(dto, myAccount, response);
+            return ResponseEntity.ok().body(1);
+
+         }
+      } catch (NullPointerException e) {
+         // 쿠키가 없는 상태
+         // 신고 체크박스, 신고 내용에 관련한 DB에 저장 (mapper)
+         managementService.report(dto, myAccount, response);
+         return ResponseEntity.ok().body(1);
+      }
+
+      // 신고를 이미 했는지 확인
+      
+
 
    }
 

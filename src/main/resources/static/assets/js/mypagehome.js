@@ -98,7 +98,7 @@ function deleteFollow(userAccount) {
 
 
 
-// 이벤트 핸들러
+// 팔로잉 추가/취소 이벤트 핸들러
 const $followingList = document.querySelector('.ff');
 
 $followingList.addEventListener("click", e => {
@@ -117,6 +117,35 @@ $followingList.addEventListener("click", e => {
   }
 
 })
+
+const $userFollow = document.querySelector('.user-following');
+
+$userFollow.addEventListener("click", e => {
+
+  if (e.target.matches('#cancel-follow')) {
+    const userId = e.target.parentNode.dataset.followingid;
+    console.log('팔로잉 취소 ', userId);
+    deleteFollow(userId);
+
+
+  } else if (e.target.matches('#register-follow')) {
+    const userId = e.target.parentNode.dataset.followingid;
+    console.log('팔로잉 추가 ', userId);
+    insertFollow(userId);
+
+  }
+
+})
+
+
+
+
+
+
+
+
+
+
 
 const $pen = document.querySelector('.fa-pen');
 $pen.onclick = () => {

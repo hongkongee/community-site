@@ -10,7 +10,6 @@
                 <img src="/assets/img/logo2.png" alt="로고이미지">
             </a>
         </h1>
-
         <div class="profile-box">
             <!-- profilePicture로수정 -->
             <c:if test="${login == null || login.profilePicture == null}">

@@ -104,6 +104,7 @@ public class UserService {
             .auth(foundMember.getAuth().getDescription())
             .profilePicture(foundMember.getProfilePicture())
             .loginMethod(foundMember.getLoginMethod().toString())
+            .point(foundMember.getPoint())
             .build();
 
       // 세션에 로그인한 회원 정보를 저장

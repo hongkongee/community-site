@@ -60,4 +60,18 @@ public class GameController {
         return "game/lotto";
     }
 
+    @PostMapping("/lotto")
+    @ResponseBody
+    public ResponseEntity<String> lottoStart(@RequestBody String gamePoint, HttpSession session) {
+        log.info("/game/lotto: POST, point: {}", gamePoint);
+        LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+        String myAccount = loginDto.getAccountNumber();
+        loginDto.setPoint(Integer.parseInt(gamePoint));
+        log.info("setPoint: {}", gamePoint);
+
+
+
+        return ResponseEntity.ok().body(gamePoint);
+    }
+
 }

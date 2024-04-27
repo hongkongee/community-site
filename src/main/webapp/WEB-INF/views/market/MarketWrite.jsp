@@ -17,14 +17,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
 
-  <%@ include file="../include/static-head.jsp" %>
+  <link rel="stylesheet" href="/assets/css/snb.css" >
   <link rel="stylesheet" href="/assets/css/market.css">
   <link rel="stylesheet" href="/assets/css/allpage.css">
-  <link rel="stylesheet" href="/assets/css/snb.css">
+  
+
+  <link rel="stylesheet" href="/assets/css/header.css">
+
+  
+ 
 
 
-
-
+ 
   <!-- 부트스트랩 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -37,7 +41,7 @@
 </head>
 
 <body>
-
+  <%@ include file="../include/static-head.jsp" %>
   <%@ include file="../include/snb.jsp" %>
 
   <%@ include file="../include/headcss.jsp"%>

@@ -40,7 +40,7 @@
 
     <nav class="gnb">
         <a href="#" class="close">
-            <button type="button">X</button>
+            <button type="button">X</i></button>
         </a>
         <ul>
 

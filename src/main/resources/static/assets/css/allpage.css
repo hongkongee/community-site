@@ -5,7 +5,7 @@
     padding: 5%;
     width: 60vw;
     height: 100vh;
-    background: #F8F6E3;
+    background: #fff;
     margin: auto;
   }
 
@@ -20,10 +20,18 @@ section.all {
     margin-top: 90px;
 }
 
-section.all .add-btn { /* 글쓰기 버튼 */
+.add-btn { /* 글쓰기 버튼 */
     float: right;
 
+    background: #fff;
+    color: #333;
+    font: inherit;
+    font-weight: 700;
+    border-radius: 7px;
+    border: 2px solid #ededed;
+    padding: 7px 10px;
 }
+
 
 section.all .list-container { /* 게시판 테이블 */
     width: 90%;
@@ -159,15 +167,19 @@ section.all .list-container .head-wrapper {
 .pagination-custom li:hover a {
     background: #333 !important;
     color: #fff !important;
+    
+}
+
+
+.btn-primary{
+    position: relative;
+    float: right;
 }
 
 
 .number-of-reply {
     font-weight: bold;
 }
-
-
-
 
 
 

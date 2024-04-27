@@ -31,7 +31,7 @@ MarketListResponseDTO {
     private int isFavorite;
     private final int price;
     private final String address;
-    private final MultipartFile file;
+    private final String file;
 
 //    private int price;
 //    private String location;

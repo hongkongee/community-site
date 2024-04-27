@@ -113,10 +113,13 @@
         </div>
         <br>
 
-        <div id="market-img">
-          <c:if test="${b.postImg != null}">
-            <img src="/display${b.postImg}" alt="업로드 이미지">
+
+        <div id="board-img">
+          <c:if test="${b.file != null}">
+            <img src="/display${b.file}" alt="업로드 이미지">
           </c:if>
+
+        </div>
 
 
           <div class="textContent" id="textContent" name="textContent">${b.textContent}</div>

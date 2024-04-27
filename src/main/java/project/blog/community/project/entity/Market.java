@@ -23,13 +23,14 @@ CREATE TABLE tbl_market (
 );
 */
 
-@Setter @Getter
+@Setter
+@Getter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Market{
+public class Market {
 
     private int boardNo;
 
@@ -67,11 +68,11 @@ public class Market{
         this.category = dto.getCategory();
         this.price = dto.getPrice();
         this.address = dto.getAddress();
-        this.rate = rate;
-
+        this.file = file;
         this.textWriter = writer;
-    }
 
+        //        this.rate = rate;
+    }
 
 
 }

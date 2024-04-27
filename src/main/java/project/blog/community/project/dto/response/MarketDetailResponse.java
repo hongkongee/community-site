@@ -25,7 +25,7 @@ public class MarketDetailResponse {
     private final String chooseReason;
     private final String message;
     private final int rate;
-    private final String postImg;
+    private final String file;
 
 
     public MarketDetailResponse(Market market) {
@@ -42,7 +42,7 @@ public class MarketDetailResponse {
         this.chooseReason = market.getChooseReason();
         this.message = market.getMessage();
         this.rate = market.getRate();
-        this.postImg = market.getPostImg();
+        this.file = market.getFile();
     }
 
 }

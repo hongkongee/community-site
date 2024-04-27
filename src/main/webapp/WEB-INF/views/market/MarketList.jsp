@@ -25,6 +25,11 @@
       display: block;
       background-color: red;
     }
+
+    .post {
+      cursor: pointer;
+    }
+
   </style>
 
 </head>
@@ -73,8 +78,9 @@
           <tbody>
 
             <c:forEach var="s" items="${bList}">
-              <tr class="post">
-                <!-- 게시글 하나 -->
+              <!-- 게시글 하나 -->
+              <tr class="post" data-bno="${s.boardNo}">
+                
                 <td id="bno" class="bno">${s.boardNo}</td>
                 <td id="textTitle" name="textTitle"> <a href="/market/detail/${s.boardNo}"> ${s.textTitle} </a></td>
                 <td id="textWriter" name="textWriter">${s.textWriter}</td>
@@ -105,8 +111,6 @@
           </tbody>
         </table>
 
-
-
       </div>
     </section>
   </div>
@@ -114,24 +118,45 @@
 
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const $posts = document.querySelectorAll('.post');
 
-      $posts.forEach(post => {
-        post.addEventListener('click', function (e) {
-          // 클릭된 요소가 a 태그인 경우 (제목을 클릭한 경우)
-          if (e.target.tagName === 'A') {
-            return; // detail 페이지로 이동하는 기본 동작 수행
-          }
+    document.querySelector('tbody').onclick = e => {
+      console.log('클릭 이벤트 발생');
+      if (e.target.matches('.fa-star')) {
+        clickFav(e);
+        return;
+      }
+      const bno = e.target.closest('tr.post').dataset.bno;
+      console.log('bno : ', bno);
+      window.location.href = '/market/detail/' + bno;
+    }
 
-          // 클릭된 요소가 tr 태그이고, 클릭된 요소가 즐겨찾기 아이콘이 아닌 경우
-          if (this.contains(e.target) && !e.target.classList.contains('favorite')) {
-            const boardNo = document.querySelector('.bno').textContent;
-            location.href = `/market/detail/${boardNo}`;
-          }
-        });
-      });
-    });
+
+
+
+
+
+
+
+    // document.addEventListener('DOMContentLoaded', function () {
+    //   const $posts = document.querySelectorAll('.post');
+
+    //   $posts.forEach(post => {
+    //     post.addEventListener('click', function (e) {
+    //       // 클릭된 요소가 a 태그인 경우 (제목을 클릭한 경우)
+    //       if (e.target.tagName === 'A') {
+    //         return; // detail 페이지로 이동하는 기본 동작 수행
+    //       }
+
+    //       // 클릭된 요소가 tr 태그이고, 클릭된 요소가 즐겨찾기 아이콘이 아닌 경우
+    //       if (this.contains(e.target) && !e.target.classList.contains('favorite')) {
+    //         const boardNo = document.querySelector('.bno').textContent;
+    //         location.href = `/market/detail/${boardNo}`;
+    //       }
+    //     });
+    //   });
+    // });
+
+
 
 
 

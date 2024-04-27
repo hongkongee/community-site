@@ -59,7 +59,7 @@
 
     <nav class="gnb">
         <a href="#" class="close">
-            <button type="button"><i class="fas fa-times fa-2x"></i></button>
+            <button type="button">X</i></button>
         </a>
         <ul>
 

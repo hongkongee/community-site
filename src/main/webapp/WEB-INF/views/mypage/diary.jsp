@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>Diary</title>
 
-    <%@ include file="/WEB-INF/views/include/headcss.jsp"%>
+    <%@ include file="../include/static-head.jsp" %>
     <link rel="stylesheet" href="/assets/css/diary.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@
 <body>
 
    
-    <%@ include file="/WEB-INF/views/include/header.jsp"%>
+    <%@ include file="../include/header.jsp"%>
 
     <div class="MydiaryJsp">
         <div class="Frame45">

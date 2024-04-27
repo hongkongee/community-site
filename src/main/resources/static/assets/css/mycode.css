@@ -40,7 +40,7 @@ background-color: #000080;
 }
 
 a{
-    text-decoration:none;
+    
 }
 a:hover{
     cursor: pointer;
@@ -60,13 +60,18 @@ a:hover{
 
 .add-photo{
   
-  width: 123px; 
-  height: 39px; 
+ 
   left: 370px;
    top: 70px; 
    position: absolute;
    
-    font-size: 20px;
+   background: #fff;
+   color: #333;
+   font: inherit;
+   font-weight: 700;
+   border-radius: 7px;
+   border: 2px solid #ededed;
+   padding: 7px 10px;
 
 }
 .add-photo :hover{
@@ -142,9 +147,7 @@ margin-left: 20%;
 margin-top: 25%;
 
   }
-.form-control{
-    border: none;
-}
+
 
   .card-title-wrapper.HTML{
     background-color: #fe992edc;
@@ -285,7 +288,7 @@ margin-top: 25%;
        
        overflow: hidden;
        transition: 0.5s;
-       border: 2px solid transparent;
+      
    }
 
    .card-container .card:last-child {
@@ -304,7 +307,7 @@ margin-top: 25%;
        align-items: center;
        padding: 10px 10px;
        position:relative;
-       top: 250px;
+       top: 215px;
    }
 
    .card-container .card .card-title-wrapper .time-view-wrapper>div {
@@ -331,17 +334,12 @@ margin-top: 25%;
    }
 
 
-   #card-down.card-wrapper {
-       transform: translateY(15px);
-   }
+   
    #card-down .card {
        box-shadow: none;
    }
 
-   .card-container .card-hover.card {
-       border: 2px solid;
-   }
-
+   
    .card-container .card-btn-group {
        display: flex;
        justify-content: center;
@@ -359,7 +357,7 @@ margin-top: 25%;
        height: 40px;
        
        background: #fff;
-       opacity: 0;
+       
        color: #000000;
        font-weight: 700;
        font-size: 25px;
@@ -435,7 +433,10 @@ margin-top: 25%;
     padding-left: 10px;
 }
 
-
+.fa-close:before, .fa-multiply:before, .fa-remove:before, .fa-times:before, .fa-xmark:before {
+    content: none;
+    display: none;
+}
 
 
 
@@ -543,8 +544,9 @@ font-size: 18px;
 }
 
 .top-section .search form {
+    justify-content: center;
     display: flex;
-
+    width: 1150px;
 }
 .top-section .search form #search-type {
     flex: 1;

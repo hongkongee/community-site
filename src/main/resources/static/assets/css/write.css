@@ -13,20 +13,30 @@ section.form-container {
   border: #000 solid 1px;
   width: 96%;
   border-radius: 60px;
+ 
+  padding: 5%;
+  position: relative;
+    top: 90px;
+
 }
 
 section.form-container h1 {
-  font-size: 28px;
-  font-weight: bold;
-  margin: 15px;
+ text-align: center;
+  font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 25px;
 }
 
 section.form-container form {
   margin: 15px;
+  border: #000 solid 1px;
+  border-radius: 60px;
+  padding: 5%;
 }
 
 section.form-container select.form-select {
-  margin: 10px;
+  margin: 20px 0px;
   width: 330px;
 }
 
@@ -37,4 +47,7 @@ section.form-container input#title {
 
 #real-submit {
   display: none;
+}
+.buttons{
+text-align: right;
 }

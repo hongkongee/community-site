@@ -31,6 +31,7 @@
             width: 740px;
             height: 100px;
             display: inline-block;
+            background-color: transparent;
         }
 
         #chatt #sendZone>* {
@@ -39,7 +40,7 @@
         }
 
         #chatt #btnSend {
-            width: 54px;
+            width: 43px;
             height: 100px;
         }
 
@@ -60,6 +61,16 @@
         #chatt .other {
             background-color: #eee;
             margin: 2px;
+        }
+
+        input[type="text"] {
+            background-color: transparent;
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
         }
     </style>
 </head>

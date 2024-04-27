@@ -168,12 +168,13 @@ body{
 
 <div id="wrap" class="form-container">
     
-    <h2># 작성일자: ${b.regDate}</h2>
+    <h2>${b.title}</h2>
     <div class="form-main">
     <input type="text" id="programming" name="programming" value="${b.programming}" readonly>
-    
-    <label for="title">제목</label>
-    <input type="text" id="title" name="title" value="${b.title}" readonly>
+
+    <div class="form-main">
+    <input type="text" id="programming" name="programming" value="${b.programming}" readonly>
+
 
     <label for="content">내용</label>
     <div id="content">${b.content}</div>

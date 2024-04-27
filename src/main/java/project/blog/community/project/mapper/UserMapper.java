@@ -19,8 +19,9 @@ public interface UserMapper {
    // 중복 체크
    boolean isDuplicate(@Param("type") String type, @Param("keyword") String keyword);
 
-   // 신고 횟수 1 증가
+   // 신고 횟수 1 증가, 평점 0.1 깎기
    void updateReport(String accountNumber);
+
 
    // 자동 로그인 세션아이디, 만료시간 업데이트
    void saveAutoLogin(AutoLoginDTO build);

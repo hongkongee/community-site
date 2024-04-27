@@ -30,7 +30,7 @@
 
     <update id="updateReport">
         UPDATE tbl_user
-        SET report = report + 1
+        SET report = report + 1, rate = rate - 0.1
         WHERE account_number = #{accountNumber}
     </update>
 

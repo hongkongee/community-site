@@ -118,7 +118,6 @@
           <c:if test="${b.file != null}">
             <img src="/display${b.file}" alt="업로드 이미지">
           </c:if>
-
         </div>
 
 

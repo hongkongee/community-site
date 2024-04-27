@@ -88,7 +88,7 @@
             </div>
 
             <!-- 이미지 업로드 -->
-            <div class="mb-3">    
+            <div class="mb-3">
               <label for="formFile" class="form-label">사진 업로드</label>
               <input class="form-control" type="file" id="formFile" name="formFile" accept="image/*">
             </div>

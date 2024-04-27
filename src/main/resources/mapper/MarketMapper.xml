@@ -15,12 +15,28 @@
     </insert>
 
 
+
+    <!-- 전체 글 불러오기-->
     <select id = "findAll" resultType="market">
         <!-- resultType 원래는 풀 경로이나, mybatis-config.xml에서 메서드화해서 줄임 // select 리턴 타입 설정 -->
         <!-- selectType은 resultType(return) 필수)-->
         SELECT * FROM tbl_market
         ORDER BY board_no DESC
     </select>
+
+    <!-- 특정회원의 즐겨찾기만 리스트 가져오기 -->
+    <select id="selectByAccountNumber" resultType="MarketFavorite">
+        SELECT *
+        FROM market_favorite
+        <where>
+            <if test="accountNumber != null">
+                AND account_number = #{accountNumber}
+            </if>
+        </where>
+        ORDER BY board_no DESC
+    </select>
+
+
 
     <select id = "findOne" resultType="market">
         SELECT * FROM tbl_market
@@ -89,6 +105,7 @@
         SELECT * FROM tbl_market_rate
         WHERE board_no = #{boardNo} AND text_writer = #{textWriter}
     </select>
+
 
 
 

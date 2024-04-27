@@ -23,6 +23,7 @@ import project.blog.community.project.dto.request.MarketModifyRequestDTO;
 import project.blog.community.project.dto.request.MarketRateRequestDTO;
 import project.blog.community.project.dto.request.MarketWriteRequestDTO;
 import project.blog.community.project.dto.response.MarketDetailResponse;
+import project.blog.community.project.dto.response.MarketGetAddFavListResponseDTO;
 import project.blog.community.project.dto.response.MarketListResponseDTO;
 import project.blog.community.project.dto.response.MarketModifyResponse;
 import project.blog.community.project.entity.Board;
@@ -50,14 +51,14 @@ public class MarketController {
     @Value("${file.upload.root-path}")
     private String rootPath;
 
-    //메인 : 폐기함
-    @GetMapping("/main")
-    public String mainPage() {
-        log.info("/market/main: GET");
-
-        // /WEB-INF/views/~~~~~.jsp
-        return "market/MarketMain";
-    }
+    //메인
+//    @GetMapping("/main")
+//    public String mainPage() {
+//        log.info("/market/main: GET");
+//
+//        // /WEB-INF/views/~~~~~.jsp
+//        return "market/MarketMain";
+//    }
 
     //리스트 뷰
     @GetMapping("/list")
@@ -69,8 +70,10 @@ public class MarketController {
         List<MarketListResponseDTO> dtoList = marketService.getList(request);
         log.info("dtoList: {}", dtoList);
 
+
         //정보를 jsp로 전달 -> key-value 형태로 데이터를 추가
         model.addAttribute("bList", dtoList); //jsp로 전달하는 역할
+
 
         log.info("isFavorite" + dtoList);
         // /WEB-INF/views/~~~~~.jsp
@@ -113,6 +116,8 @@ public class MarketController {
     public String detail(@PathVariable("boardNo") int boardNo, Model model) {
         log.info("/market/detail/{}: GET", boardNo);
         MarketDetailResponse dto = marketService.getDetail(boardNo);
+
+
         int rate = marketService.getRate(dto.getTextWriter());
 
         model.addAttribute("b", dto);
@@ -123,7 +128,6 @@ public class MarketController {
     }
 
 //    @PostMapping("/detail/{boardNo}")
-
 
 
     //수정하기
@@ -147,7 +151,7 @@ public class MarketController {
         log.info("/detail: PUT, dto: {}", dto);
 
         //성공시 200
-        marketService.modify(dto,currentLoginMemberAccount);
+        marketService.modify(dto, currentLoginMemberAccount);
         return ResponseEntity.ok().body("modSuccess"); //담음
     }
 
@@ -169,13 +173,6 @@ public class MarketController {
                                         @RequestBody Map<String, Object> isAddFav,
                                         HttpSession session) {
 
-        //@RequestBody Map<String, Object> isAddFav
-        //HTTP 요청 본문에서 JSON 형식으로 전달된 데이터를
-        //Map<String, Object> 타입으로 받습니다.
-        // 여기서 isAddFav 키의 값은 즐겨찾기에 추가할지 제거할지를 나타내는
-        // 불리언(boolean) 값입니다.
-
-
         log.info("/list/{}: POST!", boardNo);
         log.info("isAddFav: {}", isAddFav);
         boolean flag = (Boolean) isAddFav.get("isAddFav");
@@ -185,6 +182,22 @@ public class MarketController {
         // 즐겨찾기를 DB에 추가하는 기능
         marketService.updateFav(boardNo, session, String.valueOf(flag));
         return ResponseEntity.ok().body("success");
+    }
+
+    @GetMapping("/list")
+    public String getAddFavList(Model model, String addFavList) {
+
+        log.info("/market/list: getFavGET");
+
+        List<MarketGetAddFavListResponseDTO> addFavDTOList = marketService.getAddFavListService(addFavList);
+        log.info("dtoList: {}", addFavDTOList);
+
+
+        //정보를 jsp로 전달 -> key-value 형태로 데이터를 추가
+        model.addAttribute("addFavList", addFavDTOList); //jsp로 전달하는 역할
+
+        return "market/MarketList";
+
     }
 
 

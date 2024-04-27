@@ -8,6 +8,7 @@ import project.blog.community.project.dto.request.MarketModifyRequestDTO;
 import project.blog.community.project.dto.request.MarketRateRequestDTO;
 import project.blog.community.project.dto.request.MarketWriteRequestDTO;
 import project.blog.community.project.dto.response.MarketDetailResponse;
+import project.blog.community.project.dto.response.MarketGetAddFavListResponseDTO;
 import project.blog.community.project.dto.response.MarketListResponseDTO;
 import project.blog.community.project.entity.Favorite;
 import project.blog.community.project.entity.Market;
@@ -27,7 +28,7 @@ public class MarketService {
     private final MarketMapper mapper;
 
 
-    public List<MarketListResponseDTO> getList(HttpServletRequest  request) {
+    public List<MarketListResponseDTO> getList(HttpServletRequest request) {
         List<MarketListResponseDTO> dtoList = new ArrayList<>();
 
         HttpSession session = request.getSession();
@@ -47,6 +48,21 @@ public class MarketService {
 
     }
 
+    public List<MarketGetAddFavListResponseDTO> getAddFavListService(String addFavList, HttpServletRequest request) {
+        List<MarketGetAddFavListResponseDTO> addFavDTOList = new ArrayList<>();
+
+        HttpSession session = request.getSession();
+        session.getAttribute("login");
+        // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
+        String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
+
+        // 내가 즐겨찾기한 리스트
+        List<Integer> boards = mapper.checkFav(currentLoginMemberAccount);
+
+    }
+
+
+
 
     public void modify(MarketModifyRequestDTO dto, String currentLoginMemberAccount) {
         Market marketContent = dto.toEntity();
@@ -60,6 +76,9 @@ public class MarketService {
         market.setFile(filePath);
         mapper.save(market);
     }
+
+
+
 
     public MarketDetailResponse getDetail(int boardNo) {
         mapper.updateViewCount(boardNo);
@@ -93,7 +112,6 @@ public class MarketService {
         } else {
             mapper.removeFav(favorite);
         }
-
     }
 
     public void addRate(MarketRateRequestDTO dto) {
@@ -116,4 +134,6 @@ public class MarketService {
         else return true; //중복됨
 
     }
+
+
 }

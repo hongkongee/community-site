@@ -9,10 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판 수정하기</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Single+Day&display=swap" rel="stylesheet">
+    <%@ include file="/WEB-INF/views/include/static-head.jsp" %>
+    <link rel="stylesheet" href="/assets/css/header.css">
 
+    <link rel="stylesheet" href="/assets/css/mainpage.css" >
+    <link rel="stylesheet" href="/assets/css/snb.css" >
+
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  
     <!-- reset -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
 
@@ -24,32 +28,44 @@
     <!-- ck editor -->
     <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
     <style>
+body{
+    background-color: #000080;
+}
 h2{
-    color: white;
+    font-size:25px;
+            
 }
 
         .form-container {
-            width: 500px;
+            width: 80%;
             margin: auto;
             padding: 20px;
-           /* background-image: linear-gradient(135deg, #a1c4fd, #fbc2eb);*/
-            background-color: #000080;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
+        
+            background-color: #fff;
+           
+            border-radius: 60px;
             font-size: 18px;
+            padding: 5%;
+            position: relative;
+    top: 190px;
+            
         }
         .form-container h1 {
-            font-size: 40px;
-            font-weight: 700;
+            font-size: 50px;
+            font-weight: bold;
             letter-spacing: 10px;
             text-align: center;
             margin-bottom: 20px;
-            color: #ffffff;
+            color: black;
+            padding: 40px 0px;
+
         }
+      
         label {
             display: block;
             margin-bottom: 5px;
             font-size: 20px;
+            color: black;
         }
         input[type="text"],
         textarea {
@@ -57,10 +73,10 @@ h2{
             width: 100%;
             padding: 8px;
             box-sizing: border-box;
-            border: 2px solid #ffffff;
+            border: 1px solid black;
             border-radius: 8px;
             margin-bottom: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
+           
         }
         textarea {
             resize: none;
@@ -73,38 +89,31 @@ h2{
         }
         button {
             font-size: 20px;
-            padding: 10px 20px;
-            border: none;
-            margin-right: 10px;
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
+    background: white;
+    border: 2px solid #00196b;
         }
-        button.list-btn {
-            background: #e61e8c;
-        }
+       
         button:hover {
-            background-color: #3d8b40;
+            background: #00196b;
+            color: #fff;
         }
         button.list-btn:hover {
-            background: #e61e8c93;
+            background: #00196b;
+            color: #fff;
         }
         select{
             font-size: 18px;
             width: 100%;
             padding: 8px;
             box-sizing: border-box;
-            border: 2px solid #ffffff;
+            border: 1px solid black;
             border-radius: 8px;
             margin-bottom: 10px;
             background-color: rgba(255, 255, 255, 0.8);
-
+            
         }
-label{
-    color: white;
+.list-btn{
+    margin-right: 10px;
 }
 
 #bno {
@@ -115,9 +124,10 @@ label{
     </style>
 </head>
 <body>
+    <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <div id="wrap" class="form-container">
     <h1>My Code</h1>
-    <form action="/wel/modify" method="post" enctype="multipart/form-data">
+    <form action="/wel/modify" method="post" enctype="multipart/form-data" class="form-main">
         
         <select class="form-select" id="programming" name="programming" aria-label="Default select example" data-programming="${b.programming}">                
             <option value="HTML">HTML</option>

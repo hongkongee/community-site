@@ -24,7 +24,7 @@ public class MypageUserResponseDTO {
 
     private String profilePicture;
 
-    private int rate;
+    private float rate;
 
     private String introduction;
 

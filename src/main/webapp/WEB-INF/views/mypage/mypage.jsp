@@ -266,7 +266,102 @@
             <div class="my-market">
 
                 <div class="user-market">
-                    <div class="title-market">${user.nickname}님의 중고 장터 평점: ${user.rate}</div>
+                    <div class="title-market">
+                        판매자 평점: 
+
+                        <c:if test="${user.rate < 0.5}">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </c:if>
+
+                        <c:if test="${user.rate >= 0.5 and user.rate < 1}">
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </c:if>
+
+
+                        <c:if test="${user.rate >= 1 and user.rate < 1.4}">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </c:if>
+
+                        <c:if test="${user.rate >= 1.5 && user.rate < 2}">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </c:if>
+
+                        <c:if test="${user.rate >= 2 && user.rate < 2.5}">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </c:if>
+
+                        <c:if test="${user.rate >= 2.5 && user.rate < 3}">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </c:if>
+
+                        <c:if test="${user.rate >= 3 && user.rate < 3.5}">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </c:if>
+
+                        <c:if test="${user.rate >= 3.5 && user.rate < 4}">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </c:if>
+
+                        <c:if test="${user.rate >= 4 && user.rate < 4.5}">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </c:if>
+
+                        <c:if test="${user.rate >= 4.5 && user.rate < 4.9}">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </c:if>
+
+                        <c:if test="${user.rate >= 4.9 && user.rate <= 5}"> 
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </c:if>
+
+
+
+
+                    </div>
                     <h2> <i class="fa-solid fa-store"></i> 평가 </h2>
                     <div class="market-rates">
                         <c:forEach var="market" items="${markets}">

@@ -135,7 +135,7 @@
       
 
       <div class="more-container">
-        <a href="#" class="more-btn"> <!-- 더보기 -->
+        <a href="/market/list" class="more-btn"> <!-- 더보기 -->
           더보기 
           <i class="fa-solid fa-angle-right"></i>
         </a>

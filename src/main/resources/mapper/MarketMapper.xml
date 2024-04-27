@@ -74,14 +74,20 @@
 
     <update id="updateRateBoard">
         UPDATE tbl_user
-        SET rate = rate + 1
-        WHERE account_number = #{textWriter}
+        SET rate = #{avg}
+        WHERE account_number = #{writer}
     </update>
 
     <insert id="addRate">
-        INSERT INTO tbl_market_rate (board_no, text_writer, message, choose_reason)
-        VALUES (#{boardNo}, #{textWriter}, #{message}, #{chooseReason})
+        INSERT INTO tbl_market_rate (board_no, text_writer, message, choose_reason, rate_value)
+        VALUES (#{boardNo}, #{textWriter}, #{message}, #{chooseReason}, #{rateValue})
     </insert>
+
+    <select id="rateAverage" resultType="float">
+        SELECT AVG(rate_value)
+        FROM tbl_market_rate
+        WHERE text_writer = #{textWriter}
+    </select>
 
     <select id="checkRate" resultType="int">
         SELECT rate FROM tbl_user

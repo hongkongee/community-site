@@ -10,6 +10,10 @@ const textWriter = document.getElementById('textWriter').textContent; // 작성�
 const rate = document.getElementById('rate').textContent; // 작성자의 평점
 
 
+
+
+
+
 let selectedValue = $selectElement.value;
 
 
@@ -30,11 +34,19 @@ document.getElementById('confirmBtn').onclick = () => {
   const $chooseReason = document.getElementById('why'); // 선택지
   const $textareaValue = document.getElementById('reportText'); // 서술형
 
+  const $rateStarFieldset = document.querySelector('.rate-star');
+  const $checkedRadioButton = $rateStarFieldset.querySelector('input[name="rating"]:checked'); // 별점
+  const rateValue = Number($checkedRadioButton.value); // 별점 값
+  console.log(rateValue);
+
   console.log('좋아요 평가 제출~');
   const chooseReason = $chooseReason.value;
   const textareaValue = $textareaValue.value;
   if (chooseReason === '이유를 선택해주세요') {
     alert('이유를 선택해주세요!');
+    return;
+  } else if (rateValue === null) {
+    alert('별점을 매겨주세요!');
     return;
   }
 
@@ -54,6 +66,7 @@ document.getElementById('confirmBtn').onclick = () => {
         textWriter: textWriter,
         message: textareaValue,
         chooseReason: chooseReason,
+        rateValue: rateValue
       })
     })
     .then(response => response.text())//response.json() : Controller 데이터 받음

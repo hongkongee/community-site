@@ -46,6 +46,19 @@
       width: 500px;
       height: 500px;
     }
+
+    @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+        .rate-star { display: inline-block;border: 0;margin-right: 15px;}
+        .rate-star > input {display: none;}
+        .rate-star > label {float: right;color: #ddd}
+        .rate-star > label:before {display: inline-block;font-size: 1rem;padding: .3rem .2rem;margin: 0;cursor: pointer;font-family: FontAwesome;content: "\f005 ";}
+        .rate-star .half:before {content: "\f089 "; position: absolute;padding-right: 0;}
+        .rate-star input:checked ~ label, 
+        .rate-star label:hover,.rate-star label:hover ~ label { color: #f73c32 !important;  } 
+        .rate-star input:checked + .rate-star label:hover,
+        .rate-star input input:checked ~ label:hover,
+        .rate-star input:checked ~ .rate-star label:hover ~ label,  
+        .rate-star label:hover ~ input:checked ~ label { color: #f73c32 !important;  }
   </style>
 
 
@@ -176,7 +189,7 @@
 
 
 
-      <!-- Modal -->
+      <!-- 판매자 평가 Modal -->
       <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -186,6 +199,14 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+
+              <fieldset class="rate-star">
+                <input type="radio" id="rating5" name="rating" value="5"><label for="rating5" title="5점"></label>
+                <input type="radio" id="rating4" name="rating" value="4"><label for="rating4" title="4점"></label>
+                <input type="radio" id="rating3" name="rating" value="3"><label for="rating3" title="3점"></label>
+                <input type="radio" id="rating2" name="rating" value="2"><label for="rating2" title="2점"></label>
+                <input type="radio" id="rating1" name="rating" value="1"><label for="rating1" title="1점"></label>
+              </fieldset>
 
 
               <select class="form-select" id="why" aria-label="Default select example" name="chooseReason">

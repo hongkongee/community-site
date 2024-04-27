@@ -83,12 +83,9 @@
 
         input[type="number"]::-webkit-outer-spin-button,
         input[type="number"]::-webkit-inner-spin-button {
+            appearance: none;
+            -moz-appearance: none;
             -webkit-appearance: none;
-            width: 300px;
-            height: 2em;
-            border-color: #7AA2E3;
-            border-width: 0 0 2px;
-            background-color: transparent;
         }
 
         button {
@@ -148,7 +145,7 @@
                         <button type="button" id="id_check">중복 확인</button>
                     </div>
                     <div>
-                        <p>비밀번호를 입력해주세요&nbsp;<span id="pwChk">(영문과 특수문자를 포함해서 8자 이상)</span></p>
+                        <p>비밀번호를 입력해주세요&nbsp;<span id="pwChk">(영문, 숫자, 특수문자를 포함해서 8자 이상)</span></p>
                         <input type="password" name="password" id="password" class="input-btn" required="required"
                             maxlength="20" placeholder="사용하실 비밀번호를 입력해주세요">
                     </div>
@@ -200,10 +197,10 @@
     </div>
 
     <script>
+        
+        let code = ''; // 이메일 전송 인증번호 저장을 위한 변수
+        
         // 이메일 인증버튼 클릭 이벤트
-
-        let code = ''; // 이메일 전송 인증번호 저장을 위한 변수수
-
         document.getElementById('mail-check-btn').onclick = () => {
             const email = document.getElementById('user_email').value.trim();
             console.log('완성된 이메일: ', email);
@@ -249,64 +246,10 @@
             }
         }
 
-
-        // 회언가입 입력값 검증 처리
-        // 이메일 인증버튼 클릭 이벤트
-
-        let code = ''; // 이메일 전송 인증번호 저장을 위한 변수수
-
-        document.getElementById('mail-check-btn').onclick = () => {
-            const email = document.getElementById('user_email').value.trim();
-            console.log('완성된 이메일: ', email);
-
-            fetch('/users/email', {
-                    method: 'post',
-                    headers: {
-                        'Content-type': 'text/plain'
-                    },
-                    body: email
-                })
-                .then(res => res.text())
-                .then(data => {
-                    console.log('인증번호: ', data);
-                    code = data;
-
-                    // 이메일 전송이 완료되면 이메일 입력창 readonly로 막기
-                    document.getElementById('user_email').readOnly = true;
-
-                    // 인증번호 입력창 활성화
-                    document.getElementById('mail-check-input').disabled = false;
-                    alert('인증번호가 전송되었습니다. 확인 후 입력란에 정확히 입력하세요.');
-                })
-                .catch(error => {
-                    console.log(error);
-                    alert('이메일 전송에 실패했습니다. 존재하는 이메일인지 확인해주세요.');
-                })
-        };
-
-        // 인증번호 검증
-        // blur -> focus가 빠지는 경우 발생.
-        document.getElementById('mail-check-input').onblur = e => {
-            console.log('blur 이벤트 발생!');
-            const inputCode = e.target.value;
-            if (inputCode === code) {
-                document.getElementById('mailCheckMsg').textContent = '인증번호가 일치합니다!';
-                document.getElementById('mailCheckMsg').style.color = 'skyblue';
-                e.target.style.display = 'none';
-            } else {
-                document.getElementById('mailCheckMsg').textContent = '인증번호를 다시 확인하세요!';
-                document.getElementById('mailCheckMsg').style.color = 'red';
-                e.target.focus();
-            }
-        }
-
-
-        // 회언가입 입력값 검증 처리
+        // 회원가입 입력값 검증 처리
 
         // 입력값 검증 통과 여부 배열
         const checkResultList = [false, false, false, false, false, false, false, false];
-
-        // 회원가입 입력값 검증 처리
 
         // 아이디 검사 정규표현식
         const accountPattern = /^[a-zA-Z0-9]{4,14}$/;
@@ -425,6 +368,7 @@
 
         // 닉네임 검사 정규표현식
         const nickPattern = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
+
         // 닉네임 입력값 검증
         const $nickInput = document.getElementById('user_nickname');
         $nickInput.onkeyup = e => {

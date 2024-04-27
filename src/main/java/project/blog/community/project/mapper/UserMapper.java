@@ -45,6 +45,12 @@ public interface UserMapper {
    // 포인트 증가시키기
    void addPoint(@Param("me") String myAccount, @Param("point") int todayPoint);
 
+   // 회원 정보 수정
+   void modify (User user);
+
+   // 회원 탈퇴
+   void delete(String user);
+
 
 
 }

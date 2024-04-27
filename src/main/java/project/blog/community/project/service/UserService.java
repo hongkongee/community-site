@@ -14,6 +14,7 @@ import org.springframework.web.util.WebUtils;
 import project.blog.community.project.dto.request.AutoLoginDTO;
 import project.blog.community.project.dto.request.LoginRequestDTO;
 import project.blog.community.project.dto.request.SignUpRequestDto;
+import project.blog.community.project.dto.request.UserRequestDTO;
 import project.blog.community.project.dto.response.LoginUserResponseDTO;
 import project.blog.community.project.dto.response.MypageUserResponseDTO;
 import project.blog.community.project.entity.User;
@@ -147,7 +148,19 @@ public class UserService {
 
    }
 
+   // 회원 정보 수정 서비스
+   public void modifyInfo(UserRequestDTO dto) {
+      User entity = dto.toEntity(encoder);
+      log.info("entity: {}", entity);
+      userMapper.modify(dto.toEntity(encoder));
+   }
 
+   // 회원 탈퇴 서비스
+   public void deleteUser(String account) {
+
+      userMapper.delete(account);
+
+   }
 }
 
 

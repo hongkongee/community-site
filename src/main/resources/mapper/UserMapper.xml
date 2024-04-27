@@ -53,6 +53,20 @@
         WHERE session_id = #{sessionId}
     </select>
 
+    <update id="modify">
+        UPDATE tbl_user
+        SET password = #{password},
+            birthday = #{birthday},
+            gender = #{gender},
+            nickname = #{nickname}
+        WHERE account_number = #{accountNumber}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM tbl_user
+        WHERE account_number=#{account}
+    </delete>
+
     <select id="findUserByFollower" resultType="java.lang.String">
         SELECT follower
         FROM tbl_follow

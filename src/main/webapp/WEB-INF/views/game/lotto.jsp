@@ -22,6 +22,7 @@
             margin: 0 auto;
             width: 60%;
             text-align: center;
+            padding-top: 200px;
         }
 
         .container .wrap h2 {
@@ -49,6 +50,16 @@
             display: flex;
             justify-content: space-around;
 
+        }
+
+        input[type="number"] {
+            border-color: #7AA2E3;
+            border-width: 0 0 2px;
+            background-color: transparent;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
         }
 
         input[type="number"]::-webkit-outer-spin-button,
@@ -105,6 +116,45 @@
         #list-btn {
             margin-top: 10px;
         }
+
+        button {
+            box-sizing: border-box;
+            appearance: none;
+            background-color: transparent;
+            border: 2px solid #7AA2E3;
+            border-radius: 0.6em;
+            color: #7AA2E3;
+            cursor: pointer;
+            /* display: flex; */
+            align-self: center;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1;
+            margin: 20px;
+            padding: 0.4em 1em;
+            text-decoration: none;
+            text-align: center;
+            text-transform: uppercase;
+            font-family: 'Orbit', sans-serif;
+
+            &:hover,
+            &:focus {
+                color: #fff;
+                outline: 0;
+            }
+
+            background-image: linear-gradient(45deg, #7AA2E3 50%, transparent 50%);
+            background-position: 100%;
+            background-size: 400%;
+
+
+            transition: background 300ms ease-in-out;
+
+            &:hover {
+                background-position: 0;
+            }
+        }
+
     </style>
 
 

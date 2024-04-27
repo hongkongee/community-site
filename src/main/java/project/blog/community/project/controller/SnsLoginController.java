@@ -1,4 +1,4 @@
-/*
+
 package project.blog.community.project.controller;
 
 import jakarta.servlet.http.HttpSession;

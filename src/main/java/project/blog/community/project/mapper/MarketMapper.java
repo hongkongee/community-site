@@ -44,6 +44,5 @@ public interface MarketMapper {
     void addRate(MarketRateRequestDTO dto);
 
 
-
-
+    List<Integer> selectByAccountNumber(String currentLoginMemberAccount);
 }

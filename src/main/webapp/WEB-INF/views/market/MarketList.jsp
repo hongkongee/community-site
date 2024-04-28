@@ -64,7 +64,7 @@
               <th>작성자</th>
               <th>작성일</th>
               <th>조회수</th>
-              <th>즐겨찾기</th>
+              <th id="favBtn" name="favBtn">즐겨찾기</th>
               <th>판태상태</th>
               <th>가격</th>
               <th>거래장소</th>
@@ -89,6 +89,7 @@
                       <img style="width: 100%; height: 100%;" src="/display${s.file}" alt="업로드 이미지">
                     </td>
                   </c:when>
+
                   <c:otherwise>
                     <td id="board-img" style="height: 50px; width: 50px;"></td>
                   </c:otherwise>
@@ -100,8 +101,8 @@
                 <td id="viewCount" name="viewCount" data-view-count="${s.viewCount}"> ${s.viewCount}</td>
 
                 <td class="favorite" name="favorite" data-bno="${s.boardNo}">
-                  <c:if test="${s.isFavorite == 1}">
-                    <i class="fa-solid fa-star"></i>
+                  <c:if test="${s.isFavorite == 1}" >
+                    <i class="fa-solid fa-star" id="favOn" data-fav-on="{$s.favOn}"></i>
                   </c:if>
 
                   <c:if test="${s.isFavorite == 0}">
@@ -130,6 +131,7 @@
 
 
   <script>
+    //메뉴 버튼 전체 클릭 이벤트
     document.querySelector('tbody').onclick = e => {
       console.log('클릭 이벤트 발생');
       if (e.target.matches('.fa-star')) {
@@ -144,28 +146,76 @@
 
 
 
+    //즐겨찾기만 보기
+
+    //즐겨찾기 글자요소
+    const $favBtn = document.getElementById('favBtn');
+    //즐겨찾기(검은별)요소
+    const $favOn = document.getElementById('favOn');
+
+
+    $favBtn.addEventListener('click', function (e) {
+
+      //favOn 버튼의 활성화 상태를 토글
+      $favBtn.classList.toggle('active');
+
+
+      //favON 버튼의 활성화 여부 확인
+      const isFavOn = $favBtn.classList.contains('active');
+      console.log('isFavOn: ', isFavOn);
+
+      // 모든 포스트 요소들 가져오기
+      const bListItems = [...document.querySelectorAll('.post')];
+      console.log('bListItem: ', bListItems);
+      bListItems.forEach(item => {
+
+        //포스트의 즐겨찾기 여부 확인
+        const isFavorite = item.querySelector('.favorite i').classList.contains('fa-solid');
+        console.log('isFavorite: ', isFavorite);
+
+        //즐겨찾기가 활성화되어 있고 즐겨찾기가 아닌 포스트를 감춤
+        //즐겨찾기가 비활성화되어 있으면 모든 포스트 보이기
+        if (isFavOn && !isFavorite) {
+          console.log('즐겨찾기 활성화 and isFavorite: false');
+          item.style.display = 'none'; //감추기
+        } else {
+          item.style.display = 'table-row' //보이기
+        }
+      });
 
 
 
 
-    // document.addEventListener('DOMContentLoaded', function () {
-    //   const $posts = document.querySelectorAll('.post');
+      // fetch('/market/favorite', {
+      //     method: 'POST', // HTTP POST 요청
+      //     headers: {
+      //       'Content-Type': 'application/json' // JSON 형식의 데이터를 전송할 것임을 지정
+      //     },
+      //     body: JSON.stringify({ // 전송할 데이터를 JSON 문자열로 변환하여 body에 설정
+      //       isFavOn: isFavOn
+      //     })
+      //   })
+      //   .then(response => {
+      //     // 응답을 처리
+      //     if (!response.ok) {
+      //       throw new Error('Network response was not ok');
+      //     }
+      //     return response.json(); // JSON 형식의 응답 데이터를 JavaScript 객체로 변환
+      //   })
+      //   .then(data => {
+      //     // 성공적으로 데이터를 받았을 때의 처리
+      //     console.log(data); // 받은 데이터를 콘솔에 출력하거나 필요한 처리를 수행
+      //   })
+      //   .catch(error => {
+      //     // 요청이 실패했을 때의 처리
+      //     console.error('There was a problem with your fetch operation:', error);
+      //   });
 
-    //   $posts.forEach(post => {
-    //     post.addEventListener('click', function (e) {
-    //       // 클릭된 요소가 a 태그인 경우 (제목을 클릭한 경우)
-    //       if (e.target.tagName === 'A') {
-    //         return; // detail 페이지로 이동하는 기본 동작 수행
-    //       }
+    });
 
-    //       // 클릭된 요소가 tr 태그이고, 클릭된 요소가 즐겨찾기 아이콘이 아닌 경우
-    //       if (this.contains(e.target) && !e.target.classList.contains('favorite')) {
-    //         const boardNo = document.querySelector('.bno').textContent;
-    //         location.href = `/market/detail/${boardNo}`;
-    //       }
-    //     });
-    //   });
-    // });
+
+
+
 
 
 
@@ -194,6 +244,29 @@
         });
       }
     });
+
+
+
+    // document.addEventListener('DOMContentLoaded', function () {
+    //   const $posts = document.querySelectorAll('.post');
+
+    //   $posts.forEach(post => {
+    //     post.addEventListener('click', function (e) {
+    //       // 클릭된 요소가 a 태그인 경우 (제목을 클릭한 경우)
+    //       if (e.target.tagName === 'A') {
+    //         return; // detail 페이지로 이동하는 기본 동작 수행
+    //       }
+
+    //       // 클릭된 요소가 tr 태그이고, 클릭된 요소가 즐겨찾기 아이콘이 아닌 경우
+    //       if (this.contains(e.target) && !e.target.classList.contains('favorite')) {
+    //         const boardNo = document.querySelector('.bno').textContent;
+    //         location.href = `/market/detail/${boardNo}`;
+    //       }
+    //     });
+    //   });
+    // });
+
+
 
 
 

@@ -3,13 +3,18 @@ package project.blog.community.project.service;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import project.blog.community.project.common.Page;
 import project.blog.community.project.dto.request.MarketModifyRequestDTO;
 import project.blog.community.project.dto.request.MarketRateRequestDTO;
 import project.blog.community.project.dto.request.MarketWriteRequestDTO;
 import project.blog.community.project.dto.response.MarketDetailResponse;
 import project.blog.community.project.dto.response.MarketGetAddFavListResponseDTO;
 import project.blog.community.project.dto.response.MarketListResponseDTO;
+import project.blog.community.project.dto.response.ReplyListResponseDTO;
 import project.blog.community.project.entity.Favorite;
 import project.blog.community.project.entity.Market;
 import project.blog.community.project.entity.Rate;
@@ -45,23 +50,37 @@ public class MarketService {
             dtoList.add(dto);
         }
         return dtoList;
-
     }
 
-    public List<MarketGetAddFavListResponseDTO> getAddFavListService(String addFavList, HttpServletRequest request) {
+
+
+
+    //즐겨찾기만 호출 하는 리스트
+    public List<MarketGetAddFavListResponseDTO> getAddFavListService(String currentLoginMemberAccount) {
         List<MarketGetAddFavListResponseDTO> addFavDTOList = new ArrayList<>();
 
-        HttpSession session = request.getSession();
-        session.getAttribute("login");
-        // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
-        String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
-
         // 내가 즐겨찾기한 리스트
-        List<Integer> boards = mapper.checkFav(currentLoginMemberAccount);
+        List<Integer> boards = mapper.selectByAccountNumber(currentLoginMemberAccount);
 
+        return addFavDTOList;
     }
 
 
+
+//    //페이지 처리
+//    @GetMapping("/{boardNo}/page/{pageNo}")
+//    public ResponseEntity<?> list(@PathVariable int boardNo, @PathVariable int pageNo) {
+//        log.info("api/v1/replies{}: GET!!!", boardNo);
+//        log.info("pageNo: {}", pageNo);
+//
+//        Page page = new Page();
+//        page.setPageNo(pageNo);
+//        page.setAmount(5);
+//
+//        ReplyListResponseDTO replies = replyService.getList(boardNo, page);
+//
+//        return ResponseEntity.ok().body(replies);
+//    }
 
 
     public void modify(MarketModifyRequestDTO dto, String currentLoginMemberAccount) {

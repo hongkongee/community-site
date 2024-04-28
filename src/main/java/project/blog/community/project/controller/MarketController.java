@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.Banner;
 import org.springframework.http.ResponseEntity;
@@ -74,7 +75,6 @@ public class MarketController {
         //정보를 jsp로 전달 -> key-value 형태로 데이터를 추가
         model.addAttribute("bList", dtoList); //jsp로 전달하는 역할
 
-
         log.info("isFavorite" + dtoList);
         // /WEB-INF/views/~~~~~.jsp
         return "market/MarketList";
@@ -119,6 +119,7 @@ public class MarketController {
 
 
         int rate = marketService.getRate(dto.getTextWriter());
+
 
         model.addAttribute("b", dto);
         model.addAttribute("rate", rate);
@@ -184,21 +185,29 @@ public class MarketController {
         return ResponseEntity.ok().body("success");
     }
 
-    @GetMapping("/list")
-    public String getAddFavList(Model model, String addFavList) {
-
-        log.info("/market/list: getFavGET");
-
-        List<MarketGetAddFavListResponseDTO> addFavDTOList = marketService.getAddFavListService(addFavList);
-        log.info("dtoList: {}", addFavDTOList);
 
 
-        //정보를 jsp로 전달 -> key-value 형태로 데이터를 추가
-        model.addAttribute("addFavList", addFavDTOList); //jsp로 전달하는 역할
 
-        return "market/MarketList";
-
-    }
+    //즐겨찾기만 호출 하는 리스트
+//    @GetMapping("/list")
+//    public String getAddFavList(HttpServletRequest request) {
+//
+//        log.info("/market/list: getFavGET");
+//
+//        HttpSession session = request.getSession();
+//        session.getAttribute("login");
+//        // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
+//        String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
+//
+//        List<MarketGetAddFavListResponseDTO> addFavDTOList = marketService.getAddFavListService(currentLoginMemberAccount);
+//        log.info("dtoList: {}", addFavDTOList);
+//
+//
+//        //정보를 jsp로 전달 -> key-value 형태로 데이터를 추가
+////        model.addAttribute("addFavList", addFavDTOList); //jsp로 전달하는 역할
+//
+//        return "market/MarketList";
+//    }
 
 
     //좋아요

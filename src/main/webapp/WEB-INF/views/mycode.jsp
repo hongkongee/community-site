@@ -6,15 +6,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="/assets/css/mycode.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet">
+  <%@ include file="/WEB-INF/views/include/static-head.jsp" %>
+  <link rel="stylesheet" href="/assets/css/header.css">
+  
 
-<link rel="stylesheet" href="/assets/css/header.css">
+  <link rel="stylesheet" href="/assets/css/mainpage.css" >
+
+  <!----><link rel="stylesheet" href="/assets/css/mycode.css">
+
+
 </head>
 <body>
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
+
+    <%@ include file="/WEB-INF/views/include/header.jsp" %>
+
   <div class="MygalleryJsp" >
   <div class="mar">
     <div class="background">
@@ -42,7 +47,7 @@
                 <input type="text" class="form-control" name="keyword" value="${s.keyword}">
 
                 <button class="btn btn-primary" type="submit">
-                    <i class="fas fa-search">검색</i>
+                    검색
                 </button>
 
             </form>
@@ -69,7 +74,7 @@
                                   ${b.regDate} </div>
 
                         <div class="view">
-                                <i class="fas fa-eye"></i>
+                                
                                 <span class="view-count">${b.programming}</span>
                             </div>
 
@@ -231,7 +236,7 @@ $cardContainer.addEventListener('click', e => {
         $targetCard?.classList.remove('card-hover');
 
         const $delBtn = e.target.closest('.card-wrapper')?.querySelector('.del-btn');
-        if ($delBtn) $delBtn.style.opacity = '0';
+        if ($delBtn) $delBtn.style.opacity = '1';
       }
 
 

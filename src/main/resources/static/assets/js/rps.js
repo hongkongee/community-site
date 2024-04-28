@@ -8,8 +8,9 @@
  const $rpsArea = document.querySelector('.rps-game'); // 게임 영역
  const $form = document.getElementById('rps-betting') // form 태그
 
- const myPoint = 30000; // 내 포인트
- const minPoint = 5000; // 최소 베팅 포인트
+ const myPoint = Number(document.querySelector('.rps-bet').dataset.point); // 내 포인트
+ const myId = document.querySelector('.rps-bet').dataset.account; // 내 아이디
+ const minPoint = 50; // 최소 베팅 포인트
  let betPoint = -1; // 입력 베팅 포인트
 
  const $rpsBtn = document.querySelectorAll('.rps-btn'); // 가위바위보 최종 버튼
@@ -28,7 +29,7 @@
      alert('포인트가 부족합니다.');
      return;
    } else if (betPoint < minPoint) {
-     alert('최소 5000P이상 베팅하셔야 합니다.');
+     alert('최소 50P이상 베팅하셔야 합니다.');
      return;
 
 
@@ -45,29 +46,34 @@
  };
 
  $resultScreen = document.querySelector('section.rps .result');
+ const $resultMsg = document.getElementById('result-msg');
 
  // 결과 화면
  function whatResultOnScreen(rr) { // rr : 가위바위보 결과 (WIN, DRAW, LOSE 중 하나)
    console.log("스크린 화면 결정 스크립트 실행!");
    console.log('rr: ', rr);
+   
 
    $resultScreen.style.display = 'block';
 
    if (rr === 'WIN') {
      console.log("승리");
-     document.getElementById('win').style.display = 'block';
-     document.getElementById('draw').style.display = 'none';
-     document.getElementById('lose').style.display = 'none';
+     $resultMsg.textContent = '이겼습니다! 원금의 2배 ' +  2 * $betPoint.value.trim() + 'P 획득!!!';
+    //  document.getElementById('win').style.display = 'block';
+    //  document.getElementById('draw').style.display = 'none';
+    //  document.getElementById('lose').style.display = 'none';
 
    } else if (rr === 'DRAW') {
-     document.getElementById('draw').style.display = 'block';
-     document.getElementById('win').style.display = 'none';
-     document.getElementById('lose').style.display = 'none';
+    $resultMsg.textContent = '무승부입니다';
+    //  document.getElementById('draw').style.display = 'block';
+    //  document.getElementById('win').style.display = 'none';
+    //  document.getElementById('lose').style.display = 'none';
 
    } else { // LOSE
-     document.getElementById('lose').style.display = 'block';
-     document.getElementById('win').style.display = 'none';
-     document.getElementById('draw').style.display = 'none';
+    $resultMsg.textContent = '패배입니다... ' + $betPoint.value.trim() + 'P 손실';
+    //  document.getElementById('lose').style.display = 'block';
+    //  document.getElementById('win').style.display = 'none';
+    //  document.getElementById('draw').style.display = 'none';
 
    }
 
@@ -79,7 +85,7 @@
 
  // 가위바위보 입력값을 서버에 전송
  function sendChoice(choice) {
-   fetch('/home/rps/game', {
+   fetch('/game/rps/start', {
        method: 'POST',
        headers: {
            'content-type': 'application/json'
@@ -92,7 +98,7 @@
    .then(response => response.text())
    .then(data => {
        console.log('Server response:', data);
-       // Handle server response as needed
+       // "WIN", "LOSE", or "DRAW"
        rpsResult = data;
    })
    .catch(error => {
@@ -128,5 +134,12 @@
  });
 
 
+// 즉시실행함수
+(() => {
 
+  console.log('myPoint: ', myPoint);
+  console.log('myId: ', myId);
+  
+  
+})();
 

@@ -161,36 +161,34 @@ public class MarketController {
         return ResponseEntity.ok().body("success");
     }
 
-
-    @PostMapping("/detail/{boardNo}")
+    // 좋아요, 평가 기능
+    @PostMapping("/detail")
     @ResponseBody
-    public ResponseEntity<?> rate(@RequestBody MarketRateRequestDTO dto, HttpSession session) {
-        log.info("/market/detail/{boardNo}: post {}", dto.toString());
+    public ResponseEntity<?> rate(@RequestBody MarketRateRequestDTO dto, HttpServletRequest request) {
+        log.info("/market/detail: post {}", dto.toString());
         //글번호
 
         //항상 request, session 오고(비로그인含) session 안에 로그인이 있는지 판단
-        String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
+        HttpSession session = request.getSession();
+        session.getAttribute("login");
+        // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
+        String myAccount = getCurrentLoginMemberAccount(session);
 
         // HttpServletRequest가 null인 경우에도 처리
-        if (currentLoginMemberAccount != null) { //무조건 request(요청)가 온다
-            log.info("Session ID: {}", session.getId()); // 세션 ID 출력
-            log.info("loginID: {}", session.getAttribute("loginUser"));
-        } else {
+
+        if (myAccount == null) { // 로그인을 안 한 경우
             return ResponseEntity.ok().body("로그인이 필요합니다."); // MockHttpSession을 사용하여 HttpSession 생성
         }
 
-        // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
-
-
+        // 중복 확인하기 (이미 내가 해당 게시물에 좋아요 평가를 했는지 확인)
         boolean flag = marketService.isDuplication(dto);
 
         log.info("rate get flag{} ", flag);
-        if (flag) {
-            log.info("if 내부 flag1{} ", flag);
+        if (flag) { // 중복
             return ResponseEntity.ok().body("이미 추천한 게시물입니다.");
+            
         } else {
-            log.info("if 내부 flag3{} ", flag);
-            marketService.addRate(dto);
+            marketService.addRate(dto); // rate 저장하기
             return ResponseEntity.ok().body("좋아요를 추가했습니다.");
         }
 

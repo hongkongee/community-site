@@ -125,11 +125,6 @@ section.board .form-container .buttons {
   font-size: 16px;
 }
 
-section.board .form-container .buttons #modify,
-section.board .form-container .buttons #delete {
-  /* 작성자만 삭제, 수정권한이 있음 */
-  display: none;
-}
 
 section.board #content {
   font-size: 20px;

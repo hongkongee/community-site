@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import project.blog.community.interceptor.AfterLoginInterceptor;
 import project.blog.community.interceptor.AutoLoginInterceptor;
 import project.blog.community.interceptor.BoardInterceptor;
+import project.blog.community.interceptor.BoardInterceptor;
 import project.blog.community.interceptor.MyPageInterceptor;
 
 @Configuration

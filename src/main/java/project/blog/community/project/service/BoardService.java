@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import project.blog.community.project.common.Search;
+import project.blog.community.project.dto.request.BoardModifyRequestDTO;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
 import project.blog.community.project.dto.response.BoardListResponseDTO;
@@ -86,6 +87,7 @@ public class BoardService {
 
    }
 
+   // 게시글 정보 가져오기
    public BoardDetailResponseDTO getDetail(int bno) {
       boardMapper.updateViewCount(bno);
 
@@ -94,6 +96,14 @@ public class BoardService {
 
       return new BoardDetailResponseDTO(board, nickname);
 
+   }
+
+   // 수정 페이지에서 게시글 정보 가져오기
+   public BoardDetailResponseDTO getModifyDetail(int bno) {
+      Board board = boardMapper.findOne(bno);
+      String nickname = findNickname(board.getWriter());
+
+      return new BoardDetailResponseDTO(board, nickname);
    }
 
    // account를 주면 nickname을 반환하는 메서드
@@ -176,11 +186,12 @@ public class BoardService {
 
    }*/
 
-
+   // 전체 게시글 수
    public int getCountAll(Search page) {
       return boardMapper.getCountAll(page);
    }
 
+   // 내 게시글 수
    public int getCount(Search page, HttpServletRequest request) {
       HttpSession session = request.getSession();
       LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
@@ -192,6 +203,7 @@ public class BoardService {
       return count;
    }
 
+   // 카테고리별 게시글 수
    public int getCountCategory(String category, Search page) {
       return boardMapper.getCountCategory(category, page);
    }
@@ -293,7 +305,27 @@ public class BoardService {
       return dtoList;
    }
 
+   // 검색한 글 개수
    public int getCountSearch(Search page, String account) {
       return boardMapper.findSearchCount(page, account);
    }
+
+
+
+   // 게시글 수정하기
+   public void modifyBoard(BoardModifyRequestDTO dto, String savePath) {
+
+      Board modifyBoard = Board.builder()
+              .bno(dto.getBno())
+              .category(stringToCategory(dto.getCategory()))
+              .title(dto.getTitle())
+              .content(dto.getContent())
+              .postImg(savePath)
+              .build();
+
+      // 수정할 bno 정보만 필요. writer는 수정할 필요가 없고 bno로 찾을 수 있으므로 필요가 없다.
+      boardMapper.updateBoard(modifyBoard);
+   }
+
+
 }

@@ -38,7 +38,7 @@
 
       <div class="btn-container">
 
-        <a href="/home/main">
+        <a href="#" class="refresh">
           <i class="fa-solid fa-rotate-right"></i> <!-- 새로고침 아이콘 -->
         </a>
         
@@ -208,12 +208,6 @@
         </div> -->
 
       </div>
-
-    </section>
-
-    <!-- ============= 스포츠 토토 ============= -->
-    <section class="sports">
-      <h2>경기 예측</h2>
 
     </section>
 

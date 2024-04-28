@@ -25,7 +25,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
       registry
             .addInterceptor(boardInterceptor)
-            .addPathPatterns("/home/**", "/market/**", "/game/**")
+            .addPathPatterns("/home/**", "/market/**", "/game/**", "/chat/chat")
             .excludePathPatterns("/home/main");
 
       registry

@@ -46,7 +46,7 @@
     <nav class="right-snb">
     <!-- 포인트 : aside>nav.right-snb>.point -->
     <div class="point">
-        <i class="fa-solid fa-coins">&nbsp;</i> <span>${sessionScope.login == null ? '' : login.point} P</span>
+        <i class="fa-solid fa-coins">&nbsp;</i> <span id="my-point-snb"></span>
     </div>
 
 

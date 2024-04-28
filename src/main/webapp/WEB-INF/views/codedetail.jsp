@@ -8,21 +8,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판 글쓰기</title>
 
+    <%@ include file="/WEB-INF/views/include/static-head.jsp" %>
+    <link rel="stylesheet" href="/assets/css/header.css">
 
+    <link rel="stylesheet" href="/assets/css/mainpage.css" >
+    <link rel="stylesheet" href="/assets/css/snb.css" >
 
-
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  
     <style>
-
-
-        .form-container {
-            width: 500px;
+body{
+    background-color: #000080;
+}
+.form-container {
+            width: 70%;
             margin: auto;
             padding: 20px;
-            background-color: #000080;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
+        
+            background-color: #fff;
+           
+            border-radius: 60px;
             font-size: 18px;
-        }
+            padding: 5%;
+            position: relative;
+    top: 190px;
+}
+.form-main{
+            
+            border: 1px solid black;
+            border-radius: 60px;
+           
+            padding: 5%;
+                }
 
         .form-container h1 {
             font-size: 40px;
@@ -30,34 +47,44 @@
             letter-spacing: 10px;
             text-align: center;
             margin-bottom: 20px;
-            color: #ffffff;
+            color: black;
         }
-
-        .form-container h2 {
-            font-size: 30px;
-            color: white;
+.form-container h1 {
+            font-size: 50px;
+            font-weight: bold;
+            letter-spacing: 10px;
             text-align: center;
             margin-bottom: 20px;
+            color: black;
+            padding: 40px 0px;
         }
 
         label {
             display: block;
             margin-bottom: 5px;
             font-size: 20px;
-            color: white;
+            color: black;
         }
-h2{
-    color: white;
+        #wrap h2{
+    
+    font-size: 50px;
+            font-weight: bold;
+            letter-spacing: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: black;
+            padding: 40px 0px;
+
 }
         #title, #programming {
             font-size: 18px;
             width: 100%;
             padding: 8px;
             box-sizing: border-box;
-            border: 2px solid #ffffff;
+            border: 1px solid black;
             border-radius: 8px;
             margin-bottom: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
+           
         }
 
         #content {
@@ -66,10 +93,10 @@ h2{
             width: 100%;
             padding: 8px;
             box-sizing: border-box;
-            border: 2px solid #ffffff;
+            border: 1px solid black;
             border-radius: 8px;
             margin-bottom: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
+          
         }
 
         textarea {
@@ -85,28 +112,33 @@ h2{
 
         button {
             font-size: 20px;
-            padding: 10px 20px;
-            border: none;
-            margin-right: 10px;
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
+    background: white;
+    border: 2px solid #00196b;
         }
-
-        button.list-btn {
-            background: #e61e8c;
-        }
-
+       
         button:hover {
-            background-color: #3d8b40;
+            background: #00196b;
+            color: #fff;
         }
-
         button.list-btn:hover {
-            background: #e61e8c93;
+            background: #00196b;
+            color: #fff;
         }
+        select{
+            font-size: 18px;
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid black;
+            border-radius: 8px;
+            margin-bottom: 10px;
+       
+            
+        }
+.list-btn{
+    margin-right: 10px;
+}
+
 
         /* 페이지 css */
         /* 페이지 액티브 기능 */
@@ -122,41 +154,27 @@ h2{
             color: #fff !important;
         }
 
-        /* 댓글 프로필 */
-        .profile-box {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin: 10px auto;
-        }
-
-        .profile-box img {
-            width: 100%;
-        }
-
-        .reply-profile {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            margin-right: 10px;
-
-        }
+       
 
         
     </style>
+   
 </head>
 <body>
+
+    <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 
 
 <div id="wrap" class="form-container">
     
-    <h2># 작성일자: ${b.regDate}</h2>
+    <h2>${b.title}</h2>
+    <div class="form-main">
     <input type="text" id="programming" name="programming" value="${b.programming}" readonly>
-    
-    <label for="title">제목</label>
-    <input type="text" id="title" name="title" value="${b.title}" readonly>
+
+    <div class="form-main">
+    <input type="text" id="programming" name="programming" value="${b.programming}" readonly>
+
 
     <label for="content">내용</label>
     <div id="content">${b.content}</div>
@@ -170,7 +188,7 @@ h2{
             수정
         </button>
        
-
+    </div>
 
     </div>
 

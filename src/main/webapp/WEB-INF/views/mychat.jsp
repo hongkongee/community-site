@@ -11,7 +11,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/header.css">
-  
+<%@ include file="/WEB-INF/views/include/headcss.jsp"%>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -21,7 +21,7 @@
     <div class="Chat" >Chat</div>
     <div class="Line2" ></div>
     <div class="Frame22" >
-       
+        
 
 
         <div class="friends">

@@ -168,6 +168,7 @@ body {
   flex-direction: column;
   overflow-y: scroll;
   height: 200px;
+  margin-right: 50px;
 
   &::-webkit-scrollbar {
     width: 10px;
@@ -177,6 +178,10 @@ body {
 .body-wrapper1 .user-friends .following-list .user-wrapper {
   display: flex;
   justify-content: flex-start;
+}
+
+.body-wrapper1 .user-friends .name-box a {
+  font-size: 18px
 }
 
 .body-wrapper1 .user-friends .follower-list {
@@ -199,8 +204,8 @@ body {
 }
 
 .profile-box { /* 프로필 사진 */
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   overflow: hidden;
   font-size: 12px;
@@ -231,22 +236,28 @@ body {
   /* gap: 20%; */
   /* justify-content: space-evenly; */
   padding-bottom: 25px;
+  width: 90%;
+  margin: 50px auto;
+
 }
 
 .body-wrapper2 .my-market {
   font-size: 25px;
-  margin-left: 180px;
+  /* margin-left: 180px; */
+  width: 32%;
 }
 
 .body-wrapper2 .popular-wrapper {
   font-size: 25px;
   margin-left: 180px;
+  width: 32%;
 }
 
 
 .body-wrapper2 .weather-wrapper {
   font-size: 25px;
   margin-left: 180px;
+  width: 26%;
 }
 
 .point-msg {
@@ -262,6 +273,16 @@ body {
 .popular-title-container {
   font-size: 18px;
 }
+
+.popular-title-container>a {
+  color: orange;
+}
+
+.popular-content {
+  font-size: 15px;
+  color: gray;
+}
+
 
 #audio-controls {
   background-color: #f2f2f2;
@@ -342,4 +363,14 @@ p#intro-text {
 
 .rate-evaluation {
   font-size: 18px;
+}
+
+/* 중고 장터 평점, 평가 */
+.rate-evaluation .chooseReason {
+  font-weight: bold;
+}
+
+.rate-evaluation .regDate {
+  color: gray;
+  font-size: 15px;
 }

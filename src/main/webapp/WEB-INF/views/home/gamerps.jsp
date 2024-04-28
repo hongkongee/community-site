@@ -33,14 +33,14 @@
 
 
       <!-- 베팅금액 입력하기 -->
-      <div class="rps-bet">
+      <div class="rps-bet" data-point="${user.point}" data-account="${user.accountNumber}">
 
-        <!-- <form id="rps-betting" action="/home/rps/bet" method="post"> -->
-          <input type="text" id="bet-point" name="bp" placeholder="베팅 금액을 입력해주세요">P <br>
+        
+          <input type="text" id="bet-point" name="betPoint" placeholder="베팅 금액을 입력해주세요">P <br>
           <div id="bet-btn">
             <button>제출</button>
           </div>
-        <!-- </form> -->
+        
 
       </div>
       
@@ -49,10 +49,6 @@
       
       <!-- 가위바위보 선택 -->
       <div class="rps-game">
-
-        <!-- <form id="gameForm" action="/home/rps/game" method="POST">
-          <input type="hidden" id="choiceInput" name="choice">
-        </form> -->
       
         <button id="rock" class="rps-btn" ><img src="/assets/img/rock_image.jpg" alt="Rock"></button>
         <button id="paper" class="rps-btn" ><img src="/assets/img/paper_image.jpg" alt="Paper"></button>
@@ -70,9 +66,10 @@
       <!-- 가위바위보 결과 -->
 
       <div class="result">
-        <div id="win">이겼습니다! 원금의 2배 획득</div>
+        <div id="result-msg"></div>
+        <!-- <div id="win">이겼습니다! 원금의 2배 획득</div>
         <div id="draw">무승부입니다.</div>
-        <div id="lose">패배입니다...</div>
+        <div id="lose">패배입니다...</div> -->
         <a class="btn btn-primary" href="/game/rps" role="button">다시 하기</a>
       </div>
 

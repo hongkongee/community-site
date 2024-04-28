@@ -291,6 +291,8 @@ public class BoardService {
       boardMapper.save(uploadedBoard);
    }
 
+   //public void saveTodo(String content, )
+
 
    // 문자열을 Category 타입으로 바꾸는 메서드
    private Category stringToCategory(String str) {

@@ -33,6 +33,7 @@ public class BoardDetailResponseDTO {
     private final String content;
     private final String postImg;
 
+
     public BoardDetailResponseDTO(Board board, String nickname) {
         this.bno = board.getBno();
         this.category = board.getCategory().name().toLowerCase();

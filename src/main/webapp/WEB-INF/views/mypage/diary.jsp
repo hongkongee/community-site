@@ -66,32 +66,36 @@
                     <div class="todo">
                         <h2>일정</h2>
                         <div class="schedule-input">
-                            <textarea id="schedule-content" placeholder="일정을 작성해주세요"></textarea>
+                            <textarea type="text" id="schedule-content" placeholder="날짜를 선택해주세요."></textarea>
+                            <button id="save-todo" class="leftbtn" type="button">저장</button>
                         </div>
                     </div>
+
 
                     <div class="whatdo">
                         <h2>일기 쓰기</h2>
                         <div class="story">
-                            <textarea type="text" class="story-write" placeholder="일기를 작성해주세요"></textarea>
+                            <textarea type="text" id="story-write" placeholder="날짜를 선택해주세요."></textarea>
+                            <button id="save-diary" class="rightbtn" type="button">저장</button>
                         </div>
                     </div>
-                    <button id="save-diary" type="submit">저장</button>
                 </form>
             </div>
 
+
             <div class="saved">
+
                 <div class="todo-saved">
-                    <form action="/home/write" method="post" enctype="multipart/form-data">
-
-
-
-
-
-                    </form>
+                    <ul>
+                        <c:if test=""></c:if>
+                    </ul>
                 </div>
-                <div class="whatdo-saved"></div>
+
+                <div class="whatdo-saved">
+                    <ul> </ul>
+                </div>
             </div>
+
         </div>
     </div>
 
@@ -103,6 +107,8 @@
             var currentYear = currentDate.getFullYear();
             var currentMonth = currentDate.getMonth();
             createCalendar(currentDate);
+
+            let previousElement = null;
 
             // 이전 달, 다음 달 버튼에 대한 클릭 이벤트 핸들러
             document.getElementById('prev-month').addEventListener('click', function () {
@@ -147,33 +153,269 @@
                         dateCounter++;
 
                         // 날짜 클릭 시 일정 작성 영역을 표시하는 이벤트 등록
-                        cell.addEventListener('click', showScheduleInput);
+                        cell.addEventListener('click', e => {
+                            if (previousElement !== null) {
+                                previousElement.style.color = '';
+                                previousElement.style.background = '';
+                            }
+
+                            previousElement = event.target;
+
+                            showScheduleInput(e);
+                        });
                     }
                 }
             }
 
+
             // 날짜 클릭 시 해당 날짜에 저장된 일정을 표시하는 함수
-            function showScheduleInput(todoSaved) {
+            function showScheduleInput(e) {
+
                 var scheduleInput = document.querySelector('.schedule-input');
+                const $diaryInput = document.querySelector('div.story');
                 scheduleInput.style.display = 'block';
+                e.target.style.color = 'white'
+                e.target.style.background = '#1c398d';
 
                 // 클릭한 날짜를 가져와서 표시
-                var selectedDate = event.target.textContent;
+                var selectedDate = e.target.textContent;
+                console.log('selectedDate: ', selectedDate);
                 var selectedMonth = currentMonth + 1; // 클릭한 날짜의 달을 가져옴
                 var scheduleContent = document.getElementById('schedule-content');
+                var storyWrite = document.getElementById('story-write')
                 scheduleContent.placeholder = currentYear + '년 ' + selectedMonth + '월 ' + selectedDate +
                     '일 일정을 작성해주세요';
+                storyWrite.placeholder = currentYear + '년 ' + selectedMonth + '월 ' + selectedDate +
+                    '일 일기를 작성해주세요';
 
-                // 일정 저장 함수
-                document.getElementById('save-schedule').addEventListener('click', function () {
-                    var scheduleContent = document.getElementById('schedule-content').value;
-                    saveSchedule(currentYear, selectedMonth, selectedDate,
-                        scheduleContent); // 일정 저장
+                scheduleInput.setAttribute('data-reg-date',
+                    `\${currentYear}/\${selectedMonth}/\${selectedDate}`)
+                $diaryInput.setAttribute('data-reg-date', `\${currentYear}/\${selectedMonth}/\${selectedDate}`)
 
-                    // 저장 후 일정 입력창 초기화
-                    document.getElementById('schedule-content').value = '';
-                });
+
+                let urlDate;
+                if (selectedMonth < 10) {
+                    if (selectedDate < 10) {
+                        urlDate = `\${currentYear}-0\${selectedMonth}-0\${selectedDate}`;
+                    } else {
+                        urlDate = `\${currentYear}-0\${selectedMonth}-\${selectedDate}`;
+                    }
+
+                } else {
+                    if (selectedDate < 10) {
+                        urlDate = `\${currentYear}-\${selectedMonth}-0\${selectedDate}`;
+                    } else {
+                        urlDate = `\${currentYear}-\${selectedMonth}-\${selectedDate}`;
+                    }
+                }
+
+                console.log('urlDate = ', urlDate);
+                // window.location.href = '/mypage/diary/' + urlDate;
+                fetchGetTodo(urlDate);
+                fetchGetWhatdo(urlDate);
+
+
             }
+
+
+
+            // ////////////// 일정을 DB에 저장하는 함수 /////////////////////
+            document.getElementById('save-todo').addEventListener('click', e => {
+
+                console.log('일정 저장 버튼 클릭 이벤트 발생!');
+
+                let date = e.target.closest('div.schedule-input').dataset.regDate;
+
+                const dateArr = date.split('/');
+
+                console.log('날짜: ', dateArr);
+                if (dateArr[1].length === 1) {
+                    dateArr[1] = '0' + dateArr[1];
+                }
+                if (dateArr[2].length === 1) {
+                    dateArr[2] = '0' + dateArr[2];
+                }
+                date = dateArr.join('-');
+
+
+
+                console.log('정제된 날짜 문자열: ', date);
+
+                const $content = e.target.previousElementSibling;
+                console.log('할일 내용: ', $content.value);
+                const writer = '${login.accountNumber}';
+                console.log('작성자: ', writer);
+
+                if ($content.value !== '') {
+                    fetch('/mypage/diary/todo', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                regDate: date,
+                                todoText: $content.value,
+                            })
+                        })
+                        .then(res => res.text())
+                        .then(data => {
+                            console.log(data);
+                            $content.value = '';
+                            alert(
+                                `\${dateArr[0]}년 \${dateArr[1]}월 \${dateArr[2]}일 일정이 등록되었습니다.`
+                            );
+                            // location.reload();
+                            fetchGetTodo(date);
+                        });
+                }
+
+            });
+
+
+            // ////////////// 일기를 DB에 저장하는 함수 /////////////////////
+            document.getElementById('save-diary').addEventListener('click', e => {
+
+                console.log('일기 저장 버튼 클릭 이벤트 발생!');
+                let date = e.target.closest('div.story').dataset.regDate;
+                const dateArr = date.split('/');
+
+                console.log('날짜: ', dateArr);
+                if (dateArr[1].length === 1) {
+                    dateArr[1] = '0' + dateArr[1];
+                }
+                if (dateArr[2].length === 1) {
+                    dateArr[2] = '0' + dateArr[2];
+                }
+                date = dateArr.join('-');
+                console.log('정제된 날짜 문자열: ', date);
+
+                const $content = e.target.previousElementSibling;
+                console.log('일기 내용: ', $content.value);
+                const writer = '${login.accountNumber}';
+                console.log('작성자: ', writer);
+
+                if ($content.value !== '') {
+                    fetch('/mypage/diary/whatdo', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                regDate: date,
+                                whatdoText: $content.value,
+                            })
+                        })
+                        .then(res => res.text())
+                        .then(data => {
+                            console.log(data);
+                            $content.value = '';
+                            alert(
+                                `\${dateArr[0]}년 \${dateArr[1]}월 \${dateArr[2]}일 일기가 등록되었습니다.`
+                            );
+                            // location.reload();
+                            fetchGetWhatdo(date);
+                        });
+                }
+            });
+
+            /*
+               fetch 이용해서 완성된 날짜를 컨트롤러에 보냄 -> 컨트롤러에서는 전달받은 날짜에 해당하는 일정과 일기를 담아서
+               JSON 형태로 리턴 -> 클라이언트에서는 JSON 데이터를 받아서 반복문을 이용해서 div.todo-saved와 div.whatdo-saved 에다가
+               li를 문자열 형태로 만들어서 화면에 표현해 주기.
+
+               사용자가 또다른 날짜를 클릭한다면 -> ul안에 모든 li를 다 비우고 다시 fetch 요청 통해서 DB에서 일정과 일기를 가져와서
+               또다시 div.todo-saved와 div.whatdo-saved 에다가 li 만들어서 표현.
+               */
+
+            // 다이어리 일정 불러오는 함수
+            function fetchGetTodo(regDate) {
+                const URL = '/mypage/diary/';
+                fetch(URL + regDate)
+                    .then(res => res.json())
+                    .then(todoList => {
+                        renderTodos(todoList);
+                    });
+            }
+
+            function renderTodos(todoList) {
+                const $todoWrapper = document.querySelector('.todo-saved')
+                let tag = '';
+                let regDateTag = '';
+
+                if (todoList !== null && todoList.length > 0) {
+                    for (let todo of todoList) {
+
+                        console.log(todo);
+
+                        const {
+                            diaryNo,
+                            toDo,
+                            writer,
+                            regDate
+                        } = todo;
+
+                        console.log(toDo);
+
+                        regDateTag = '' + regDate + '';
+                        if (toDo != null) {
+                            tag += `
+                                    <li>
+                                        \${toDo} <br>
+                                    </li>
+                                    `
+                        }
+
+                    }
+                    tag = regDateTag + tag;
+                    $todoWrapper.innerHTML = tag;
+                }
+            }
+
+            // 다이어리 일기 불러오는 함수
+            function fetchGetWhatdo(regDate) {
+                const URL = '/mypage/diary/';
+                fetch(URL + regDate)
+                    .then(res => res.json())
+                    .then(whatdoList => {
+                        renderWhatdos(whatdoList);
+                    });
+            }
+
+            function renderWhatdos(whatdoList) {
+                const $whatdoWrapper = document.querySelector('.whatdo-saved')
+                let tag = '';
+                let regDateTag = '';
+
+                if (whatdoList !== null && whatdoList.length > 0) {
+                    for (let whatdo of whatdoList) {
+
+                        console.log(whatdo);
+
+                        const {
+                            diaryNo,
+                            whatDo,
+                            writer,
+                            regDate
+                        } = whatdo;
+
+                        console.log(whatDo);
+
+                        regDateTag = '' + regDate + '';
+                        if (whatDo != null) {
+                            tag += `
+                                    <li>
+                                        \${whatDo} <br>
+                                    </li>
+                                    `
+                        }
+                    }
+                    tag = regDateTag + tag;
+                    $whatdoWrapper.innerHTML = tag;
+                }
+            }
+
+
+
         });
     </script>
 </body>

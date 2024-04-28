@@ -9,7 +9,6 @@
     <title>채팅</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/header.css">
-
     <link rel="stylesheet" href="/assets/css/snb.css">
     <style>
         * {
@@ -32,6 +31,7 @@
             width: 740px;
             height: 100px;
             display: inline-block;
+            background-color: transparent;
         }
 
         #chatt #sendZone>* {
@@ -40,7 +40,7 @@
         }
 
         #chatt #btnSend {
-            width: 54px;
+            width: 43px;
             height: 100px;
         }
 
@@ -61,6 +61,16 @@
         #chatt .other {
             background-color: #eee;
             margin: 2px;
+        }
+
+        input[type="text"] {
+            background-color: transparent;
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
         }
     </style>
 </head>

@@ -52,6 +52,7 @@
                 <li><a href="/wel/myCode">My Code</a></li>
                 <li><a href="/chat/chat">Chat</a></li>
                 <li><a href="#">Market</a></li>
+                <li><a href="/users/info">My Info</a></li>
             </c:if>
 
             <c:if test="${sessionScope.login != null}">

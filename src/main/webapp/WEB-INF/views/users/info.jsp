@@ -170,7 +170,6 @@
                         <p>변경할 닉네임을 입력해주세요&nbsp;<span id="nickChk"></span></p>
                         <input type="text" name="nickname" id="user_nickname" class="input-btn" minlength="2"
                             maxlength="8" required="required">${login.nickname}
-                        <button type="button" id="id_check">중복 확인</button>
                     </div>
                     <div id="gender-box">
                         <p>성별을 선택해주세요</p>

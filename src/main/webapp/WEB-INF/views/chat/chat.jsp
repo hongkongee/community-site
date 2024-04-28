@@ -50,7 +50,6 @@
             padding: 6px;
             border-radius: 10px;
             font-size: 0.6em;
-
         }
 
         #chatt .me {
@@ -129,13 +128,13 @@
                     item = `<div style = "background-color : #ffc;
                             margin : 1px 0px 2px 30%;" >
 		                <span><b>` + data.mid + `</b></span> [` + data.date + ` ]<br/>
-                      <span>` + data.msg + `</span>
+                      <span style = "color: #000;">` + data.msg + `</span>
 						</div>`;
                 } else {
                     item = `<div style = "background-color : #eee;
                             margin : 2px;" >
 		                <span><b>` + data.mid + `</b></span> [` + data.date + ` ]<br/>
-                      <span>` + data.msg + `</span>
+                      <span style = "color: #000;">` + data.msg + `</span>
 						</div>`;
                 }
 

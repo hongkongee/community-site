@@ -131,4 +131,11 @@ public class GameService {
         return (int) duration.getSeconds();
     }
 
+    // jsp에서 받은 포인트로 DB 포인트 수정
+    public void lottoPoint(String myAccount, String gamePoint) {
+        int resultPoint = Integer.parseInt(gamePoint)-100;
+        log.info("lottoResultPoint: {}", resultPoint);
+        userMapper.addPoint(myAccount, resultPoint);
+
+    }
 }

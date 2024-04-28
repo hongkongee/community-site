@@ -66,10 +66,7 @@ public class GameController {
         log.info("/game/lotto: POST, point: {}", gamePoint);
         LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
         String myAccount = loginDto.getAccountNumber();
-        loginDto.setPoint(Integer.parseInt(gamePoint));
-        log.info("setPoint: {}", gamePoint);
-
-
+        gameService.lottoPoint(myAccount, gamePoint);
 
         return ResponseEntity.ok().body(gamePoint);
     }

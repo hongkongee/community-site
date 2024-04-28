@@ -154,9 +154,9 @@
             }
         }
 
-        /* #userpoint {
+        #userpoint {
             display: none;
-        } */
+        }
     </style>
 
 
@@ -222,7 +222,7 @@
 
             if (userPoint >= 100) {
 
-                let gamePoint = userPoint - 100;
+                let gamePoint = 0;
 
                 // 사용자가 입력한 숫자를 담을 배열 선언
                 var userNumbers = [];
@@ -289,6 +289,7 @@
                     $result.textContent = "꽝입니다!"
                 }
 
+                // POST: /game/lotto로 비동기 요청
                 fetch("/game/lotto", {
                     method: 'POST',
                     headers: {
@@ -364,6 +365,9 @@
                         a.classList.add("blue");
                     }
                 }
+            } else {
+                alert('포인트가 부족합니다!');
+                return;
             }
 
 

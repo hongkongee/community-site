@@ -2,6 +2,7 @@ package project.blog.community.project.entity;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Setter
@@ -18,6 +19,6 @@ public class Diary {
     private String whatDo;
     private String writer;
 
-    private LocalDateTime regDate;
+    private LocalDate regDate;
 
 }

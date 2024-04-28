@@ -6,19 +6,33 @@
 
     <insert id="todoSave">
         INSERT INTO tbl_diary
-        (todo, reg_date)
-        VALUES (#{toDo}, #{regDate})
+        (todo, reg_date, writer)
+        VALUES (#{toDo}, #{regDate}, #{writer})
     </insert>
 
     <insert id="whatdoSave">
         INSERT INTO tbl_diary
-        (whatdo, reg_date)
-        VALUES (#{whatDo}, #{regDate})
+        (whatdo, reg_date, writer)
+        VALUES (#{whatDo}, #{regDate}, #{writer})
     </insert>
 
     <select id="findAll" resultType="diary">
         SELECT * FROM tbl_diary
     </select>
+
+    <select id="findTodoList" resultType="Diary">
+        SELECT * FROM tbl_diary
+        WHERE reg_date = #{regDate}
+        ORDER BY diary_no DESC;
+    </select>
+
+    <select id="findWhatdoList" resultType="Diary">
+        SELECT * FROM tbl_diary
+        WHERE reg_date = #{regDate}
+        ORDER BY diary_no DESC;
+    </select>
+
+
 
     <select id="findOne" resultType="diary">
         SELECT * FROM tbl_diary
@@ -28,13 +42,13 @@
     <update id="modifyTodo">
         UPDATE tbl_diary
         SET todo = #{toDo}
-        WHERE writer = #{writer}
+        WHERE diary_no = #{diaryNo}
     </update>
 
     <update id="modifyWhatdo">
         UPDATE tbl_diary
         SET whatdo = #{whatDo}
-        WHERE writer = #{writer}
+        WHERE diary_no = #{diaryNo}
     </update>
 
     <delete id="todoDelete">

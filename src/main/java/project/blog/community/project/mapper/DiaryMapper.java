@@ -8,19 +8,33 @@ import java.util.List;
 @Mapper
 public interface DiaryMapper {
 
-    void todoSave(Diary diary); // todoSave저장
+    // todo저장
+    void todoSave(Diary diary);
 
-    void whatdoSave(Diary diary); // whatSave저장
+    // whatdo저장
+    void whatdoSave(Diary diary);
 
-    List<Diary> findAll(); // 전체 글
+    // 전체 글 조회
+    List<Diary> findAll();
 
-    Diary findOne(int diaryNo); // 글 하나
+    // 날짜 별 글을 조회 todoList
+    List<Diary> findTodoList(String regDate);
 
-    void todoDelete(int diaryNo); // 삭제
+    // 날짜 별 글을 조회 whatdoList
+    List<Diary> findWhatdoList(String regDate);
 
-    void whatdoDelete(int diaryNo); // 삭제
+    // 글 개별 조회
+    Diary findOne(int diaryNo);
 
-    void modifyTodo(int diaryNo); // todo수정
+    // todo삭제
+    void todoDelete(int diaryNo);
 
-    void modifyWhatdo(int diaryNo); // whatdo 수정
+    // whatdo삭제
+    void whatdoDelete(int diaryNo);
+
+    // todo수정
+    void modifyTodo(Diary diary);
+
+    // whatdo수정
+    void modifyWhatdo(Diary diary);
 }

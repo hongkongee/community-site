@@ -43,9 +43,6 @@ public class SnsLoginController {
     @Value("${sns.naver.state}")
     private String naverState;
 
-    @Value("${sns.naver.grant_type}")
-    private String naverGrantType;
-
     @GetMapping("/kakao/login")
     public String kakaoLogin() {
         String uri = "https://kauth.kakao.com/oauth/authorize";

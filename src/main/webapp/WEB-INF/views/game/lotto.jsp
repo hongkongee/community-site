@@ -370,9 +370,7 @@
                 return;
             }
 
-
         }
-
 
         // 로또 추첨기
         function createLotto() {

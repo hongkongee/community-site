@@ -197,13 +197,16 @@
     </div>
 
     <script>
-        
         let code = ''; // 이메일 전송 인증번호 저장을 위한 변수
-        
+
         // 이메일 인증버튼 클릭 이벤트
         document.getElementById('mail-check-btn').onclick = () => {
             const email = document.getElementById('user_email').value.trim();
             console.log('완성된 이메일: ', email);
+            if (email === '') {
+                alert('이메일 값을 입력해주세요.');
+                return;
+            }
 
             fetch('/users/email', {
                     method: 'post',

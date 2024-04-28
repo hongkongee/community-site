@@ -17,6 +17,7 @@ public class MarketRateRequestDTO {
     private String textWriter;
     private String message;
     private String chooseReason;
+    private int rateValue;
 
 
 

@@ -19,8 +19,9 @@ public interface UserMapper {
    // 중복 체크
    boolean isDuplicate(@Param("type") String type, @Param("keyword") String keyword);
 
-   // 신고 횟수 1 증가
+   // 신고 횟수 1 증가, 평점 0.1 깎기
    void updateReport(String accountNumber);
+
 
    // 자동 로그인 세션아이디, 만료시간 업데이트
    void saveAutoLogin(AutoLoginDTO build);
@@ -38,6 +39,20 @@ public interface UserMapper {
 
    // 팔로우하는 유저 찾기
    List<String> findUserByFollowing(String account);
+
+   //프로필 바꾸기
+  void updateProfile(@Param("profilePicture") String profilePicture, @Param("accountNumber") String accountNumber);
+
+   // 포인트 증가시키기
+   void addPoint(@Param("me") String myAccount, @Param("point") int todayPoint);
+
+   // 회원 정보 수정
+   void modify (User user);
+
+   // 회원 탈퇴
+   void delete(String user);
+
+
 
 }
 

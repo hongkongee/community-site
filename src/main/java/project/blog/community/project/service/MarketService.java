@@ -11,6 +11,7 @@ import project.blog.community.project.common.Page;
 import project.blog.community.project.dto.request.MarketModifyRequestDTO;
 import project.blog.community.project.dto.request.MarketRateRequestDTO;
 import project.blog.community.project.dto.request.MarketWriteRequestDTO;
+import project.blog.community.project.dto.response.MainMarketResponseDTO;
 import project.blog.community.project.dto.response.MarketDetailResponse;
 import project.blog.community.project.dto.response.MarketGetAddFavListResponseDTO;
 import project.blog.community.project.dto.response.MarketListResponseDTO;
@@ -63,6 +64,18 @@ public class MarketService {
         List<Integer> boards = mapper.selectByAccountNumber(currentLoginMemberAccount);
 
         return addFavDTOList;
+    }
+
+    // 즐겨찾기 고려 안하고 최신순으로 4개의 중고 거래 게시글 불러오기
+    public List<MainMarketResponseDTO> getRecentList() {
+        List<Market> fourList = mapper.findFour();
+        List<MainMarketResponseDTO> dtoList = new ArrayList<>();
+
+        for (Market market : fourList){
+            MainMarketResponseDTO dto = new MainMarketResponseDTO(market);
+            dtoList.add(dto);
+        }
+        return dtoList;
     }
 
 
@@ -136,11 +149,15 @@ public class MarketService {
     public void addRate(MarketRateRequestDTO dto) {
         String textWriter = dto.getTextWriter(); //재가공
 
-        // User 테이블 rate 컬럼 1 추가
-        mapper.updateRateBoard(textWriter);
-
-        // Market Rate 테이블(중복 검사를 위한 테이블) row 추가
+        // Market Rate 테이블(중복 검사를 위한 테이블) row 추가 -> 선택한 1~5를 저장 (insert)
         mapper.addRate(dto);
+
+        // Market Rate 테이블에서 해당 유저의 모든 평점을 평균을 내서 값을 가져오고 (select)
+        float rateAvg = mapper.rateAverage(dto.getTextWriter());
+
+        // 평균 낸 값을 유저 테이블에 저장 (update)
+        mapper.updateRateBoard(textWriter, rateAvg);
+
     }
 
     public int getRate(String textWriter) {
@@ -152,6 +169,10 @@ public class MarketService {
         if (rate == null) return false; //중복X
         else return true; //중복됨
 
+    }
+
+    public List<Rate> findUserRate(String userAccount) {
+        return mapper.checkRateByUser(userAccount);
     }
 
 

@@ -42,7 +42,10 @@ public class BoardService {
 
       for (Board board : boardList) {
          String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
-         BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname);
+
+         int numberOfReply = boardMapper.calcNumberOfReply(board.getBno());
+
+         BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname, numberOfReply);
          dtoList.add(dto);
       }
 
@@ -75,7 +78,9 @@ public class BoardService {
 
       for (Board board : boardList) {
          String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
-         BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname);
+         int numberOfReply = boardMapper.calcNumberOfReply(board.getBno());
+
+         BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname, numberOfReply);
          dtoList.add(dto);
       }
 
@@ -157,7 +162,7 @@ public class BoardService {
       if (number > 0) {
 
          // 쿠키에 게시글 번호와 로그인 유저 ID 저장
-       /*     Cookie cookie = new Cookie("like" + bno, currentLoginMemberAccount); // ex) "like125", "tjtkdvl"
+/*            Cookie cookie = new Cookie("like" + bno, currentLoginMemberAccount); // ex) "like125", "tjtkdvl"
             cookie.setMaxAge(60);
             cookie.setPath("/");
             response.addCookie(cookie); // 클라이언트에 전송*/
@@ -310,4 +315,21 @@ public class BoardService {
       boardMapper.delete(bno);
    }
 
+   public List<BoardListResponseDTO> getListUserSearch(Search page, String account) {
+
+      List<BoardListResponseDTO> dtoList = new ArrayList<>();
+      List<Board> boardList = boardMapper.findSearch(page, account);
+
+      for (Board board : boardList) {
+         String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
+         BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname);
+         dtoList.add(dto);
+      }
+
+      return dtoList;
+   }
+
+   public int getCountSearch(Search page, String account) {
+      return boardMapper.findSearchCount(page, account);
+   }
 }

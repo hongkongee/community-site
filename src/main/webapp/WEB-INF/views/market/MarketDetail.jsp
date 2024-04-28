@@ -46,6 +46,19 @@
       width: 500px;
       height: 500px;
     }
+
+    @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+        .rate-star { display: inline-block;border: 0;margin-right: 15px;}
+        .rate-star > input {display: none;}
+        .rate-star > label {float: right;color: #ddd}
+        .rate-star > label:before {display: inline-block;font-size: 1rem;padding: .3rem .2rem;margin: 0;cursor: pointer;font-family: FontAwesome;content: "\f005 ";}
+        .rate-star .half:before {content: "\f089 "; position: absolute;padding-right: 0;}
+        .rate-star input:checked ~ label, 
+        .rate-star label:hover,.rate-star label:hover ~ label { color: #f73c32 !important;  } 
+        .rate-star input:checked + .rate-star label:hover,
+        .rate-star input input:checked ~ label:hover,
+        .rate-star input:checked ~ .rate-star label:hover ~ label,  
+        .rate-star label:hover ~ input:checked ~ label { color: #f73c32 !important;  }
   </style>
 
 
@@ -194,24 +207,31 @@
 
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-          aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">좋은 이유를 눌러주세요♡</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
+      <!-- 판매자 평가 Modal -->
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">좋은 이유를 눌러주세요♡</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
 
-
-                <select class="form-select" id="why" aria-label="Default select example" name="chooseReason">
-                  <option selected>이유를 선택해주세요</option>
-                  <option value="1 ">판매자가 친절해서</option>
-                  <option value="2">저렴한 가격</option>
-                  <option value="3">가까운 거래장소</option>
-                </select>
+              <fieldset class="rate-star">
+                <input type="radio" id="rating5" name="rating" value="5"><label for="rating5" title="5점"></label>
+                <input type="radio" id="rating4" name="rating" value="4"><label for="rating4" title="4점"></label>
+                <input type="radio" id="rating3" name="rating" value="3"><label for="rating3" title="3점"></label>
+                <input type="radio" id="rating2" name="rating" value="2"><label for="rating2" title="2점"></label>
+                <input type="radio" id="rating1" name="rating" value="1"><label for="rating1" title="1점"></label>
+              </fieldset>
+              
+              <select class="form-select" id="why" aria-label="Default select example" name="chooseReason">
+                <option selected>이유를 선택해주세요</option>
+                <option value="판매자가 친절해서">판매자가 친절해서</option>
+                <option value="저렴한 가격">저렴한 가격</option>
+                <option value="가까운 거래장소">가까운 거래장소</option>
+              </select>
 
                 <label for="report-reason">기타 사유가 있으면 말씀해주세요</label>
                 <textarea rows="3" id="reportText" name="message" class="form-control"

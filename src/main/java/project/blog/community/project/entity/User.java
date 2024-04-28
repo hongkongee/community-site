@@ -27,6 +27,7 @@ CREATE TABLE tbl_user (
 
 import lombok.*;
 import org.springframework.cglib.core.Local;
+import project.blog.community.project.common.rate;
 
 import java.time.LocalDateTime;
 
@@ -72,7 +73,7 @@ public class User {
    private LoginMethod loginMethod;
 
    // 회원 평점 (중고 마켓에서 받은 누적 좋아요 수)
-   private int rate;
+   private float rate;
 
 
    public enum LoginMethod {

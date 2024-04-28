@@ -3,13 +3,13 @@
   padding: 5%;
   width: 60vw;
   height: 100vh;
-  background: #F8F6E3;
+  background: #fff;
   margin: auto;
   position: relative;
 }
 
 section.rps {
-  border: yellowgreen solid 1px;
+  border: #000 solid 1px;
   position: absolute;
   width: 80%;
   top: 180px;

@@ -5,43 +5,42 @@
 }
 
 body{
-background-color: #7AA2E3;
+background-color: #000080;
 
 }
 .background{
   
-  width: 1277px;
-  height: 903px; 
-left: 15%;
-margin: 30px;
-   position: absolute; 
-   background: #F8F6E3;
-   border-radius: 60px;
+    width: 1277px;
+    background-color: #fff;
+    left: 300px;
+    top: 100px;
+    margin: 30px;
+    position: absolute;
+   
+    border-radius: 60px;
 }
 
 .Rectangle1{
   padding-left: 40px;
-  width: 1077px;
-   height: 903px; 
- left: 2%;
- margin: 0 -10px;
+  width: 1200px;
+ background-color: #fff;
+ 
+
     position: absolute; 
-    background: #F8F6E3;
+  
      border-radius: 60px;
 
-overflow: auto;
-overflow-x: hidden;
 
 }
 .Rectangle1::-webkit-scrollbar{
-  background-color: #F8F6E3;
+ 
   width: 20px; 
  
 
 }
 
 a{
-    text-decoration:none;
+    
 }
 a:hover{
     cursor: pointer;
@@ -55,18 +54,24 @@ a:hover{
 }
 
 .Rectangle1::-webkit-scrollbar-track {
-  background: #F8F6E3;  
+
  
 }
 
 .add-photo{
   
-  width: 123px; 
-  height: 39px; 
-  left: 350px;
+ 
+  left: 370px;
    top: 70px; 
    position: absolute;
-    background: #97E7E1
+   
+   background: #fff;
+   color: #333;
+   font: inherit;
+   font-weight: 700;
+   border-radius: 7px;
+   border: 2px solid #ededed;
+   padding: 7px 10px;
 
 }
 .add-photo :hover{
@@ -99,7 +104,9 @@ a:hover{
   cursor: pointer;
 }
 .let2{
-  width: 172px; height: 32px; left: 853px; top: 195px; position: absolute; color: black; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word
+    width: 190px;
+    height: 32px;
+    left: 903px; top: 195px; position: absolute; color: black; font-size: 20px; font-family: Inter; font-weight: 500; word-wrap: break-word
 }
 .new:hover{
   cursor: pointer;
@@ -121,12 +128,9 @@ a:hover{
   width: 48px; height: 51px; left: 982px; top: 125px; position: absolute; background: #D9D9D9; border-radius: 9999px
 }
 
-.Rectangle51{
 
-  width: 17px; height: 213px; left: 1201px; top: 176px; position: absolute; background: #D9D9D9
-}
 .Frame20{
- left: 150px; top: 50px; position: absolute; background: #F8F6E3; justify-content: center; align-items: center; display: inline-flex
+ left: 150px; top: 50px; position: absolute;  justify-content: center; align-items: center; display: inline-flex
 
 }
 .Gallery{
@@ -144,10 +148,11 @@ margin-top: 25%;
 
   }
 
-
+/* HTML에 대한 색상 지정 */
   .card-title-wrapper.HTML{
     background-color: #fe992edc;
   }
+  /* CSS에 대한 색상 지정 */
   .card-title-wrapper.CSS  {
     background-color: #4169e1c9;
 }
@@ -172,11 +177,11 @@ margin-top: 25%;
     background-color: #4163d3;
     
 }
+/* 그 외 언어에 대한 색상 지정 */
 .card-title-wrapper.Other-than {
     background-color: #000000;
     
 }
-
 
   .card-title-wrapper.HTML .card-title {
     background-color: #fe992edc;
@@ -267,33 +272,6 @@ margin-top: 25%;
 
    }
  
-   .main-title-wrapper {
-       position: relative;
-   }
-
-   .main-title-wrapper h1 {
-       font-size: 40px;
-       font-weight: 700;
-       letter-spacing: 10px;
-       text-align: center;
-       margin-bottom: 70px;
-   }
-
-   .main-title-wrapper .add-btn {
-       width: fit-content;
-       padding: 10px 25px;
-       background: rgb(216, 112, 147);
-       border-radius: 15px;
-       color: #fff;
-       font-size: 18px;
-       position: absolute;
-       right: 120px;
-       top: 0;
-       cursor: pointer;
-   }
-   .main-title-wrapper .add-btn:hover {
-       background: rgba(216, 112, 147, 0.7);
-   }
 
    .card-container .card-wrapper {
        position: relative;
@@ -311,7 +289,7 @@ margin-top: 25%;
        
        overflow: hidden;
        transition: 0.5s;
-       border: 2px solid transparent;
+      
    }
 
    .card-container .card:last-child {
@@ -322,19 +300,7 @@ margin-top: 25%;
        color: #333;
    }
 
-   .card-container .card-wrapper .card-title-wrapper .card-title {
-       /* width: 50%; */
-       font-size: 28px;
-       font-weight: 700;
-       padding: 15px;
-       text-align: center;
-       margin: 0 auto;
-
-       display: flex;
-       justify-content: center;
-       align-items: center;
-
-   }
+   
 
    .card-container .card .card-title-wrapper .time-view-wrapper {
        display: flex;
@@ -342,7 +308,7 @@ margin-top: 25%;
        align-items: center;
        padding: 10px 10px;
        position:relative;
-       top: 250px;
+       top: 215px;
    }
 
    .card-container .card .card-title-wrapper .time-view-wrapper>div {
@@ -369,17 +335,12 @@ margin-top: 25%;
    }
 
 
-   #card-down.card-wrapper {
-       transform: translateY(15px);
-   }
+   
    #card-down .card {
        box-shadow: none;
    }
 
-   .card-container .card-hover.card {
-       border: 2px solid;
-   }
-
+   
    .card-container .card-btn-group {
        display: flex;
        justify-content: center;
@@ -397,7 +358,7 @@ margin-top: 25%;
        height: 40px;
        
        background: #fff;
-       opacity: 0;
+       
        color: #000000;
        font-weight: 700;
        font-size: 25px;
@@ -442,18 +403,25 @@ margin-top: 25%;
    }
 
    .modal-buttons .confirm {
-       color: white;
-       background-color: #007bff;
+       
+      
        border-radius: 4px;
    }
 
    .modal-buttons .cancel {
-       color: #f5f5f5;
-       background-color: #dd1111;
+    
        border-radius: 4px;
    }
+ 
+   .modal-buttons .confirm:hover {
+       background-color: rgb(157, 188, 253);
+   
+}
 
-
+.modal-buttons .cancel:hover {
+    background-color: rgb(157, 188, 253);
+    
+}
 
    
    ul.pagination.pagination-lg.pagination-custom{
@@ -466,7 +434,10 @@ margin-top: 25%;
     padding-left: 10px;
 }
 
-
+.fa-close:before, .fa-multiply:before, .fa-remove:before, .fa-times:before, .fa-xmark:before {
+    content: none;
+    display: none;
+}
 
 
 
@@ -574,8 +545,9 @@ font-size: 18px;
 }
 
 .top-section .search form {
+    justify-content: center;
     display: flex;
-
+    width: 1150px;
 }
 .top-section .search form #search-type {
     flex: 1;

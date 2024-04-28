@@ -7,19 +7,29 @@
 
     <insert id="save">
         INSERT INTO tbl_market
-        (text_title, text_content, text_writer, category, price, address)
+        (text_title, text_content, text_writer, category, price, address, file)
         VALUES
-        (#{textTitle}, #{textContent}, #{textWriter}, #{category}, #{price}, #{address})
+        (#{textTitle}, #{textContent}, #{textWriter}, #{category}, #{price}, #{address}, #{file});
         <!--VALUES는 SQL 문법에서 데이터 삽입(INSERT) 작업을 할 때,
         특정 테이블의 컬럼에 삽입될 값들을 지정하는 데 사용되는 키워드입니다.-->
     </insert>
 
 
+
+    <!-- 전체 글 불러오기-->
     <select id = "findAll" resultType="market">
         <!-- resultType 원래는 풀 경로이나, mybatis-config.xml에서 메서드화해서 줄임 // select 리턴 타입 설정 -->
         <!-- selectType은 resultType(return) 필수)-->
         SELECT * FROM tbl_market
         ORDER BY board_no DESC
+    </select>
+
+    <select id = "findFour" resultType="market">
+        <!-- resultType 원래는 풀 경로이나, mybatis-config.xml에서 메서드화해서 줄임 // select 리턴 타입 설정 -->
+        <!-- selectType은 resultType(return) 필수)-->
+        SELECT * FROM tbl_market
+        ORDER BY board_no DESC
+        LIMIT 0, 4
     </select>
 
     <select id = "findOne" resultType="market">
@@ -32,7 +42,11 @@
 
     <update id="modify">
         UPDATE tbl_market
-        SET text_title = #{textTitle}, text_content = #{textContent}, category = #{category}, price = #{price}
+        SET text_title = #{textTitle},
+        text_content = #{textContent},
+        category = #{category},
+        price = #{price},
+        address = #{address}
         WHERE board_no = #{boardNo}
     </update>
 
@@ -66,14 +80,21 @@
 
     <update id="updateRateBoard">
         UPDATE tbl_user
-        SET rate = rate + 1
-        WHERE account_number = #{textWriter}
+        SET rate = #{avg}
+        WHERE account_number = #{writer}
     </update>
 
+    <!-- 즐겨찾기 -->
     <insert id="addRate">
-        INSERT INTO tbl_market_rate
-        VALUES (#{boardNo}, #{textWriter}, #{message}, #{chooseReason})
+        INSERT INTO tbl_market_rate (board_no, text_writer, message, choose_reason, rate_value)
+        VALUES (#{boardNo}, #{textWriter}, #{message}, #{chooseReason}, #{rateValue})
     </insert>
+
+    <select id="rateAverage" resultType="float">
+        SELECT AVG(rate_value)
+        FROM tbl_market_rate
+        WHERE text_writer = #{textWriter}
+    </select>
 
     <select id="checkRate" resultType="int">
         SELECT rate FROM tbl_user
@@ -84,6 +105,14 @@
         SELECT * FROM tbl_market_rate
         WHERE board_no = #{boardNo} AND text_writer = #{textWriter}
     </select>
+
+    <select id="checkRateByUser" resultType="rate">
+        SELECT * FROM tbl_market_rate
+        WHERE text_writer = #{textWriter}
+        ORDER BY reg_date DESC
+        LIMIT 0, 5
+    </select>
+
 
 
 

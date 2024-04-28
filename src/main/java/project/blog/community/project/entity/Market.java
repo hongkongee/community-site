@@ -1,6 +1,7 @@
 package project.blog.community.project.entity;
 
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 import project.blog.community.project.dto.request.MarketWriteRequestDTO;
 
 import java.time.LocalDateTime;
@@ -22,13 +23,14 @@ CREATE TABLE tbl_market (
 );
 */
 
-@Setter @Getter
+@Setter
+@Getter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Market{
+public class Market {
 
     private int boardNo;
 
@@ -45,18 +47,19 @@ public class Market{
 
     private int price;
 
-    private String location;
+    //private String location;
     private String address;
 
     private String ContentImg; //XML profile_image 스네이크 케이스 자동 인식
-    private String loginMethod; //sql tbl 타입과 일치 시켜야 함
+    //private String loginMethod; //sql tbl 타입과 일치 시켜야 함
     private int viewCount;
     private boolean addFav;
     private String category;
     private String chooseReason;
     private String message;
+    private String file;
 
-    public Market(MarketWriteRequestDTO dto, String writer) {
+    public Market(MarketWriteRequestDTO dto, String file, String writer) {
         //dto -> Entity
         this.textTitle = dto.getTextTitle();
         this.textContent = dto.getTextContent();
@@ -65,10 +68,11 @@ public class Market{
         this.category = dto.getCategory();
         this.price = dto.getPrice();
         this.address = dto.getAddress();
-
+        this.file = file;
         this.textWriter = writer;
-    }
 
+        //        this.rate = rate;
+    }
 
 
 }

@@ -8,19 +8,21 @@
     <meta charset="UTF-8">
     <title>Diary</title>
 
+    <%@ include file="../include/static-head.jsp" %>
     <link rel="stylesheet" href="/assets/css/diary.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+        
 </head>
 
 <body>
 
-    <%@ include file="../include/headcss.jsp"%>
+   
     <%@ include file="../include/header.jsp"%>
 
     <div class="MydiaryJsp">

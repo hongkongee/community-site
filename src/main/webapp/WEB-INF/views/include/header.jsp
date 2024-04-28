@@ -10,17 +10,16 @@
                 <img src="/assets/img/logo2.png" alt="로고이미지">
             </a>
         </h1>
-
-        <!-- 프로필 사진 -->
         <div class="profile-box">
-            <c:if test="${login == null || login.profile == null}">
+            <!-- profilePicture로수정 -->
+            <c:if test="${login == null || login.profilePicture == null}">
                 <img src="/assets/img/jjanggu.jpg" alt="프사">
             </c:if>
-
-            <c:if test="${login != null && login.profile != null}">
+            <!-- profilePicture로수정 -->
+            <c:if test="${login != null && login.profilePicture != null}">
                 <c:choose>
-                    <c:when test="${login.loginMethod == COMMON}">
-                        <img src="/display${login.profile}" alt="프사">
+                    <c:when test="${login.loginMethod == 'COMMON'}">
+                        <img src="/display${login.profilePicture}" alt="프사">
                     </c:when>
                     <c:otherwise>
                         <img src="${login.profile}" alt="프사">
@@ -28,7 +27,6 @@
                 </c:choose>
             </c:if>
         </div>
-
 
         <h2 class="intro-text">
             Welcome ${sessionScope.login == null ? '' : login.name}
@@ -41,7 +39,7 @@
 
     <nav class="gnb">
         <a href="#" class="close">
-            <button type="button">X</button>
+            <button type="button">X</i></button>
         </a>
         <ul>
 
@@ -51,9 +49,10 @@
                 <li><a href="/mypage/home/${login.accountNumber}">My Page</a></li>
                 <li><a href="/mypage/posting_cube">My Posts</a></li>
                 <li><a href="/mypage/diary">My Diary</a></li>
-                <li><a href="#">My Code</a></li>
-                <li><a href="/wel/chat">Chat</a></li>
+                <li><a href="/wel/myCode">My Code</a></li>
+                <li><a href="/chat/chat">Chat</a></li>
                 <li><a href="#">Market</a></li>
+                <li><a href="/users/info">My Info</a></li>
             </c:if>
 
             <c:if test="${sessionScope.login != null}">
@@ -61,7 +60,8 @@
             </c:if>
 
 
-            <c:if test="${login == null}"> <!-- 로그인 안했으면 -->
+            <c:if test="${login == null}">
+                <!-- 로그인 안했으면 -->
                 <li><a href="/users/sign-up">Sign Up</a></li>
                 <li><a href="/users/sign-in">Sign In</a></li>
             </c:if>
@@ -76,9 +76,10 @@
 
 <script>
     const $profileBox = document.querySelector('.profile-box');
+    //profile을 profilePicture로수정
 
     $profileBox.onclick = e => {
-        location.href = '/display/download${login.profile}';
+        location.href = '/display/download${login.profilePicture}';
     };
 
     //버튼의 요소 노드 취득

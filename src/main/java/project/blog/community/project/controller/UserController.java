@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.blog.community.project.dto.request.LoginRequestDTO;
 import project.blog.community.project.dto.request.SignUpRequestDto;
+import project.blog.community.project.dto.request.UserRequestDTO;
 import project.blog.community.project.entity.User;
+import project.blog.community.project.mapper.UserMapper;
 import project.blog.community.project.service.LoginResult;
 import project.blog.community.project.service.UserService;
 import project.blog.community.util.LoginUtils;
@@ -27,6 +29,7 @@ public class UserController {
 
    private final UserService userService;
    private final MailSenderService mailSenderService;
+   private final UserMapper userMapper;
 
    @GetMapping("/sign-up")
    public void signUp() {
@@ -137,6 +140,39 @@ public class UserController {
          e.printStackTrace();
          return ResponseEntity.internalServerError().body("이메일 전송 과정에서 에러 발생!");
       }
+   }
+
+   // 회원정보수정창 페이지 요청
+   @GetMapping("/info")
+   public void userInfoForm () {}
+
+   @PostMapping("/info")
+   public String userInfo (UserRequestDTO dto, HttpSession session) {
+      log.info("modify 요청 들어옴 : {}", dto.toString());
+
+      String account = LoginUtils.getCurrentLoginMemberAccount(session);
+
+      if (userService.checkDuplicateValue("account", account)) {
+         userService.modifyInfo(dto);
+      }
+
+      return "redirect:/home/main";
+   }
+
+   @GetMapping("/delete")
+   public String delete (HttpSession session) {
+      log.info("delete요청 들어옴!");
+
+      String account = LoginUtils.getCurrentLoginMemberAccount(session);
+
+      log.info("account: {}", account);
+
+      if (userService.checkDuplicateValue("account", account)) {
+         userService.deleteUser(account);
+      }
+
+      return "redirect:/users/sign-out";
+
    }
 
 

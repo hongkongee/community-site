@@ -32,7 +32,7 @@ function renderFollows(follows) {
       // 프로필 사진
       let profileTag = '';
       if (profilePicture) { // 프로필 사진이 존재한다면 
-        profileTag = `<img src="/display\${profilePicture}" alt="프사">`;
+        profileTag = `<img src="/display\${user.profilePicture}" alt="프사">`;
 
       } else { // 프로필 사진이 없다면
         profileTag = `<img src="/assets/img/jjanggu.jpg" alt="기본 프사">`;
@@ -217,6 +217,28 @@ function checkPresentPage() {
   }
 }
 
+// 서버에 로그인 유저 정보 (포인트 등) 가져오기
+function loginUserInformation() {
+  console.log('login User\'s information~');
+
+  fetch('/home/snb', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    }})
+  .then(res => res.json())
+  .then(point => {
+
+    console.log('point = ', point);
+    document.getElementById('my-point-snb').textContent = point + ' P';
+
+  });
+
+
+
+
+}
+
 
 
 // 즉시실행함수
@@ -227,7 +249,9 @@ function checkPresentPage() {
 
   // 서버에 팔로우 정보 요청보내기
   requestPost();
-    
+
+  // 서버에 로그인 유저 정보 요청보내기
+  loginUserInformation();    
   
 })();
 

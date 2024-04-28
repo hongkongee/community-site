@@ -4,6 +4,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,6 +14,7 @@ import org.springframework.web.util.WebUtils;
 import project.blog.community.project.dto.request.AutoLoginDTO;
 import project.blog.community.project.dto.request.LoginRequestDTO;
 import project.blog.community.project.dto.request.SignUpRequestDto;
+import project.blog.community.project.dto.request.UserRequestDTO;
 import project.blog.community.project.dto.response.LoginUserResponseDTO;
 import project.blog.community.project.dto.response.MypageUserResponseDTO;
 import project.blog.community.project.entity.User;
@@ -99,8 +102,9 @@ public class UserService {
             .gender(String.valueOf(foundMember.getGender()))
             .nickname(foundMember.getNickname())
             .auth(foundMember.getAuth().getDescription())
-            .profile(foundMember.getProfilePicture())
+            .profilePicture(foundMember.getProfilePicture())
             .loginMethod(foundMember.getLoginMethod().toString())
+            .point(foundMember.getPoint())
             .build();
 
       // 세션에 로그인한 회원 정보를 저장
@@ -109,15 +113,18 @@ public class UserService {
       session.setMaxInactiveInterval(60 * 60);
    }
 
+   public void saveProfile(String savePath, String accountNumber) {
+      userMapper.updateProfile(savePath, accountNumber);
+   }
 
 
-    public MypageUserResponseDTO getUserInformation(String account) {
-       User user = userMapper.findUser(account);
-       log.info("In UserService process, user = " + user.toString());
+   public MypageUserResponseDTO getUserInformation(String account) {
+      User user = userMapper.findUser(account);
+      log.info("In UserService process, user = " + user.toString());
 
-       MypageUserResponseDTO dto = new MypageUserResponseDTO(user);
-       return dto;
-    }
+      MypageUserResponseDTO dto = new MypageUserResponseDTO(user);
+      return dto;
+   }
 
 
    public void autoLoginClear(HttpServletRequest request, HttpServletResponse response) {
@@ -142,7 +149,19 @@ public class UserService {
 
    }
 
+   // 회원 정보 수정 서비스
+   public void modifyInfo(UserRequestDTO dto) {
+      User entity = dto.toEntity(encoder);
+      log.info("entity: {}", entity);
+      userMapper.modify(dto.toEntity(encoder));
+   }
 
+   // 회원 탈퇴 서비스
+   public void deleteUser(String account) {
+
+      userMapper.delete(account);
+
+   }
 }
 
 

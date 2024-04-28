@@ -93,7 +93,34 @@ body {
 .Frame45 .Sat {
     color: blue;
 }
-
+#next-month{
+background: #fff;
+    color: #333;
+    font: inherit;
+    font-weight: 700;
+    border-radius: 7px;
+    border: 2px solid #ededed;
+    padding: 7px 10px;
+}
+#prev-month{
+    background: #fff;
+    color: #333;
+    font: inherit;
+    font-weight: 700;
+    border-radius: 7px;
+    border: 2px solid #ededed;
+    padding: 7px 10px;
+}
+#prev-month:hover{
+    background: #7c7c7c;;
+    color: #fff;
+    border: 2px solid blue;
+}
+#next-month:hover{
+    background: #7c7c7c;;
+    color: #fff;
+    border: 2px solid blue;
+}
 /* ---------------------캘린더 끝--------------------- */
 
 .Frame45 .Frame57 {
@@ -103,7 +130,7 @@ body {
     border-radius: 60px;
     overflow: hidden;
     border: 1px solid #000080;
-    margin: 5% auto;
+    margin: 5% auto; 
     position: relative;
     display: flex;
     justify-content: space-evenly;
@@ -153,8 +180,7 @@ body {
     font-size: 20px;
     font-family: inherit;
     overflow-y: auto;
-    border: 1px solid black;
-
+    border: 1px solid #000080;
 }
 
 .Frame45 .story {
@@ -180,19 +206,21 @@ body {
     font-size: 20px;
     font-family: inherit;
     overflow-y: auto;
-    border: 1px solid black;
+    border: 1px solid #000080;
 }
 
 .Frame45 .Frame57 button {
-    width: 100px;
-    height: 50px;
+    font-weight: 600;
     border-radius: 60px;
-    border: none;
-    background: #000080;
-    color: white;
     font-size: 20px;
     font-family: inherit;
     position: absolute;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 7px;
+    border: 2px solid #ededed;
+    padding: 7px 10px;
+    background: #fff;
 }
 
 .Frame45 .Frame57 .rightbtn {
@@ -203,6 +231,11 @@ body {
 .Frame45 .Frame57 .leftbtn {
     right: -40px;
     bottom: -25px;
+}
+.Frame45 .Frame57 button:hover{
+    background: #7c7c7c;
+    color: #fff;
+    border: 2px solid blue;
 }
 
 /* --------------------일정, 일기 작성란 끝---------------------- */
@@ -225,7 +258,7 @@ body {
 .Frame45 .saved .todo-saved {
     width: 40%;
     height: 300px;
-    border: 1px solid black;
+    border: 1px solid #000080;
     border-radius: 60px;
     padding: 30px;
     font-size: 25px;
@@ -241,7 +274,7 @@ body {
 .Frame45 .saved .whatdo-saved {
     width: 40%;
     height: 300px;
-    border: 1px solid black;
+    border: 1px solid #000080;
     border-radius: 60px;
     padding: 30px;
     font-size: 25px;

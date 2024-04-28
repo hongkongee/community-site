@@ -12,7 +12,7 @@
       body {
         font-weight: 100;
         font-size: 28px;
-        background: #F8F6E3;
+        background: #fff;
         font-family: "Orbit", sans-serif; /* 폰트: orbit */
         font-weight: 400;
         font-style: normal;
@@ -20,7 +20,7 @@
   
       aside .left-snb {
         width: 20vw;
-        background: #7AA2E3;
+        background: #000080;
         color: #666;
         padding: 30px 30px;
         height: 300vh; /* 상하방향으로 화면 가득히 */
@@ -30,13 +30,13 @@
       }
       aside .left-snb ul>li {
         margin-top: 15px;
-        color: #000;
+        color: #fff;
         line-height: 160%;
       }
 
       aside .left-snb #game a {
         margin-top: 22px;
-        color: #000;
+        color: #fff;
         line-height: 160%;
       }
   
@@ -47,7 +47,7 @@
       
   
       aside .left-snb ul li>ul {
-        color: #000;
+        color: #fff;
         font-size: 22px;
         line-height: 160%;
       }
@@ -73,7 +73,7 @@
         right: 0;
         top: 100px;
         width: 20vw;
-        background: #7AA2E3;
+        background: #000080;
         float: right;
         height: 300vh;
         box-sizing: border-box;
@@ -84,11 +84,16 @@
         margin-top: 50px;
       }
 
-  
-  
+      .fa-coins:before {
+       
+        color: #fff;
+    }
+  span{
+    color: #fff;
+  }
   
       aside .right-snb .weather {
-        background: #F8F6E3;
+        background: #fff;
         width: 90%;
         height: 300px;
         margin: 30px 5%;
@@ -101,11 +106,11 @@
   
       aside .right-snb .friends .friends { /* 친구 목록 */
         font-size: 26px;
-        background: #F8F6E3;
+        background: #fff;
         padding: 30px;
         margin: 0 5%;
         border-radius: 10%;
-  
+        
         position: relative;
       }
   
@@ -150,10 +155,13 @@
         width: 100%;
         cursor: pointer;
       }
-  
+  b{
+    color: #000;
+  }
       aside .right-snb .friends .friendName {
         line-height: 26px;
         font-size: 18px;
+        color: #000;
       }
 
       aside .right-snb .friends b {
@@ -213,4 +221,24 @@
       p.myAccountNumber {
         display: none;
       }
+ /* 날씨 */
+  .weather1{
+  display: flex;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  }
+  .icon{
+  margin-left: 40px;
+  }
+  .wea{
+  margin:0px 5px;
+
+
+  } 
+
+  .button{
+  background: none;
+  border: 0; background-color: transparent;
+  width: 100%;
+  }
 

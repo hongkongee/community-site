@@ -29,6 +29,7 @@ public interface BoardMapper {
 
     void updateLikeCount(@Param("bno") int bno, @Param("number") int number);
 
+
     // 총 게시물의 개수 리턴
     int getCount(@Param("page") Search page, @Param("account") String currentLoginMemberAccount);
 
@@ -59,4 +60,12 @@ public interface BoardMapper {
     // 게시물 삭제
     void delete(int bno);
 
+    // 게시물 검색
+    List<Board> findSearch(@Param("page") Search page, @Param("account") String account);
+    
+    int findSearchCount(@Param("page") Search page, @Param("account") String account);
+
+    int calcNumberOfReply(int bno);
+
+    int checkReportCount(int bno);
 }

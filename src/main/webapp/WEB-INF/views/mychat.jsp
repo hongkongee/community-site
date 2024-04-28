@@ -7,21 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="/assets/css/mychat.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet">
 
-  
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/header.css">
+<%@ include file="/WEB-INF/views/include/headcss.jsp"%>
 </head>
 <body>
-
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
 
   <div class="MychatJsp">
     <div class="Rectangle1"></div>
     <div class="Chat" >Chat</div>
     <div class="Line2" ></div>
     <div class="Frame22" >
-       
+        
 
 
         <div class="friends">

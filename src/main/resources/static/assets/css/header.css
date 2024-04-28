@@ -13,7 +13,7 @@ header {
   font-family: "Orbit", sans-serif;
   font-weight: 400;
   font-style: normal;
-  border: 5px solid #7aa2e3;
+
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
   margin-bottom: 100px;
@@ -43,7 +43,10 @@ header a:active {
   color: inherit;
 }
 
-
+.lnr-menu:before {
+  font-size: 60px;
+  color: #000;
+}
 
 header.on {
   background: #7aa2e3;
@@ -74,7 +77,8 @@ header .inner-header .logo a {
 }
 
 header .inner-header .logo a img {
-  height: 60px;
+  height: 80px;
+  width: 170px;
 }
 
 header .inner-header .intro-text {
@@ -101,14 +105,14 @@ header .inner-header .menu-open .lnr-menu {
 
 /* header gnb style */
 header .gnb {
-  background: #7aa2e3;
-  color: black;
+  background: #000080;
+  
   height: 100vh;
   font-size: 40px;
   padding: 70px 75px;
   box-sizing: border-box;
   text-align: left;
-
+  color: #fff;
   position: fixed;
   z-index: 2000;
   right: -100%;
@@ -130,13 +134,14 @@ header .gnb .close {
 
 header .gnb button {
   font-style: italic;
-  font-size: 20px;
+  
   border: none;
   background: none;
-  color: black;
+  color: #fff;
   cursor: pointer;
   margin: 0;
   padding: 0;
+  font-size: 50px;
 }
 
 
@@ -154,4 +159,9 @@ header .gnb ul li {
 header .gnb ul li:hover,
 header .gnb ul li.active {
   color: #fff;
+}
+.menu-txt{
+  color: #000;
+  font-size: 25px;
+  font-weight: bold;
 }

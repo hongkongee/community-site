@@ -154,8 +154,13 @@ body{
             color: #fff !important;
         }
 
-       
-
+       #content{
+        overflow:scroll;
+        overflow-x: hidden;
+       }
+       pre{
+        overflow: hidden;
+       }
         
     </style>
    

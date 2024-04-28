@@ -38,18 +38,18 @@ public class SnsLoginService {
         KakaoUserResponseDTO dto = getKakaoUserInfo(accessToken);
 
         // 카카오에서 받은 회원정보로 우리 사이트 회원가입
-        String email = dto.getKakaoAccount().getEmail();
-        log.info("이메일: {}", email);
+        String id = String.valueOf(dto.getId());
+        log.info("카카오 아이디: {}", id);
 
-        // 회원 중복 확인 (이메일)
-        if (!userService.checkDuplicateValue("email", email)) {
+        // 회원 중복 확인 (아이디)
+        if (!userService.checkDuplicateValue("account", id)) {
             // 한 번도 카카오 로그인을 한 적이 없다면 회원가입 진행
             userService.join(
                     SignUpRequestDto.builder()
                             .accountNumber(String.valueOf(dto.getId()))
                             .password("0000")
                             .name(dto.getProperties().getNickname())
-                            .email(email)
+                            .email(dto.getKakaoAccount().getEmail())
                             .loginMethod(User.LoginMethod.KAKAO)
                             .build(),
                     dto.getProperties().getProfileImage()
@@ -57,10 +57,11 @@ public class SnsLoginService {
         }
 
         // 우리 사이트 로그인 처리
-        userService.maintainLoginState(session, String.valueOf(dto.getId()));
+        userService.maintainLoginState(session, id);
 
     }
 
+    // 카카오 서버로부터 유저정보 받아오기
     private KakaoUserResponseDTO getKakaoUserInfo(String accessToken) {
 
         String requestUri = "https://kapi.kakao.com/v2/user/me";
@@ -122,6 +123,7 @@ public class SnsLoginService {
 
     }
 
+    // 네이버 로그인
     public void naverLogin(Map<String, String> params, HttpSession session) {
 
         String accessToken = getNaverAccessToken(params);
@@ -146,14 +148,14 @@ public class SnsLoginService {
                             .birthday(Integer.parseInt(dto.getNaverUserDetail().getBirthyear()))
                             .gender(dto.getNaverUserDetail().getGender())
                             .nickname(dto.getNaverUserDetail().getNickname())
-                            .loginMethod(User.LoginMethod.KAKAO)
+                            .loginMethod(User.LoginMethod.NAVER)
                             .build(),
                     dto.getNaverUserDetail().getProfileImage()
             );
         }
 
 //         우리 사이트 로그인 처리
-        userService.maintainLoginState(session, dto.getNaverUserDetail().getId());
+        userService.maintainLoginState(session, id);
 
     }
 

@@ -3,7 +3,6 @@ package project.blog.community.project.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import project.blog.community.project.dto.request.MarketRateRequestDTO;
-import project.blog.community.project.entity.Board;
 import project.blog.community.project.entity.Favorite;
 import project.blog.community.project.entity.Market;
 import project.blog.community.project.entity.Rate;
@@ -37,7 +36,7 @@ public interface MarketMapper {
     // 기존 즐겨찾기 삭제
     void removeFav(Favorite favorite);
 
-    void updateRateBoard(String textWriter);
+    void updateRateBoard(@Param("writer") String textWriter, @Param("avg") float rateAvg);
 
     void updateRateWriter(String textWriter);
 
@@ -52,6 +51,5 @@ public interface MarketMapper {
     List<Rate> checkRateByUser(String textWriter);
 
 
-
-
+    float rateAverage(String textWriter);
 }

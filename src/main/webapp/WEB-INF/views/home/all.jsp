@@ -64,7 +64,7 @@
                     <tr class="post"> <!-- 게시글 하나 -->
                       <td id="bno">${b.bno}</td>
                       <td id="category">${b.category}</td>
-                      <td id="title"> <a href="#" data-bno="${b.bno}"> ${b.title} </a></td> <!-- 게시글 페이지로-->
+                      <td id="title"> <a href="#" data-bno="${b.bno}"> ${b.title} <span class="number-of-reply">[${b.numberOfReply}]</span> </a></td> <!-- 게시글 페이지로-->
                       <td id="writer" data-writeraccount="${b.writerAccount}"> <a href="#">${b.writer}</a></td> <!-- 유저 정보 페이지 -->
                       <td id="date">${b.regDate}</td>
                       <td id="view">${b.viewCount}</td>

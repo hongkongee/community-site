@@ -221,11 +221,16 @@ function checkPresentPage() {
 function loginUserInformation() {
   console.log('login User\'s information~');
 
-  fetch('/home/snb')
+  fetch('/home/snb', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    }})
   .then(res => res.json())
   .then(point => {
 
-    console.log(point);
+    console.log('point = ', point);
+    document.getElementById('my-point-snb').textContent = point + ' P';
 
   });
 
@@ -246,10 +251,7 @@ function loginUserInformation() {
   requestPost();
 
   // 서버에 로그인 유저 정보 요청보내기
-  loginUserInformation();
-
-  console.log(document.querySelector('.point>span').textContent);
-    
+  loginUserInformation();    
   
 })();
 

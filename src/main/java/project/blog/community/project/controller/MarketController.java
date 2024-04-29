@@ -18,18 +18,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import project.blog.community.project.common.marketSearch;
-import project.blog.community.project.common.rate;
+import project.blog.community.project.common.*;
 import project.blog.community.project.dto.request.MarketModifyRequestDTO;
 import project.blog.community.project.dto.request.MarketRateRequestDTO;
 import project.blog.community.project.dto.request.MarketWriteRequestDTO;
-import project.blog.community.project.dto.response.MarketDetailResponse;
-import project.blog.community.project.dto.response.MarketGetAddFavListResponseDTO;
-import project.blog.community.project.dto.response.MarketListResponseDTO;
-import project.blog.community.project.dto.response.MarketModifyResponse;
+import project.blog.community.project.dto.response.*;
 import project.blog.community.project.entity.Board;
 import project.blog.community.project.entity.Reply;
 import project.blog.community.project.service.MarketService;
+import project.blog.community.project.service.ReplyService;
+import project.blog.community.util.LoginUtils;
 import project.blog.community.util.upload.FileUtils;
 
 import java.util.ArrayList;
@@ -63,17 +61,21 @@ public class MarketController {
 
     //리스트 뷰
     @GetMapping("/list")
-    public String list(Model model, HttpServletRequest request) {
+    public String list(Model model, HttpServletRequest request, @ModelAttribute("s") Search page) {
 
 
         log.info("/market/list: GET");
+        page.setAmount(10);
 
-        List<MarketListResponseDTO> dtoList = marketService.getList(request);
+        List<MarketListResponseDTO> dtoList = marketService.getList(request, page);
         log.info("dtoList: {}", dtoList);
 
+        PageMaker pageMaker = new PageMaker(page, marketService.getCountAll(page));
+        log.info( "count all is " + marketService.getCountAll(page));
 
         //정보를 jsp로 전달 -> key-value 형태로 데이터를 추가
         model.addAttribute("bList", dtoList); //jsp로 전달하는 역할
+        model.addAttribute("maker", pageMaker);
 
         log.info("isFavorite" + dtoList);
         // /WEB-INF/views/~~~~~.jsp
@@ -128,19 +130,14 @@ public class MarketController {
         return "market/MarketDetail";
     }
 
-//    @PostMapping("/detail/{boardNo}")
 
 
     //수정하기
-    @PutMapping("/detail/{boardNo}")
-    @ResponseBody //response 할 때 추가함
-    public ResponseEntity<String> update(@Validated @RequestBody MarketModifyRequestDTO dto,
-                                         BindingResult result, HttpServletRequest request) {
+    @PostMapping("/detail/{boardNo}")
+    @ResponseBody //response 할 때 추가함 //비동기
+    public ResponseEntity<String> update(@Validated MarketModifyRequestDTO dto, @RequestPart(value = "formFile", required = false) MultipartFile file,
+                                         BindingResult result) {
 
-        HttpSession session = request.getSession();
-        session.getAttribute("login");
-        // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
-        String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
 
         //에러 없을시 건너뜀 : 400에러
         if (result.hasErrors()) {
@@ -151,8 +148,13 @@ public class MarketController {
 
         log.info("/detail: PUT, dto: {}", dto);
 
+        String filePath = null;
+        if (file != null) {
+            filePath = FileUtils.uploadFile(file, rootPath);
+        }
+
         //성공시 200
-        marketService.modify(dto, currentLoginMemberAccount);
+        marketService.modify(dto, filePath);
         return ResponseEntity.ok().body("modSuccess"); //담음
     }
 
@@ -217,5 +219,46 @@ public class MarketController {
         }
 
     }
+//
+
+    //동기 페이징 처리
+    @GetMapping("/listPage")
+    public String listPage(Model model, @ModelAttribute("s") Search page, HttpServletRequest request) {
+        System.out.println("search = " + page);
+        log.info("/market/listPage: GET!!!");
+
+        //보여주고 싶은 게시물 리스트
+        List<MarketListResponseDTO> marketList = marketService.getMarketList(page, request);
+
+        // 페이징 버튼 알고리즘 적용 -> 사용자가 요청한 페이지 정보, 총 게시물 개수를 전달.
+        // 페이징 알고리즘 자동 호출.
+        PageMaker pageMaker = new PageMaker(page, marketService.getCount(page, request));
+
+
+        model.addAttribute("bList", marketList);
+        model.addAttribute("maker", pageMaker);
+
+        log.info(marketList.toString());
+
+        return "market/list";
+    }
+
+
+
+
+    // 비동기 페이징 처리
+//    @GetMapping("/list/page/{pageNo}")
+//    public ResponseEntity<?> list(@PathVariable int boardNo, @PathVariable int pageNo) {
+//        log.info("api/v1/replies{}: GET!!!", boardNo);
+//        log.info("pageNo: {}", pageNo);
+//
+//        Page page = new Page();
+//        page.setPageNo(pageNo);
+//        page.setAmount(5);
+//
+//        MarketPageListResponseDTO getPage = marketService.getList(boardNo, page);
+//
+//        return ResponseEntity.ok().body(getPage);
+//    }
 
 }

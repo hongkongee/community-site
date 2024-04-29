@@ -3,22 +3,14 @@ package project.blog.community.project.service;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import project.blog.community.project.common.Page;
+import project.blog.community.project.common.Search;
 import project.blog.community.project.dto.request.MarketModifyRequestDTO;
 import project.blog.community.project.dto.request.MarketRateRequestDTO;
 import project.blog.community.project.dto.request.MarketWriteRequestDTO;
-import project.blog.community.project.dto.response.MainMarketResponseDTO;
-import project.blog.community.project.dto.response.MarketDetailResponse;
-import project.blog.community.project.dto.response.MarketGetAddFavListResponseDTO;
-import project.blog.community.project.dto.response.MarketListResponseDTO;
-import project.blog.community.project.dto.response.ReplyListResponseDTO;
-import project.blog.community.project.entity.Favorite;
-import project.blog.community.project.entity.Market;
-import project.blog.community.project.entity.Rate;
+import project.blog.community.project.dto.response.*;
+import project.blog.community.project.entity.*;
 import project.blog.community.project.mapper.MarketMapper;
 
 
@@ -29,12 +21,14 @@ import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccoun
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
+
 
 public class MarketService {
     private final MarketMapper mapper;
 
 
-    public List<MarketListResponseDTO> getList(HttpServletRequest request) {
+    public List<MarketListResponseDTO> getList(HttpServletRequest request, Search page) {
         List<MarketListResponseDTO> dtoList = new ArrayList<>();
 
         HttpSession session = request.getSession();
@@ -45,10 +39,10 @@ public class MarketService {
         // 내가 즐겨찾기한 리스트
         List<Integer> boards = mapper.checkFav(currentLoginMemberAccount);
 
-        List<Market> marketList = mapper.findAll();
+        List<Market> marketList = mapper.findAll(page);
         for (Market market : marketList){
             MarketListResponseDTO dto = new MarketListResponseDTO(market, boards);
-            dtoList.add(dto);
+             dtoList.add(dto);
         }
         return dtoList;
     }
@@ -80,27 +74,9 @@ public class MarketService {
 
 
 
-//    //페이지 처리
-//    @GetMapping("/{boardNo}/page/{pageNo}")
-//    public ResponseEntity<?> list(@PathVariable int boardNo, @PathVariable int pageNo) {
-//        log.info("api/v1/replies{}: GET!!!", boardNo);
-//        log.info("pageNo: {}", pageNo);
-//
-//        Page page = new Page();
-//        page.setPageNo(pageNo);
-//        page.setAmount(5);
-//
-//        ReplyListResponseDTO replies = replyService.getList(boardNo, page);
-//
-//        return ResponseEntity.ok().body(replies);
-//    }
 
 
-    public void modify(MarketModifyRequestDTO dto, String currentLoginMemberAccount) {
-        Market marketContent = dto.toEntity();
 
-        mapper.modify(marketContent, currentLoginMemberAccount);
-    }
 
     public void register(MarketWriteRequestDTO dto, String filePath, String currentLoginMemberAccount) {
         Market market = new Market(dto, filePath, currentLoginMemberAccount);//DTO -> Entity
@@ -109,7 +85,12 @@ public class MarketService {
         mapper.save(market);
     }
 
+    public void modify(MarketModifyRequestDTO dto, String filePath) {
+        Market marketContent = dto.toEntity();
 
+        marketContent.setFile(filePath);
+        mapper.modify(marketContent);
+    }
 
 
     public MarketDetailResponse getDetail(int boardNo) {
@@ -176,4 +157,79 @@ public class MarketService {
     }
 
 
+
+
+    public int getCount(Search page, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+        log.info("dto: {}", loginDto);
+
+        String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
+        int count = mapper.getCount(page, currentLoginMemberAccount);
+        log.info("count: " + count);
+        return count;
+
+
+
+    }
+
+
+
+    public List<MarketListResponseDTO> getMarketList(Search page, HttpServletRequest request) {
+
+
+        HttpSession session = request.getSession();
+        LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+        log.info("dto: {}", loginDto);
+
+        String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
+
+        List<MarketListResponseDTO> myList = new ArrayList<>();
+        List<Market> marketList = mapper.findList(page, currentLoginMemberAccount);
+
+        return myList;
+
+    }
+
+
+    public int getCountAll(Search page) {
+        return mapper.getCountAll(page);
+    }
 }
+
+
+//페이징 비동기 방식
+//    public MarketPageListResponseDTO getList(int boardNo, Page page) {
+//        List<MarketDetailResponse> dtoList = new ArrayList<>();
+//
+//
+//        List<Market> marketList = mapper.findAllpage(boardNo,page);
+//        for (Market market : marketList) {
+//            dtoList.add(new MarketDetailResponse(market));
+//        }
+//
+//        int count = mapper.count(boardNo);
+//
+//        return MarketPageListResponseDTO.builder()
+//                .marketList(dtoList)
+//                .count(count)
+//                .pageInfo(new PageMaker(page, count))
+//                .build();
+//    }
+
+
+//    //페이지 처리
+//    @GetMapping("/{boardNo}/page/{pageNo}")
+//    public ResponseEntity<?> list(@PathVariable int boardNo, @PathVariable int pageNo) {
+//        log.info("api/v1/replies{}: GET!!!", boardNo);
+//        log.info("pageNo: {}", pageNo);
+//
+//        Page page = new Page();
+//        page.setPageNo(pageNo);
+//        page.setAmount(5);
+//
+//        ReplyListResponseDTO replies = replyService.getList(boardNo, page);
+//
+//        return ResponseEntity.ok().body(replies);
+//    }

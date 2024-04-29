@@ -32,7 +32,7 @@ function renderFollows(follows) {
       // 프로필 사진
       let profileTag = '';
       if (profilePicture) { // 프로필 사진이 존재한다면 
-        profileTag = `<img src="/display\${user.profilePicture}" alt="프사">`;
+        profileTag = `<img src="/display${user.profilePicture}" alt="프사">`;
 
       } else { // 프로필 사진이 없다면
         profileTag = `<img src="/assets/img/jjanggu.jpg" alt="기본 프사">`;

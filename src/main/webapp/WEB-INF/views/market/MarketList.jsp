@@ -68,7 +68,6 @@
               <th>판태상태</th>
               <th>가격</th>
               <th>거래장소</th>
-              <th>좋아요</th>
             </tr>
           </thead>
 
@@ -101,7 +100,7 @@
                 <td id="viewCount" name="viewCount" data-view-count="${s.viewCount}"> ${s.viewCount}</td>
 
                 <td class="favorite" name="favorite" data-bno="${s.boardNo}">
-                  <c:if test="${s.isFavorite == 1}" >
+                  <c:if test="${s.isFavorite == 1}">
                     <i class="fa-solid fa-star" id="favOn" data-fav-on="{$s.favOn}"></i>
                   </c:if>
 
@@ -114,7 +113,6 @@
                 <td id="category" name="category">${s.category}</td>
                 <td id="price" name="price">${s.price}</td>
                 <td id="address" name="address">${s.address}</td>
-                <td id="rate" name="rate"> ${s.rate}</td>
 
 
               </tr>
@@ -122,7 +120,68 @@
 
             <!-- Add more rows as needed -->
           </tbody>
+
+
+          <!-- 댓글 페이징 영역 -->
+          <!-- <ul class="pagination justify-content-center"> -->
+            <!--
+                < JS로 댓글 페이징 DIV삽입 >
+            --> 
+          <!-- </ul>  -->
+
+
+          <div class="bottom-section">
+
+            <!-- 페이지 버튼 영역 -->
+            <nav aria-label="Page navigation example">
+                <ul class="pagination pagination-lg pagination-custom">
+                    <c:if test="${maker.page.pageNo != 1}">
+                        <li class="page-item"><a class="page-link"
+                                href="/market/list?pageNo=1&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
+                        </li>
+                    </c:if>
+
+
+                    <c:if test="${maker.prev}">
+                        <li class="page-item"><a class="page-link"
+                                href="/market/list?pageNo=${maker.begin-1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">prev</a>
+                        </li>
+                    </c:if>
+
+                    <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
+                        <li data-page-num="${i}" class="page-item">
+                            <a class="page-link"
+                                href="/market/list?pageNo=${i}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">${i}</a>
+                        </li>
+                    </c:forEach>
+
+                    <c:if test="${maker.next}">
+                        <li class="page-item"><a class="page-link"
+                                href="/market/list?pageNo=${maker.end+1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">next</a>
+                        </li>
+                    </c:if>
+
+                    <c:if test="${maker.page.pageNo != maker.finalPage}">
+                        <li class="page-item"><a class="page-link"
+                                href="/market/list?pageNo=${maker.finalPage}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&gt;&gt;</a>
+                        </li>
+                    </c:if>
+
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+
+
+
+
+
         </table>
+
+
+
+
 
       </div>
     </section>
@@ -131,6 +190,67 @@
 
 
   <script>
+    // 화면에 페이지 버튼들을 렌더링하는 함수
+    // function renderPage({
+    //   begin,
+    //   end,
+    //   prev,
+    //   next,
+    //   page,
+    //   finalPage
+    // }) {
+    //   let tag = '';
+
+    //   if (prev) {
+    //     tag += `<li class='page-item'><a class='page-link page-active' href='\${begin - 1}'>이전</a></li>`;
+    //   }
+
+    //   for (let i = begin; i <= end; i++) {
+    //     let active = '';
+    //     if (page.pageNo === i) {
+    //       active = 'active';
+    //     }
+    //     tag += `<li class='page-item \${active}'><a class='page-link page-custom' href='\${i}'>\${i}</a></li>`;
+    //   }
+
+    //   if (next) {
+    //     tag += `<li class='page-item'><a class='page-link page-active' href='\${end + 1}'>다음</a></li>`;
+    //   }
+
+    //   const $pageUl = document.querySelector('ul.pagination');
+    //   $pageUl.innerHTML = tag;
+
+    // }
+
+
+
+    // function makePageButtonClickHandler() {
+    //   const $pageUl = document.querySelector('.pagination');
+
+    //   $pageUl.onclick = e => {
+    //     if (!e.target.matches('.page-item a')) return;
+    //     e.preventDefault();
+    //     fetchGetReplies(e.target.getAttribute('href'));
+    //   }
+
+    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //메뉴 버튼 전체 클릭 이벤트
     document.querySelector('tbody').onclick = e => {
       console.log('클릭 이벤트 발생');
@@ -157,17 +277,17 @@
     $favBtn.addEventListener('click', function (e) {
 
       //favOn 버튼의 활성화 상태를 토글
-      $favBtn.classList.toggle('active');
+      $favBtn.classList.toggle('active'); //우선 선언
 
 
       //favON 버튼의 활성화 여부 확인
-      const isFavOn = $favBtn.classList.contains('active');
+      const isFavOn = $favBtn.classList.contains('active'); //boolean
       console.log('isFavOn: ', isFavOn);
 
       // 모든 포스트 요소들 가져오기
-      const bListItems = [...document.querySelectorAll('.post')];
+      const bListItems = [...document.querySelectorAll('.post')]; //querySelectorAll 유사배열 ->[... ] 배열화 后 forEach
       console.log('bListItem: ', bListItems);
-      bListItems.forEach(item => {
+      bListItems.forEach(item => { //a.forEach(b ) 이름 다르게
 
         //포스트의 즐겨찾기 여부 확인
         const isFavorite = item.querySelector('.favorite i').classList.contains('fa-solid');
@@ -245,6 +365,12 @@
       }
     });
 
+
+    // (() => {
+
+    //   // 페이지 번호 클릭 이벤트 핸들러
+    //   makePageButtonClickHandler();
+    // })();
 
 
     // document.addEventListener('DOMContentLoaded', function () {

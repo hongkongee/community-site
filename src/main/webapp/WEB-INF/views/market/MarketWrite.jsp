@@ -64,7 +64,8 @@
       <main id="wrap" class="form-container">
         <div class=content-box>
           <h1>게시판 글쓰기</h1>
-          <form action="/market/write" method="post">
+          <form action="/market/write" method="post" enctype="multipart/form-data">
+            <!-- 파일전송은 post 형식必须: enctype="multipart/form-data"-->
 
             <label for="textTitle">제목</label>
             <input type="text" id="textTitle" name="textTitle" required>
@@ -77,15 +78,32 @@
             <label for="price">가격</label>
             <input type="text" id="price" name="price" required>
 
-            <br>
-            <label for="textContent">내용</label>
-            <textarea id="textContent" name="textContent" maxlength="200" required></textarea>
 
+            <br>
+            <!-- <label for="textContent">내용</label>
+            <textarea id="textContent" name="textContent" maxlength="200" required></textarea> -->
+
+
+            <!-- 부트스트랩 게시판 -->
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">내용</label>
+              <textarea class="form-control" id="textContent" name="textContent" rows="20" cols="20"
+                required></textarea>
+            </div>
+
+            <!-- 이미지 업로드 -->
+            <div class="mb-3">
+              <label for="formFile" class="form-label">사진 업로드</label>
+              <input class="form-control" type="file" id="formFile" name="formFile" accept="image/*">
+            </div>
+
+            <br>
             <div class="buttons">
               <button class="list-btn" type="button" onclick="window.location.href='/market/list'">목록</button>
-              <button type="submit">글쓰기</button>
+              <button type="submit" id="submit">글쓰기</button>
               <br>
             </div>
+
 
             <%@ include file="../market/subMap.jsp" %>
 
@@ -106,16 +124,27 @@
 
 
 
-  <script>
+  <!-- <script>
     CKEDITOR.replace('textContent');
-  </script>
+  </script> -->
 
 </body>
 <script>
+const $submit = document.getElementById('submit');
+const $priceInput = document.getElementById('price');
 
+console.log('submit 클릭됨');
+$submit.addEventListener('click', e => {
+  const price = $priceInput.value;
 
+  if (isNaN(price) || price <= 0) { 
+        // price가 숫자가 아니거나 0 또는 음수이거나 정수가 아닌 경우
+        alert("가격은 정수를 입력 하세요.");
+        e.preventDefault(); // 폼 제출을 막음
+        return; // 함수를 여기서 종료하여 다음 로직을 실행하지 않도록 함
+    }
 
-
+});
 </script>
 
 </html>

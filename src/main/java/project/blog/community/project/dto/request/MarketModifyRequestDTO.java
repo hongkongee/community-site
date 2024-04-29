@@ -30,16 +30,19 @@ public class MarketModifyRequestDTO {
     @NotNull
     private int price;
 
+    private String address;
+
 
     // 글번호
 
     public Market toEntity(){
         return Market.builder()
                 .boardNo(boardNo)
-                .textTitle(title)
+                .textTitle(title) // 수정된 부분
                 .textContent(text)
                 .category(category)
                 .price(price)
+                .address(address)
                 .build();
     }
 

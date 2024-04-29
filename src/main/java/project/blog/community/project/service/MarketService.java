@@ -3,13 +3,19 @@ package project.blog.community.project.service;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import project.blog.community.project.common.Page;
 import project.blog.community.project.dto.request.MarketModifyRequestDTO;
 import project.blog.community.project.dto.request.MarketRateRequestDTO;
 import project.blog.community.project.dto.request.MarketWriteRequestDTO;
 import project.blog.community.project.dto.response.MainMarketResponseDTO;
 import project.blog.community.project.dto.response.MarketDetailResponse;
+import project.blog.community.project.dto.response.MarketGetAddFavListResponseDTO;
 import project.blog.community.project.dto.response.MarketListResponseDTO;
+import project.blog.community.project.dto.response.ReplyListResponseDTO;
 import project.blog.community.project.entity.Favorite;
 import project.blog.community.project.entity.Market;
 import project.blog.community.project.entity.Rate;
@@ -28,7 +34,7 @@ public class MarketService {
     private final MarketMapper mapper;
 
 
-    public List<MarketListResponseDTO> getList(HttpServletRequest  request) {
+    public List<MarketListResponseDTO> getList(HttpServletRequest request) {
         List<MarketListResponseDTO> dtoList = new ArrayList<>();
 
         HttpSession session = request.getSession();
@@ -45,7 +51,19 @@ public class MarketService {
             dtoList.add(dto);
         }
         return dtoList;
+    }
 
+
+
+
+    //즐겨찾기만 호출 하는 리스트
+    public List<MarketGetAddFavListResponseDTO> getAddFavListService(String currentLoginMemberAccount) {
+        List<MarketGetAddFavListResponseDTO> addFavDTOList = new ArrayList<>();
+
+        // 내가 즐겨찾기한 리스트
+        List<Integer> boards = mapper.selectByAccountNumber(currentLoginMemberAccount);
+
+        return addFavDTOList;
     }
 
     // 즐겨찾기 고려 안하고 최신순으로 4개의 중고 거래 게시글 불러오기
@@ -61,17 +79,38 @@ public class MarketService {
     }
 
 
-    public void modify(MarketModifyRequestDTO dto) {
+
+//    //페이지 처리
+//    @GetMapping("/{boardNo}/page/{pageNo}")
+//    public ResponseEntity<?> list(@PathVariable int boardNo, @PathVariable int pageNo) {
+//        log.info("api/v1/replies{}: GET!!!", boardNo);
+//        log.info("pageNo: {}", pageNo);
+//
+//        Page page = new Page();
+//        page.setPageNo(pageNo);
+//        page.setAmount(5);
+//
+//        ReplyListResponseDTO replies = replyService.getList(boardNo, page);
+//
+//        return ResponseEntity.ok().body(replies);
+//    }
+
+
+    public void modify(MarketModifyRequestDTO dto, String currentLoginMemberAccount) {
         Market marketContent = dto.toEntity();
-        mapper.modify(marketContent);
+
+        mapper.modify(marketContent, currentLoginMemberAccount);
     }
 
-    public void register(MarketWriteRequestDTO dto, String currentLoginMemberAccount) {
-        Market market = new Market(dto, currentLoginMemberAccount);//DTO -> Entity
+    public void register(MarketWriteRequestDTO dto, String filePath, String currentLoginMemberAccount) {
+        Market market = new Market(dto, filePath, currentLoginMemberAccount);//DTO -> Entity
 //        market.setTextWriter(MarketUtils.getCurrentLoginMemberAccount(session));
+        market.setFile(filePath);
         mapper.save(market);
-
     }
+
+
+
 
     public MarketDetailResponse getDetail(int boardNo) {
         mapper.updateViewCount(boardNo);
@@ -105,11 +144,10 @@ public class MarketService {
         } else {
             mapper.removeFav(favorite);
         }
-
     }
 
     public void addRate(MarketRateRequestDTO dto) {
-        String textWriter = dto.getTextWriter();
+        String textWriter = dto.getTextWriter(); //재가공
 
         // Market Rate 테이블(중복 검사를 위한 테이블) row 추가 -> 선택한 1~5를 저장 (insert)
         mapper.addRate(dto);
@@ -119,8 +157,6 @@ public class MarketService {
 
         // 평균 낸 값을 유저 테이블에 저장 (update)
         mapper.updateRateBoard(textWriter, rateAvg);
-
-
 
     }
 

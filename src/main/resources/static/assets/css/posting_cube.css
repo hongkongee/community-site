@@ -105,7 +105,7 @@ body {
 
 .post-container .post {
     transition: 0.5s;
-    border: 2px solid #00196b;
+    border: 1px solid #00196b;
     border-radius: 10px;
     position: absolute;
     background: white;
@@ -130,7 +130,7 @@ body {
 /* -----------------------게시글 제목 시작-------------------------- */
 .post-container .post-wrapper .post-content {
     /* background-color: yellow; */
-    padding: 15px;
+    padding: 5px;
     text-align: center;
 }
 
@@ -145,6 +145,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 5px 10px;
+    border-top: 1px solid black;
 }
 
 .post-container .post-wrapper .card-btn-group {

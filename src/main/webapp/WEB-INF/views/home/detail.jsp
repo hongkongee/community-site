@@ -111,8 +111,11 @@
                     onclick="location.href='/home/board/all'">
                 목록
             </button>
-            <button id="modify">수정</button>
-            <button id="delete">삭제</button>
+            <c:if test="${login.accountNumber eq b.writerAccount}">
+              <button id="modify"> <a href="/home/modify/${b.bno}">수정</a></button>
+              <button id="delete">삭제</button>
+            </c:if>
+            
 
         </div>
 
@@ -170,14 +173,14 @@
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" name="clame-reason" value="dispute" id="dispute">
                   <label class="form-check-label" for="flexCheckChecked">
-                    지나친 정치/종교 논쟁
+                    게시판 성격과 맞지 않는 글
                   </label>
                 </div>
 
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" name="clame-reason" value="plaster" id="plaster">
                   <label class="form-check-label" for="flexCheckChecked">
-                    도배성 댓글
+                    도배성 글
                   </label>
                 </div>
 

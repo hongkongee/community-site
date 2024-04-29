@@ -565,6 +565,27 @@ $addFollowing.onclick = () => {
 
 };
 
+// 수정 버튼 누르기
+
+// 삭제 버튼 누르기
+document.getElementById('delete').onclick = () => {
+  if (confirm('정말로 삭제하시겠습니까?')) {
+    // bno = Number(bno);
+    // console.log(typeof bno);
+
+    fetch('/home/remove/' + bno)
+    .then(response =>  {
+      console.log(response)
+      window.location.href = '/home/board/all';
+    })
+
+  } else {
+    return;
+  }
+
+
+}
+
 
 // 즉시 실행 함수
 (() => {

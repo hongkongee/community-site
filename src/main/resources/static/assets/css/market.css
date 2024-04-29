@@ -9,7 +9,7 @@
 
 /* a태그 기능 죽이기 */
 a {
-  color: inherit;
+  color: #000;
   text-decoration: none;
 }
 
@@ -54,7 +54,7 @@ a {
   text-align: center;
 
   width: 60vw;
-  height: 300vh;
+  height: 190vh;
   margin: auto;
   background: #7AA2E3;
 
@@ -112,15 +112,54 @@ a {
 
 }
 
+/* 요소 구분선 */
+.boardList th:nth-child(n+2) {
+  position: relative;
+  margin-left: 5px;
+  padding-left: 10px;
+}
+
+/* 요소 구분선 */
+.boardList th:nth-child(n+2)::after {
+  position:absolute;
+  left: 0;
+  top: 3px;
+  content: "";
+  width: 2px;
+  height: 15px;
+  background-color: rgb(0, 0, 0);
+}
+
+/* 요소 구분선 */
+.titleContentBox span:nth-child(n+2) {
+  position: relative;
+  margin-left: 5px;
+  padding-left: 10px;
+}
+
+.titleContentBox>span {
+  color: #000;
+}
+
+/* 요소 구분선 */
+.titleContentBox span:nth-child(n+2)::after {
+  position:absolute;
+  left: 0;
+  top: 3px;
+  content: "";
+  width: 2px;
+  height: 15px;
+  background-color: rgb(255, 0, 0);
+}
+
 
 
 /*컨텐츠 전체영역*/
 .content-group {
-  margin-top: 10vw;
   width: 100%;
   /* height: 60vw; */
   position: absolute;
-  top: 20%;
+  top: 5%;
   background: silver;
   border: 3px solid #000;
 
@@ -159,6 +198,12 @@ a {
   margin-top: 3vw;
 }
 
+.textContent {
+  width: 60vw; /* 70 문자 너비 */
+  
+}
+
+
 .ContentImg {
   flex: 1 0 auto;
   max-width: 300px;
@@ -180,10 +225,10 @@ a {
 
 }
 
-#normal {
+/* #normal {
   width: 50% !important;
   height: 500px;
-}
+} */
 
 .ContentContent {
   flex: 3 0 auto;

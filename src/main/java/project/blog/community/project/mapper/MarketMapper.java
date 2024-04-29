@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface MarketMapper {
     void save(Market market);
-    void modify(Market market);
+    void modify(Market market, String currentLoginMemberAccount);
 
     List<Market> findAll();
 
@@ -50,6 +50,8 @@ public interface MarketMapper {
 
     List<Rate> checkRateByUser(String textWriter);
 
+    List<Integer> selectByAccountNumber(String currentLoginMemberAccount);
 
     float rateAverage(String textWriter);
+
 }

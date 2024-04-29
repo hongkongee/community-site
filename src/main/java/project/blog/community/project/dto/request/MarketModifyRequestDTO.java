@@ -1,5 +1,6 @@
 package project.blog.community.project.dto.request;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -32,6 +33,8 @@ public class MarketModifyRequestDTO {
 
     private String address;
 
+    @Nullable
+    private String file;
 
     // 글번호
 
@@ -43,6 +46,7 @@ public class MarketModifyRequestDTO {
                 .category(category)
                 .price(price)
                 .address(address)
+                .file(file)
                 .build();
     }
 

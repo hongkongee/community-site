@@ -22,6 +22,7 @@
         <!-- selectType은 resultType(return) 필수)-->
         SELECT * FROM tbl_market
         ORDER BY board_no DESC
+        LIMIT #{pageStart}, #{amount}
     </select>
 
     <select id = "findFour" resultType="market">
@@ -47,6 +48,9 @@
         category = #{category},
         price = #{price},
         address = #{address}
+        <if test="file != null">
+            , file = #{file}
+        </if>
         WHERE board_no = #{boardNo}
     </update>
 
@@ -113,8 +117,35 @@
         LIMIT 0, 5
     </select>
 
+<!--    <select id="findAllpage" resultType="reply">-->
+<!--        SELECT *-->
+<!--        FROM tbl_market-->
+<!--        WHERE board_no = #{boardNo}-->
+<!--        LIMIT #{p.pageStart}, #{p.amount}-->
+<!--    </select>-->
 
+<!--    <select id="count" resultType="int">-->
+<!--        SELECT COUNT(*)-->
+<!--        FROM tbl_market-->
+<!--        WHERE board_no = #{boardNo}-->
+<!--    </select>-->
+<!--
+    <select id="findList" resultType="market">
+        SELECT * FROM tbl_market
+        WHERE text_writer = #{textWrite}
+        ORDER BY boardNo DESC
+        LIMIT #{pageStart}, #{amount}
+    </select>
 
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_market
+        WHERE text_writer = #{textWriter}
+    </select>-->
 
+    <select id="getCountAll" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_market
+    </select>
 
 </mapper>

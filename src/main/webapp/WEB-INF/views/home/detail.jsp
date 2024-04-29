@@ -95,7 +95,7 @@
         <div id="content">${b.content}</div>
 
         <!-- 좋아요 -->
-        <div class="like" data-like-cookie="${l}">
+        <div class="like" id="like-data" data-likeornot="${l}">
           <!-- <i class="fa-solid fa-heart"></i> : check 됐을 때 -->
           <i class="fa-regular fa-heart"></i>
           <label class="like-label" for="flexCheckDefault" data-like-count="${b.likeCount}">

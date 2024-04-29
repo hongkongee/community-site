@@ -136,9 +136,9 @@
     font-size: 18px;
     width: 200px;
     position: absolute;
-    top: 15%;
+    top: 7%;
     left: 90%;
-    transform: translate(-15%, -85%);
+    transform: translate(-10%, -85%);
   }
 
   section.market>.card-container { /* 게시물 전체 영역 */

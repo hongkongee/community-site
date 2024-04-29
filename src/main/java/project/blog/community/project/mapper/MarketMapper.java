@@ -1,6 +1,7 @@
 package project.blog.community.project.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import project.blog.community.project.dto.request.MarketRateRequestDTO;
 import project.blog.community.project.entity.Favorite;
 import project.blog.community.project.entity.Market;

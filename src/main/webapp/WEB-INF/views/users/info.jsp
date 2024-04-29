@@ -10,7 +10,7 @@
     <title>회원 정보 수정</title>
 
     <%@ include file="../include/headcss.jsp" %>
-
+<link rel="icon" href="/assets/img/favicon.ico">
     <link rel="stylesheet" href="/assets/css/common.css">
 
     <style>

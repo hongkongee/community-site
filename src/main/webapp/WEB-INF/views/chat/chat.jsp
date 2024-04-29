@@ -9,7 +9,6 @@
     <title>채팅</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/header.css">
-
     <link rel="stylesheet" href="/assets/css/snb.css">
     <style>
         * {
@@ -32,6 +31,7 @@
             width: 740px;
             height: 100px;
             display: inline-block;
+            background-color: transparent;
         }
 
         #chatt #sendZone>* {
@@ -40,7 +40,7 @@
         }
 
         #chatt #btnSend {
-            width: 54px;
+            width: 43px;
             height: 100px;
         }
 
@@ -50,7 +50,6 @@
             padding: 6px;
             border-radius: 10px;
             font-size: 0.6em;
-
         }
 
         #chatt .me {
@@ -61,6 +60,16 @@
         #chatt .other {
             background-color: #eee;
             margin: 2px;
+        }
+
+        input[type="text"] {
+            background-color: transparent;
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
         }
     </style>
 </head>
@@ -119,13 +128,13 @@
                     item = `<div style = "background-color : #ffc;
                             margin : 1px 0px 2px 30%;" >
 		                <span><b>` + data.mid + `</b></span> [` + data.date + ` ]<br/>
-                      <span>` + data.msg + `</span>
+                      <span style = "color: #000;">` + data.msg + `</span>
 						</div>`;
                 } else {
                     item = `<div style = "background-color : #eee;
                             margin : 2px;" >
 		                <span><b>` + data.mid + `</b></span> [` + data.date + ` ]<br/>
-                      <span>` + data.msg + `</span>
+                      <span style = "color: #000;">` + data.msg + `</span>
 						</div>`;
                 }
 

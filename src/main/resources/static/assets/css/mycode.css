@@ -148,10 +148,11 @@ margin-top: 25%;
 
   }
 
-
+/* HTML에 대한 색상 지정 */
   .card-title-wrapper.HTML{
     background-color: #fe992edc;
   }
+  /* CSS에 대한 색상 지정 */
   .card-title-wrapper.CSS  {
     background-color: #4169e1c9;
 }
@@ -176,11 +177,11 @@ margin-top: 25%;
     background-color: #4163d3;
     
 }
+/* 그 외 언어에 대한 색상 지정 */
 .card-title-wrapper.Other-than {
     background-color: #000000;
     
 }
-
 
   .card-title-wrapper.HTML .card-title {
     background-color: #fe992edc;

@@ -9,7 +9,7 @@ body {
     display: flex;
     overflow-y: auto;
     margin: 0;
-    
+
 }
 
 .MydiaryJsp {
@@ -17,7 +17,7 @@ body {
     height: 100%;
     background: #000080;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     min-height: 100%;
     box-sizing: border-box;
@@ -30,7 +30,7 @@ body {
     height: inherit;
     top: 200px;
     position: relative;
-    background: #fff;
+    background: white;
     border-radius: 60px;
 }
 
@@ -68,6 +68,7 @@ body {
     width: 14%;
     box-sizing: border-box;
 }
+
 .Frame45 table td {
     background: white;
 }
@@ -124,7 +125,7 @@ background: #fff;
 
 .Frame45 .Frame57 {
     width: 70%;
-    height: auto; 
+    height: auto;
     background: white;
     border-radius: 60px;
     overflow: hidden;
@@ -139,22 +140,23 @@ background: #fff;
 .Frame45 .todo {
     display: inline-flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
     margin-left: 50px;
     position: relative;
-    width: 30%;
+    width: 35%;
     padding: 10px;
 }
+
 .Frame45 .whatdo {
-    width: 50%;
+    width: 45%;
     display: inline-flex;
     flex-direction: column;
-    align-items: center; 
-    margin: 30px; 
+    align-items: center;
+    margin: 30px;
     position: relative;
     padding: 10px;
     left: 20px;
-   
+
 }
 
 .Frame45 .schedule-input {
@@ -163,7 +165,6 @@ background: #fff;
     color: black;
     font-size: 20px;
     font-weight: bold;
-    margin-top: 20px; 
     position: relative;
     background: white;
     border-radius: 60px;
@@ -172,7 +173,7 @@ background: #fff;
 
 .Frame45 .todo textarea {
     width: 80%;
-    height: 150px;
+    height: 200px;
     border: none;
     border-radius: 60px;
     padding: 20px;
@@ -180,7 +181,6 @@ background: #fff;
     font-family: inherit;
     overflow-y: auto;
     border: 1px solid #000080;
-    
 }
 
 .Frame45 .story {
@@ -189,7 +189,6 @@ background: #fff;
     color: black;
     font-size: 20px;
     font-weight: bold;
-    margin-top: 20px; 
     margin-right: 10px;
     position: relative;
     background: white;
@@ -200,7 +199,7 @@ background: #fff;
 
 .Frame45 .whatdo textarea {
     width: 70%;
-    height: 150px;
+    height: 200px;
     border: none;
     border-radius: 60px;
     padding: 20px;
@@ -213,7 +212,6 @@ background: #fff;
 .Frame45 .Frame57 button {
     font-weight: 600;
     border-radius: 60px;
-   
     font-size: 20px;
     font-family: inherit;
     position: absolute;
@@ -224,8 +222,17 @@ background: #fff;
     padding: 7px 10px;
     background: #fff;
 }
-.Frame45 .Frame57 button:hover{
 
+.Frame45 .Frame57 .rightbtn {
+    bottom: -25px;
+    right: -15px;
+}
+
+.Frame45 .Frame57 .leftbtn {
+    right: -40px;
+    bottom: -25px;
+}
+.Frame45 .Frame57 button:hover{
     background: #7c7c7c;
     color: #fff;
     border: 2px solid blue;
@@ -236,12 +243,12 @@ background: #fff;
 /* ---------------------일정, 일기 저장 시작--------------------------- */
 .Frame45 .saved {
     width: 70%;
-    height: auto; 
+    height: auto;
     background: white;
     border-radius: 60px;
     overflow: hidden;
     border: 1px solid #000080;
-    margin: 5% auto; 
+    margin: 5% auto;
     position: relative;
     display: flex;
     justify-content: space-evenly;
@@ -253,17 +260,31 @@ background: #fff;
     height: 300px;
     border: 1px solid #000080;
     border-radius: 60px;
-
+    padding: 30px;
+    font-size: 25px;
+    line-height: 2;
+    overflow: auto;
 }
+
+.Frame45 .saved .todo-saved::-webkit-scrollbar {
+    display: none;
+}
+
+
 .Frame45 .saved .whatdo-saved {
     width: 40%;
     height: 300px;
     border: 1px solid #000080;
     border-radius: 60px;
+    padding: 30px;
+    font-size: 25px;
+    line-height: 2;
+    overflow: auto;
 }
 
-
-
+.Frame45 .saved .whatdo-saved::-webkit-scrollbar {
+    display: none;
+}
 
 
 /* ---------------------일정, 일기 저장 끝--------------------------- */

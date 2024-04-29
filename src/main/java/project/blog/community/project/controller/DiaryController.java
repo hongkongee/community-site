@@ -4,6 +4,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,12 +15,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import project.blog.community.project.common.PageMaker;
 import project.blog.community.project.common.Search;
+import project.blog.community.project.dto.request.DiaryPostRequestDTO;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.response.BoardDetailResponseDTO;
 import project.blog.community.project.dto.response.BoardMyListResponseDTO;
+import project.blog.community.project.dto.response.DiaryDetailResponseDTO;
+import project.blog.community.project.dto.response.DiaryListResponseDTO;
+import project.blog.community.project.entity.Diary;
 import project.blog.community.project.service.BoardService;
+import project.blog.community.project.service.DiaryService;
 import project.blog.community.util.FileUtils;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccount;
@@ -29,20 +38,66 @@ import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccoun
 @Slf4j
 public class DiaryController {
 
-   private final BoardService service;
+    private final BoardService service;
+    private final DiaryService diaryService;
 
 
     // rootPath = "//ICT4_28/img"
     @Value("${file.upload.root-path}")
     private String rootPath;
 
+
     // 마이페이지->다이어리로 이동
     @GetMapping("/diary")
-    public String diary() {
+    public String todoDiary() {
         log.info("/mypage/diary: GET!!!");
       return "mypage/diary";
    }
 
+//   @GetMapping("/diary")
+//   public String todayDiary() {
+//
+//       LocalDate currentDate = LocalDate.now();
+//
+//       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//
+//       String formattedDate = currentDate.format(formatter);
+//
+//       System.out.println("Today's date: " + formattedDate);
+//
+//
+//       return "redirect:/mypage/diary/" + formattedDate;
+//   }
+
+   // 다이어리 -> 할일 저장 요청 (비동기)
+    @PostMapping("/diary/todo")
+    public ResponseEntity<?> todo(@RequestBody DiaryPostRequestDTO dto, HttpSession session) {
+        log.info("/diary/todo: POST 요청! dto: {}", dto);
+        diaryService.registerTodo(dto, session);
+        return  ResponseEntity.ok().body("success");
+    }
+
+
+    // 다이어리 -> 일기 저장 요청 (비동기)
+    @PostMapping("/diary/whatdo")
+    public ResponseEntity<?> whatdo(@RequestBody DiaryPostRequestDTO dto, HttpSession session) {
+        log.info("/diary/whatdo: POST 요청! dto: {}", dto);
+        diaryService.registerWhatdo(dto, session);
+        return ResponseEntity.ok().body("success");
+    }
+
+
+//     todoList 날짜별 요청
+    @GetMapping("/diary/{regDate}")
+    public ResponseEntity<?> todoList(@PathVariable String regDate) {
+        log.info("/diary/{}: GET!!", regDate);
+
+        List<DiaryDetailResponseDTO> todoLists = diaryService.getTodoList(regDate);
+        log.info("todoList: {}", todoLists);
+
+        return ResponseEntity.ok().body(todoLists);
+
+    }
 
 
     // 마이페이지->posting_cube로 이동
@@ -67,6 +122,8 @@ public class DiaryController {
         return "mypage/posting_cube";
     }
 
+
+    // 좋아요 버튼
     @PostMapping("/posting_cube/like/{bno}") // URL에 {bno}를 포함시킴
     @ResponseBody
     public ResponseEntity<Integer> like(@PathVariable("bno") int bno, @RequestBody LikeRequestDTO dto,
@@ -94,11 +151,8 @@ public class DiaryController {
       System.out.println("/board/detail: GET! " + bno);
       BoardDetailResponseDTO dto = service.getDetail(bno);
 
-
-
       model.addAttribute("b", dto);
       return "home/detail";
-
 
    }
 
@@ -108,16 +162,18 @@ public class DiaryController {
    @GetMapping("/newposting")
    public String newposting() {
       log.info("/mypage/newposting: GET!!!");
-
       return "mypage/newposting";
    }
 
+
+
     // 글쓰기 제출 페이지 (DTO 안쓰고)
     @PostMapping("/newposting")
-    public String writeSubmit(@RequestParam("category") String category,
-                              @RequestParam("title") String title,
+    public String writeSubmit(@RequestParam @Param("category") String category,
+                              @RequestParam ("title") String title,
                               @RequestParam("content") String content,
-                              @RequestParam("file") MultipartFile uploadedImage,
+                              @RequestParam("file")
+                              MultipartFile uploadedImage,
                               HttpServletRequest request) {
 
         log.info("/mypage/newposting: POST, {}, {}, {}", category, title, content);
@@ -131,7 +187,13 @@ public class DiaryController {
         String writer = getCurrentLoginMemberAccount(session);
 
         // 서버에 파일 업로드 지시
-        String savePath = FileUtils.uploadFile(uploadedImage, rootPath);
+        String savePath = null;
+
+        if (uploadedImage.getSize() == 0) {
+            savePath = null;
+        } else {
+            savePath = FileUtils.uploadFile(uploadedImage, rootPath);
+        }
         log.info("save-path: {}", savePath);
 
 
@@ -151,8 +213,6 @@ public class DiaryController {
 
         return "redirect:/mypage/posting_cube";
     }
-
-
 
 
 

@@ -1,11 +1,13 @@
 package project.blog.community.project.service;
 
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.WebUtils;
 import project.blog.community.project.common.Search;
 import project.blog.community.project.dto.request.BoardModifyRequestDTO;
 import project.blog.community.project.dto.request.LikeRequestDTO;
@@ -119,6 +121,40 @@ public class BoardService {
    }
 
 
+     //게시물의 좋아요 수 바꾸기
+//    public int changeLike(LikeRequestDTO dto, HttpServletRequest request) {
+//        int bno = dto.getBno();
+//        int number = dto.getNumber();
+//
+//        // 게시물 테이블의 좋아요 수 업데이트
+//        boardMapper.updateLikeCount(bno, number);
+//
+//        HttpSession session = request.getSession();
+//        session.getAttribute("login");
+//        // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
+//
+//        // 좋아요를 눌렀다면 Like 테이블에 insert
+//        if (number > 0) {
+//
+//            Cookie cookie = new Cookie("like", Integer.toString(bno));
+//            cookie.setMaxAge(60);
+//            cookie.setPath("/");
+//            response.addCookie(cookie);
+//
+//            return 1;
+//
+//        } else { // 좋아요를 안 눌렀다면 해당 게시글에 대한 쿠키 삭제하기
+//            Cookie cookie = WebUtils.getCookie(request, "like");
+//            cookie.setMaxAge(0);
+//            cookie.setPath("/");
+//            response.addCookie(cookie);*/
+//
+//            likeMapper.deleteLike(currentLoginMemberAccount, bno);
+//
+//            return 0;
+//        }
+//    }
+//
    // 게시물의 좋아요 수 바꾸기
    public int changeLike(LikeRequestDTO dto, HttpServletRequest request) {
       int bno = dto.getBno();
@@ -266,6 +302,8 @@ public class BoardService {
 
       boardMapper.save(uploadedBoard);
    }
+
+   //public void saveTodo(String content, )
 
 
    // 문자열을 Category 타입으로 바꾸는 메서드

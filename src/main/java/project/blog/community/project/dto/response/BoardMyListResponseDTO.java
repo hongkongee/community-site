@@ -6,6 +6,7 @@ import project.blog.community.project.entity.Board;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 
 @Setter
 @Getter
@@ -23,6 +24,7 @@ public class BoardMyListResponseDTO {
     private int likeCount;
     private String postImg;
     private int isHeart; // 하트 체크 여부
+    private final int random;
 
 
 
@@ -33,6 +35,10 @@ public class BoardMyListResponseDTO {
         this.likeCount = board.getLikeCount();
         this.postImg = board.getPostImg();
         this.writer = board.getWriter();
+
+        // 기본 이미지를 위한 난수 생성
+        Random random = new Random();
+        this.random = random.nextInt(3) + 1;
     }
 
     private String makeShortTitle(String title) {

@@ -16,15 +16,15 @@
 
     <style>
         body {
-            background-color: #7AA2E3;
+            background-color: #000080;
         }
 
         .container {
             width: 60%;
             margin: 100px auto;
             font-family: "Orbit", sans-serif;
-            color: #7AA2E3;
-            background-color: #F8F6E3;
+            color: #000080;
+            background-color: #fff;
             border-radius: 40px;
         }
 
@@ -51,7 +51,7 @@
         .container .wrap .login input[type="password"] {
             width: 200px;
             height: 2em;
-            border-color: #7AA2E3;
+            border-color: #000080;
             border-width: 0 0 2px;
             background-color: transparent;
         }
@@ -71,8 +71,7 @@
 
         .container .wrap .social-btn {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
         }
 
         .social-btn img {
@@ -86,9 +85,9 @@
             box-sizing: border-box;
             appearance: none;
             background-color: transparent;
-            border: 2px solid #7AA2E3;
+            border: 2px solid #000080;
             border-radius: 0.6em;
-            color: #7AA2E3;
+            color: #000080;
             cursor: pointer;
             align-self: center;
             font-size: 1rem;
@@ -109,7 +108,7 @@
                 outline: 0;
             }
 
-            background-image: linear-gradient(45deg, #7AA2E3 50%, transparent 50%);
+            background-image: linear-gradient(45deg, #000080 50%, transparent 50%);
             background-position: 100%;
             background-size: 400%;
 

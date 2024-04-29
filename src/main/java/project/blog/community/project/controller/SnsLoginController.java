@@ -42,9 +42,6 @@ public class SnsLoginController {
     @Value("${sns.naver.state}")
     private String naverState;
 
-    @Value("${sns.google.auth.url}")
-    private String googleAuthUrl;
-
     @Value("${sns.google.login.url}")
     private String googleLoginUrl;
 
@@ -56,9 +53,6 @@ public class SnsLoginController {
 
     @Value("${sns.google.client-pw}")
     private String googleClientPw;
-
-    @Value("${sns.google.auth.scope}")
-    private String googleAuthScope;
 
     @GetMapping("/kakao/login")
     public String kakaoLogin() {

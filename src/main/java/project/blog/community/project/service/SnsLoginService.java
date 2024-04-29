@@ -27,15 +27,6 @@ import java.util.Map;
 public class SnsLoginService {
 
     private final UserService userService;
-
-    @Value("${sns.google.redirect.uri}")
-    private String googleRedirectUri;
-
-    @Value("${sns.google.client-id}")
-    private String googleClientId;
-
-    @Value("${sns.google.client-pw}")
-    private String googleClientPw;
     
     // 카카오 로그인 처리
     public void kakaoLogin(Map<String, String> params, HttpSession session) {

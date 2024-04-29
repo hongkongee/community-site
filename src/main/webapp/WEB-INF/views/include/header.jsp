@@ -10,26 +10,6 @@
                 <img src="/assets/img/logo2.png" alt="로고이미지">
             </a>
         </h1>
-
-        <!-- 프로필 사진 
-        <div class="profile-box">
-               profilePicture로수정 
-            <c:if test="${login == null || login.profilePicture == null}">
-                <img src="/assets/img/jjanggu.jpg" alt="프사">
-            </c:if>
-   profilePicture로수정 -
-            <c:if test="${login != null && login.profilePicture != null}">
-                <c:choose>
-                    <c:when test="${login.loginMethod == COMMON}">
-                        <img src="/display${login.profilePicture}" alt="프사">
-                    </c:when>
-                    <c:otherwise>
-                        <img src="${login.profilePicture}" alt="프사">
-                    </c:otherwise>
-                </c:choose>
-            </c:if>
-        </div>
-    -->
         <div class="profile-box">
             <!-- profilePicture로수정 -->
             <c:if test="${login == null || login.profilePicture == null}">
@@ -72,6 +52,7 @@
                 <li><a href="/wel/myCode">My Code</a></li>
                 <li><a href="/chat/chat">Chat</a></li>
                 <li><a href="#">Market</a></li>
+                <li><a href="/users/info">My Info</a></li>
             </c:if>
 
             <c:if test="${sessionScope.login != null}">

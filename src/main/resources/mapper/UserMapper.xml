@@ -6,9 +6,9 @@
 
     <insert id="save">
         INSERT INTO tbl_user
-            (account_number, password, name, email, birthday, gender, nickname, login_method)
+            (account_number, password, name, email, birthday, gender, nickname, login_method, profile_picture)
         VALUES
-            (#{accountNumber}, #{password}, #{name}, #{email}, #{birthday}, #{gender}, #{nickname}, #{loginMethod})
+            (#{accountNumber}, #{password}, #{name}, #{email}, #{birthday}, #{gender}, #{nickname}, #{loginMethod}, #{profilePicture})
     </insert>
 
     <select id="findUser" resultType="user">
@@ -30,7 +30,7 @@
 
     <update id="updateReport">
         UPDATE tbl_user
-        SET report = report + 1
+        SET report = report + 1, rate = rate - 0.1
         WHERE account_number = #{accountNumber}
     </update>
 
@@ -52,6 +52,20 @@
         FROM tbl_user
         WHERE session_id = #{sessionId}
     </select>
+
+    <update id="modify">
+        UPDATE tbl_user
+        SET password = #{password},
+            birthday = #{birthday},
+            gender = #{gender},
+            nickname = #{nickname}
+        WHERE account_number = #{accountNumber}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM tbl_user
+        WHERE account_number=#{account}
+    </delete>
 
     <select id="findUserByFollower" resultType="java.lang.String">
         SELECT follower

@@ -18,6 +18,7 @@
     width: 100%;    
     position: relative;
     top: 90px;
+    margin-bottom: 50px;
 
   }
 
@@ -114,10 +115,10 @@
   /* ========================== 당근마켓 ========================== */
 
   section.market {
-    border: #000 solid 1px;
+    /* border: #000 solid 1px; */
     width: 100%;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 250px;
 
     position: relative;
   }
@@ -150,6 +151,7 @@
   section.market>.card-container .card-wrapper { /* 게시물 하나 영역 */
     margin-bottom: 30px;
     font-size: 24px;
+    width: 23%;
 
   }
 
@@ -184,12 +186,16 @@
     margin: 20px auto;
   }
 
+  section.market .card-wrapper .card-title-wrapper h2.card-title {
+    font-weight: bold;
+  }
+
   /* ========================== 스포츠 ========================== */
 
 
   section.sports {
 
-    border: #000 solid 1px;
+    /* border: #000 solid 1px; */
     width: 100%;
     margin: auto;
     margin-top: 100px;

@@ -136,7 +136,7 @@
       
 
       <div class="more-container">
-        <a href="#" class="more-btn"> <!-- 더보기 -->
+        <a href="/market/list" class="more-btn"> <!-- 더보기 -->
           더보기 
           <i class="fa-solid fa-angle-right"></i>
         </a>
@@ -153,7 +153,7 @@
 
         
         <div class="card-wrapper"> <!-- 게시물 하나 영역 (더미데이터) -->
-          <section class="card">
+          <section class="card" data-mno="${m.boardNo}">
             <!-- <div class="card-image">
               <img src="/assets/img/test.jpg" alt="게시물 이미지">
             </div> -->
@@ -161,7 +161,7 @@
 
               <a href="#">
                 <h2 class="card-title">${m.textTitle}</h2>
-                <p>${m.price}</p>
+                <p>&#8361;${m.price}</p>
 
               </a>
               

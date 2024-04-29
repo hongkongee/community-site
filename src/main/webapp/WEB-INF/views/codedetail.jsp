@@ -176,7 +176,6 @@ body{
     <h2>${b.title}</h2>
     <div class="form-main">
     <input type="text" id="programming" name="programming" value="${b.programming}" readonly>
-    
 
     <label for="content">내용</label>
     <div id="content">${b.content}</div>

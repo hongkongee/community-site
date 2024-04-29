@@ -5,6 +5,7 @@ const writer = document.querySelector('.board-info').dataset.writer; // 현재 �
 let likeFlag = 0; // 쿠키 존재 여부 (1 이면 좋아요 이미 부여)
 const $likeLabel = document.querySelector('.like .like-label'); // 좋아요 텍스트
 const $heartBtn = document.querySelector('.like>i.fa-heart'); // 좋아요 하트 아이콘
+const writerAccount = document.querySelector('.board-info').dataset.writeraccount; // 현재 페이지 작성자 계정
 
 
 // URL 복사하기
@@ -484,7 +485,7 @@ document.getElementById('report-form').addEventListener("submit", function (e) {
 
   var formData = {
     bno: bno, // 게시글 번호
-    writer: writer, // 게시글 작성자
+    writer: writerAccount, // 게시글 작성자 (계정)
     message: message, // text area 기타 사유 메세지
     interests: interests // 체크된 박스만 모아둔 배열
   };
@@ -499,14 +500,18 @@ document.getElementById('report-form').addEventListener("submit", function (e) {
     })
     .then(response => response.text())
     .then(data => {
-      console.log("Form submission successful:", data);
-      // Handle server response as needed
+      console.log('신고 여부 1 or -1 : ', data);
+      if (data === '1') {
+        alert('정상적으로 신고되었습니다.');
+      } else {
+        alert('오늘 이미 신고 하셨습니다.')
+      }
     })
     .catch(error => {
       console.error("Error submitting form:", error);
     });
 
-  alert('정상적으로 신고되었습니다.');
+ 
   document.querySelector('.modal-content .modal-footer .btn-secondary').click();
   document.getElementById("reportText").value = '';
   document.getElementById("advertisement").checked = false;

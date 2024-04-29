@@ -1,5 +1,6 @@
 package project.blog.community.project.service;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import project.blog.community.project.dto.response.MyCodeDetailResponseDTO;
 import project.blog.community.project.dto.response.MyCodeListResponseDTO;
 import project.blog.community.project.entity.MyCode;
 import project.blog.community.project.mapper.MyCodeMapper;
+import project.blog.community.util.LoginUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +24,9 @@ public class MyCodeService {
     private final MyCodeMapper mapper;
 
 
-    public void register(MyCodeWriteRequestDTO dto) {
+    public void register(MyCodeWriteRequestDTO dto, HttpSession session) {
         MyCode myCode = new MyCode(dto);
+        myCode.setWriter(LoginUtils.getCurrentLoginMemberAccount(session));
         mapper.save(myCode);
     }
 
@@ -72,6 +75,7 @@ public List<MyCodeListResponseDTO> endgetList(MyCodePage page){
 
         return new MyCodeDetailResponseDTO(myCode);
     }
+
 
 
 }

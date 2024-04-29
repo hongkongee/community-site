@@ -1,5 +1,7 @@
 package project.blog.community.project.controller;
 
+import com.mysql.cj.Session;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -51,11 +53,11 @@ public String endCode(Model model,@ModelAttribute("s") CodeSearch page){
 }
 
 @PostMapping("/write")
-public String write(MyCodeWriteRequestDTO dto){
+public String write(MyCodeWriteRequestDTO dto , HttpSession session){
     System.out.println("write post get");
     System.out.println("dto = {}" + dto);
 
-    service.register(dto);
+    service.register(dto, session);
     return "redirect:/wel/myCode";
 }
 

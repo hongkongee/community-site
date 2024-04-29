@@ -73,7 +73,7 @@ public class BoardListResponseDTO {
 
         // 기본 이미지를 위한 난수 생성
         Random random = new Random();
-        this.random = random.nextInt(3) + 1;
+        this.random = random.nextInt(6) + 1;
 
 
     }

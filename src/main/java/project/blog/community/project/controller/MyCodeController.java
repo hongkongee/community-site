@@ -7,9 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import project.blog.community.project.common.CodeSearch;
-import project.blog.community.project.common.MyCodePage;
-import project.blog.community.project.common.MyCodeMaker;
+import project.blog.community.project.common.*;
 import project.blog.community.project.dto.request.MyCodeWriteRequestDTO;
 import project.blog.community.project.dto.response.MyCodeDetailResponseDTO;
 import project.blog.community.project.dto.response.MyCodeListResponseDTO;
@@ -32,21 +30,22 @@ public class MyCodeController {
 
     private final MyCodeService service;
 @GetMapping("/myCode")
-public String gallery(Model model,@ModelAttribute("s") CodeSearch page){
+public String gallery(Model model, @ModelAttribute("s") CodeSearch page, HttpSession session){
     log.info("page: {}", page);
-    List<MyCodeListResponseDTO> dtoList = service.getList(page);
+    List<MyCodeListResponseDTO> dtoList = service.getList(page, session);
 
 
-    MyCodeMaker myCodeMaker = new MyCodeMaker(page, service.getCount(page));
+    MyCodeMaker myCodeMaker = new MyCodeMaker(page, service.getCount(page, session));
 
     model.addAttribute("gList", dtoList);
     model.addAttribute("maker", myCodeMaker);
     return "mycode";
 }
+
 @GetMapping("/endMyCode")
-public String endCode(Model model,@ModelAttribute("s") CodeSearch page){
-   List<MyCodeListResponseDTO> endList = service.endgetList(page);
-    MyCodeMaker myCodeMaker = new MyCodeMaker(page, service.getCount(page));
+public String endCode(Model model,@ModelAttribute("s") CodeSearch page, HttpSession session){
+   List<MyCodeListResponseDTO> endList = service.endgetList(page, session);
+    MyCodeMaker myCodeMaker = new MyCodeMaker(page, service.getCount(page, session));
     model.addAttribute("gList",endList);
     model.addAttribute("maker",myCodeMaker);
     return "mycode";

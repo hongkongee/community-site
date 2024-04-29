@@ -2,12 +2,14 @@ package project.blog.community.project.service;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import project.blog.community.project.common.CodeSearch;
 import project.blog.community.project.common.MyCodePage;
 import project.blog.community.project.dto.request.MyCodeWriteRequestDTO;
+import project.blog.community.project.dto.response.LoginUserResponseDTO;
 import project.blog.community.project.dto.response.MyCodeDetailResponseDTO;
 import project.blog.community.project.dto.response.MyCodeListResponseDTO;
 import project.blog.community.project.entity.MyCode;
@@ -30,19 +32,29 @@ public class MyCodeService {
         mapper.save(myCode);
     }
 
-    public List<MyCodeListResponseDTO> getList(CodeSearch page) {
+    public List<MyCodeListResponseDTO> getList(CodeSearch page, HttpSession session) {
         List<MyCodeListResponseDTO> dtoList = new ArrayList<>();
         //List<MyCode> galleryList = mapper.findAll(page);
-        List<MyCode> myCodeList = mapper.findAll(page);
+
+        LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+        String myAccount = loginDto.getAccountNumber();
+
+        List<MyCode> myCodeList = mapper.findAll(page, myAccount);
+        log.info("myCodeList: {}", myCodeList);
         for (MyCode myCode : myCodeList) {
             MyCodeListResponseDTO dto = new MyCodeListResponseDTO(myCode);
+
             dtoList.add(dto);
         }
         return dtoList;
     }
-public List<MyCodeListResponseDTO> endgetList(MyCodePage page){
+public List<MyCodeListResponseDTO> endgetList(MyCodePage page, HttpSession session){
+
+    LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+    String myAccount = loginDto.getAccountNumber();
+
         List<MyCodeListResponseDTO> mylist = new ArrayList<>();
-        List<MyCode> endlist = mapper.endAll(page);
+        List<MyCode> endlist = mapper.endAll(page, myAccount);
     for (MyCode myCode : endlist) {
         MyCodeListResponseDTO dto = new MyCodeListResponseDTO(myCode);
         mylist.add(dto);
@@ -63,8 +75,11 @@ public List<MyCodeListResponseDTO> endgetList(MyCodePage page){
 
 
 
-    public int getCount(CodeSearch page) {
-        return mapper.getCount();
+    public int getCount(CodeSearch page, HttpSession session) {
+        LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+        String myAccount = loginDto.getAccountNumber();
+
+        return mapper.getCount(page, myAccount);
 
     }
 

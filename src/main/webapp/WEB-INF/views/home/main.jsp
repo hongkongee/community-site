@@ -12,7 +12,7 @@
 
   <%@ include file="../include/static-head.jsp" %>
   <link rel="stylesheet" href="/assets/css/header.css">
-
+ 
   <link rel="stylesheet" href="/assets/css/mainpage.css">
   <link rel="stylesheet" href="/assets/css/snb.css">
   <!-- <link rel="stylesheet" href="/assets/css/weather.css"> -->

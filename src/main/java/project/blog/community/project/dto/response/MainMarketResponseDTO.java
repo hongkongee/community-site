@@ -20,6 +20,7 @@ public class MainMarketResponseDTO {
     private final int viewCount;
     private final int price;
     private final String address;
+    private final String file;
 
     public MainMarketResponseDTO(Market market) {
         this.textWriter = market.getTextWriter();
@@ -29,6 +30,7 @@ public class MainMarketResponseDTO {
         this.price = market.getPrice();
         this.address = market.getAddress();
         this.boardNo = market.getBoardNo();
+        this.file = market.getFile();
     }
 
     // 날짜 포맷을 바꾸는 함수

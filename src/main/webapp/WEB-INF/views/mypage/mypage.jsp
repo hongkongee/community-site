@@ -50,8 +50,20 @@
                     <c:if test="${empty user.profilePicture}">
                         <img class="user-profile-pic" src="/assets/img/jjanggu.jpg" alt="기본 프사">
                     </c:if>
+
+
                     <c:if test="${not empty user.profilePicture}">
-                        <img class="user-profile-pic" src="/display${user.profilePicture}" alt="프사">
+
+
+                        <c:choose>
+                            <c:when test="${user.loginMethod == 'COMMON'}">
+                                <img class="user-profile-pic" src="/display${user.profilePicture}" alt="프사">
+                            </c:when>
+                            <c:otherwise>
+                                <img src="${user.profilePicture}" alt="프사">
+                            </c:otherwise>
+                        </c:choose>
+
                     </c:if>
                     <input type="file" id="profile-img" style="display: none;" name="profilePicture">
                 </div>
@@ -96,7 +108,7 @@
                     </c:if>
 
                 </div>
-                   
+
             </div>
 
             <!-- 모달 버튼 -->
@@ -267,7 +279,7 @@
 
                 <div class="user-market">
                     <div class="title-market">
-                        판매자 평점: 
+                        판매자 평점:
 
                         <c:if test="${user.rate < 0.5}">
                             <i class="fa-regular fa-star"></i>
@@ -350,7 +362,7 @@
                             <i class="fa-solid fa-star-half-stroke"></i>
                         </c:if>
 
-                        <c:if test="${user.rate >= 4.9 && user.rate <= 5}"> 
+                        <c:if test="${user.rate >= 4.9 && user.rate <= 5}">
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>

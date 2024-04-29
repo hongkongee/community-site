@@ -9,7 +9,7 @@
 }
 
 section.rps {
-  border: #000 solid 1px;
+  /* border: #000 solid 1px; */
   position: absolute;
   width: 80%;
   top: 180px;
@@ -31,9 +31,11 @@ section.rps input#bet-money {
   margin: 20px;
 }
 
-section.rps input#bet-btn {
+section.rps #bet-btn {
   margin: 20px;
 }
+
+
 
 section.rps .rps-game {
   display: none;

@@ -58,7 +58,8 @@ public class UserController {
       // 사진 업로드, 나중에 수정해야함
       String rootPath = null;
 
-      String savePath = FileUtils.uploadFile(dto.getProfilePicture(), rootPath);
+      String savePath = null;
+//      String savePath = FileUtils.uploadFile(dto.getProfilePicture(), rootPath);
 
       // 일반 방식 (사이트) 회원가입
       dto.setLoginMethod(User.LoginMethod.COMMON);

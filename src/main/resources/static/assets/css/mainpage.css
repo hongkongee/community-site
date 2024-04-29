@@ -14,7 +14,7 @@
 
   section.hot {
     margin: auto;
-    border: #000 solid 1px;
+    /* border: #000 solid 1px; */
     width: 100%;    
     position: relative;
     top: 90px;
@@ -29,7 +29,7 @@
   .btn-container { /* 버튼 (새로고침, 인기순, 최신순) */
     width: 200px;
     position: absolute;
-    top: 5%;
+    top: 3%;
     left: 90%;
     transform: translate(-50%, -60%);
 
@@ -136,9 +136,9 @@
     font-size: 18px;
     width: 200px;
     position: absolute;
-    top: 15%;
+    top: 7%;
     left: 90%;
-    transform: translate(-15%, -85%);
+    transform: translate(-10%, -85%);
   }
 
   section.market>.card-container { /* 게시물 전체 영역 */

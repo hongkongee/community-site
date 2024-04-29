@@ -70,19 +70,24 @@ document.querySelector('section.market .card-container').onclick = e => {
     window.location.href = '/market/detail/' + mno;
   }
 
-
-    
-  
 }
+
+document.querySelector('a.refresh>.fa-rotate-right').onclick = () => {
+  location.reload();
+}
+
+
 
 // 즉시실행함수
 (() => {
-  console.log('r = ', r);
+  const currentPage = window.location.href;
 
-  if (r === 1) { // 최신순
+  if (currentPage.includes('/home/main/recent')) { // 최신순
+    console.log('최신순 페이지 입니다');
     $recent.classList.add('active');
 
   } else { // 인기순
+    console.log('인기순 페이지 입니다');
     $popular.classList.add('active');
   }
   

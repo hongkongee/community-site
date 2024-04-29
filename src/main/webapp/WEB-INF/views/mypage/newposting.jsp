@@ -32,12 +32,13 @@
 
       <form action="/mypage/newposting" method="post" enctype="multipart/form-data">
         <!-- 카테고리 선택 영역 -->
-        <select class="form-select" name="category" aria-label="Default select example">
+        <select class="form-select" name="category" aria-label="Default select example" required>
           <option selected>게시판을 선택해 주세요</option>
-          <option value="game">게임 게시판</option>
-          <option value="market">중고 거래 게시판</option>
-          <option value="movie">영화 게시판</option>
-          <option value="trip">여행 게시판</option>
+          <option value="normal">질문</option>
+          <option value="game">코드 공유</option>
+          <option value="movie">취업</option>
+          <option value="trip">IT 소식</option>
+          <option value="market">자유 게시판</option>
         </select>
 
         <!-- 제목 입력 영역 -->

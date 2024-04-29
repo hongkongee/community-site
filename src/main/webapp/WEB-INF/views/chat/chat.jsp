@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/header.css">
     <link rel="stylesheet" href="/assets/css/snb.css">
+    <link rel="icon" href="/assets/img/favicon.ico">
     <style>
         * {
             box-sizing: border-box;

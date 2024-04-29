@@ -9,7 +9,7 @@
 
 /* a태그 기능 죽이기 */
 a {
-  color: inherit;
+  color: #000;
   text-decoration: none;
 }
 
@@ -54,7 +54,7 @@ a {
   text-align: center;
 
   width: 60vw;
-  height: 300vh;
+  height: 190vh;
   margin: auto;
   background: #7AA2E3;
 
@@ -135,6 +135,10 @@ a {
   position: relative;
   margin-left: 5px;
   padding-left: 10px;
+}
+
+.titleContentBox>span {
+  color: #000;
 }
 
 /* 요소 구분선 */
@@ -221,10 +225,10 @@ a {
 
 }
 
-#normal {
+/* #normal {
   width: 50% !important;
   height: 500px;
-}
+} */
 
 .ContentContent {
   flex: 3 0 auto;

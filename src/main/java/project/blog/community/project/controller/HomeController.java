@@ -13,18 +13,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
-import project.blog.community.project.common.Page;
 import project.blog.community.project.common.PageMaker;
 import project.blog.community.project.common.Search;
+import project.blog.community.project.dto.request.BoardModifyRequestDTO;
 import project.blog.community.project.dto.request.LikeRequestDTO;
 import project.blog.community.project.dto.request.ReportRequestDTO;
-import project.blog.community.project.dto.request.RpsRequestDTO;
 import project.blog.community.project.dto.response.*;
 import project.blog.community.project.service.*;
 import project.blog.community.util.FileUtils;
 
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 
 import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccount;
 
@@ -255,6 +254,66 @@ public class HomeController {
       // /WEB-INF/views/~~~~~.jsp
       return "home/write";
    }
+
+   // 글 삭제
+   @GetMapping("/remove/{bno}")
+   @ResponseBody
+   public ResponseEntity<?> deleteBoard(@PathVariable("bno") int bno) {
+      log.info("/home/remove: GET! {}", bno);
+
+      boardService.delete(bno);
+      return ResponseEntity.ok().body("삭제 완료");
+
+   }
+   
+   // 글 수정 페이지 view
+   @GetMapping("/modify/{bno}")
+   public String modifyBoard(@PathVariable int bno, Model model) {
+      log.info("/home/modify/{}: GET!", bno);
+      
+
+      BoardDetailResponseDTO modifyDetail = boardService.getModifyDetail(bno);
+      model.addAttribute("m", modifyDetail);
+
+      return "home/modify";
+   }
+
+   // 글 수정 제출 form태그 post
+   @PostMapping("/modify")
+   public String modifySubmit(BoardModifyRequestDTO dto) {
+      log.info("/home/modify : POST! {}", dto);
+
+      log.info("file-name: {}", dto.getFile().getOriginalFilename());
+      log.info("file-size: {}KB", dto.getFile().getSize() / 1024.0); // getSize()는 MB 단위
+      log.info("file-type: {}", dto.getFile().getContentType());
+
+      // 서버에 파일 업로드 지시
+      String savePath = null;
+
+      if (dto.getFile().getSize() == 0) {
+         // 아무것도 업로드 안함 -> 수정할 때는 원래 있었던 이미지 파일을 유지하는게 좋을듯, DB 수정은 안함
+         BoardDetailResponseDTO modifyDetail = boardService.getModifyDetail(dto.getBno());
+         String storedImgPath = modifyDetail.getPostImg();
+         savePath = storedImgPath;
+
+         boardService.modifyBoard(dto, savePath);
+
+      } else {
+
+         // 무언가 업로드 -> 새로 업로드
+         savePath = FileUtils.uploadFile(dto.getFile(), rootPath);
+
+         // DB에 정보 수정
+         boardService.modifyBoard(dto, savePath);
+      }
+
+      log.info("save-path: {}", savePath);
+
+
+
+      return "redirect:/home/detail/" + dto.getBno();
+   }
+
 
    // 글쓰기 제출 페이지 (DTO 안쓰고)
    @PostMapping("/write")

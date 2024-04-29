@@ -178,6 +178,7 @@ public class HomeController {
 //        Cookie c = WebUtils.getCookie(request, "like" + bno);
       // 좋아요 이미 눌렀는지 확인하기
       int like = boardService.checkLike(request, bno);
+      log.info("already pushed like or not? : " + like);
 
       if (like > 0) { // 이미 좋아요를 눌렀다면
          model.addAttribute("l", 1);

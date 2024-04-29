@@ -93,9 +93,11 @@
         </c:forEach>
     </div>
  <!-- 게시글 목록 하단 영역 -->
+
  <div class="bottom-section">
 
   <!-- 페이지 버튼 영역 -->
+  
   <nav aria-label="Page navigation example">
       <ul class="pagination pagination-lg pagination-custom">
           <c:if test="${maker.page.pageNo != 1}">
@@ -109,14 +111,14 @@
                                        href="/wel/myCode?pageNo=${maker.begin-1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">prev</a>
               </li>
           </c:if>
-
+         
           <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
               <li data-page-num="${i}" class="page-item">
                   <a class="page-link"
                      href="/wel/myCode?pageNo=${i}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">${i}</a>
               </li>
           </c:forEach>
-
+      
           <c:if test="${maker.next}">
               <li class="page-item"><a class="page-link"
                                        href="/wel/myCode?pageNo=${maker.end+1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">next</a>
@@ -133,7 +135,7 @@
   </nav>
 
 </div>
-    
+
 
   </div>
 </div>

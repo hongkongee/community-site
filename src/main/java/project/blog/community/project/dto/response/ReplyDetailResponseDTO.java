@@ -37,7 +37,7 @@ public class ReplyDetailResponseDTO {
       this.updateDate = reply.getUpdateDate();
       this.account = reply.getAccount();
       // prfile수정
-      this.profilePicture = reply.getProfileImage();
+      this.profilePicture = reply.getProfilePicture();
       this.loginMethod = reply.getLoginMethod();
    }
 

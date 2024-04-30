@@ -2,7 +2,7 @@ const $writer = document.getElementById('writer');
 const $writerInformation = document.querySelector('.writer-info');
 const bno = document.querySelector('.board-info').dataset.bno; // 현재 페이지 글번호
 const writer = document.querySelector('.board-info').dataset.writer; // 현재 페이지 작성자
-let likeFlag = 0; // 쿠키 존재 여부 (1 이면 좋아요 이미 부여)
+
 const $likeLabel = document.querySelector('.like .like-label'); // 좋아요 텍스트
 const $heartBtn = document.querySelector('.like>i.fa-heart'); // 좋아요 하트 아이콘
 const writerAccount = document.querySelector('.board-info').dataset.writeraccount; // 현재 페이지 작성자 계정
@@ -29,297 +29,6 @@ $copyUrl.onclick = () => {
   alert("페이지 URL이 복사되었습니다.: " + currentPageUrl);
 
 };
-/*
-// 댓글 기능 
-const replyURL = '/api/v1/replies';
-const loginAccount = '${login.account}'; // 로그인한 사람 계정
-const auth = '${login.auth}'; // 로그인한 사람 권한
-
-console.log(loginAccount);
-console.log(auth);
-
-// 댓글 삭제 + 수정모드 진입 이벤트 핸들러
-function makeReplyRemoveClickHandler() {
-
-  const $replyData = document.getElementById('replyData');
-
-  $replyData.onclick = e => {
-    e.preventDefault();
-
-    const rno = e.target.closest('#replyContent').dataset.replyid;
-
-    if (e.target.matches('#replyDelBtn')) {
-      if (!confirm('정말로 삭제하시겠습니까?')) return;
-
-      fetch(`${replyURL}/${rno}`, {
-          method: 'DELETE'
-        })
-        .then(rest => {
-          if (res.status == 200) {
-            alert('댓글이 삭제되었습니다.');
-            fetchGetReplies();
-          } else {
-            alert('오류가 발생했습니다. 관리자에게 문의하세요.');
-            return;
-          }
-        });
-
-
-    } else if (e.target.matche('#replyModBtn')) {
-      // 기존에 작성한 댓글 내용을 가져오기
-      const replyText = e.target.parentNode.previousElementSibling.textContent;
-      // 읽어온 댓글 내용을 모달 바다에 집어넣기
-      document.getElementById('modReplyText').value = replyText;
-      // 읽어놓은 댓글번호도 모달 안에 있는 input hidden에 집어놓기
-      document.getElementById('modReplyId').value = rno;
-
-    }
-
-  }
-
-}
-
-function makeReplyModifyClickhHandler() {
-
-  const $modBtn = document.getElementById('replyModBtn');
-
-  $modBtn.addEventListener('click', e => {
-
-      const payload = {
-        rno: +document.getElementById('modReplyId').value,
-        text: document.getElementById('modReplyText').value
-      };
-      console.log(payload);
-
-      const requestInfo = {
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      };
-
-      fetch(replyURL, requestInfo)
-        .then(res => {
-          if (res.status == 200) {
-            alert('댓글이 수정되었습니다.');
-            document.getElementById('modal-close').click();
-            return res.text();
-          } else {
-            alert('수정값에 문제가 있습니다. 내용을 확인하세요!');
-            document.getElementById('modalReplyText').value = '';
-            return;
-          }
-        })
-        .then(data => {
-          console.log(data);
-          fetchGetReplies();
-        });
-  });
-
-}
-
-
-// 화면에 페이지 버튼들을 렌더링하는 함수
-function renderPage({
-  begin,
-  end,
-  prev,
-  next,
-  page,
-  finalPage
-}) {
-  let tag = '';
-
-  if (prev) {
-    tag += `<li class='page-item'><a class='page-link page-active' href='${begin - 1}'>이전</a></li>`;
-  }
-
-  for (let i = begin; i <= end; i++) {
-    let active = '';
-    if (page.pageNo === i) {
-      active = 'active';
-    }
-    tag += `<li class='page-item ${active}'><a class='page-link page-custom' href='${i}'>${i}</a></li>`;
-  }
-
-  if (next) {
-    tag += `<li class='page-item'><a class='page-link page-active' href='${end + 1}'>다음</a></li>`;
-  }
-
-  const $pageUl = document.querySelector('.pagination');
-  $pageUl.innerHTML = tag;
-
-}
-
-
-// 화면에 댓글 태그들을 렌더링하는 함수
-function renderReplies(replyList) {
-  const {
-    count,
-    pageInfo,
-    replies
-  } = replyList;
-  let tag = '';
-
-  if (replies !== null && replies.length > 0) {
-    for (let reply of replies) {
-      // 객체 디스트럭처링
-      const {
-        rno,
-        writer,
-        text,
-        regDate,
-        updateDate,
-        account,
-        profile,
-        loginMethod
-      } = reply;
-
-      tag += `
-                     <div id='replyContent' class='card-body' data-replyId='${rno}'>
-                     <div class='row user-block'>
-                     <span class='col-md-8'>`;
-
-      let profileTag = '';
-      if (profile) {
-        if (loginMethod.trim() === 'COMMON') {
-          profileTag = `<img class='reply-profile' src='/local${profile}' alt='profile image' >`;
-        } else {
-          profileTag = `<img class='reply-profile' src='${profile}' alt='profile image' >`;
-        }
-      } else {
-        profileTag = `<img class='reply-profile' src='/assets/img/jjanggu.jpg' alt='default profile' style="width: 45px; height: 45px; border-radius: 50%; overflow: hidden; font-size: 12px; margin-right: 20px;" >`;
-      }
-      tag += profileTag;
-
-      //tag += (profile ? `<img class='reply-profile' src='/local\${profile}' alt='profile image' >`
-      //                  : `<img class='reply-profile' src='/assets/img/anonymous.jpg' alt='anonymous image' >`);
-
-      tag += `<b>${writer}</b>
-                     </span>
-                     <span class='col-md-4 text-right' style="width= 30%;"><b style="font-size:13px;">${updateDate ? updateDate : regDate}</b></span>
-                     </div><br>
-                     <div class='row'>
-                     <div class='col-md-9'>${text}</div>
-                     <div class='col-md-3 text-right' style="display: flex;">`;
-
-      
-        tag += `
-                     <a id='replyModBtn' class='fa-solid fa-user-pen' data-bs-toggle='modal' data-bs-target='#replyModifyModal' style="font-size:13px;">수정</a>&nbsp;
-                     <a id='replyDelBtn' class='fa-solid fa-delete-left' href='#' style="font-size:13px;">삭제</a>`;
-      
-
-
-      tag += `   </div>
-                  </div>
-                  </div>
-                  `;
-    }
-  } else {
-    tag += "<div id='replyContent' class='card-body'>댓글이 아직 없습니다!</div>";
-  }
-  // 댓글 수 렌더링
-  document.getElementById('replyCnt').textContent = count;
-  // 댓글 렌더링
-  // 반복문을 이용해서 문자열로 작성한 tag를 댓글영역 div에 innerHTML로 그대로 삽입.
-  document.getElementById('replyData').innerHTML = tag;
-
-  // 페이지 렌더링 함수 호출
-  renderPage(pageInfo);
-
-};
-
-function makePageButtonClickHandler() {
-  const $pageUl = document.querySelector('.pagination');
-
-  $pageUl.onclick = e => {
-    if (!e.target.matches('.page-item a')) return;
-    e.preventDefault();
-    fetchGetReplies(e.target.getAttribute('href'));
-  }
-
-
-}
-
-function fetchGetReplies(pageNum = 1) {
-  fetch(`${replyURL}/${bno}/page/${pageNum}`)
-    .then(res => res.json())
-    .then(replyList => {
-      console.log(replyList);
-
-      renderReplies(replyList);
-    })
-}
-
-// 댓글 추가 버튼 등록
-const $replyAddBtn = document.getElementById('replyAddBtn');
-
-// 댓글 버튼 이벤트
-if ($replyAddBtn) {
-  $replyAddBtn.onclick = e => {
-
-    // 댓글 내용
-    const $replyText = document.getElementById('newReplyText');
-    // 댓글 작성자
-    const $replyWriter = document.getElementById('newReplyWriter');
-
-    // 공백 제거된 값을 얻기
-    const textVal = $replyText.value.trim();
-    const writerVal = $replyWriter.value.trim();
-
-    // 사용자 입력값 검증
-    if (textVal === '') {
-      alert('댓글 내용은 필수값입니다.');
-      return;
-    } else if (writerVal === '') {
-      alert('댓글 작성자는 필수값입니다.');
-      return;
-    } else if (writerVal.length < 2 || writerVal.length > 8) {
-      alert('댓글 작성자는 2글자에서 8글자 사이로 작성하세요!');
-      return;
-    }
-
-    // 서버로 보낼 데이터 준비. (js 객체)
-    const payload = {
-      text: textVal,
-      author: writerVal,
-      bno: bno
-    };
-
-    // 요청 방식 및 데이터를 전달할 정보 객체 만들기 (POST)
-    const requestInfo = {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    }
-
-    // 서버에서 POST 요청 보내기
-    fetch(replyURL, requestInfo)
-      .then(res => {
-        console.log(res.status);
-        if (res.status === 200) {
-          alert('댓글이 정상 등록되었습니다.')
-          return res.text();
-        } else {
-          alert('댓글 등록에 실패하였습니다.')
-          return res.text();
-        }
-      })
-      .then(data => {
-        console.log('응답 성공! ', data);
-        $replyText.value = '';
-        $replyWriter.value = '';
-
-        // 댓글 목록 새로고침
-        fetchGetReplies();
-      });
-
-  }
-}
-*/
 
 
 
@@ -350,11 +59,14 @@ function likeCountUpDown(n) {
 
 }
 
+let likeFlag;
+
 // 페이지 진입 부터 좋아요 하트 체크여부 부여 (과거 이미 체크했다면 부여)
 function alreadyLike() {
+  console.log('alreadyLike 실행!!');
 
   // DB에 이미 저장됨 (이미 클릭) -> likeFlag = 1
-  likeFlag = document.querySelector('.like').dataset.likeCookie;
+  likeFlag = document.getElementById('like-data').dataset.likeornot;
   likeFlag = Number(likeFlag);
   console.log('이미 좋아요를 눌렀나요?', likeFlag);
 
@@ -442,6 +154,11 @@ document.querySelector('.wrapper').onclick = e => {
     return;
   }
 
+  if (e.target.matches('#delete')) { // 삭제 버튼을 누르면
+    clickDeleteButton();
+    returnl
+  }
+
   // 그 외의 영역을 누르면
   console.log('창 닫기');
   $writerInformation.style.display = 'none'; // 창이 없어진다
@@ -521,7 +238,10 @@ document.getElementById('report-form').addEventListener("submit", function (e) {
 
 
 
-});
+}); // 신고 영역 end
+
+
+
 
 // 팔로잉 누르기
 const $addFollowing = document.getElementById('add-following');
@@ -565,9 +285,33 @@ $addFollowing.onclick = () => {
 
 };
 
+// 수정 버튼 누르기
+
+// 삭제 버튼 누르기
+function clickDeleteButton() {
+  if (confirm('정말로 삭제하시겠습니까?')) {
+    // bno = Number(bno);
+    // console.log(typeof bno);
+
+    fetch('/home/remove/' + bno)
+    .then(response =>  {
+      console.log(response)
+      window.location.href = '/home/board/all';
+    });
+
+  } else {
+    return;
+  }
+}
+  
+
+
+
+
 
 // 즉시 실행 함수
 (() => {
+  console.log('즉시 실행함수~');
 
   alreadyLike();
 

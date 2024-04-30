@@ -17,14 +17,7 @@ public class MyCodeListResponseDTO {
     private final String regDate;
     private final String writer;
     private final String programming;
-
-//    public GalleryListResponseDTO(Gallery gallery) {
-//        this.PhotoNumber = gallery.getPhotoNumber();
-//        this.shortTitle = makeShortTitle(gallery.getTitle());
-//
-//        this.regDate = makePrettierDateString(gallery.getRegDate());
-//        this.writer = gallery.getUser();
-//    }
+    
 public MyCodeListResponseDTO(MyCode myCode) {
     this.codeNo = myCode.getCodeNo();
     this.shortTitle = (myCode.getTitle() != null) ? makeShortTitle(myCode.getTitle()) : null;

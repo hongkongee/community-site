@@ -8,6 +8,7 @@ import project.blog.community.project.entity.Market;
 
 import javax.management.loading.PrivateClassLoader;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @ToString
@@ -16,7 +17,7 @@ public class MarketDetailResponse {
     private final int boardNo;
     private final String textTitle;
     private final String textContent;
-    private final LocalDateTime updateDate;
+    private final String updateDate;
     private final String textWriter;
     private final String category;
     private final int price;
@@ -33,7 +34,7 @@ public class MarketDetailResponse {
         this.boardNo = market.getBoardNo();
         this.textTitle = market.getTextTitle();
         this.textContent = market.getTextContent();
-        this.updateDate = market.getUpdateDate();
+        this.updateDate = makePrettierDateString(market.getUpdateDate());
         this.textWriter = market.getTextWriter();
         this.category = market.getCategory();
         this.price = market.getPrice();
@@ -43,6 +44,12 @@ public class MarketDetailResponse {
         this.message = market.getMessage();
         this.rate = market.getRate();
         this.file = market.getFile();
+    }
+
+
+    public static String makePrettierDateString(LocalDateTime updateDate) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return dtf.format(updateDate);//재가공
     }
 
 }

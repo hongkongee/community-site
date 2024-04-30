@@ -1,11 +1,9 @@
 package project.blog.community.project.dto.response;
 
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
+import project.blog.community.project.common.PageMaker;
 import project.blog.community.project.entity.Favorite;
 import project.blog.community.project.entity.Market;
 
@@ -18,6 +16,10 @@ import java.util.List;
 
 public class
 MarketListResponseDTO {
+
+    //페이지 만들기 요소
+
+
 
     private final int boardNo;
     private final String textWriter;
@@ -52,6 +54,11 @@ MarketListResponseDTO {
         this.file = market.getFile();
         this.isFavorite = 0;
 
+
+
+
+
+
         // favorite
         if (boards.contains(this.boardNo)) {
             this.isFavorite = 1;
@@ -61,6 +68,9 @@ MarketListResponseDTO {
 
     }
 
+
+
+    //시간 재가공
     public static String makePrettierDateString(LocalDateTime updateDate) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return dtf.format(updateDate);//재가공

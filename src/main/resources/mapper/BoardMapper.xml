@@ -179,6 +179,12 @@
         WHERE bno=#{bno}
     </delete>
 
+    <update id="updateBoard">
+        UPDATE tbl_board
+        SET title = #{title}, content = #{content}, category = #{category}, post_img = #{postImg}
+        WHERE bno = #{bno}
+    </update>
+
     <select id="checkReportCount" resultType="int">
         SELECT report_count
         FROM tbl_board

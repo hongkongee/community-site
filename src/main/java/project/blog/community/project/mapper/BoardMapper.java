@@ -60,6 +60,9 @@ public interface BoardMapper {
     // 게시물 삭제
     void delete(int bno);
 
+    // 게시물 수정
+    void updateBoard(Board board);
+
     // 게시물 검색
     List<Board> findSearch(@Param("page") Search page, @Param("account") String account);
     

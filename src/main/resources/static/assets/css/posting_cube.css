@@ -7,13 +7,13 @@ body {
     font-family: "Orbit", sans-serif;
     font-weight: 400;
     font-style: normal;
-    background: #00196b;
+    background: #000080;
 }
 
 .MypostcubeJsp {
     width: 100%;
     height: 100%;
-    background: #00196b;
+    background: #000080;
     padding: 20px;
 }
 
@@ -42,8 +42,8 @@ body {
 .add-btn {
     width: 110px;
     height: 40px;
-    background: #7AA2E3;
-    border: 1px solid #7AA2E3;
+    background: #000080;
+    color: white;
     border-radius: 60px;
     font-size: 15px;
     font-family: "Orbit", sans-serif;
@@ -53,6 +53,8 @@ body {
 
 .add-btn:hover {
     background: white;
+    border: 1px solid #000080;
+    color: #000080;
 }
 
 .amount {
@@ -67,15 +69,26 @@ body {
     width: 30px;
     height: 30px;
     border-radius: 60px;
-    background: #7AA2E3;
+    background:#000080;
     display: flex;
     justify-content: center;
     align-items: center;
+    /* color: white; */
+}
+
+.amount div a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.amount div a:hover {
+    color: #000080;
 }
 
 .amount div:hover {
-    border-radius: 0;
+    border: 1px solid #000080;
     background: white;
+    color: #000080;
 }
 
 .amount div:last-child {
@@ -100,13 +113,14 @@ body {
     cursor: pointer;
     transition: 0.5s;
     margin: 20px 10px;
+    border: 1px solid #000080;
+    border-radius: 20px;
+    overflow: hidden;
    
 }
 
 .post-container .post {
     transition: 0.5s;
-    border: 1px solid #00196b;
-    border-radius: 10px;
     position: absolute;
     background: white;
     overflow: hidden;
@@ -118,7 +132,7 @@ body {
 
 .post-container .post .post-photo {
     width: 100%;
-    height: 200px;
+    height: 250px;
 }
 
 .post-container .post img {
@@ -146,6 +160,7 @@ body {
     align-items: center;
     padding: 5px 10px;
     border-top: 1px solid black;
+    margin-top: 20px;
 }
 
 .post-container .post-wrapper .card-btn-group {
@@ -166,7 +181,7 @@ body {
     position: absolute;
     right: -10px;
     top: -10px;
-    z-index: 100;
+    z-index: 1000;
 }
 
 .card-btn-group .del-btn {
@@ -185,27 +200,9 @@ body {
 
 /* ---------------------------------삭제 버튼 끝---------------------------------- */
 
-/* -------------------------------댓글 & 좋아요 시작------------------------------- */
-.post-container .post .post-reply {
+/* -------------------------------좋아요 시작------------------------------- */
+.post {
     width: 100%;
-    display: inline-flex;
-    justify-content: space-between;
-    background: white;
-    border-top: #7AA2E3;
-}
-
-.post-container .post .post-reply .reply {
-    justify-content: space-between;
-    border: 1px solid #7AA2E3;
-    background: #7AA2E3;
-    width: 120px;
-    font-size: 15px;
-    margin-left: 10px;
-}
-
-.post-container .post .post-reply .reply-rec {
-    border: 1px solid #7AA2E3;
-    width: 60%;
 }
 
 .like {
@@ -217,7 +214,7 @@ body {
   }
 
  
-/* -------------------------------댓글 & 좋아요 시작------------------------------- */
+/* -------------------------------좋아요 끝------------------------------- */
 
 
 /* -------------------------------pagination 시작--------------------------------- */
@@ -304,13 +301,14 @@ body {
 
 .modal-buttons .confirm {
     color: white;
-    background-color: #007bff;
+    background-color: #000080;
     border-radius: 4px;
 }
 
 .modal-buttons .cancel {
-    color: #f5f5f5;
-    background-color: #dd1111;
+    color: black;
+    background-color: white;
+    border: 1px solid #000080;
     border-radius: 4px;
 }
 /* --------------------------------모달창: 정말 삭제? 끝------------------------- */

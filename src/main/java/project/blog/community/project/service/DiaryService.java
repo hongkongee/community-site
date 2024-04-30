@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import project.blog.community.project.dto.request.DiaryPostRequestDTO;
 import project.blog.community.project.dto.response.DiaryDetailResponseDTO;
 import project.blog.community.project.dto.response.DiaryListResponseDTO;
+import project.blog.community.project.dto.response.LoginUserResponseDTO;
 import project.blog.community.project.entity.Diary;
 import project.blog.community.project.mapper.DiaryMapper;
 
@@ -41,10 +42,12 @@ public class DiaryService {
 
     }
 
-    public List<DiaryDetailResponseDTO> getTodoList(String regDate) {
+    public List<DiaryDetailResponseDTO> getTodoList(String regDate, HttpSession session) {
         List<DiaryDetailResponseDTO> dtoList = new ArrayList<>();
+        LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+        String myAccount = loginDto.getAccountNumber();
 
-        List<Diary> todoList = diaryMapper.findTodoList(regDate);
+        List<Diary> todoList = diaryMapper.findTodoList(regDate, myAccount);
         for (Diary diary : todoList) {
             dtoList.add(new DiaryDetailResponseDTO(diary));
         }

@@ -73,18 +73,18 @@ body {
     background: white;
 }
 
-/* .Frame45 table tbody {
-    
-} */
+.Frame45 table td:hover {
+    background: #000080;
+    color: white;
+    opacity: 90%;
+}
+
 
 .Frame45 table #this-month {
     font-size: 30px;
+    text-align: center;
 }
 
-/* table td {
-    background-color: white;
-    text-align: left;
-} */
 
 .Frame45 .Sun {
     color: red;
@@ -95,41 +95,42 @@ body {
 }
 #next-month{
 background: #fff;
-    color: #333;
+    color: black;
     font: inherit;
     font-weight: 700;
     border-radius: 7px;
-    border: 2px solid #ededed;
+    border: 2px solid #000080;
     padding: 7px 10px;
+    margin: 20px 10px;
 }
 #prev-month{
     background: #fff;
-    color: #333;
+    color:black;
     font: inherit;
     font-weight: 700;
     border-radius: 7px;
-    border: 2px solid #ededed;
+    border: 2px solid #000080;
     padding: 7px 10px;
+    margin: 20px;
 }
 #prev-month:hover{
-    background: #7c7c7c;;
+    background: #000080;;
     color: #fff;
-    border: 2px solid blue;
+    border: none;
 }
 #next-month:hover{
-    background: #7c7c7c;;
+    background: #000080;;
     color: #fff;
-    border: 2px solid blue;
+    border: none;
 }
 /* ---------------------캘린더 끝--------------------- */
 
 .Frame45 .Frame57 {
     width: 70%;
     height: auto;
-    background: white;
+    background: #AAD6EC;
     border-radius: 60px;
     overflow: hidden;
-    border: 1px solid #000080;
     margin: 5% auto; 
     position: relative;
     display: flex;
@@ -141,18 +142,17 @@ background: #fff;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 50px;
     position: relative;
-    width: 35%;
+    width: 40%;
     padding: 10px;
 }
 
 .Frame45 .whatdo {
-    width: 45%;
+    width: 50%;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    margin: 30px;
+    margin: 30px 0 30px 50px;
     position: relative;
     padding: 10px;
     left: 20px;
@@ -166,13 +166,13 @@ background: #fff;
     font-size: 20px;
     font-weight: bold;
     position: relative;
-    background: white;
+    background: #AAD6EC;
     border-radius: 60px;
     padding: 20px;
 }
 
 .Frame45 .todo textarea {
-    width: 80%;
+    width: 100%;
     height: 200px;
     border: none;
     border-radius: 60px;
@@ -180,7 +180,7 @@ background: #fff;
     font-size: 20px;
     font-family: inherit;
     overflow-y: auto;
-    border: 1px solid #000080;
+    border: 5px solid #000080;
 }
 
 .Frame45 .story {
@@ -191,14 +191,14 @@ background: #fff;
     font-weight: bold;
     margin-right: 10px;
     position: relative;
-    background: white;
+    background: #AAD6EC;
     border-radius: 60px;
     padding: 20px;
     text-align: center;
 }
 
 .Frame45 .whatdo textarea {
-    width: 70%;
+    width: 100%;
     height: 200px;
     border: none;
     border-radius: 60px;
@@ -206,7 +206,7 @@ background: #fff;
     font-size: 20px;
     font-family: inherit;
     overflow-y: auto;
-    border: 1px solid #000080;
+    border: 5px solid #000080;
 }
 
 .Frame45 .Frame57 button {
@@ -218,14 +218,14 @@ background: #fff;
     bottom: 20px;
     right: 20px;
     border-radius: 7px;
-    border: 2px solid #ededed;
+    border: 2px solid #000080;
     padding: 7px 10px;
     background: #fff;
 }
 
 .Frame45 .Frame57 .rightbtn {
     bottom: -25px;
-    right: -15px;
+    right: -40px;
 }
 
 .Frame45 .Frame57 .leftbtn {
@@ -233,9 +233,9 @@ background: #fff;
     bottom: -25px;
 }
 .Frame45 .Frame57 button:hover{
-    background: #7c7c7c;
+    background: #000080;;
     color: #fff;
-    border: 2px solid blue;
+    border: none;
 }
 
 /* --------------------일정, 일기 작성란 끝---------------------- */
@@ -244,10 +244,9 @@ background: #fff;
 .Frame45 .saved {
     width: 70%;
     height: auto;
-    background: white;
+    background: #AAD6EC;
     border-radius: 60px;
     overflow: hidden;
-    border: 1px solid #000080;
     margin: 5% auto;
     position: relative;
     display: flex;
@@ -258,12 +257,13 @@ background: #fff;
 .Frame45 .saved .todo-saved {
     width: 40%;
     height: 300px;
-    border: 1px solid #000080;
+    border: 5px solid #000080;
     border-radius: 60px;
     padding: 30px;
     font-size: 25px;
     line-height: 2;
     overflow: auto;
+    background: white;
 }
 
 .Frame45 .saved .todo-saved::-webkit-scrollbar {
@@ -274,16 +274,21 @@ background: #fff;
 .Frame45 .saved .whatdo-saved {
     width: 40%;
     height: 300px;
-    border: 1px solid #000080;
+    border: 5px solid #000080;
     border-radius: 60px;
     padding: 30px;
     font-size: 25px;
     line-height: 2;
     overflow: auto;
+    background: white;
 }
 
 .Frame45 .saved .whatdo-saved::-webkit-scrollbar {
     display: none;
+}
+
+.whatdo-saved li {
+    list-style-type: none;
 }
 
 

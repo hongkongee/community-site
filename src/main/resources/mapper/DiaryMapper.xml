@@ -23,6 +23,7 @@
     <select id="findTodoList" resultType="Diary">
         SELECT * FROM tbl_diary
         WHERE reg_date = #{regDate}
+        AND writer = #{myAccount}
         ORDER BY diary_no DESC;
     </select>
 

@@ -49,25 +49,15 @@ public class DiaryController {
 
     // 마이페이지->다이어리로 이동
     @GetMapping("/diary")
-    public String todoDiary() {
+    public String todoDiary(HttpServletRequest request) {
         log.info("/mypage/diary: GET!!!");
+
+        HttpSession session = request.getSession();
+        session.getAttribute("login");
+        String writer = getCurrentLoginMemberAccount(session);
       return "mypage/diary";
    }
 
-//   @GetMapping("/diary")
-//   public String todayDiary() {
-//
-//       LocalDate currentDate = LocalDate.now();
-//
-//       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//
-//       String formattedDate = currentDate.format(formatter);
-//
-//       System.out.println("Today's date: " + formattedDate);
-//
-//
-//       return "redirect:/mypage/diary/" + formattedDate;
-//   }
 
    // 다이어리 -> 할일 저장 요청 (비동기)
     @PostMapping("/diary/todo")
@@ -87,12 +77,12 @@ public class DiaryController {
     }
 
 
-//     todoList 날짜별 요청
+    // todoList 날짜별 요청
     @GetMapping("/diary/{regDate}")
-    public ResponseEntity<?> todoList(@PathVariable String regDate) {
+    public ResponseEntity<?> todoList(@PathVariable String regDate, HttpSession session) {
         log.info("/diary/{}: GET!!", regDate);
 
-        List<DiaryDetailResponseDTO> todoLists = diaryService.getTodoList(regDate);
+        List<DiaryDetailResponseDTO> todoLists = diaryService.getTodoList(regDate, session);
         log.info("todoList: {}", todoLists);
 
         return ResponseEntity.ok().body(todoLists);
@@ -123,28 +113,6 @@ public class DiaryController {
     }
 
 
-    // 좋아요 버튼
-    @PostMapping("/posting_cube/like/{bno}") // URL에 {bno}를 포함시킴
-    @ResponseBody
-    public ResponseEntity<Integer> like(@PathVariable("bno") int bno, @RequestBody LikeRequestDTO dto,
-                                        HttpServletRequest request, Model model) {
-        log.info("/mypage/posting_cube/like: POST: {}, {}", dto.getBno(), dto.getNumber());
-
-        // 좋아요 이미 눌렀는지 확인하기
-        int like = service.checkLike(request, bno);
-
-        if (like > 0) { // 이미 좋아요를 눌렀다면
-            model.addAttribute("l", 1);
-        } else { // 좋아요를 누르지 않았다면
-            model.addAttribute("l", 0);
-        }
-
-        // 좋아요 수 1 증가 또는 1 감소시키기
-        int isCookie = service.changeLike(dto, request);
-        return ResponseEntity.ok().body(isCookie);
-    }
-
-
    // 큐브 게시물 누르면 그 게시물로 이동
    @GetMapping("/posting_cube/{bno}")
    public String detail(@PathVariable("bno") int bno, @ModelAttribute("s") Search search, Model model) {
@@ -157,14 +125,12 @@ public class DiaryController {
    }
 
 
-
    // 글 작성하기 누르면 새로운 글 작성하는 페이지로 이동
    @GetMapping("/newposting")
    public String newposting() {
       log.info("/mypage/newposting: GET!!!");
       return "mypage/newposting";
    }
-
 
 
     // 글쓰기 제출 페이지 (DTO 안쓰고)
@@ -213,6 +179,29 @@ public class DiaryController {
 
         return "redirect:/mypage/posting_cube";
     }
+
+
+    // 좋아요 버튼
+    @PostMapping("/posting_cube/like/{bno}")
+    @ResponseBody
+    public ResponseEntity<Integer> like(@PathVariable("bno") int bno, @RequestBody LikeRequestDTO dto,
+                                        HttpServletRequest request, Model model) {
+        log.info("/mypage/posting_cube/like/{bno}: POST: {}, {}", dto.getBno(), dto.getNumber());
+
+        // 좋아요 이미 눌렀는지 확인하기
+        int like = service.checkLike(request, bno);
+
+        if (like > 0) { // 이미 좋아요를 눌렀다면
+            model.addAttribute("l", 1);
+        } else { // 좋아요를 누르지 않았다면
+            model.addAttribute("l", 0);
+        }
+
+        // 좋아요 수 1 증가 또는 1 감소시키기
+        int isCookie = service.changeLike(dto, request);
+        return ResponseEntity.ok().body(isCookie);
+    }
+
 
 
 

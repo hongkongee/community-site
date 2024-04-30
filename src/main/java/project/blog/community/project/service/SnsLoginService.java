@@ -227,8 +227,8 @@ public class SnsLoginService {
         GoogleUserResponseDTO dto = getGoogleUserInfo(accessToken);
 
         // 구글에서 받은 회원정보로 우리 사이트 회원가입
-        // 구글은 아이디를 제공하지 않아 locale + localDateTime.now()를 이용해 임의 생성
-        String id = dto.getLocale() + LocalDateTime.now();
+        // 구글은 아이디를 제공하지 않아 email + google 로 임의 아이디 생성
+        String id = dto.getEmail() + "google" ;
         log.info("구글 소셜 아이디: {}", id);
 
         // 회원 중복 확인 (아이디)

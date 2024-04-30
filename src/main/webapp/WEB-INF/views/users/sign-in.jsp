@@ -175,9 +175,21 @@
             </div>
 
         </div>
+    </div>
+    </div>
 
-    </div>
-    </div>
+    <script>
+
+        const serverResult = '${result}';
+        console.log(serverResult);
+
+        if (serverResult === 'NO_ACC') {
+            alert('존재하지 않는 아이디입니다.');
+        } else if (serverResult === 'NO_PW') {
+            alert('비밀번호가 틀렸습니다.');
+        }
+
+    </script>
 
 
 

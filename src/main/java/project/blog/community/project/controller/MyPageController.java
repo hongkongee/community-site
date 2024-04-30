@@ -58,6 +58,7 @@ public class MyPageController {
       // 홈페이지 유저 정보 가져오기
       MypageUserResponseDTO userInformation = userService.getUserInformation(account);
       model.addAttribute("user", userInformation);
+      log.info("user account is : {}", userInformation.getAccountNumber());
 
 //      log.info("user: " + userInformation.toString());
 
@@ -65,6 +66,7 @@ public class MyPageController {
       // 로그인한 유저의 정보가져오기
       HttpSession session = request.getSession();
       LoginUserResponseDTO loginDto = (LoginUserResponseDTO) session.getAttribute("login");
+      log.info("login account is : {}", loginDto.accountNumber);
 
 //      String loginAccount = getCurrentLoginMemberAccount(session);
       model.addAttribute("login", loginDto);

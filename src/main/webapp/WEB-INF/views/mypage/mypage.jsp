@@ -60,7 +60,14 @@
                                 <img class="user-profile-pic" src="/display${user.profilePicture}" alt="프사">
                             </c:when>
                             <c:otherwise>
-                                <img src="${user.profilePicture}" alt="프사">
+                                <c:if test="${fn:contains(user.profilePicture, 'https')}">
+                                    <img class="user-profile-pic" src="${user.profilePicture}" alt="프사">
+                                </c:if>
+
+                                <c:if test="${not fn:contains(user.profilePicture, 'https')}">
+                                    <img class="user-profile-pic" src="/display${user.profilePicture}" alt="프사">
+                                </c:if>
+                                
                             </c:otherwise>
                         </c:choose>
 

@@ -266,6 +266,11 @@ document.getElementById('today-point').onclick = () => {
   console.log('image path is ', imgPath);
 
 
+  console.log('userAccount: ', userAccount); 
+
+  console.log('loginAccount: ', loginAccount);
+
+
 
 })();
 

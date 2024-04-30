@@ -396,7 +396,7 @@
             if (loginMethod.trim() === 'COMMON') {
               profileTag = `<img class='reply-profile' src='/display\${profilePicture}' alt='profile image' style="width: 45px; height: 45px; border-radius: 50%; overflow: hidden; font-size: 12px; margin-right: 20px;" >`;
             } else {
-              profileTag = `<img class='reply-profile' src='/display\${profilePicture}' alt='profile image' style="width: 45px; height: 45px; border-radius: 50%; overflow: hidden; font-size: 12px; margin-right: 20px;" >`;
+              profileTag = `<img class='reply-profile' src='\${profilePicture}' alt='profile image' style="width: 45px; height: 45px; border-radius: 50%; overflow: hidden; font-size: 12px; margin-right: 20px;" >`;
             }
           } else {
             profileTag =

@@ -63,8 +63,6 @@ $modifyBtn.addEventListener('click', e => {
   $editAddress.value = document.getElementById('address').textContent;
 
   
-  $imgSection.value = imgSrc;
-  console.log('요소 취득됨', $modifyBtn.value);
 
 
   console.log($editedTitle.value);

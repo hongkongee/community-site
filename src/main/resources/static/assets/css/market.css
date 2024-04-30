@@ -1,20 +1,20 @@
 /* reset css */
-@import url('https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css');
+/* @import url('https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css'); */
 
 
 /* padding 적용해도 box 사이즈 고정 */
-* {
+/* * {
   box-sizing: border-box;
-}
+} */
 
 /* a태그 기능 죽이기 */
-a {
-  color: #000;
+/* a {
+  color: inherit;
   text-decoration: none;
-}
+} */
 
 /* 버튼 디자인 통일 (추후 수정) */
-.btn {
+/* .btn {
   background: #fff;
   color: #333;
   font: inherit;
@@ -39,7 +39,7 @@ a {
 .btn-red:hover {
   background: #fff;
   color: #ff2e2e;
-}
+} */
 
 
 
@@ -54,26 +54,24 @@ a {
   text-align: center;
 
   width: 60vw;
-  height: 190vh;
+  height: 100vw;
   margin: auto;
-  background: #7AA2E3;
 
 }
 
 
 /*테두리 전체*/
-.content-box {
-  width: 60vw;
+.wrapper .content-box {
+  width: 100%;
   height: 100%;
-  position: relative;
   border-radius: 60px;
-  margin: auto;
-  background: #F8F6E3;
+
+  margin-top: 20px;
 
 
 }
 
-.head {
+.wrapper .head {
   width: 100%;
   height: 5vw;
   position: absolute;
@@ -89,22 +87,18 @@ a {
 
 }
 
-.pointUserName{
+.wrapper .pointUserName{
   color: gold;
 }
 
 
-.title {
-  width: 100%;
-  height: 8vw;
-  margin-top: 15vw;
-  background: white;
-  border: 3px solid #000;
 
-}
+
+
+
 
 /*title*/
-.titleContent {
+.wrapper .titleContent {
   font-size: 30px;
   font-weight: 40px;
   text-align: left;
@@ -113,14 +107,14 @@ a {
 }
 
 /* 요소 구분선 */
-.boardList th:nth-child(n+2) {
+.wrapper .boardList th:nth-child(n+2) {
   position: relative;
   margin-left: 5px;
   padding-left: 10px;
 }
 
 /* 요소 구분선 */
-.boardList th:nth-child(n+2)::after {
+.wrapper .boardList th:nth-child(n+2)::after {
   position:absolute;
   left: 0;
   top: 3px;
@@ -130,19 +124,29 @@ a {
   background-color: rgb(0, 0, 0);
 }
 
+
+.wrapper .titleContentBox{
+  
+  margin: 150px auto 0;
+  font-size: 23px;
+
+}
+
+.wrapper .titleContentBox span{
+  color: black;
+}
+
+
+
 /* 요소 구분선 */
-.titleContentBox span:nth-child(n+2) {
+.wrapper .titleContentBox .title-content:nth-child(n+2) {
   position: relative;
   margin-left: 5px;
   padding-left: 10px;
 }
 
-.titleContentBox>span {
-  color: #000;
-}
-
 /* 요소 구분선 */
-.titleContentBox span:nth-child(n+2)::after {
+.wrapper .titleContentBox .title-content:nth-child(n+2)::after {
   position:absolute;
   left: 0;
   top: 3px;
@@ -155,18 +159,13 @@ a {
 
 
 /*컨텐츠 전체영역*/
-.content-group {
-  width: 100%;
+.wrapper .content-group {
   /* height: 60vw; */
-  position: absolute;
-  top: 5%;
-  background: silver;
-  border: 3px solid #000;
 
-
+  margin-top: 15px;
 }
 
-.contentHead {
+.wrapper .contentHead {
   width: auto;
   color: black;
   font-size: 30px;
@@ -175,7 +174,7 @@ a {
 
 }
 
-.contentHead>div {
+.wrapper .contentHead>div {
   display: inline-block;
   margin-right: 10px;
   /* 각 div 사이의 간격을 조절합니다. */
@@ -184,27 +183,28 @@ a {
 
 
 
-.contentHead div:hover {
+.wrapper .contentHead div:hover {
   color: #ff8342;
 }
 
-.Content1 {
+.wrapper .Content1 {
   margin-top: 30px;
   
 }
 
-.ContentBox {
+.wrapper .ContentBox {
   display: flex;
   margin-top: 3vw;
 }
 
-.textContent {
+.wrapper .textContent {
   width: 60vw; /* 70 문자 너비 */
+  margin: 20px 0 20px 0;
   
 }
 
 
-.ContentImg {
+.wrapper .ContentImg {
   flex: 1 0 auto;
   max-width: 300px;
   max-height: 300px; /* 최대 높이 300px로 제한 */
@@ -219,18 +219,15 @@ a {
 }
 
 
-.ContentImg:hover{
+.wrapper .ContentImg:hover{
   transform: scale(1.1);
   transition: all 1.0s;
 
 }
 
-/* #normal {
-  width: 50% !important;
-  height: 500px;
-} */
 
-.ContentContent {
+
+.wrapper .ContentContent {
   flex: 3 0 auto;
   text-align: left;
   padding-left: 20px;
@@ -247,12 +244,12 @@ a {
 }
 
 
-.pointBox {
+.wrapper .pointBox {
   font-size: 10vh;
   margin-top: 10vh;
 }
 
-.pointCharge {
+.wrapper .pointCharge {
   text-decoration: underline;
   text-decoration-thickness: 4px;
   color: red;
@@ -260,13 +257,13 @@ a {
 }
 
 
-.pointBox .pointGroup button {
+.wrapper .pointBox .pointGroup button {
   border-radius: 10px;
   margin: 1vw;
 
 }
 
-.pointBox .pointGroup button:hover {
+.wrapper .pointBox .pointGroup button:hover {
   background-color:#002ead;
   transition: 0.7s;
 
@@ -276,7 +273,7 @@ a {
 
 
 /* reply 댓글영역 */
-.reply {
+.wrapper .reply {
   width: 100%;
   height: 150px;
   
@@ -292,17 +289,17 @@ overflow: scroll;
 
 
 
-.reply .replyTitle {
+.wrapper .reply .replyTitle {
   margin-left: 2%;
 }
 
-.reply .replyBox {
+.wrapper .reply .replyBox {
   margin-left: 2%;
 }
 
 
 
-.ad .ad-box {
+.wrapper .ad .ad-box {
   width: 60vw;
 
   margin-top: 5vw;
@@ -314,7 +311,7 @@ overflow: scroll;
 
 
 
-.ad .ad-box .adtitle {
+.wrapper .ad .ad-box .adtitle {
   text-align: left;
   margin: 5% 0 0 2%;
   font-size: 30px;
@@ -322,31 +319,31 @@ overflow: scroll;
 }
 
 
-.ad .ad-box li img{
+.wrapper .ad .ad-box li img{
   border: 3px solid #000;
 
 }
 
 
-.ad .ad-box .add-group li {
+.wrapper .ad .ad-box .add-group li {
   float: left;
   width: 25%;
   box-sizing: border-box;
   padding: 10px; /* 패딩 추가 */
 }
 
-.ad .ad-box .add-group li img {
+.wrapper .ad .ad-box .add-group li img {
   transition: opacity 0.3s; /* transition 속성 수정 */
   overflow: hidden;
   width: 200px;
   height: 200px;
 }
 
-.ad .ad-box .add-group li img:hover {
+.wrapper .ad .ad-box .add-group li img:hover {
   opacity: 0.7; /* 이미지에 마우스 호버 시 투명도 조절 */
 }
 
-.ad .ad-box .add-group li img::before {
+.wrapper .ad .ad-box .add-group li img::before {
   position: absolute;
   top: 0;
   left: -75%;
@@ -359,7 +356,7 @@ overflow: scroll;
   opacity: 0;
 }
  
-.ad .ad-box .add-group li img:hover::before {
+.wrapper .ad .ad-box .add-group li img:hover::before {
   animation: shine .75s;
 }
 

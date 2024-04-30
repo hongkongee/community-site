@@ -6,32 +6,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-
-  <!-- 폰트 -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
+  <title>게시판 글쓰기</title>
 
 
   <%@ include file="../include/static-head.jsp" %>
-  <link rel="stylesheet" href="/assets/css/market.css">
   <link rel="stylesheet" href="/assets/css/snb.css">
 
-  <!-- Bootstrap CSS 라이브러리를 포함 -->
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- jQuery 라이브러리를 포함 -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-  <!-- Popper.js 라이브러리를 포함 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-  <!-- Bootstrap JavaScript 라이브러리를 포함 -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/assets/css/market.css">
 
 
   <style>
+    /* 구글맵 */
     #map-container {
       text-align: center;
     }
@@ -47,6 +32,7 @@
       height: 500px;
     }
 
+    /* 좋아요 */
     @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
     .rate-star {
@@ -99,10 +85,9 @@
 
 <body>
 
-  <%@ include file="../include/snb.jsp" %>
-
-  <%@ include file="../include/headcss.jsp"%>
   <%@ include file="../include/header.jsp"%>
+
+  <%@ include file="../include/snb.jsp" %>
 
   <!-- 가운데 Content -->
   <div class="wrapper">
@@ -114,31 +99,37 @@
 
       <!-- Head 내용 -->
 
+      <div class="titleContentBox">
+        <span>#작성자 : </span><span id="textWriter" name="textWriter">${b.textWriter}</span>
+        <span class="title-content">#글번호 : </span><span id="boardNo" name="boardNo">${b.boardNo}</span>
+        <span class="title-content">#작성시간 : </span><span id="updateDate" name="updateDate">${b.updateDate}</span>
+        <span class="title-content">#가격 : </span><span id="price" name="price">${b.price}</span><span>원</span><br>
+        <span class="title-content">#판매자 선호 거래지역 : </span><span id="address" name="address">${b.address}</span>
+        <span class="title-content">#판매상태 : </span><span id="selectedCategory" name="category">${b.category}</span>
+        <span class="title-content">#판매자의 좋아요 받은 수 : </span><span id="rate" name="rate">${rate}</span><br><br>
+        
+        
+        <span class="title-content">#제목 : </span><span id="textTitle" name="textTitle">${b.textTitle}</span>
+      </div>
 
 
       <!-- Title 내용 -->
 
 
-      <div class="title">
-        <div class="titleContentBox">
-          <span>#작성자 : </span><span id="textWriter" name="textWriter">${b.textWriter}</span>
-          <span>#글번호 : </span><span id="boardNo" name="boardNo">${b.boardNo}</span>
-          <span>#판매자의 좋아요 받은 수 : </span><span id="rate" name="rate">${rate}</span>
-          <span>#작성시간 : </span><span id="updateDate" name="updateDate">${b.updateDate}</span><br>
-          <span>#제목 : </span><span id="textTitle" name="textTitle">${b.textTitle}</span>
-          <span>#가격 : </span><span id="price" name="price">${b.price}</span><span>원</span>
-          <span>#판매자 선호 거래지역 : </span><span id="address" name="address">${b.address}</span>
-          <span>#판매상태 : </span><span id="selectedCategory" name="category">${b.category}</span>
-        </div>
-      </div>
+
 
 
 
 
       <!-- Content 내용 -->
       <div class="content-group">
+
+
+
+
+
         <div class="Content1">
-          <button class="content-list"><a href="/market/list">목록</a></button></button>
+          <button class="content-list"><a href="/market/list">목록</a></button>
 
           <c:if test="${login.accountNumber == b.textWriter}">
             <button class="content-Write"><a href="/market/write">글쓰기</a></button>
@@ -150,7 +141,7 @@
           </c:if>
 
           <c:if test="${login.accountNumber ne b.textWriter}">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <button type="button"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
               좋아요
             </button>
           </c:if>
@@ -207,7 +198,7 @@
 
                   <label for="editedContent">수정할 내용</label>
                   <textarea class="form-control-lg" id="editedContent" rows="50" cols="100"
-                    style="width: 100%;"></textarea>
+                    style="width: 100%; height: 60%;" ></textarea>
 
                   <select id="editedCategory" name="category">
                     <option value="sale">판매중</option>
@@ -230,11 +221,12 @@
                   <!-- 이미지 업로드 -->
                   <div class="mb-3">
                     <label for="formFile" class="form-label">사진 업로드</label>
-                    <input class="form-control" type="file" id="formFile" name="formFile" accept="image/*" value="${b.file}">
+                    <input class="form-control" type="file" id="formFile" name="formFile" accept="image/*"
+                      value="${b.file}">
                   </div>
 
                   <br>
-                  
+
 
 
 

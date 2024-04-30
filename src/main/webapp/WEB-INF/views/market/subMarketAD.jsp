@@ -35,8 +35,8 @@
     <!-- 광고 더미리스트 -->
     <div class="adSampleList" style="display:none;">
       <div class="ad">
-        <img src="https://image.msscdn.net/images/goods_img/20200306/1338015/1338015_2_500.jpg" />
-        <div class="ad-content">#흰 셔츠<br />#50000원</div>
+        <img src="https://shop-phinf.pstatic.net/20230207_95/1675758661014LVotx_JPEG/KakaoTalk_20230207_172735920_02.jpg?type=w860" />
+        <div class="ad-content">#흰 셔츠<br />#49,000원</div>
       </div>
       <div class="ad">
         <img src="https://static.lookpin.co.kr/20230211105113-07e7/a75da881ce8b00e52b77abe98f126239.jpg" />
@@ -72,7 +72,7 @@
         <div class="ad-content">#게임셔츠<br />#80000원</div>
       </div>
       <div class="ad">
-        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fm.wooilsin.co.kr%2Fproduct%2Fdetail.html%3Fproduct_no%3D295&psig=AOvVaw3_8mRbMsgcWkL82rJi26yF&ust=1714183790171000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMDsy7Pm3oUDFQAAAAAdAAAAABAJ" />
+        <img src="https://img.shoppingntmall.com/goods/373/11474373_h.jpg" />
         <div class="ad-content">#고급 청바지<br />#70000원</div>
       </div>
     </div>

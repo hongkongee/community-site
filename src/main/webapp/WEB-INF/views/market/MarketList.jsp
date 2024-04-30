@@ -6,13 +6,14 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>All page</title>
+  <title>MarketList Page</title>
 
 
   <%@ include file="../include/static-head.jsp" %>
   <link rel="stylesheet" href="/assets/css/allpage.css">
   <link rel="stylesheet" href="/assets/css/snb.css">
 
+  <!-- 즐겨찾기 js defer -->
   <script src="/assets/js/MarketAddFav.js" defer></script>
 
 
@@ -28,6 +29,14 @@
 
     .post {
       cursor: pointer;
+    }
+
+    .boardList th {
+
+      text-align: center;
+      /* 텍스트를 가운데 정렬합니다. */
+      margin: 10px;
+      /* 적절한 내부 여백을 설정합니다. */
     }
   </style>
 
@@ -84,13 +93,13 @@
 
                 <c:choose>
                   <c:when test="${s.file != null}">
-                    <td id="board-img" style="height: 50px; width: 50px;">
+                    <td id="board-img" style="height: 50px; width: 50px; vertical-align: middle;">
                       <img style="width: 100%; height: 100%;" src="/display${s.file}" alt="업로드 이미지">
                     </td>
                   </c:when>
 
                   <c:otherwise>
-                    <td id="board-img" style="height: 50px; width: 50px;"></td>
+                    <td id="board-img" style="height: 50px; width: 50px; vertical-align: middle;"></td>
                   </c:otherwise>
                 </c:choose>
 
@@ -124,9 +133,9 @@
 
           <!-- 댓글 페이징 영역 -->
           <!-- <ul class="pagination justify-content-center"> -->
-            <!--
+          <!--
                 < JS로 댓글 페이징 DIV삽입 >
-            --> 
+            -->
           <!-- </ul>  -->
 
 
@@ -134,57 +143,57 @@
 
             <!-- 페이지 버튼 영역 -->
             <nav aria-label="Page navigation example">
-                <ul class="pagination pagination-lg pagination-custom">
-                    <c:if test="${maker.page.pageNo != 1}">
-                        <li class="page-item"><a class="page-link"
-                                href="/market/list?pageNo=1&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
-                        </li>
-                    </c:if>
+              <ul class="pagination pagination-lg pagination-custom">
+                <c:if test="${maker.page.pageNo != 1}">
+                  <li class="page-item"><a class="page-link"
+                      href="/market/list?pageNo=1&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
+                  </li>
+                </c:if>
 
 
-                    <c:if test="${maker.prev}">
-                        <li class="page-item"><a class="page-link"
-                                href="/market/list?pageNo=${maker.begin-1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">prev</a>
-                        </li>
-                    </c:if>
+                <c:if test="${maker.prev}">
+                  <li class="page-item"><a class="page-link"
+                      href="/market/list?pageNo=${maker.begin-1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">prev</a>
+                  </li>
+                </c:if>
 
-                    <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
-                        <li data-page-num="${i}" class="page-item">
-                            <a class="page-link"
-                                href="/market/list?pageNo=${i}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">${i}</a>
-                        </li>
-                    </c:forEach>
+                <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
+                  <li data-page-num="${i}" class="page-item">
+                    <a class="page-link"
+                      href="/market/list?pageNo=${i}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">${i}</a>
+                  </li>
+                </c:forEach>
 
-                    <c:if test="${maker.next}">
-                        <li class="page-item"><a class="page-link"
-                                href="/market/list?pageNo=${maker.end+1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">next</a>
-                        </li>
-                    </c:if>
+                <c:if test="${maker.next}">
+                  <li class="page-item"><a class="page-link"
+                      href="/market/list?pageNo=${maker.end+1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">next</a>
+                  </li>
+                </c:if>
 
-                    <c:if test="${maker.page.pageNo != maker.finalPage}">
-                        <li class="page-item"><a class="page-link"
-                                href="/market/list?pageNo=${maker.finalPage}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&gt;&gt;</a>
-                        </li>
-                    </c:if>
+                <c:if test="${maker.page.pageNo != maker.finalPage}">
+                  <li class="page-item"><a class="page-link"
+                      href="/market/list?pageNo=${maker.finalPage}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&gt;&gt;</a>
+                  </li>
+                </c:if>
 
-                </ul>
+              </ul>
             </nav>
 
-        </div>
-    </div>
-
-
-
-
-
-        </table>
-
-
-
-
-
+          </div>
       </div>
-    </section>
+
+
+
+
+
+      </table>
+
+
+
+
+
+  </div>
+  </section>
   </div>
 
 

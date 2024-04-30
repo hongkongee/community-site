@@ -21,6 +21,8 @@ import project.blog.community.util.LoginUtils;
 import project.blog.community.util.MailSenderService;
 import project.blog.community.util.upload.FileUtils;
 
+import java.sql.Savepoint;
+
 @Controller
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -57,8 +59,10 @@ public class UserController {
 
       // 사진 업로드, 나중에 수정해야함
       String rootPath = null;
-
       String savePath = null;
+
+//      savePath = FileUtils.uploadFile(dto.getProfilePicture(), rootPath);
+
 //      String savePath = FileUtils.uploadFile(dto.getProfilePicture(), rootPath);
 
       // 일반 방식 (사이트) 회원가입

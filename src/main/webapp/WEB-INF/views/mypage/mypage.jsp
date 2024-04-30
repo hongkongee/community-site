@@ -441,23 +441,7 @@
                     </div>
                 </c:if>
 
-                <!-- music wrapper -->
-                <!-- <div class="music-wrapper">
-                    <div class="musicborder">
-                        <div>재생중인 음악</div>
 
-                        <audio id="myAudio" controls>
-                            <source src="/assets/audio/testmusic.mp3" type="audio/mpeg">
-                            이 브라우저에서는 음악 기능을 지원하지 않습니다.
-                        </audio>
-
-
-
-                    </div>
-
-
-
-                </div> -->
 
 
             </div>

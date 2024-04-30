@@ -2,9 +2,12 @@ package project.blog.community.project.entity;
 
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
+import project.blog.community.project.common.PageMaker;
 import project.blog.community.project.dto.request.MarketWriteRequestDTO;
+import project.blog.community.project.dto.response.MarketDetailResponse;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /*
 CREATE TABLE tbl_market (
@@ -58,6 +61,14 @@ public class Market {
     private String chooseReason;
     private String message;
     private String file;
+
+    private int count;
+    private PageMaker pageInfo;
+    private List<MarketDetailResponse> marketList;
+
+
+
+
 
     public Market(MarketWriteRequestDTO dto, String file, String writer) {
         //dto -> Entity

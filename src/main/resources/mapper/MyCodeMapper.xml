@@ -18,22 +18,27 @@ CREATE TABLE my_code(
 );
 -->
 
-    <sql id="search">
-        <if test="type == 'title'">
-            WHERE title LIKE CONCAT('%', #{keyword}, '%')
+   <sql id="search">
+
+        <if test="page.type == 'title'">
+            AND title LIKE CONCAT('%', #{page.keyword}, '%')
         </if>
-        <if test="type == 'content'">
-            WHERE content LIKE CONCAT('%', #{keyword}, '%')
+        <if test="page.type == 'content'">
+            AND content LIKE CONCAT('%', #{page.keyword}, '%')
         </if>
-        <if test="type == 'tc'">
-            WHERE title LIKE CONCAT('%', #{keyword}, '%')
-            OR content LIKE CONCAT('%', #{keyword}, '%')
+        <if test="page.type == 'tc'">
+            AND title LIKE CONCAT('%', #{page.keyword}, '%')
+            OR content LIKE CONCAT('%', #{page.keyword}, '%')
         </if>
-        <if test="type == 'programming'">
-            WHERE programming LIKE CONCAT('%', #{keyword}, '%')
+        <if test="page.type == 'programming'">
+            AND programming LIKE CONCAT('%', #{page.keyword}, '%')
         </if>
 
+
     </sql>
+
+
+
     <insert id="save">
         INSERT INTO my_code
         (title, content, writer, programming)
@@ -64,14 +69,17 @@ CREATE TABLE my_code(
         resultType에 List를 따로 언급할 필요 없습니다. -->
     <select id="findAll" resultType="myCode">
         SELECT * FROM my_code
+        WHERE writer = #{account}
         <include refid="search" />
         ORDER BY code_no DESC
-        LIMIT #{pageStart}, #{amount}
+        LIMIT #{page.pageStart}, #{page.amount}
     </select>
+
     <select id="endAll" resultType="myCode">
         SELECT * FROM my_code
+        WHERE writer = #{account}
         ORDER BY code_no
-        LIMIT #{pageStart}, #{amount}
+        LIMIT #{page.pageStart}, #{page.amount}
     </select>
 
     <select id="findOne" resultType="myCode">
@@ -80,11 +88,16 @@ CREATE TABLE my_code(
         WHERE code_no = #{codeNo}
     </select>
 
-<select id="getCount" resultType="int">
-    SELECT COUNT(*)
-    FROM my_code
-    <include refid="search" />
-</select>
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*)
+        FROM my_code
+
+        WHERE writer = #{account}
+        <include refid="search" />
+
+    </select>
+
+
     <select id="getEndCount" resultType="int">
         SELECT COUNT(*)
         FROM my_code

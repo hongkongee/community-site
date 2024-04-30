@@ -32,8 +32,7 @@ function renderFollows(follows) {
       // 프로필 사진
       let profileTag = '';
       if (profilePicture) { // 프로필 사진이 존재한다면 
-        profileTag = `<img src="/display\${user.profilePicture}" alt="프사">`;
-
+        profileTag = `<img src="/display${profilePicture}" alt="프사">`;
       } else { // 프로필 사진이 없다면
         profileTag = `<img src="/assets/img/jjanggu.jpg" alt="기본 프사">`;
 
@@ -167,6 +166,8 @@ function clickXbutton() {
     } else if (e.target.matches('.fa-house')) { // 집모양 아이콘 클릭
 
       window.location.href='/mypage/home/' + userAccount;
+    } else if (e.target.matches('.fa-message')) {
+      window.location.href = '/chat/chat';
     }
     
   }

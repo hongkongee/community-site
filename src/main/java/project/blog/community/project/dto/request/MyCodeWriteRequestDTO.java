@@ -11,7 +11,7 @@ public class MyCodeWriteRequestDTO {
     private int codeNo;
     private String title;
     private String content;
-    private String writer;
+
     private String programming;
 
 

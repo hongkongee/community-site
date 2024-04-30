@@ -22,7 +22,7 @@
                         <img src="/display${login.profilePicture}" alt="프사">
                     </c:when>
                     <c:otherwise>
-                        <img src="${login.profile}" alt="프사">
+                        <img src="${login.profilePicture}" alt="프사">
                     </c:otherwise>
                 </c:choose>
             </c:if>
@@ -51,7 +51,7 @@
                 <li><a href="/mypage/diary">My Diary</a></li>
                 <li><a href="/wel/myCode">My Code</a></li>
                 <li><a href="/chat/chat">Chat</a></li>
-                <li><a href="#">Market</a></li>
+                <li><a href="/market/list">Market</a></li>
                 <li><a href="/users/info">My Info</a></li>
             </c:if>
 

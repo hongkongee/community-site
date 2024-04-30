@@ -63,48 +63,41 @@
       <div class="Gallery">My Code</div>
     </div>
     <div class="card-container">
-      <c:forEach var="b" items="${gList}">
-          <div class="card-wrapper">
-              <section class="card" data-bno="${b.codeNo}">
-                  <div class="card-title-wrapper ${b.programming}">
-                      <h2 class="card-title">${b.shortTitle}</h2>
-                      <div class="time-view-wrapper">
-                          <div class="time">
-                              <i class="far fa-clock"></i>
-                                  ${b.regDate} </div>
-
-                        <div class="view">
-                                
-                                <span class="view-count">${b.programming}</span>
+        <c:forEach var="b" items="${gList}">
+            <c:if test="${login.accountNumber == b.writer}">
+                <div class="card-wrapper">
+                    <section class="card" data-bno="${b.codeNo}">
+                        <div class="card-title-wrapper ${b.programming}">
+                            <h2 class="card-title">${b.shortTitle}</h2>
+                            <div class="time-view-wrapper">
+                                <div class="time">
+                                    <i class="far fa-clock"></i>
+                                    ${b.regDate}
+                                </div>
+                                <div class="view">
+                                    <span class="view-count">${b.programming}</span>
+                                </div>
                             </div>
-
-                      </div>
-                  </div>
-                  <div class="card-content">
-
-                      ${b.shortContent}
-
-
-
-
-                  </div>
-              </section>
-              
-
-                  <div class="card-btn-group">
-                      <button class="del-btn" data-href="/wel/codedelete">
-                          <i class="fas fa-times">&times;</i>
-                      </button>
-                  </div>
-
-
-          </div>
-      </c:forEach>
-  </div>
+                        </div>
+                        <div class="card-content">
+                            ${b.shortContent}
+                        </div>
+                    </section>
+                    <div class="card-btn-group">
+                        <button class="del-btn" data-href="/wel/codedelete">
+                            <i class="fas fa-times">&times;</i>
+                        </button>
+                    </div>
+                </div>
+            </c:if>
+        </c:forEach>
+    </div>
  <!-- 게시글 목록 하단 영역 -->
+
  <div class="bottom-section">
 
   <!-- 페이지 버튼 영역 -->
+  
   <nav aria-label="Page navigation example">
       <ul class="pagination pagination-lg pagination-custom">
           <c:if test="${maker.page.pageNo != 1}">
@@ -118,14 +111,14 @@
                                        href="/wel/myCode?pageNo=${maker.begin-1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">prev</a>
               </li>
           </c:if>
-
+         
           <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
               <li data-page-num="${i}" class="page-item">
                   <a class="page-link"
                      href="/wel/myCode?pageNo=${i}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">${i}</a>
               </li>
           </c:forEach>
-
+      
           <c:if test="${maker.next}">
               <li class="page-item"><a class="page-link"
                                        href="/wel/myCode?pageNo=${maker.end+1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">next</a>
@@ -142,7 +135,7 @@
   </nav>
 
 </div>
-    
+
 
   </div>
 </div>
@@ -275,7 +268,6 @@ $cardContainer.addEventListener('click', e => {
       $post.onclick = e=>{
         window.location.href = '/wel/endMyCode';
       }
-
 
   // 사용자가 현재 머물고 있는 페이지 버튼에 active 스타일 부여
   function appendPageActive() {

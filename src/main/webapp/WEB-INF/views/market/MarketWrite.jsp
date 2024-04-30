@@ -130,6 +130,8 @@
 
 </body>
 <script>
+
+//정수값 검사
 const $submit = document.getElementById('submit');
 const $priceInput = document.getElementById('price');
 

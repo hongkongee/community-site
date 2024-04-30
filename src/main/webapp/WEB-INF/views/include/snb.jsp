@@ -9,7 +9,7 @@
     <!-- 왼쪽 메뉴 사이드바 -->
     <ul>
         <li id="home"><a href="/home/main">Home</a></li>
-        <li id="second-hand"><a href="/market/list">중고 장터</a></li>
+        <li id="second-hand"><a href="/market/list">중고 거래</a></li>
         <li id="all"><a href="/home/board/all">
         전체 게시판
         <ul>

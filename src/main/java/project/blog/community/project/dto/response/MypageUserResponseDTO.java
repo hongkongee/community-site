@@ -30,6 +30,8 @@ public class MypageUserResponseDTO {
 
     private int point;
 
+    private String loginMethod;
+
     public MypageUserResponseDTO(User user) {
         this.accountNumber = user.getAccountNumber();
         this.email = user.getEmail();
@@ -38,6 +40,7 @@ public class MypageUserResponseDTO {
         this.birthday = user.getBirthday();
         this.profilePicture = user.getProfilePicture();
         this.rate = user.getRate();
+        this.loginMethod = String.valueOf(user.getLoginMethod());
 
         this.introduction = user.getIntroduction();
 

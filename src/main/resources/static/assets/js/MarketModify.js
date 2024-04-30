@@ -1,5 +1,6 @@
-/////수정하기 
+//수정하기 
 
+//주소 요소 취득
 const bno = document.getElementById('boardNo').textContent;
 const modifyURL = `/market/detail/${bno}`; //백틱
 
@@ -9,12 +10,14 @@ const $modifyBtn = document.getElementById('modifyBtn');
 const $saveBtn = document.getElementById('saveEdit');
 
 
+//게시물 번호
 const $boardNo = document.getElementById('boardNo');
 
+//제목
 const $editedTitle = document.getElementById('editedTitle');
 let editedTitle = document.getElementById('editedTitle').value;
 
-
+//내용
 const $editedContent = document.getElementById('editedContent');
 let editedContent = document.getElementById('editedContent').value;
 
@@ -28,9 +31,14 @@ let selectedCategory = document.getElementById('selectedCategory').value;
 const $editedPrice = document.getElementById('editedPrice');
 let editedPrice = document.getElementById('editedPrice').value;
 
+
 //거래장소
 const $editAddress = document.getElementById('editAddress');
 let address = document.getElementById('address').value;
+
+
+//이미지 요소 취득
+const imgSrc = document.getElementById('board-img').querySelector('img').getAttribute('src');
 
 
 //닫기 버튼
@@ -40,19 +48,23 @@ const $modal = document.getElementById('editModal');
 const $deleteBtn = document.getElementById('content-Del');
 
 //수정권한 부여
-const currentAccount = '${login.account}';
+// const currentAccount = '${login.account}';
 const auth = '${login.auth}';
 
 
 
 $modifyBtn.addEventListener('click', e => {
-  console.log('수정 버튼 이벤트 발생!');
-  //수정창에
+  console.log('수정 버튼 이벤트 발생!', e);
+  //수정창에 기존 값 출력
   $editedTitle.value = document.getElementById('textTitle').textContent;
   $editedContent.value = document.getElementById('textContent').textContent;
   $editedCategory.value = document.getElementById('selectedCategory').textContent;
   $editedPrice.value = document.getElementById('price').textContent;
   $editAddress.value = document.getElementById('address').textContent;
+
+  
+  $imgSection.value = imgSrc;
+  console.log('요소 취득됨', $modifyBtn.value);
 
 
   console.log($editedTitle.value);
@@ -64,16 +76,6 @@ $modifyBtn.addEventListener('click', e => {
 
 
 
-
-
-// function makeCloseClickHandler() {
-//   $closeBtn.onclick = e => {
-//     console.log('닫기 버튼 클릭!');
-//     $modal.style.display = "none"; // 모달을 숨김
-//     location.reload(); // 화면 새로고침
-//   };
-// }
-
 function makeModifyClickHandler() {
   console.log('수정 버튼 함수 실행!');
 
@@ -84,23 +86,25 @@ function makeModifyClickHandler() {
         return;
       }
 
+      const formData = new FormData();
+      const $data = document.getElementById('formFile');
 
-      const payload = {
-        boardNo: bno,
-        title: $editedTitle.value,
-        text: $editedContent.value,
-        category: $editedCategory.value,
-        price: $editedPrice.value,
-        address : $editAddress.value
-    
-      };
+      if ($data.files.length > 0) {
+        formData.append('formFile', $data.files[0]);
+      }
+      formData.append('boardNo', bno);
+      formData.append('title', $editedTitle.value);
+      formData.append('text', $editedContent.value);
+      formData.append('category', $editedCategory.value);
+      formData.append('price', $editedPrice.value);
+      formData.append('address', $editAddress.value);
+
+
+
 
       const requestInfo = {
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json; charset=utf-8'
-        },
-        body: JSON.stringify(payload)
+        method: 'post',
+        body: formData
       };
 
       fetch(modifyURL, requestInfo)
@@ -159,3 +163,53 @@ function deleteBoard() {
       }
     });
 }
+
+
+
+
+      // const payload = {
+      //   boardNo: bno,
+      //   title: $editedTitle.value,
+      //   text: $editedContent.value,
+      //   category: $editedCategory.value,
+      //   price: $editedPrice.value,
+      //   address : $editAddress.value
+    
+      // };
+
+  // $modifyBtn.addEventListener('click', e => {
+  //   console.log('수정 버튼 이벤트 발생!', e);
+  //   //수정창에 기존 값 출력
+  //   $editedTitle.value = document.getElementById('textTitle').textContent;
+  //   $editedContent.value = document.getElementById('textContent').textContent;
+  //   $editedCategory.value = document.getElementById('selectedCategory').textContent;
+  //   $editedPrice.value = document.getElementById('price').textContent;
+  //   $editAddress.value = document.getElementById('address').textContent;
+
+
+  //   console.log($editedTitle.value);
+  //   console.log($editedContent.value);
+  //   makeModifyClickHandler();
+  // })
+
+// function makeCloseClickHandler() {
+//   $closeBtn.onclick = e => {
+//     console.log('닫기 버튼 클릭!');
+//     $modal.style.display = "none"; // 모달을 숨김
+//     location.reload(); // 화면 새로고침
+//   };
+// }
+
+
+
+
+
+
+
+// function makeCloseClickHandler() {
+//   $closeBtn.onclick = e => {
+//     console.log('닫기 버튼 클릭!');
+//     $modal.style.display = "none"; // 모달을 숨김
+//     location.reload(); // 화면 새로고침
+//   };
+// }

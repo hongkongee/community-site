@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter@ToString
 @EqualsAndHashCode
 public class MyCodeMaker {
-    private int begin,end, finalPage;
+    private int begin, end, finalPage;
 
     private boolean prev, next;
     private MyCodePage page;

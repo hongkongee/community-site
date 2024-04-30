@@ -95,7 +95,7 @@
         <div id="content">${b.content}</div>
 
         <!-- 좋아요 -->
-        <div class="like" data-like-cookie="${l}">
+        <div class="like" id="like-data" data-likeornot="${l}">
           <!-- <i class="fa-solid fa-heart"></i> : check 됐을 때 -->
           <i class="fa-regular fa-heart"></i>
           <label class="like-label" for="flexCheckDefault" data-like-count="${b.likeCount}">
@@ -107,12 +107,14 @@
         <!-- 화면 이동에 관련한 버튼 -->
         <div class="buttons">
 
-            <button class="list-btn" type="button"
-                    onclick="location.href='/home/board/all'">
-                목록
-            </button>
-            <button id="modify">수정</button>
+          <button class="list-btn" type="button" onclick="location.href='/home/board/all'">
+            목록
+          </button>
+          <c:if test="${login.accountNumber eq b.writerAccount}">
+            <button id="modify"> <a href="/home/modify/${b.bno}">수정</a></button>
             <button id="delete">삭제</button>
+          </c:if>
+
 
         </div>
 
@@ -170,14 +172,14 @@
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" name="clame-reason" value="dispute" id="dispute">
                   <label class="form-check-label" for="flexCheckChecked">
-                    지나친 정치/종교 논쟁
+                    게시판 성격과 맞지 않는 글
                   </label>
                 </div>
 
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" name="clame-reason" value="plaster" id="plaster">
                   <label class="form-check-label" for="flexCheckChecked">
-                    도배성 댓글
+                    도배성 글
                   </label>
                 </div>
 
@@ -223,14 +225,14 @@
                 <div class="col-md-3">
                   <div class="form-group">
                     <div class="profile-box">
-                       <!--profilePicture로 수정-->
+                      <!--profilePicture로 수정-->
                       <c:if test="${login.profilePicture == null}">
                         <img src="/assets/img/jjanggu.jpg" alt="프사">
                       </c:if>
                       <!--profilePicture로 수정-->
                       <c:if test="${login.profilePicture != null}">
                         <c:choose>
-                          <c:when test="${login.loginMethod == COMMON}">
+                          <c:when test="${login.loginMethod == 'COMMON'}">
                             <!--profilePicture로 수정-->
                             <img src="/display${login.profilePicture}" alt="프사">
                           </c:when>
@@ -298,7 +300,8 @@
           <!-- Modal footer -->
           <div class="modal-footer">
             <button id="replyModBtn" type="button" class="btn btn-dark" style="font-size: 13px;">수정</button>
-            <button id="modal-close" type="button" class="btn btn-danger" data-bs-dismiss="modal" style="font-size: 13px;">닫기
+            <button id="modal-close" type="button" class="btn btn-danger" data-bs-dismiss="modal"
+              style="font-size: 13px;">닫기
             </button>
           </div>
         </div>
@@ -379,6 +382,7 @@
             profilePicture,
             loginMethod
           } = reply;
+          console.log(profilePicture);
 
           tag += `
                      <div id='replyContent' class='card-body' data-replyId='\${rno}'>
@@ -388,9 +392,9 @@
           let profileTag = '';
           if (profilePicture) {
             if (loginMethod.trim() === 'COMMON') {
-              profileTag = `<img class='reply-profile' src='/local\${accountNumber}' alt='profile image' >`;
+              profileTag = `<img class='reply-profile' src='/display\${profilePicture}' alt='profile image' style="width: 45px; height: 45px; border-radius: 50%; overflow: hidden; font-size: 12px; margin-right: 20px;" >`;
             } else {
-              profileTag = `<img class='reply-profile' src='\${accountNumber}' alt='profile image' >`;
+              profileTag = `<img class='reply-profile' src='/display\${profilePicture}' alt='profile image' style="width: 45px; height: 45px; border-radius: 50%; overflow: hidden; font-size: 12px; margin-right: 20px;" >`;
             }
           } else {
             profileTag =
@@ -398,8 +402,8 @@
           }
           tag += profileTag;
 
-          //tag += (profile ? `<img class='reply-profile' src='/local\${profile}' alt='profile image' >`
-          //                  : `<img class='reply-profile' src='/assets/img/anonymous.jpg' alt='anonymous image' >`);
+          //tag += (profile ? `<img class='reply-profile' src='/display\${login.profilePicture}' alt='profile image' >`
+          //                  : `<img class='reply-profile' src='/assets/img/jjanggu.jpg' alt='anonymous image' >`);
 
           tag += `<b>\${writer}</b>
                      </span>

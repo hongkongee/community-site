@@ -60,11 +60,11 @@
                                 <img class="user-profile-pic" src="/display${user.profilePicture}" alt="프사">
                             </c:when>
                             <c:otherwise>
-                                <c:if test="${fn:contains(user.profilePicture, 'https')}">
+                                <c:if test="${fn:contains(user.profilePicture, 'http')}">
                                     <img class="user-profile-pic" src="${user.profilePicture}" alt="프사">
                                 </c:if>
 
-                                <c:if test="${not fn:contains(user.profilePicture, 'https')}">
+                                <c:if test="${not fn:contains(user.profilePicture, 'http')}">
                                     <img class="user-profile-pic" src="/display${user.profilePicture}" alt="프사">
                                 </c:if>
                                 
@@ -81,7 +81,7 @@
 
             <div class="user-info" data-useraccount="${user.accountNumber}">
                 <div class="profile-name">
-                    ${user.nickname}<br />
+                    ${user.name}<br />
                 </div>
                 <div class="email">
                     ${user.email}
@@ -171,18 +171,40 @@
                             <div class="user-wrapper">
 
                                 <div class="profile-box">
+
                                     <c:if test="${empty following.profilePicture}">
                                         <img src="/assets/img/jjanggu.jpg" alt="기본 프사">
                                     </c:if>
 
+
                                     <c:if test="${not empty following.profilePicture}">
-                                        <img src="/display${following.profilePicture}" alt="프사">
+
+
+                                        <c:choose>
+                                            <c:when test="${following.loginMethod == 'COMMON'}">
+                                                <img src="/display${following.profilePicture}" alt="프사">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:if test="${fn:contains(following.profilePicture, 'http')}">
+                                                    <img src="${following.profilePicture}" alt="프사">
+                                                </c:if>
+
+                                                <c:if test="${not fn:contains(following.profilePicture, 'http')}">
+                                                    <img src="/display${following.profilePicture}" alt="프사">
+                                                </c:if>
+                                                
+                                            </c:otherwise>
+                                        </c:choose>
+
                                     </c:if>
+
+
+                                    
                                 </div>
 
                                 <div class="name-box">
                                     <a class="friendName" href="/mypage/home/${following.accountNumber}">
-                                        ${following.nickname}&nbsp;
+                                        ${following.name}&nbsp;
                                     </a>
                                 </div>
 
@@ -231,14 +253,32 @@
                                         <img src="/assets/img/jjanggu.jpg" alt="기본 프사">
                                     </c:if>
 
+
                                     <c:if test="${not empty follower.profilePicture}">
-                                        <img src="/display${follower.profilePicture}" alt="프사">
+
+
+                                        <c:choose>
+                                            <c:when test="${follower.loginMethod == 'COMMON'}">
+                                                <img src="/display${follower.profilePicture}" alt="프사">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:if test="${fn:contains(follower.profilePicture, 'http')}">
+                                                    <img src="${follower.profilePicture}" alt="프사">
+                                                </c:if>
+
+                                                <c:if test="${not fn:contains(follower.profilePicture, 'http')}">
+                                                    <img src="/display${follower.profilePicture}" alt="프사">
+                                                </c:if>
+                                                
+                                            </c:otherwise>
+                                        </c:choose>
+
                                     </c:if>
                                 </div>
 
                                 <div class="name-box">
                                     <a class="friendName" href="/mypage/home/${follower.accountNumber}">
-                                        ${follower.nickname}&nbsp;
+                                        ${follower.name}&nbsp;
                                     </a>
                                 </div>
 
@@ -412,7 +452,7 @@
 
                 <div class="popular-post">
                     <div class="popular-title">
-                        <div class="best-three">${user.nickname} 님의 인기 게시글</div>
+                        <div class="best-three">${user.name} 님의 인기 게시글</div>
                     </div>
                     <div class="popular-list">
                         <c:forEach var="post" items="${posts}">

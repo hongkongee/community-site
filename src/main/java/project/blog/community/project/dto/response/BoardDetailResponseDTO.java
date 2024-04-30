@@ -32,8 +32,23 @@ public class BoardDetailResponseDTO {
 
     private final String content;
     private final String postImg;
+    private final String name;
 
 
+    public BoardDetailResponseDTO(Board board, String nickname, String name) {
+        this.bno = board.getBno();
+        this.category = board.getCategory().name().toLowerCase();
+        this.categoryDescription = board.getCategory().getDescription();
+        this.title = board.getTitle();
+        this.writer = nickname;
+        this.writerAccount = board.getWriter();
+        this.regDate = makeDateString(board.getRegDate());
+        this.viewCount = board.getViewCount();
+        this.content = board.getContent();
+        this.likeCount = board.getLikeCount();
+        this.postImg = board.getPostImg();
+        this.name = name;
+    }
     public BoardDetailResponseDTO(Board board, String nickname) {
         this.bno = board.getBno();
         this.category = board.getCategory().name().toLowerCase();
@@ -46,6 +61,7 @@ public class BoardDetailResponseDTO {
         this.content = board.getContent();
         this.likeCount = board.getLikeCount();
         this.postImg = board.getPostImg();
+        this.name = "";
     }
 
     private String makeDateString(LocalDateTime regDate) {

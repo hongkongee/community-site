@@ -18,6 +18,8 @@ public class MypageUserResponseDTO {
 
     private String nickname;
 
+    private String name;
+
 //    private Gender gender;
 
     private int birthday; // year
@@ -43,6 +45,7 @@ public class MypageUserResponseDTO {
         this.loginMethod = String.valueOf(user.getLoginMethod());
 
         this.introduction = user.getIntroduction();
+        this.name = user.getName();
 
         this.point = user.getPoint();
     }

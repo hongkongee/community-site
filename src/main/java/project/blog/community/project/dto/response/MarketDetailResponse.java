@@ -3,10 +3,8 @@ package project.blog.community.project.dto.response;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import project.blog.community.project.common.rate;
 import project.blog.community.project.entity.Market;
 
-import javax.management.loading.PrivateClassLoader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -27,7 +25,27 @@ public class MarketDetailResponse {
     private final String message;
     private final int rate;
     private final String file;
+    private final String name;
 
+
+    public MarketDetailResponse(Market market, String name) {
+        //entity -> DTO
+        this.boardNo = market.getBoardNo();
+        this.textTitle = market.getTextTitle();
+        this.textContent = market.getTextContent();
+        this.updateDate = makePrettierDateString(market.getUpdateDate());
+        this.textWriter = market.getTextWriter();
+        this.category = market.getCategory();
+        this.price = market.getPrice();
+        this.address = market.getAddress();
+
+        this.chooseReason = market.getChooseReason();
+        this.message = market.getMessage();
+        this.rate = market.getRate();
+        this.file = market.getFile();
+        this.name = name;
+
+    }
 
     public MarketDetailResponse(Market market) {
         //entity -> DTO
@@ -44,6 +62,8 @@ public class MarketDetailResponse {
         this.message = market.getMessage();
         this.rate = market.getRate();
         this.file = market.getFile();
+        this.name = market.getTextWriter();
+
     }
 
 

@@ -20,7 +20,7 @@ function renderFollows(follows) {
 
     for (let follower of follows) {
 
-      const {accountNumber, name, email, nickname, profilePicture} = follower;
+      const {accountNumber, name, email, nickname, profilePicture, loginMethod} = follower;
       console.log('nickname:', nickname);
       console.log('email:', email);
 
@@ -32,16 +32,36 @@ function renderFollows(follows) {
       // 프로필 사진
       let profileTag = '';
       if (profilePicture) { // 프로필 사진이 존재한다면 
-        profileTag = `<img src="/display${profilePicture}" alt="프사">`;
+        if (loginMethod === 'COMMON') {
+          profileTag = `<img src="/display${profilePicture}" alt="프사">`;
+        } else { // 구글, 네이버, 카카오
+          if (profilePicture.includes('https')) {
+            profileTag = `<img src="${profilePicture}" alt="프사">`;
+          } else {
+            profileTag = `<img src="/display${profilePicture}" alt="프사">`;
+          }
+
+        }
+        
       } else { // 프로필 사진이 없다면
         profileTag = `<img src="/assets/img/jjanggu.jpg" alt="기본 프사">`;
 
       }
 
       tag += profileTag;
+      
+      let showName = '';
 
-      tag += `</div><a class="friendName" data-userId='${accountNumber}' href="#">${nickname}</a>
-                <b>(${email})</b>
+      if (loginMethod === 'COMMON') {
+        showName = `</div><a class="friendName" data-userId='${accountNumber}' href="#">${nickname}</a>`;
+      } else { // 구글, 네이버, 카카오
+        showName = `</div><a class="friendName" data-userId='${accountNumber}' href="#">${name}</a>`;
+      }
+
+      tag += showName;
+
+
+      tag += `<b>(${email})</b>
               </span>
             </div>
           </div>`;

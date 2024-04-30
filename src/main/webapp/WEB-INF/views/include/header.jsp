@@ -28,7 +28,7 @@
                             </c:if>
 
                             <c:if test="${not fn:contains(login.profilePicture, 'https')}">
-                                <img class="user-profile-pic" src="/display${login.profilePicture}" alt="프사">
+                                <img class="user-profile-pic" src="${login.profilePicture}" alt="프사">
                             </c:if>
                         </c:otherwise>
                     </c:choose>

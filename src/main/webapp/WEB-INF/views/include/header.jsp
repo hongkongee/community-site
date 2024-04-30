@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!-- header start-->
 
@@ -12,20 +13,26 @@
         </h1>
         <div class="profile-box">
             <!-- profilePicture로수정 -->
-            <c:if test="${login == null || login.profilePicture == null}">
-                <img src="/assets/img/jjanggu.jpg" alt="프사">
-            </c:if>
-            <!-- profilePicture로수정 -->
-            <c:if test="${login != null && login.profilePicture != null}">
-                <c:choose>
-                    <c:when test="${login.loginMethod == 'COMMON'}">
-                        <img src="/display${login.profilePicture}" alt="프사">
-                    </c:when>
-                    <c:otherwise>
-                        <img src="${login.profilePicture}" alt="프사">
-                    </c:otherwise>
-                </c:choose>
-            </c:if>
+                <c:if test="${login.profilePicture == null}">
+                    <img src="/assets/img/jjanggu.jpg" alt="프사">
+                </c:if>
+                <!-- profilePicture로수정 -->
+                <c:if test="${login.profilePicture != null}">
+                    <c:choose>
+                        <c:when test="${login.loginMethod == 'COMMON'}">
+                            <img src="/display${login.profilePicture}" alt="프사">
+                        </c:when>
+                        <c:otherwise>
+                            <c:if test="${fn:contains(login.profilePicture, 'https')}">
+                                <img class="user-profile-pic" src="${login.profilePicture}" alt="프사">
+                            </c:if>
+
+                            <c:if test="${not fn:contains(login.profilePicture, 'https')}">
+                                <img class="user-profile-pic" src="/display${login.profilePicture}" alt="프사">
+                            </c:if>
+                        </c:otherwise>
+                    </c:choose>
+                </c:if>
         </div>
 
         <h2 class="intro-text">
@@ -75,12 +82,6 @@
 <!-- Header END -->
 
 <script>
-    const $profileBox = document.querySelector('.profile-box');
-    //profile을 profilePicture로수정
-
-    $profileBox.onclick = e => {
-        location.href = '/display/download${login.profilePicture}';
-    };
 
     //버튼의 요소 노드 취득
     const menuBtn = document.querySelector('header .menu-open');

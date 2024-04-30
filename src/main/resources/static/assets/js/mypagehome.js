@@ -184,7 +184,7 @@ $modBtn.addEventListener('click', e => {
   fetch('/mypage/intro', requestInfo)
     .then(res => {
       if (res.status == 200) {
-        alert('댓글이 수정되었습니다.');
+        alert('자기소개 수정되었습니다.');
         // document.getElementById('modal-close').click();
         location.reload();
         return res.text();

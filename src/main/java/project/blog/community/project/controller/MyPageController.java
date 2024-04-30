@@ -41,6 +41,7 @@ import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccoun
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/mypage")
+
 @Slf4j
 public class MyPageController {
     @Value("${file.upload.root-path}")

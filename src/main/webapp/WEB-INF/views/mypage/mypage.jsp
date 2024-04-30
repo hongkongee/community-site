@@ -442,7 +442,7 @@
                 </c:if>
 
                 <!-- music wrapper -->
-                <div class="music-wrapper">
+                <!-- <div class="music-wrapper">
                     <div class="musicborder">
                         <div>재생중인 음악</div>
 
@@ -457,7 +457,7 @@
 
 
 
-                </div>
+                </div> -->
 
 
             </div>

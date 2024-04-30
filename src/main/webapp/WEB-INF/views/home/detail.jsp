@@ -48,7 +48,13 @@
           <div class="left-region">
             <!-- 작성자 -->
             <!-- 누르면 작성자가 쓴 글 목록, 작성자의 페이지, 1:1채팅, 신고하기, 차단하기 등 -->
-            <h2 id="writer"><a href="#" id="writer-a">${b.writer}</a></h2>
+            <h2 id="writer"><a href="#" id="writer-a">
+            <c:if test="${not empty b.writer}">
+              ${b.writer}
+            </c:if>
+            <c:if test="${empty b.writer}">
+              ${b.name}
+            </c:if></a></h2>
 
             <div class="writer-info" data-writeraccount="${b.writerAccount}">
               <ul>
@@ -135,11 +141,19 @@
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
 
+          
+                         
 
           <form id="report-form" action="/home/detail/report" method="post">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">${b.writer} 님을 신고</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel"> 
+                  <c:if test="${not empty b.writer}">
+                    ${b.writer}
+                  </c:if>
+                  <c:if test="${empty b.writer}">
+                    ${b.name}
+                  </c:if> 님을 신고</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -148,7 +162,12 @@
 
 
                 <label for="report-object">신고 대상</label>
-                <span> ${b.writer} </span>
+                <span> <c:if test="${not empty b.writer}">
+                  ${b.writer}
+                </c:if>
+                <c:if test="${empty b.writer}">
+                  ${b.name}
+                </c:if> </span>
                 <br>
 
 

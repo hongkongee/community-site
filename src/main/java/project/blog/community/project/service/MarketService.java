@@ -12,6 +12,7 @@ import project.blog.community.project.dto.request.MarketWriteRequestDTO;
 import project.blog.community.project.dto.response.*;
 import project.blog.community.project.entity.*;
 import project.blog.community.project.mapper.MarketMapper;
+import project.blog.community.project.mapper.UserMapper;
 
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccoun
 
 public class MarketService {
     private final MarketMapper mapper;
+    private final UserMapper userMapper;
 
 
     public List<MarketListResponseDTO> getList(HttpServletRequest request, Search page) {
@@ -96,7 +98,13 @@ public class MarketService {
     public MarketDetailResponse getDetail(int boardNo) {
         mapper.updateViewCount(boardNo);
         Market market = mapper.findOne(boardNo);
-        return new MarketDetailResponse(market);
+
+        String writer = market.getTextWriter();
+        User user = userMapper.findUser(writer);
+        String name = user.getName();
+
+
+        return new MarketDetailResponse(market, name);
     }
 
     public void delete(int boardNo) {

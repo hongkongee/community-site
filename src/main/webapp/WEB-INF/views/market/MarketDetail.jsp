@@ -100,7 +100,7 @@
       <!-- Head 내용 -->
 
       <div class="titleContentBox">
-        <span>#작성자 : </span><span id="textWriter" name="textWriter">${b.textWriter}</span>
+        <span>#작성자 : </span><span id="textWriter" name="textWriter">${b.name}</span>
         <span class="title-content">#글번호 : </span><span id="boardNo" name="boardNo">${b.boardNo}</span>
         <span class="title-content">#작성시간 : </span><span id="updateDate" name="updateDate">${b.updateDate}</span>
         <span class="title-content">#가격 : </span><span id="price" name="price">${b.price}</span><span>원</span><br>

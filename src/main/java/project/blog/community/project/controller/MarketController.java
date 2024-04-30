@@ -98,6 +98,8 @@ public class MarketController {
         log.info("Uploaded file name: {}", file.getOriginalFilename());
         log.info("File size: {}", file.getSize());
 
+
+
         //현재 로그인한 유저 ID
         HttpSession session = request.getSession();
         session.getAttribute("login");
@@ -106,6 +108,8 @@ public class MarketController {
         String currentLoginMemberAccount = getCurrentLoginMemberAccount(session);
 
         String filePath = FileUtils.uploadFile(file, rootPath);
+
+
 
         marketService.register(dto, filePath, currentLoginMemberAccount);
         return "redirect:/market/list";

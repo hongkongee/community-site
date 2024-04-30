@@ -17,6 +17,7 @@ public class FollowerResponseDTO {
     private String email;
     private String nickname;
     private String profilePicture;
+    private String loginMethod;
 
     public FollowerResponseDTO(User user) {
         this.name = user.getName();
@@ -24,6 +25,7 @@ public class FollowerResponseDTO {
         this.nickname = user.getNickname();
         this.profilePicture = user.getProfilePicture();
         this.accountNumber =  user.getAccountNumber();
+        this.loginMethod = user.getLoginMethod().toString();
     }
 
 

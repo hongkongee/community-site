@@ -34,9 +34,12 @@ public class BoardListResponseDTO {
     private final int random;
 
     private final int numberOfReply;
+    private final String name;
+
+    private final String loginMethod;
 
     // entity를 dto로 바꾸는 생성자
-    public BoardListResponseDTO(Board board, String nickname, int numberOfReply) {
+    public BoardListResponseDTO(Board board, String nickname, int numberOfReply, String name, String loginMethod) {
         this.bno = board.getBno();
         this.category = board.getCategory().getDescription();
         this.title = makeShortTitle(board.getTitle());
@@ -47,6 +50,8 @@ public class BoardListResponseDTO {
         this.postImg = board.getPostImg();
         this.likeCount = board.getLikeCount();
         this.writerAccount = board.getWriter();
+        this.name = name;
+        this.loginMethod = loginMethod;
 
         this.numberOfReply = numberOfReply;
 
@@ -57,7 +62,7 @@ public class BoardListResponseDTO {
 
     }
 
-    public BoardListResponseDTO(Board board, String nickname) {
+    public BoardListResponseDTO(Board board, String nickname, String name, String loginMethod) {
         this.bno = board.getBno();
         this.category = board.getCategory().getDescription();
         this.title = makeShortTitle(board.getTitle());
@@ -68,6 +73,8 @@ public class BoardListResponseDTO {
         this.postImg = board.getPostImg();
         this.likeCount = board.getLikeCount();
         this.writerAccount = board.getWriter();
+        this.name = name;
+        this.loginMethod = loginMethod;
 
         this.numberOfReply = 0;
 

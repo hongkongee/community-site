@@ -1,13 +1,11 @@
 package project.blog.community.project.service;
 
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.WebUtils;
 import project.blog.community.project.common.Search;
 import project.blog.community.project.dto.request.BoardModifyRequestDTO;
 import project.blog.community.project.dto.request.LikeRequestDTO;
@@ -45,8 +43,10 @@ public class BoardService {
          String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
 
          int numberOfReply = boardMapper.calcNumberOfReply(board.getBno());
+         String name = findName(board.getWriter());
+         String loginMethod = findMethod(board.getWriter());
 
-         BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname, numberOfReply);
+         BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname, numberOfReply, name, loginMethod);
          dtoList.add(dto);
       }
 
@@ -64,7 +64,9 @@ public class BoardService {
 
       for (Board board : boardList) {
          String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
-         BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname);
+         String name = findName(board.getWriter());
+         String loginMethod = findMethod(board.getWriter());
+         BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname, name, loginMethod);
          dtoList.add(dto);
       }
 
@@ -80,8 +82,10 @@ public class BoardService {
       for (Board board : boardList) {
          String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
          int numberOfReply = boardMapper.calcNumberOfReply(board.getBno());
-
-         BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname, numberOfReply);
+         String name = findName(board.getWriter());
+         String loginMethod = findMethod(board.getWriter());
+         
+         BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname, numberOfReply, name, loginMethod);
          dtoList.add(dto);
       }
 
@@ -89,14 +93,17 @@ public class BoardService {
 
    }
 
+
+
    // 게시글 정보 가져오기
    public BoardDetailResponseDTO getDetail(int bno) {
       boardMapper.updateViewCount(bno);
 
       Board board = boardMapper.findOne(bno);
       String nickname = findNickname(board.getWriter());
+      String name = findName(board.getWriter());
 
-      return new BoardDetailResponseDTO(board, nickname);
+      return new BoardDetailResponseDTO(board, nickname, name);
 
    }
 
@@ -114,6 +121,28 @@ public class BoardService {
       try {
          User user = userMapper.findUser(account);
          return user.getNickname();
+      } catch (NullPointerException e) {
+         e.printStackTrace();
+         return account;
+      }
+   }
+
+   // account를 주면 name을 반환하는 메서드
+   private String findName(String account) {
+      try {
+         User user = userMapper.findUser(account);
+         return user.getName();
+      } catch (NullPointerException e) {
+         e.printStackTrace();
+         return account;
+      }
+   }
+
+   private String findMethod(String account) {
+
+      try {
+         User user = userMapper.findUser(account);
+         return user.getLoginMethod().toString();
       } catch (NullPointerException e) {
          e.printStackTrace();
          return account;
@@ -336,7 +365,10 @@ public class BoardService {
 
       for (Board board : boardList) {
          String nickname = findNickname(board.getWriter()); // writer(account)를 nickname으로 바꾸기
-         BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname);
+         String name = findName(board.getWriter());
+
+         String loginMethod = findMethod(board.getWriter());
+         BoardListResponseDTO dto = new BoardListResponseDTO(board, nickname, name, loginMethod);
          dtoList.add(dto);
       }
 

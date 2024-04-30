@@ -146,24 +146,27 @@
             }
 }
         
-
+        // 엔터키 버튼 이벤트 핸들러
         msg.onkeyup = function (ev) {
             if (ev.keyCode === 13) {
                 send();
             }
         }
 
+        // 전송 버튼 이벤트 핸들러
         btnSend.onclick = function () {
             send();
         }
 
+        // 전송 버튼 클릭 이후
         function send() {
             if (msg.value.trim() !== '') {
-                data.mid = getId('mid').value;
-                data.msg = msg.value;
-                data.date = new Date().toLocaleString();
-                const temp = JSON.stringify(data);
-                ws.send(temp);
+                data.mid = getId('mid').value; // 로그인 유저 아이디
+                data.msg = msg.value; // 메세지 내용
+                data.date = new Date().toLocaleString(); // 날짜
+
+                const temp = JSON.stringify(data); // json 형태로 저장
+                ws.send(temp); // 자바 WebSocketChatting의 @OnMessage로 전송
             }
 
             msg.value = '';

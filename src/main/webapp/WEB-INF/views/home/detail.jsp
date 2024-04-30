@@ -52,8 +52,8 @@
 
             <div class="writer-info" data-writeraccount="${b.writerAccount}">
               <ul>
-                <li><a href="#">게시글 보기</a></li>
-                <li><a href="#">1:1 채팅</a></li>
+                <li><a href="/home/board/all/${b.writerAccount}?keyword=">게시글 보기</a></li>
+                <li><a href="/chat/chat">1:1 채팅</a></li>
                 <li><a id="report-writer" href="#">신고하기</a></li>
                 <li><a id="add-following" href="#" data-writeraccount="${b.writerAccount}">팔로잉</a></li>
               </ul>

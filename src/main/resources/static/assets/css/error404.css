@@ -1,0 +1,56 @@
+@font-face {
+  font-family: 'NPSfontBold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/NPSfontBold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url(../img/quokka.jpg);
+  background-size: auto;
+  font-family: 'NPSfontBold';
+}
+
+.container {
+  text-align: center;
+  
+  
+}
+
+.error-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: 50px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 30px;
+  color: white;
+  margin-bottom: 30px;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.3s ease; 
+  display: inline-block; 
+}
+
+a:hover {
+  color: #0056b3;
+  transform: translate(10px, 10px); 
+}

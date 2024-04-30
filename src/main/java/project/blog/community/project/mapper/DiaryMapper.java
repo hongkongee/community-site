@@ -1,6 +1,7 @@
 package project.blog.community.project.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import project.blog.community.project.entity.Diary;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface DiaryMapper {
     List<Diary> findAll();
 
     // 날짜 별 글을 조회 todoList
-    List<Diary> findTodoList(String regDate);
+    List<Diary> findTodoList(@Param("regDate") String regDate, @Param("myAccount") String myAccount);
 
     // 날짜 별 글을 조회 whatdoList
     List<Diary> findWhatdoList(String regDate);

@@ -65,26 +65,10 @@
                                 </div>
                                 <div class="time-view-wrapper">
                                     <div id="this-month">${b.regDate}</div>
-                                </div>
-                                <div class="post-reply">
-
-                                    <div class="like" data-bno="${b.bno}" data-like="${b.isHeart}">
-                                        <c:if test="${b.isHeart == 1}">
-                                            <i class="fa-solid fa-heart"></i>
-                                        </c:if>
-                                        <c:if test="${b.isHeart == 0}">
-                                            <i class="fa-regular fa-heart"></i>
-                                        </c:if>
-
-
-                                        <label class="like-label" for="flexCheckDefault"
-                                            data-like-count="${b.likeCount}">
-                                            좋아요 ${b.likeCount}
-                                        </label>
-                                    </div>
-
-                                    <input type="text" class="reply-rec"></input>
-                                    <button class="reply">댓글 쓰기</button>
+                                   
+                                        <div class="like">
+                                            <i class="fa-solid fa-heart"> ${b.likeCount} </i>
+                                        </div>
                                 </div>
                             </div>
                         </section>

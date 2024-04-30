@@ -7,45 +7,33 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>마켓 글 쓰기</title>
 
-  <!-- reset -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+ <!-- 폰트 -->
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com">
+ <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
 
-  <!-- 폰트 -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/assets/css/snb.css" >
-  <link rel="stylesheet" href="/assets/css/market.css">
-  <link rel="stylesheet" href="/assets/css/allpage.css">
-  
+ <%@ include file="../include/static-head.jsp" %>
+ <link rel="stylesheet" href="/assets/css/market.css">
+ <link rel="stylesheet" href="/assets/css/snb.css">
+
 
   <link rel="stylesheet" href="/assets/css/header.css">
 
-  
- 
-
 
  
-  <!-- 부트스트랩 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 
-  <!-- ck editor -->
-  <!-- 게시판 라이브러리 -->
-  <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
-  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script> -->
+ 
+
 </head>
 
-<body>
-  <%@ include file="../include/static-head.jsp" %>
-  <%@ include file="../include/snb.jsp" %>
+  <body>
+    <%@ include file="../include/snb.jsp" %>
+    <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
-  <%@ include file="../include/headcss.jsp"%>
-  <%@ include file="../include/header.jsp"%>
   <!-- 가운데 Content -->
   <div class="wrapper">
 
@@ -105,21 +93,21 @@
             </div>
 
 
-            <%@ include file="../market/subMap.jsp" %>
+            <div>
+              <%@ include file="../market/subMap.jsp" %>
+            </div>
 
 
-
-
-            <!-- 광고 영역 -->
-            <%@ include file="../market/subMarketAD.jsp" %>
 
 
           </form>
+
         </div>
 
       </main>
 
     </div>
+
   </div>
 
 
@@ -130,23 +118,22 @@
 
 </body>
 <script>
+  //정수값 검사
+  const $submit = document.getElementById('submit');
+  const $priceInput = document.getElementById('price');
 
-//정수값 검사
-const $submit = document.getElementById('submit');
-const $priceInput = document.getElementById('price');
+  console.log('submit 클릭됨');
+  $submit.addEventListener('click', e => {
+    const price = $priceInput.value;
 
-console.log('submit 클릭됨');
-$submit.addEventListener('click', e => {
-  const price = $priceInput.value;
-
-  if (isNaN(price) || price <= 0) { 
-        // price가 숫자가 아니거나 0 또는 음수이거나 정수가 아닌 경우
-        alert("가격은 정수를 입력 하세요.");
-        e.preventDefault(); // 폼 제출을 막음
-        return; // 함수를 여기서 종료하여 다음 로직을 실행하지 않도록 함
+    if (isNaN(price) || price <= 0) {
+      // price가 숫자가 아니거나 0 또는 음수이거나 정수가 아닌 경우
+      alert("가격은 정수를 입력 하세요.");
+      e.preventDefault(); // 폼 제출을 막음
+      return; // 함수를 여기서 종료하여 다음 로직을 실행하지 않도록 함
     }
 
-});
+  });
 </script>
 
 </html>

@@ -69,7 +69,7 @@
             <h2 id="copy-url"> <a href="#">URL 복사</a> </h2>
 
             <!-- 댓글 개수 : 누르면 댓글영역으로 이동-->
-            <h2 id="see-reply"> <a href="#tag1"> 댓글 53 </a></h2>
+            <h2 id="see-reply"> <a href="#tag1"> 댓글 <span id="replyCntAbove" style="color: black"></span> </a></h2>
 
             <h2 id="view-count"> ${b.viewCount} </h2>
 
@@ -384,6 +384,8 @@
           } = reply;
           console.log(profilePicture);
 
+          
+
           tag += `
                      <div id='replyContent' class='card-body' data-replyId='\${rno}'>
                      <div class='row user-block'>
@@ -431,6 +433,7 @@
       }
       // 댓글 수 렌더링
       document.getElementById('replyCnt').textContent = count;
+      document.getElementById('replyCntAbove').textContent = count;
       // 댓글 렌더링
       // 반복문을 이용해서 문자열로 작성한 tag를 댓글영역 div에 innerHTML로 그대로 삽입.
       document.getElementById('replyData').innerHTML = tag;

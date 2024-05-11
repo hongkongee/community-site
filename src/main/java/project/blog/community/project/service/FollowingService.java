@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import project.blog.community.project.dto.response.FollowerResponseDTO;
+import project.blog.community.project.dto.response.LoginUserResponseDTO;
 import project.blog.community.project.entity.User;
 import project.blog.community.project.mapper.UserMapper;
 
@@ -116,7 +117,7 @@ public class FollowingService {
         try {
 
             HttpSession session = request.getSession();
-            session.getAttribute("login");
+            LoginUserResponseDTO loginUserResponseDTO = (LoginUserResponseDTO) session.getAttribute("login");
 
             // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
             return getCurrentLoginMemberAccount(session);

@@ -124,6 +124,19 @@
             ws.onmessage = function (msg) {
                 const data = JSON.parse(msg.data);
 
+                // 입장 메세지
+                if (data.mid === 'enterMsg') {
+                    item = `<div style = "background-color : #fff;
+                            margin : 0 auto;
+                            width: fit-content;
+                            display: flex;
+                            justify-content: center;" >
+		                <span style = "color: #4602c5;"><b>` + data.msg +`</b></span> [` + data.date + ` ]<br/>
+						</div>`;
+                    talk.innerHTML += item;
+                    return;
+                }
+
 
                 if (data.mid === mid.value) {
                     item = `<div style = "background-color : #ffc;
@@ -171,6 +184,16 @@
 
             msg.value = '';
         }
+
+        // 채팅창 입장 직후 메세지
+        // function enterMessage() {
+        //     data.mid = getId('mid').value; // 로그인 유저 아이디
+        //     data.msg = data.mid + '님이 입장하셨습니다.'; // 메세지 내용
+        //     data.date = new Date().toLocaleString(); // 날짜
+
+        //     const temp = JSON.stringify(data);
+        //     ws.send(temp);
+        // }
     </script>
 </body>
 

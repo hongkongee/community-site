@@ -1,11 +1,21 @@
 package project.blog.community.project.chat;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.HandshakeResponse;
+import jakarta.websocket.server.HandshakeRequest;
+import jakarta.websocket.server.ServerEndpointConfig;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
+import project.blog.community.project.dto.response.LoginUserResponseDTO;
+import project.blog.community.project.entity.User;
+import project.blog.community.project.mapper.UserMapper;
 
 @Component
-public class WebSocketConfig {
+public class WebSocketConfig extends ServerEndpointConfig.Configurator {
+
 
     @Bean
     public ServerEndpointExporter serverEndpointExporter() {
@@ -16,6 +26,19 @@ public class WebSocketConfig {
                 연결해주고 초기화해주는 클래스가 필요합니다.
          */
         return new ServerEndpointExporter();
+    }
+
+    @Override
+    public void modifyHandshake(ServerEndpointConfig config, HandshakeRequest request, HandshakeResponse response) {
+        HttpSession httpSession = (HttpSession) request.getHttpSession();
+        if (httpSession != null) {
+            LoginUserResponseDTO loginDto = (LoginUserResponseDTO) httpSession.getAttribute("login");
+            String myAccount = loginDto.getName();
+
+            config.getUserProperties().put("loginAccount", myAccount); // Store user ID in WebSocket session properties
+        } else {
+            config.getUserProperties().put("loginAccount", "null.....");
+        }
     }
 
 }

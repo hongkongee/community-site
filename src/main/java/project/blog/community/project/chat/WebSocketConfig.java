@@ -33,11 +33,14 @@ public class WebSocketConfig extends ServerEndpointConfig.Configurator {
         HttpSession httpSession = (HttpSession) request.getHttpSession();
         if (httpSession != null) {
             LoginUserResponseDTO loginDto = (LoginUserResponseDTO) httpSession.getAttribute("login");
-            String myAccount = loginDto.getName();
+            String myName = loginDto.getName();
+            String myAccount = loginDto.getAccountNumber();
 
+            config.getUserProperties().put("loginName", myName);
             config.getUserProperties().put("loginAccount", myAccount); // Store user ID in WebSocket session properties
         } else {
             config.getUserProperties().put("loginAccount", "null.....");
+            config.getUserProperties().put("loginName", "null name");
         }
     }
 

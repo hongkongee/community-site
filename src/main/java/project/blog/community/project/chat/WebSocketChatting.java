@@ -28,6 +28,11 @@ public class WebSocketChatting {
 
     private static Set<Session> CLIENTS = Collections.synchronizedSet(new HashSet<>());
 
+    private class User {
+        Session session;
+        String key;
+    }
+
     @OnOpen
     public void onOpen(Session session) throws Exception {
         System.out.println(session.toString());
@@ -37,6 +42,11 @@ public class WebSocketChatting {
         } else {
             CLIENTS.add(session);
             System.out.println("새로운 세션입니다. > " + session);
+
+            // 채팅방에 들어온 유저의 아이디 가져오기
+            String userId = (String) session.getUserProperties().get("loginAccount");
+            
+            // 입장 메세지 생성하기
             String enterMsg = enterMessage(session);
 
             try {
@@ -77,12 +87,12 @@ public class WebSocketChatting {
         String formattedDate = sdf.format(now);
 
 
-        String userId = (String) session.getUserProperties().get("loginAccount");
-        System.out.println("user ID is " + userId);
+        String userName = (String) session.getUserProperties().get("loginName");
+        System.out.println("user ID is " + userName);
 
 
         String mid = "enterMsg";
-        String msg = userId + "님이 입장하셨습니다.";
+        String msg = userName + "님이 입장하셨습니다.";
         String enterMsg = String.format("{\"mid\":\"%s\",\"msg\":\"%s\",\"date\":\"%s\"}", mid, msg, formattedDate);
 //        System.out.println("입장 메세지입니다. > " + enterMsg);
         return enterMsg;

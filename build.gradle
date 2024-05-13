@@ -72,6 +72,14 @@ dependencies {
     // 웹소켓 라이브러리
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
+    // JPA 구현 (Hibernate)
+    implementation 'org.hibernate:hibernate-core:5.6.0.Final'
+
+    // JPA 의존성 구현
+    implementation 'javax.persistence:javax.persistence-api:2.2'
+
+
+
 }
 
 tasks.named('test') {

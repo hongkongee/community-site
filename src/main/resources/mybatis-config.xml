@@ -26,6 +26,7 @@
         <typeAlias type="project.blog.community.project.entity.Like" alias="like"/>
         <typeAlias type="project.blog.community.project.entity.Rate" alias="rate"/>
         <typeAlias type="project.blog.community.project.entity.Diary" alias="diary"/>
+        <typeAlias type="project.blog.community.otochat.domain.ChatMessage" alias="chat"/>
     </typeAliases>
 
     <!-- SQL을 적어놓은 XML 파일의 위치를 설정 -->
@@ -38,6 +39,7 @@
         <mapper resource="mapper/ReplyMapper.xml"/>
         <mapper resource="mapper/LikeMapper.xml"/>
         <mapper resource="mapper/DiaryMapper.xml"/>
+        <mapper resource="mapper/ChatMessageMapper.xml"/>
     </mappers>
 
 

@@ -63,7 +63,7 @@ public class ChatRoomController {
             List<ChatMessageResponseDto> chatMessage = chatMessageService.findRoom(foundChatRoom.getRoomNumber());
             ChatRoom chatRoom = optionalChatRoom.get();
             ChatRoomWithMessagesDto chatRoomWithMessagesDto = new ChatRoomWithMessagesDto(chatRoom, chatMessage);
-            
+
             return ResponseEntity.ok(chatRoomWithMessagesDto);
 
             //없으면 새로 만들기

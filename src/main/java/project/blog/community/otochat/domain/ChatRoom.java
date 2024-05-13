@@ -3,7 +3,7 @@ package project.blog.community.otochat.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import project.blog.community.project.entity.User;
+import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
 

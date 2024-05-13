@@ -31,7 +31,9 @@ public class SocketHandler extends TextWebSocketHandler {
     static String fileUploadSession = "";
 
     private final ChatMessageService chatMessageService;
-    private final AwsS3Service awsS3Service;
+
+    // AWS 파일 저장
+//    private final AwsS3Service awsS3Service;
 
     // 클라이언트로부터 JSON 형태의 메세지를 받아서 처리
     @Override
@@ -83,7 +85,7 @@ public class SocketHandler extends TextWebSocketHandler {
         }
     }
 
-
+/*
     @Override
     public void handleBinaryMessage(WebSocketSession session, BinaryMessage message) {
         //ByteBuffer형태의 페이로드로 웹소켓 메시지 저장
@@ -128,7 +130,7 @@ public class SocketHandler extends TextWebSocketHandler {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
     @SuppressWarnings("unchecked")
     @Override

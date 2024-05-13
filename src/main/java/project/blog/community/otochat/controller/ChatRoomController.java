@@ -7,9 +7,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.blog.community.otochat.domain.ChatRoom;
+import project.blog.community.otochat.domain.ChatUser;
 import project.blog.community.otochat.dto.ChatMessageResponseDto;
 import project.blog.community.otochat.dto.ChatRoomRequestDto;
+import project.blog.community.otochat.dto.ChatRoomResponseDto;
+import project.blog.community.otochat.dto.ChatRoomWithMessagesDto;
+import project.blog.community.otochat.repository.ChatRoomRepository;
+import project.blog.community.otochat.repository.ChatUserRepository;
 import project.blog.community.otochat.service.ChatMessageService;
+import project.blog.community.otochat.service.ChatRoomService;
 import project.blog.community.project.entity.User;
 import project.blog.community.project.mapper.UserMapper;
 
@@ -19,15 +25,16 @@ import java.util.Optional;
 
 import static project.blog.community.util.LoginUtils.getCurrentLoginMemberAccount;
 
+// HTTP 방식의 통신과 관련된 기능 컨트롤러
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/otochat")
 public class ChatRoomController {
 
     private final ChatRoomService chatRoomService;
-    private final ChatRoomMapper chatRoomMapper;
+    private final ChatRoomRepository chatRoomRepository;
     private final ChatMessageService chatMessageService;
-    private final UserMapper userMapper;
+    private final ChatUserRepository chatUserRepository;
 
     @PostMapping("/room")
     public ResponseEntity<ChatRoomWithMessagesDto> makeRoom(
@@ -39,14 +46,14 @@ public class ChatRoomController {
         // 세션 유틸리티 메서드로 로그인한 유저 ID 가져오기
         String myAccount = getCurrentLoginMemberAccount(session);
 
-        User user = userMapper
-                .findUser(myAccount)
+        ChatUser user = chatUserRepository
+                .findChatUserByAccount(myAccount)
                 .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
 
-        User other = userMapper.findUser(chatRoomRequestDto.getAccountNumber())
+        ChatUser other = chatUserRepository.findChatUserByAccount(chatRoomRequestDto.getAccountNumber())
                 .orElseThrow(() -> new RuntimeException("채팅 상대방 정보가 없습니다"));
 
-        Optional<ChatRoom> optionalChatRoom = chatRoomRepository.findByMemberAndOther(member, other);
+        Optional<ChatRoom> optionalChatRoom = chatRoomRepository.findByUserAndOther(user, other);
         //고유한 값이어야 함
 
 
@@ -55,12 +62,14 @@ public class ChatRoomController {
             ChatRoom foundChatRoom = optionalChatRoom.get();
             List<ChatMessageResponseDto> chatMessage = chatMessageService.findRoom(foundChatRoom.getRoomNumber());
             ChatRoom chatRoom = optionalChatRoom.get();
-            ChatRoomWithMessagesDto chatRoomWithMessagesDto = new ChatRoomWithMessagesDto(chatRoom,chatMessage);
+            ChatRoomWithMessagesDto chatRoomWithMessagesDto = new ChatRoomWithMessagesDto(chatRoom, chatMessage);
+            
             return ResponseEntity.ok(chatRoomWithMessagesDto);
+
             //없으면 새로 만들기
             //other의 nickname을 받기(채팅 메시지에 user과 other이 있기 떄문에 member는 상관x)
         } else {
-            ChatRoom newChatRoom=chatRoomService.save(member, other);
+            ChatRoom newChatRoom=chatRoomService.save(user, other);
             ChatRoomWithMessagesDto chatRoomWithMessagesDto = new ChatRoomWithMessagesDto(newChatRoom, new ArrayList<>());
             return ResponseEntity.ok(chatRoomWithMessagesDto);
         }

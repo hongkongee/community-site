@@ -1,5 +1,6 @@
 package project.blog.community.otochat.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import project.blog.community.otochat.domain.ChatMessage;
 import project.blog.community.otochat.domain.ChatRoom;
@@ -8,8 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ChatMessageRepository extends JpaRepository<ChatRoom, Long> {
-    // 채팅 메세지 DB에 저장하기
-    void save(ChatMessage chatMessage);
 
     // 방번호로 채팅 내역 찾기
     List<ChatMessage> findByRoomNumber(int roomNumber);
@@ -19,4 +18,7 @@ public interface ChatMessageRepository extends JpaRepository<ChatRoom, Long> {
 
     // 방번호로 모든 채팅 찾기
     List<ChatMessage> findAllByRoomNumber(int roomNumber);
+
+    // 특정 방번호의 모든 메세지 삭제
+    void deleteAll(List<ChatMessage> messagesToDelete);
 }

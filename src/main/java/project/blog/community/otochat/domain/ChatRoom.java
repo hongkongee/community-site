@@ -3,7 +3,6 @@ package project.blog.community.otochat.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Table;
 import project.blog.community.project.entity.User;
 
 import javax.persistence.*;
@@ -22,14 +21,14 @@ public class ChatRoom extends BaseTimeEntity {
 
     @ManyToOne
     @JoinColumn(name="my_id")
-    private User user; //방을 만든 사람
+    private ChatUser user; //방을 만든 사람
 
     @ManyToOne
     @JoinColumn(name="other_id")
-    private User other; //대화상대
+    private ChatUser other; //대화상대
 
     @Builder
-    public ChatRoom(User other,  User user) {
+    public ChatRoom(ChatUser other,  ChatUser user) {
         this.other=other;
         this.user=user;
     }
